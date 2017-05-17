@@ -1,0 +1,1761 @@
+<?xml version="1.0"?>
+<AVRPART>
+  <MODULE_LIST>[ADMIN:CORE:INTERRUPT_VECTOR:MEMORY:PACKAGE:FUSE:PROGRAMMING:LOCKBIT:IO_MODULE:ICE_SETTINGS]</MODULE_LIST>
+  <ADMIN>
+    <PART_NAME>AT86RF401</PART_NAME>
+    <SPEED>8MHZ</SPEED>
+    <BUILD>203</BUILD>
+    <RELEASE_STATUS>RELEASED</RELEASE_STATUS>
+    <SIGNATURE>
+      <ADDR000>$1E</ADDR000>
+      <ADDR001>$91</ADDR001>
+      <ADDR002>$81</ADDR002>
+    </SIGNATURE>
+  </ADMIN>
+  <CORE>
+    <CORE_VERSION>V2</CORE_VERSION>
+    <NEW_INSTRUCTIONS>[lpm rd,z+]</NEW_INSTRUCTIONS>
+    <INSTRUCTIONS_NOT_SUPPORTED>[sleep]</INSTRUCTIONS_NOT_SUPPORTED>
+    <RAMP_REGISTERS>[]</RAMP_REGISTERS>
+    <GP_REG_FILE>
+      <NMB_REG>32</NMB_REG>
+      <START_ADDR>$00</START_ADDR>
+      <X_REG_HIGH>$1B</X_REG_HIGH>
+      <X_REG_LOW>$1A</X_REG_LOW>
+      <Y_REG_HIGH>$1D</Y_REG_HIGH>
+      <Y_REG_LOW>$1C</Y_REG_LOW>
+      <Z_REG_HIGH>$1F</Z_REG_HIGH>
+      <Z_REG_LOW>$1E</Z_REG_LOW>
+    </GP_REG_FILE>
+  </CORE>
+  <INTERRUPT_VECTOR>
+    <NMB_VECTORS>3</NMB_VECTORS>
+    <VECTOR1>
+      <PROGRAM_ADDRESS>$000</PROGRAM_ADDRESS>
+      <SOURCE>RESETB</SOURCE>
+      <DEFINITION>Hardware pin, Watchdog or Button Reset</DEFINITION>
+    </VECTOR1>
+    <VECTOR2>
+      <PROGRAM_ADDRESS>$002</PROGRAM_ADDRESS>
+      <SOURCE>TXDONE</SOURCE>
+      <DEFINITION>Transmission Done, Bit Timer Flag 2 Interrupt</DEFINITION>
+    </VECTOR2>
+    <VECTOR3>
+      <PROGRAM_ADDRESS>$004</PROGRAM_ADDRESS>
+      <SOURCE>TXEMPTY</SOURCE>
+      <DEFINITION>Transmit Buffer Empty, Bit Itmer Flag 0 Interrupt</DEFINITION>
+    </VECTOR3>
+  </INTERRUPT_VECTOR>
+  <MEMORY>
+    <ID>AVRSimMemory8bit.SimMemory8bit</ID>
+    <PROG_FLASH>2048</PROG_FLASH>
+    <EEPROM>128</EEPROM>
+    <INT_SRAM>
+      <SIZE>128</SIZE>
+      <START_ADDR>$60</START_ADDR>
+    </INT_SRAM>
+    <EXT_SRAM>
+      <SIZE>0</SIZE>
+      <START_ADDR>NA</START_ADDR>
+    </EXT_SRAM>
+    <IO_MEMORY>
+      <IO_START_ADDR>$00</IO_START_ADDR>
+      <IO_STOP_ADDR>$3F</IO_STOP_ADDR>
+      <MEM_START_ADDR>$20</MEM_START_ADDR>
+      <MEM_STOP_ADDR>$5F</MEM_STOP_ADDR>
+      <SREG>
+        <IO_ADDR>$3F</IO_ADDR>
+        <MEM_ADDR>$5F</MEM_ADDR>
+        <C_MASK>0x01</C_MASK>
+        <Z_MASK>0x02</Z_MASK>
+        <N_MASK>0x04</N_MASK>
+        <V_MASK>0x08</V_MASK>
+        <S_MASK>0x10</S_MASK>
+        <H_MASK>0x20</H_MASK>
+        <T_MASK>0x40</T_MASK>
+        <I_MASK>0x80</I_MASK>
+      </SREG>
+      <SPH>
+        <IO_ADDR>$3E</IO_ADDR>
+        <MEM_ADDR>$5E</MEM_ADDR>
+        <SP8_MASK>0x01</SP8_MASK>
+        <SP9_MASK>0x02</SP9_MASK>
+        <SP10_MASK>0x04</SP10_MASK>
+      </SPH>
+      <SPL>
+        <IO_ADDR>$3D</IO_ADDR>
+        <MEM_ADDR>$5D</MEM_ADDR>
+        <SP0_MASK>0x01</SP0_MASK>
+        <SP1_MASK>0x02</SP1_MASK>
+        <SP2_MASK>0x04</SP2_MASK>
+        <SP3_MASK>0x08</SP3_MASK>
+        <SP4_MASK>0x10</SP4_MASK>
+        <SP5_MASK>0x20</SP5_MASK>
+        <SP6_MASK>0x40</SP6_MASK>
+        <SP7_MASK>0x80</SP7_MASK>
+      </SPL>
+      <BL_CONFIG>
+        <IO_ADDR>$35</IO_ADDR>
+        <MEM_ADDR>$55</MEM_ADDR>
+        <BL0_MASK>0x01</BL0_MASK>
+        <BL1_MASK>0x02</BL1_MASK>
+        <BL2_MASK>0x04</BL2_MASK>
+        <BL3_MASK>0x08</BL3_MASK>
+        <BL4_MASK>0x10</BL4_MASK>
+        <BL5_MASK>0x20</BL5_MASK>
+        <BLV_MASK>0x40</BLV_MASK>
+        <BL_MASK>0x80</BL_MASK>
+      </BL_CONFIG>
+      <MCUCR>
+        <IO_ADDR/>
+        <MEM_ADDR/>
+      </MCUCR>
+      <B_DET>
+        <IO_ADDR>$34</IO_ADDR>
+        <MEM_ADDR>$54</MEM_ADDR>
+        <BD0_MASK>0x01</BD0_MASK>
+        <BD1_MASK>0x02</BD1_MASK>
+        <BD2_MASK>0x04</BD2_MASK>
+        <BD3_MASK>0x08</BD3_MASK>
+        <BD4_MASK>0x10</BD4_MASK>
+        <BD5_MASK>0x20</BD5_MASK>
+      </B_DET>
+      <AVR_CONFIG>
+        <IO_ADDR>$33</IO_ADDR>
+        <MEM_ADDR>$53</MEM_ADDR>
+        <BBM_MASK>0x01</BBM_MASK>
+        <SLEEP_MASK>0x02</SLEEP_MASK>
+        <BLI_MASK>0x04</BLI_MASK>
+        <BD_MASK>0x08</BD_MASK>
+        <TM_MASK>0x10</TM_MASK>
+        <ACS0_MASK>0x20</ACS0_MASK>
+        <ACS1_MASK>0x40</ACS1_MASK>
+      </AVR_CONFIG>
+      <IO_DATIN>
+        <IO_ADDR>$32</IO_ADDR>
+        <MEM_ADDR>$52</MEM_ADDR>
+        <IOI0_MASK>0x01</IOI0_MASK>
+        <IOI1_MASK>0x02</IOI1_MASK>
+        <IOI2_MASK>0x04</IOI2_MASK>
+        <IOI3_MASK>0x08</IOI3_MASK>
+        <IOI4_MASK>0x10</IOI4_MASK>
+        <IOI5_MASK>0x20</IOI5_MASK>
+      </IO_DATIN>
+      <IO_DATOUT>
+        <IO_ADDR>$31</IO_ADDR>
+        <MEM_ADDR>$51</MEM_ADDR>
+        <IOO0_MASK>0x01</IOO0_MASK>
+        <IOO1_MASK>0x02</IOO1_MASK>
+        <IOO2_MASK>0x04</IOO2_MASK>
+        <IOO3_MASK>0x08</IOO3_MASK>
+        <IOO4_MASK>0x10</IOO4_MASK>
+        <IOO5_MASK>0x20</IOO5_MASK>
+      </IO_DATOUT>
+      <IO_ENAB>
+        <IO_ADDR>$30</IO_ADDR>
+        <MEM_ADDR>$50</MEM_ADDR>
+        <IOE0_MASK>0x01</IOE0_MASK>
+        <IOE1_MASK>0x02</IOE1_MASK>
+        <IOE2_MASK>0x04</IOE2_MASK>
+        <IOE3_MASK>0x08</IOE3_MASK>
+        <IOE4_MASK>0x10</IOE4_MASK>
+        <IOE5_MASK>0x20</IOE5_MASK>
+      </IO_ENAB>
+      <WDTCR>
+        <IO_ADDR>$22</IO_ADDR>
+        <MEM_ADDR>$42</MEM_ADDR>
+        <WDP0_MASK>0x01</WDP0_MASK>
+        <WDP1_MASK>0x02</WDP1_MASK>
+        <WDP2_MASK>0x04</WDP2_MASK>
+        <WDE_MASK>0x08</WDE_MASK>
+        <WDTOE_MASK>0x10</WDTOE_MASK>
+      </WDTCR>
+      <BTCR>
+        <IO_ADDR>$21</IO_ADDR>
+        <MEM_ADDR>$41</MEM_ADDR>
+        <F0_MASK>0x01</F0_MASK>
+        <DATA_MASK>0x02</DATA_MASK>
+        <F2_MASK>0x04</F2_MASK>
+        <IE_MASK>0x08</IE_MASK>
+        <M0_MASK>0x10</M0_MASK>
+        <M1_MASK>0x20</M1_MASK>
+        <C8_MASK>0x40</C8_MASK>
+        <C9_MASK>0x80</C9_MASK>
+      </BTCR>
+      <BTCNT>
+        <IO_ADDR>$20</IO_ADDR>
+        <MEM_ADDR>$40</MEM_ADDR>
+        <C0_MASK>0x01</C0_MASK>
+        <C1_MASK>0x02</C1_MASK>
+        <C2_MASK>0x04</C2_MASK>
+        <C3_MASK>0x08</C3_MASK>
+        <C4_MASK>0x10</C4_MASK>
+        <C5_MASK>0x20</C5_MASK>
+        <C6_MASK>0x40</C6_MASK>
+        <C7_MASK>0x80</C7_MASK>
+      </BTCNT>
+      <DEEAR>
+        <IO_ADDR>$1E</IO_ADDR>
+        <MEM_ADDR>$3E</MEM_ADDR>
+        <BA0_MASK>0x01</BA0_MASK>
+        <BA1_MASK>0x02</BA1_MASK>
+        <BA2_MASK>0x04</BA2_MASK>
+        <PA3_MASK>0x08</PA3_MASK>
+        <PA4_MASK>0x10</PA4_MASK>
+        <PA5_MASK>0x20</PA5_MASK>
+        <PA6_MASK>0x40</PA6_MASK>
+      </DEEAR>
+      <DEEDR>
+        <IO_ADDR>$1D</IO_ADDR>
+        <MEM_ADDR>$3D</MEM_ADDR>
+        <ED0_MASK>0x01</ED0_MASK>
+        <ED1_MASK>0x02</ED1_MASK>
+        <ED2_MASK>0x04</ED2_MASK>
+        <ED3_MASK>0x08</ED3_MASK>
+        <ED4_MASK>0x10</ED4_MASK>
+        <ED5_MASK>0x20</ED5_MASK>
+        <ED6_MASK>0x40</ED6_MASK>
+        <ED7_MASK>0x80</ED7_MASK>
+      </DEEDR>
+      <DEECR>
+        <IO_ADDR>$1C</IO_ADDR>
+        <MEM_ADDR>$3C</MEM_ADDR>
+        <EER_MASK>0x01</EER_MASK>
+        <EEL_MASK>0x02</EEL_MASK>
+        <EEU_MASK>0x04</EEU_MASK>
+        <BSY_MASK>0x08</BSY_MASK>
+      </DEECR>
+      <LOCKDET2>
+        <IO_ADDR>$17</IO_ADDR>
+        <MEM_ADDR>$37</MEM_ADDR>
+        <LC0_MASK>0x01</LC0_MASK>
+        <LC1_MASK>0x02</LC1_MASK>
+        <LC2_MASK>0x04</LC2_MASK>
+        <ULC0_MASK>0x08</ULC0_MASK>
+        <ULC1_MASK>0x10</ULC1_MASK>
+        <ULC2_MASK>0x20</ULC2_MASK>
+        <LAT_MASK>0x40</LAT_MASK>
+        <EUD_MASK>0x80</EUD_MASK>
+      </LOCKDET2>
+      <VCOTUNE>
+        <IO_ADDR>$16</IO_ADDR>
+        <MEM_ADDR>$36</MEM_ADDR>
+        <VCOTUNE0_MASK>0x01</VCOTUNE0_MASK>
+        <VCOTUNE1_MASK>0x02</VCOTUNE1_MASK>
+        <VCOTUNE2_MASK>0x04</VCOTUNE2_MASK>
+        <VCOTUNE3_MASK>0x08</VCOTUNE3_MASK>
+        <VCOTUNE4_MASK>0x10</VCOTUNE4_MASK>
+        <VCOVDET0_MASK>0x40</VCOVDET0_MASK>
+        <VCOVDET1_MASK>0x80</VCOVDET1_MASK>
+      </VCOTUNE>
+      <PWR_ATTEN>
+        <IO_ADDR>$14</IO_ADDR>
+        <MEM_ADDR>$34</MEM_ADDR>
+        <PCF0_MASK>0x01</PCF0_MASK>
+        <PCF1_MASK>0x02</PCF1_MASK>
+        <PCF2_MASK>0x04</PCF2_MASK>
+        <PCC0_MASK>0x08</PCC0_MASK>
+        <PCC1_MASK>0x10</PCC1_MASK>
+        <PCC2_MASK>0x20</PCC2_MASK>
+      </PWR_ATTEN>
+      <TX_CNTL>
+        <IO_ADDR>$12</IO_ADDR>
+        <MEM_ADDR>$32</MEM_ADDR>
+        <LOC_MASK>0x04</LOC_MASK>
+        <TXK_MASK>0x10</TXK_MASK>
+        <TXE_MASK>0x20</TXE_MASK>
+        <FSK_MASK>0x40</FSK_MASK>
+      </TX_CNTL>
+      <LOCKDET1>
+        <IO_ADDR>$10</IO_ADDR>
+        <MEM_ADDR>$30</MEM_ADDR>
+        <CS0_MASK>0x01</CS0_MASK>
+        <CS1_MASK>0x02</CS1_MASK>
+        <BOD_MASK>0x04</BOD_MASK>
+        <ENKO_MASK>0x08</ENKO_MASK>
+        <UPOK_MASK>0x10</UPOK_MASK>
+      </LOCKDET1>
+    </IO_MEMORY>
+  </MEMORY>
+  <PACKAGE>
+    <PACKAGES>[TSSOP]</PACKAGES>
+    <TQFP>
+      <NMB_PIN>20</NMB_PIN>
+      <PIN1>
+        <NAME>[ANTB]</NAME>
+        <TEXT/>
+      </PIN1>
+      <PIN2>
+        <NAME>[LOOPFIL]</NAME>
+        <TEXT/>
+      </PIN2>
+      <PIN3>
+        <NAME>[L1]</NAME>
+        <TEXT/>
+      </PIN3>
+      <PIN4>
+        <NAME>[L2]</NAME>
+        <TEXT/>
+      </PIN4>
+      <PIN5>
+        <NAME>[RESETB]</NAME>
+        <TEXT/>
+      </PIN5>
+      <PIN6>
+        <NAME>[N/C]</NAME>
+        <TEXT/>
+      </PIN6>
+      <PIN7>
+        <NAME>[IO0:SDI]</NAME>
+        <TEXT/>
+      </PIN7>
+      <PIN8>
+        <NAME>[IO1:SDO]</NAME>
+        <TEXT/>
+      </PIN8>
+      <PIN9>
+        <NAME>[IO2:SCK]</NAME>
+        <TEXT/>
+      </PIN9>
+      <PIN10>
+        <NAME>[XTAL:CLK]</NAME>
+        <TEXT/>
+      </PIN10>
+      <PIN11>
+        <NAME>[XTALB]</NAME>
+        <TEXT/>
+      </PIN11>
+      <PIN12>
+        <NAME>[IO3]</NAME>
+        <TEXT/>
+      </PIN12>
+      <PIN13>
+        <NAME>[IO4]</NAME>
+        <TEXT/>
+      </PIN13>
+      <PIN14>
+        <NAME>[IO5]</NAME>
+        <TEXT/>
+      </PIN14>
+      <PIN15>
+        <NAME>[DGND]</NAME>
+        <TEXT/>
+      </PIN15>
+      <PIN16>
+        <NAME>[AGND]</NAME>
+        <TEXT/>
+      </PIN16>
+      <PIN17>
+        <NAME>[DVDD]</NAME>
+        <TEXT/>
+      </PIN17>
+      <PIN18>
+        <NAME>[AVDD]</NAME>
+        <TEXT/>
+      </PIN18>
+      <PIN19>
+        <NAME>[CFIL]</NAME>
+        <TEXT/>
+      </PIN19>
+      <PIN20>
+        <NAME>[ANT]</NAME>
+        <TEXT/>
+      </PIN20>
+    </TQFP>
+  </PACKAGE>
+  <FUSE>
+    <LIST>[LOW]</LIST>
+    <ICON/>
+    <ID/>
+    <TEXT/>
+  </FUSE>
+  <PROGRAMMING>
+    <ISPInterface>
+      <NoFuseProg/>
+      <NoFuseLockRead/>
+      <LockReadMask>0x00</LockReadMask>
+    </ISPInterface>
+    <HVInterface>
+		</HVInterface>
+    <OscCal>
+		</OscCal>
+    <FlashPageSize>0</FlashPageSize>
+    <EepromPageSize>0</EepromPageSize>
+  </PROGRAMMING>
+  <LOCKBIT>
+    <ICON/>
+    <ID/>
+    <TEXT>[LB1 = 1 :  LB2 = 1] No memory lock features enabled. [LB1 = 0 :  LB2 = 1] Further programming of Flash and EEPROM is enabled. [LB1 = 0 :  LB2 = 0] Same as previous, but verify is also disabled</TEXT>
+    <NMB_TEXT>3</NMB_TEXT>
+    <NMB_LOCK_BITS>2</NMB_LOCK_BITS>
+    <TEXT1>
+      <MASK>0x06</MASK>
+      <VALUE>0x06</VALUE>
+      <TEXT>Mode 1: No memory lock features enabled</TEXT>
+    </TEXT1>
+    <TEXT2>
+      <MASK>0x06</MASK>
+      <VALUE>0x04</VALUE>
+      <TEXT>Mode 2: Further programming disabled</TEXT>
+    </TEXT2>
+    <TEXT3>
+      <MASK>0x06</MASK>
+      <VALUE>0x00</VALUE>
+      <TEXT>Mode 3: Further programming and verification disabled</TEXT>
+    </TEXT3>
+    <LOCKBIT0>
+      <NAME>LB1</NAME>
+      <TEXT>Lockbit</TEXT>
+    </LOCKBIT0>
+    <LOCKBIT1>
+      <NAME>LB2</NAME>
+      <TEXT>Lockbit</TEXT>
+    </LOCKBIT1>
+  </LOCKBIT>
+  <IO_MODULE>
+    <MODULE_LIST>[RF_CONTROL:EEPROM:WATCHDOG:TIMER_COUNTER_0:PORT:CPU]</MODULE_LIST>
+    <RF_CONTROL>
+      <LIST>[LOCKDET1:LOCKDET2:TX_CNTL:PWR_ATTEN:VCOTUNE]</LIST>
+      <LINK/>
+      <ICON>io_cpu.bmp</ICON>
+      <ID/>
+      <TEXT/>
+      <LOCKDET1>
+        <NAME>LOCKDET1</NAME>
+        <DESCRIPTION>Lock Detector Configuration Register 1</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$10</IO_ADDR>
+        <MEM_ADDR>$30</MEM_ADDR>
+        <ICON>io_flag.bmp</ICON>
+        <DISPLAY_BITS>Y</DISPLAY_BITS>
+        <BIT4>
+          <NAME>UPOK</NAME>
+          <DESCRIPTION>Unlock Conuter Control</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>ENKO</NAME>
+          <DESCRIPTION>Enable Key On Bit</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>BOD</NAME>
+          <DESCRIPTION>Black Out Disable</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>CS1</NAME>
+          <DESCRIPTION>Cycle Slip Counter bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>CS0</NAME>
+          <DESCRIPTION>Cycle Slip Counter bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </LOCKDET1>
+      <LOCKDET2>
+        <NAME>LOCKDET1</NAME>
+        <DESCRIPTION>Lock Detector Configuration register 2</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$17</IO_ADDR>
+        <MEM_ADDR>$37</MEM_ADDR>
+        <ICON>io_flag.bmp</ICON>
+        <DISPLAY_BITS>Y</DISPLAY_BITS>
+        <BIT7>
+          <NAME>EUD</NAME>
+          <DESCRIPTION>Enable Unlock Detect</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>LAT</NAME>
+          <DESCRIPTION>Lock Always True</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>ULC2</NAME>
+          <DESCRIPTION>Unlock Count bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>ULC1</NAME>
+          <DESCRIPTION>Unlock Count bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>ULC0</NAME>
+          <DESCRIPTION>Unlock Count bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>LC2</NAME>
+          <DESCRIPTION>Lock Count bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>LC1</NAME>
+          <DESCRIPTION>Lock Count bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>LC0</NAME>
+          <DESCRIPTION>Lock Count bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </LOCKDET2>
+      <TX_CNTL>
+        <NAME>TX_CNTL</NAME>
+        <DESCRIPTION>Transmit Control Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$12</IO_ADDR>
+        <MEM_ADDR>$32</MEM_ADDR>
+        <ICON>io_flag.bmp</ICON>
+        <DISPLAY_BITS>Y</DISPLAY_BITS>
+        <BIT6>
+          <NAME>FSK</NAME>
+          <DESCRIPTION>FSK Mode</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>TXE</NAME>
+          <DESCRIPTION>Transmitter Enable</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>TXK</NAME>
+          <DESCRIPTION>Transmitter Key</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT2>
+          <NAME>LOC</NAME>
+          <DESCRIPTION>PLL Lock</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+      </TX_CNTL>
+      <PWR_ATTEN>
+        <NAME>PWR_ATTEN</NAME>
+        <DESCRIPTION>Power Attenuation Control Register</DESCRIPTION>
+        <TEXT>This register is used to select the power attenuation level of the device.</TEXT>
+        <IO_ADDR>$14</IO_ADDR>
+        <MEM_ADDR>$34</MEM_ADDR>
+        <ICON>io_flag.bmp</ICON>
+        <DISPLAY_BITS>Y</DISPLAY_BITS>
+        <BIT5>
+          <NAME>PCC2</NAME>
+          <DESCRIPTION>Power Control Coarse bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>PCC1</NAME>
+          <DESCRIPTION>Power Control Coarse bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>PCC0</NAME>
+          <DESCRIPTION>Power Control Coarse bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>PCF2</NAME>
+          <DESCRIPTION>Power Control Fine bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>PCF1</NAME>
+          <DESCRIPTION>Power Control Fine bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>PCF0</NAME>
+          <DESCRIPTION>Power Control Fine bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </PWR_ATTEN>
+      <VCOTUNE>
+        <NAME>VCOTUNE</NAME>
+        <DESCRIPTION>VCO Tuning Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$16</IO_ADDR>
+        <MEM_ADDR>$36</MEM_ADDR>
+        <ICON>io_flag.bmp</ICON>
+        <DISPLAY_BITS>Y</DISPLAY_BITS>
+        <BIT7>
+          <NAME>VCOVDET1</NAME>
+          <DESCRIPTION>VCO Voltage Detector bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>VCOVDET0</NAME>
+          <DESCRIPTION>VCO Voltage Detector bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT4>
+          <NAME>VCOTUNE4</NAME>
+          <DESCRIPTION>VCO Tuning Register bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>VCOTUNE3</NAME>
+          <DESCRIPTION>VCO Tuning Register bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>VCOTUNE2</NAME>
+          <DESCRIPTION>VCO Tuning Register bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>VCOTUNE1</NAME>
+          <DESCRIPTION>VCO Tuning Register bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>VCOTUNE0</NAME>
+          <DESCRIPTION>VCO Tuning Register bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </VCOTUNE>
+    </RF_CONTROL>
+    <EEPROM>
+      <LIST>[DEEAR:DEEDR:DEECR]</LIST>
+      <LINK/>
+      <ICON>io_cpu.bmp</ICON>
+      <ID>EEPROM_02.xml</ID>
+      <TEXT/>
+      <DEEAR>
+        <NAME>DEEAR</NAME>
+        <DESCRIPTION>EERPOM Address Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$1E</IO_ADDR>
+        <MEM_ADDR>$3E</MEM_ADDR>
+        <ICON>io_cpu.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT6>
+          <NAME>PA6</NAME>
+          <DESCRIPTION>EEPROM Page Address bit 6</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>PA5</NAME>
+          <DESCRIPTION>EEPROM Page Address bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>PA4</NAME>
+          <DESCRIPTION>EEPROM Page Address bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>PA3</NAME>
+          <DESCRIPTION>EEPROM Page Address bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>BA2</NAME>
+          <DESCRIPTION>EEPROM Byte Address bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>BA1</NAME>
+          <DESCRIPTION>EEPROM Byte Address bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>BA0</NAME>
+          <DESCRIPTION>EEPROM Byte Address bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </DEEAR>
+      <DEEDR>
+        <NAME>DEEDR</NAME>
+        <DESCRIPTION>EEPROM Data Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$1D</IO_ADDR>
+        <MEM_ADDR>$3D</MEM_ADDR>
+        <ICON>io_cpu.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT7>
+          <NAME>ED7</NAME>
+          <DESCRIPTION>EEPROM Data Register bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>ED6</NAME>
+          <DESCRIPTION>EEPROM Data Register bit 6</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>ED5</NAME>
+          <DESCRIPTION>EEPROM Data Register bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>ED4</NAME>
+          <DESCRIPTION>EEPROM Data Register bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>ED3</NAME>
+          <DESCRIPTION>EEPROM Data Register bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>ED2</NAME>
+          <DESCRIPTION>EEPROM Data Register bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>ED1</NAME>
+          <DESCRIPTION>EEPROM Data Register bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>ED0</NAME>
+          <DESCRIPTION>EEPROM Data Register bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </DEEDR>
+      <DEECR>
+        <NAME>DEECR</NAME>
+        <DESCRIPTION>EEPROM Control Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$1C</IO_ADDR>
+        <MEM_ADDR>$3C</MEM_ADDR>
+        <ICON>io_flag.bmp</ICON>
+        <DISPLAY_BITS>Y</DISPLAY_BITS>
+        <BIT3>
+          <NAME>BSY</NAME>
+          <DESCRIPTION>EERPOM Busy Bit</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>R</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>EEU</NAME>
+          <DESCRIPTION>EEPROM Unlock Bit</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>EEL</NAME>
+          <DESCRIPTION>EEPROM Load Bit</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>EER</NAME>
+          <DESCRIPTION>EEPROM Read Bit</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </DEECR>
+    </EEPROM>
+    <WATCHDOG>
+      <LIST>[WDTCR]</LIST>
+      <LINK/>
+      <ICON>io_watch.bmp</ICON>
+      <ID/>
+      <TEXT/>
+      <WDTCR>
+        <NAME>WDTCR</NAME>
+        <DESCRIPTION>Watchdog Timer Control Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$22</IO_ADDR>
+        <MEM_ADDR>$42</MEM_ADDR>
+        <ICON>io_flag.bmp</ICON>
+        <DISPLAY_BITS>Y</DISPLAY_BITS>
+        <BIT4>
+          <NAME>WDTOE</NAME>
+          <ALIAS>WDDE</ALIAS>
+          <DESCRIPTION>RW</DESCRIPTION>
+          <TEXT>This bit must be set (one) when the WDE bit is cleared. Otherwise, the watchdog will not be disabled. Once set, hardware will clear this bit to zero after four clock cycles. Refer to the description of the WDE bit for a watchdog disable procedure.</TEXT>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>WDE</NAME>
+          <DESCRIPTION>Watch Dog Enable</DESCRIPTION>
+          <TEXT>When the WDE is set (one) the Watchdog Timer is enabled, and if the WDE is cleared (zero) the Watchdog Timer function is disabled. WDE can only be cleared if the WDTOE bit is set(one). To disable an enabled watchdog timer, the following procedure must be followed: 1. In the same operation, write a logical one to WDTOE and WDE. A logical one must be written to WDE even though it is set to one before the disable operation starts. 2. Within the next four clock cycles, write a logical 0 to WDE. This disables the watchdog</TEXT>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>WDP2</NAME>
+          <DESCRIPTION>Watch Dog Timer Prescaler bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <ENUM>WDOG_TIMER_PRESCALE_3BITS</ENUM>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>WDP1</NAME>
+          <DESCRIPTION>Watch Dog Timer Prescaler bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>WDP0</NAME>
+          <DESCRIPTION>Watch Dog Timer Prescaler bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </WDTCR>
+    </WATCHDOG>
+    <TIMER_COUNTER_0>
+      <LIST>[BTCNT:BTCR]</LIST>
+      <LINK/>
+      <ICON>io_timer.bmp</ICON>
+      <ID>29569</ID>
+      <TEXT/>
+      <BTCNT>
+        <NAME>BTCNT</NAME>
+        <DESCRIPTION>Timer Count register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$20</IO_ADDR>
+        <MEM_ADDR>$40</MEM_ADDR>
+        <ICON>io_timer.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT7>
+          <NAME>C7</NAME>
+          <DESCRIPTION>Timer Count Register bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>C6</NAME>
+          <DESCRIPTION>Timer Count Register bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>C5</NAME>
+          <DESCRIPTION>Timer Count Register bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>C4</NAME>
+          <DESCRIPTION>Timer Count Register bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>C3</NAME>
+          <DESCRIPTION>Timer Count Register bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>C2</NAME>
+          <DESCRIPTION>Timer Count Register bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>C1</NAME>
+          <DESCRIPTION>Timer Count Register bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>C0</NAME>
+          <DESCRIPTION>Timer Count Register bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </BTCNT>
+      <BTCR>
+        <NAME>BTCR</NAME>
+        <DESCRIPTION>Bit Timer Counter Control Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$21</IO_ADDR>
+        <MEM_ADDR>$41</MEM_ADDR>
+        <ICON>io_timer.bmp</ICON>
+        <DISPLAY_BITS>Y</DISPLAY_BITS>
+        <BIT7>
+          <NAME>C9</NAME>
+          <DESCRIPTION>Timer Count Register bit 9</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>C8</NAME>
+          <DESCRIPTION>Timer Count Register bit 8</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>M1</NAME>
+          <DESCRIPTION>Bit Timer Mode bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>M0</NAME>
+          <DESCRIPTION>Bit Timer Mode bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>IE</NAME>
+          <DESCRIPTION>Interrupt Enable</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>F2</NAME>
+          <DESCRIPTION>Flag 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>DATA</NAME>
+          <DESCRIPTION>Data Bit</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>F0</NAME>
+          <DESCRIPTION>Flag 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </BTCR>
+    </TIMER_COUNTER_0>
+    <PORT>
+      <LIST>[IO_ENAB:IO_DATOUT:IO_DATIN]</LIST>
+      <LINK/>
+      <ICON>io_port.bmp</ICON>
+      <ID>AVRSimIOPort.SimIOPort</ID>
+      <TEXT/>
+      <IO_ENAB>
+        <NAME>IO_ENAB</NAME>
+        <DESCRIPTION>I/O Enable Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$30</IO_ADDR>
+        <MEM_ADDR>$50</MEM_ADDR>
+        <ICON>io_port.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT5>
+          <NAME>IOE5</NAME>
+          <DESCRIPTION>I/O Enable bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>IOE4</NAME>
+          <DESCRIPTION>I/O Enable bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>IOE3</NAME>
+          <DESCRIPTION>I/O Enable bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>IOE2</NAME>
+          <DESCRIPTION>I/O Enable bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>IOE1</NAME>
+          <DESCRIPTION>I/O Enable bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>IOE0</NAME>
+          <DESCRIPTION>I/O Enable bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </IO_ENAB>
+      <IO_DATOUT>
+        <NAME>IO_DATOUT</NAME>
+        <DESCRIPTION>I/O Data Out Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$31</IO_ADDR>
+        <MEM_ADDR>$51</MEM_ADDR>
+        <ICON>io_port.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT5>
+          <NAME>IOO5</NAME>
+          <DESCRIPTION>I/O Data Out Register bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>IOO4</NAME>
+          <DESCRIPTION>I/O Data Out Register bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>IOO3</NAME>
+          <DESCRIPTION>I/O Data Out Register bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>IOO2</NAME>
+          <DESCRIPTION>I/O Data Out Register bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>IOO1</NAME>
+          <DESCRIPTION>I/O Data Out Register bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>IOO0</NAME>
+          <DESCRIPTION>I/O Data Out Register bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </IO_DATOUT>
+      <IO_DATIN>
+        <NAME>IO_DATIN</NAME>
+        <DESCRIPTION>I/O Data In register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$32</IO_ADDR>
+        <MEM_ADDR>$52</MEM_ADDR>
+        <ICON>io_port.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT5>
+          <NAME>IOI5</NAME>
+          <DESCRIPTION>I/O Data In Register bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>R</ACCESS>
+          <INIT_VAL/>
+        </BIT5>
+        <BIT4>
+          <NAME>IOI4</NAME>
+          <DESCRIPTION>I/O Data In Register bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>R</ACCESS>
+          <INIT_VAL/>
+        </BIT4>
+        <BIT3>
+          <NAME>IOI3</NAME>
+          <DESCRIPTION>I/O Data In Register bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>R</ACCESS>
+          <INIT_VAL/>
+        </BIT3>
+        <BIT2>
+          <NAME>IOI2</NAME>
+          <DESCRIPTION>I/O Data In Register bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>R</ACCESS>
+          <INIT_VAL/>
+        </BIT2>
+        <BIT1>
+          <NAME>IOI1</NAME>
+          <DESCRIPTION>I/O Data In Register bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>R</ACCESS>
+          <INIT_VAL/>
+        </BIT1>
+        <BIT0>
+          <NAME>IOI0</NAME>
+          <DESCRIPTION>I/O Data In Register bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>R</ACCESS>
+          <INIT_VAL/>
+        </BIT0>
+      </IO_DATIN>
+    </PORT>
+    <CPU>
+      <LIST>[SREG:SPH:SPL:AVR_CONFIG:B_DET:BL_CONFIG]</LIST>
+      <LINK>[SPH:SPL]</LINK>
+      <ICON>io_cpu.bmp</ICON>
+      <ID/>
+      <TEXT/>
+      <SREG>
+        <NAME>SREG</NAME>
+        <DESCRIPTION>Status Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$3F</IO_ADDR>
+        <MEM_ADDR>$5F</MEM_ADDR>
+        <ICON>io_sreg.bmp</ICON>
+        <DISPLAY_BITS>Y</DISPLAY_BITS>
+        <BIT7>
+          <NAME>I</NAME>
+          <DESCRIPTION>Global Interrupt Enable</DESCRIPTION>
+          <TEXT>The global interrupt enable bit must be set (one) for the interrupts to be enabled. The individual interrupt enable control is then performed in separate control registers. If the global interrupt enable bit is cleared (zero), none of the interrupts are enabled independent of the individual interrupt enable settings. The I-bit is cleared by hardware after an interrupt has occurred, and is set by the RETI instruction to enable subsequent interrupts.</TEXT>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>T</NAME>
+          <DESCRIPTION>Bit Copy Storage</DESCRIPTION>
+          <TEXT>The bit copy instructions BLD (Bit LoaD) and BST (Bit STore) use the T bit as source and destination for the operated bit. A bit from a register in the register file can be copied into T by the BST instruction, and a bit in T can be copied into a bit in a register in the register file by the BLD instruction.</TEXT>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>H</NAME>
+          <DESCRIPTION>Half Carry Flag</DESCRIPTION>
+          <TEXT>The half carry flag H indicates a half carry in some arithmetic operations. See the Instruction Set Description for detailed information.</TEXT>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>S</NAME>
+          <DESCRIPTION>Sign Bit</DESCRIPTION>
+          <TEXT>The S-bit is always an exclusive or between the negative flag N and the two&#x2019;s complement overflow flag V. See the Instruc-tion Set Description for detailed information.</TEXT>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>V</NAME>
+          <DESCRIPTION>Two's Complement Overflow Flag</DESCRIPTION>
+          <TEXT>The two&#x2019;s complement overflow flag V supports two&#x2019;s complement arithmetics. See the Instruction Set Description for detailed information.</TEXT>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>N</NAME>
+          <DESCRIPTION>Negative Flag</DESCRIPTION>
+          <TEXT>The negative flag N indicates a negative result after the different arithmetic and logic operations. See the Instruction Set Description for detailed information.</TEXT>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>Z</NAME>
+          <DESCRIPTION>Zero Flag</DESCRIPTION>
+          <TEXT>The zero flag Z indicates a zero result after the different arithmetic and logic operations. See the Instruction Set Description for detailed information.</TEXT>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>C</NAME>
+          <DESCRIPTION>Carry Flag</DESCRIPTION>
+          <TEXT>The carry flag C indicates a carry in an arithmetic or logic operation. See the Instruction Set Description for detailed information. Note that the status register is not automatically stored when entering an interrupt routine and restored when returning from an interrupt routine. This must be handled by software.</TEXT>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </SREG>
+      <SPH>
+        <NAME>SPH</NAME>
+        <DESCRIPTION>Stack Pointer High</DESCRIPTION>
+        <TEXT>The general AVR 16-bit Stack Pointer is effectively built up of two 8-bit registers in the I/O space locations $3E ($5E) and $3D ($5D). As the AT90S4414/8515 supports up to 64 kB external SRAM, all 16-bits are used. The Stack Pointer points to the data SRAM stack area where the Subroutine and Interrupt Stacks are located. This Stack space in the data SRAM must be defined by the program before any subroutine calls are executed or interrupts are enabled. The stack pointer must be set to point above $60. The Stack Pointer is decremented by one when data is pushed onto the Stack with the PUSH instruction, and it is decremented by two when an address is pushed onto the Stack with subroutine calls and interrupts. The Stack Pointer is incremented by one when data is popped from the Stack with the POP instruction, and it is incremented by two when an address is popped from the Stack with return from subroutine RET or return from interrupt R</TEXT>
+        <IO_ADDR>$3E</IO_ADDR>
+        <MEM_ADDR>$5E</MEM_ADDR>
+        <ICON>io_sph.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT2>
+          <NAME>SP10</NAME>
+          <DESCRIPTION>Stack pointer bit 10</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>SP9</NAME>
+          <DESCRIPTION>Stack pointer bit 9</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>SP8</NAME>
+          <DESCRIPTION>Stack pointer bit 8</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </SPH>
+      <SPL>
+        <NAME>SPL</NAME>
+        <DESCRIPTION>Stack Pointer Low</DESCRIPTION>
+        <TEXT>The general AVR 16-bit Stack Pointer is effectively built up of two 8-bit registers in the I/O space locations $3E ($5E) and $3D ($5D). As the AT90S4414/8515 supports up to 64 kB external SRAM, all 16-bits are used. The Stack Pointer points to the data SRAM stack area where the Subroutine and Interrupt Stacks are located. This Stack space in the data SRAM must be defined by the program before any subroutine calls are executed or interrupts are enabled. The stack pointer must be set to point above $60. The Stack Pointer is decremented by one when data is pushed onto the Stack with the PUSH instruction, and it is decremented by two when an address is pushed onto the Stack with subroutine calls and interrupts. The Stack Pointer is incremented by one when data is popped from the Stack with the POP instruction, and it is incremented by two when an address is popped from the Stack with return from subroutine RET or return from interrupt </TEXT>
+        <IO_ADDR>$3D</IO_ADDR>
+        <MEM_ADDR>$5D</MEM_ADDR>
+        <ICON>io_sph.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT7>
+          <NAME>SP7</NAME>
+          <DESCRIPTION>Stack pointer bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>SP6</NAME>
+          <DESCRIPTION>Stack pointer bit 6</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>SP5</NAME>
+          <DESCRIPTION>Stack pointer bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>SP4</NAME>
+          <DESCRIPTION>Stack pointer bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>SP3</NAME>
+          <DESCRIPTION>Stack pointer bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>SP2</NAME>
+          <DESCRIPTION>Stack pointer bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>SP1</NAME>
+          <DESCRIPTION>Stack pointer bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>SP0</NAME>
+          <DESCRIPTION>Stack pointer bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </SPL>
+      <AVR_CONFIG>
+        <NAME>AVR_CONFIG</NAME>
+        <DESCRIPTION>AVR Configuration Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$33</IO_ADDR>
+        <MEM_ADDR>$53</MEM_ADDR>
+        <ICON>io_flag.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT6>
+          <NAME>ACS1</NAME>
+          <DESCRIPTION>AVR System Clock Select bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>ACS0</NAME>
+          <DESCRIPTION>AVR System Clock Select bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>TM</NAME>
+          <DESCRIPTION>Test Mode</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>BD</NAME>
+          <DESCRIPTION>Battery Dead</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>BLI</NAME>
+          <DESCRIPTION>Battery Low Indicator</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>SLEEP</NAME>
+          <DESCRIPTION>Sleep Bit</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>BBM</NAME>
+          <DESCRIPTION>Button Boot Mode</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </AVR_CONFIG>
+      <B_DET>
+        <NAME>B_DET</NAME>
+        <DESCRIPTION>Button Detect Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$34</IO_ADDR>
+        <MEM_ADDR>$54</MEM_ADDR>
+        <ICON>io_sph.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT5>
+          <NAME>BD5</NAME>
+          <DESCRIPTION>Button Detect bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>BD4</NAME>
+          <DESCRIPTION>Button Detect bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>BD3</NAME>
+          <DESCRIPTION>Button Detect bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>BD2</NAME>
+          <DESCRIPTION>Button Detect bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>BD1</NAME>
+          <DESCRIPTION>Button Detect bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>BD0</NAME>
+          <DESCRIPTION>Button Detect bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </B_DET>
+      <BL_CONFIG>
+        <NAME>BL_CONFIG</NAME>
+        <DESCRIPTION>Battery Low Configuration Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>$35</IO_ADDR>
+        <MEM_ADDR>$55</MEM_ADDR>
+        <ICON>io_sph.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT7>
+          <NAME>BL</NAME>
+          <DESCRIPTION>Battery Low</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>BLV</NAME>
+          <DESCRIPTION>Battery Low Valid</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>BL5</NAME>
+          <DESCRIPTION>Battery Low Detection Level bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>BL4</NAME>
+          <DESCRIPTION>Battery Low Detection Level bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>BL3</NAME>
+          <DESCRIPTION>Battery Low Detection Level bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>BL2</NAME>
+          <DESCRIPTION>Battery Low Detection Level bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>BL1</NAME>
+          <DESCRIPTION>Battery Low Detection Level bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>BL0</NAME>
+          <DESCRIPTION>Battery Low Detection Level bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </BL_CONFIG>
+    </CPU>
+  </IO_MODULE>
+  <ICE_SETTINGS>
+    <MODULE_LIST>[SIMULATOR:STK500:STK500_2:AVRISPmkII]</MODULE_LIST>
+    <SIMULATOR>
+      <CoreID>AVRSimCoreV2.SimCoreV2</CoreID>
+      <MemoryID>AVRSimMemory8bit.SimMemory8bit</MemoryID>
+      <InterruptID>AVRSimInterrupt.SimInterrupt</InterruptID>
+      <NmbIOModules>0</NmbIOModules>
+      <DEFAULT_SETTINGS>
+        <HighFuse>0x00</HighFuse>
+        <ExtendedFuse>0x00</ExtendedFuse>
+        <LowFuse>0x00</LowFuse>
+        <Lockbit>0x00</Lockbit>
+      </DEFAULT_SETTINGS>
+    </SIMULATOR>
+    <STK500>
+      <DeviceId>0xD0</DeviceId>
+      <SelfTimed>0</SelfTimed>
+      <FullParallel>0</FullParallel>
+      <Polled>0</Polled>
+      <FPoll>0x00</FPoll>
+      <EPol1>0x00</EPol1>
+      <EPol2>0x00</EPol2>
+      <ComLockFuseRead>0</ComLockFuseRead>
+    </STK500>
+    <STK500_2>
+      <IspEnterProgMode>
+        <timeout>200</timeout>
+        <stabDelay>100</stabDelay>
+        <cmdexeDelay>25</cmdexeDelay>
+        <synchLoops>32</synchLoops>
+        <byteDelay>0</byteDelay>
+        <pollIndex>3</pollIndex>
+        <pollValue>0x53</pollValue>
+      </IspEnterProgMode>
+      <IspLeaveProgMode>
+        <preDelay>1</preDelay>
+        <postDelay>1</postDelay>
+      </IspLeaveProgMode>
+      <IspChipErase>
+        <eraseDelay>45</eraseDelay>
+        <pollMethod>1</pollMethod>
+      </IspChipErase>
+      <IspProgramFlash>
+        <mode>0x02</mode>
+        <blockSize>32</blockSize>
+        <delay>10</delay>
+        <cmd1>0x40</cmd1>
+        <cmd2>0x00</cmd2>
+        <cmd3>0x20</cmd3>
+        <pollVal1>0x00</pollVal1>
+        <pollVal2>0x00</pollVal2>
+      </IspProgramFlash>
+      <IspProgramEeprom>
+        <mode>0x02</mode>
+        <blockSize>4</blockSize>
+        <delay>6</delay>
+        <cmd1>0xC0</cmd1>
+        <cmd2>0x00</cmd2>
+        <cmd3>0xA0</cmd3>
+        <pollVal1>0x00</pollVal1>
+        <pollVal2>0xFF</pollVal2>
+      </IspProgramEeprom>
+      <IspReadFlash>
+        <blockSize>256</blockSize>
+      </IspReadFlash>
+      <IspReadEeprom>
+        <blockSize>256</blockSize>
+      </IspReadEeprom>
+      <IspReadFuse>
+        <pollIndex>4</pollIndex>
+      </IspReadFuse>
+      <IspReadLock>
+        <pollIndex>4</pollIndex>
+      </IspReadLock>
+      <IspReadSign>
+        <pollIndex>4</pollIndex>
+      </IspReadSign>
+      <IspReadOsccal>
+        <pollIndex>4</pollIndex>
+      </IspReadOsccal>
+    </STK500_2>
+    <AVRISPmkII/>
+  </ICE_SETTINGS>
+  <V2>
+    <templates>
+      <module class="LOCKBIT">
+        <registers name="LOCKBIT" memspace="LOCKBIT">
+          <reg size="1" name="LOCKBIT" offset="0x00">
+            <bitfield name="LB" mask="0x06" text="Memory Lock" icon="" enum="ENUM_LB"/>
+          </reg>
+        </registers>
+        <enumerator name="ENUM_LB">
+          <enum val="0x00" text="Further programming and verification disabled" constname="PROG_VER_DISABLED"/>
+          <enum val="0x01" text="Further programming disabled" constname="PROG_DISABLED"/>
+          <enum val="0x03" text="No memory lock features enabled" constname="NO_LOCK"/>
+        </enumerator>
+      </module>
+      <module class="RF_CONTROL" text="">
+        <registers name="RF_CONTROL" memspace="DATAMEM" text="" icon="io_cpu.bmp">
+          <reg size="1" name="LOCKDET1" offset="0x30" text="Lock Detector Configuration Register 1" icon="io_flag.bmp">
+            <bitfield name="UPOK" mask="0x10" text="Unlock Conuter Control" icon=""/>
+            <bitfield name="ENKO" mask="0x08" text="Enable Key On Bit" icon=""/>
+            <bitfield name="BOD" mask="0x04" text="Black Out Disable" icon=""/>
+            <bitfield name="CS" mask="0x03" text="Cycle Slip Counter bits" icon=""/>
+          </reg>
+          <reg size="1" name="LOCKDET1" offset="0x37" text="Lock Detector Configuration register 2" icon="io_flag.bmp">
+            <bitfield name="EUD" mask="0x80" text="Enable Unlock Detect" icon=""/>
+            <bitfield name="LAT" mask="0x40" text="Lock Always True" icon=""/>
+            <bitfield name="ULC" mask="0x38" text="Unlock Count bits" icon=""/>
+            <bitfield name="LC" mask="0x07" text="Lock Count bits" icon=""/>
+          </reg>
+          <reg size="1" name="TX_CNTL" offset="0x32" text="Transmit Control Register" icon="io_flag.bmp">
+            <bitfield name="FSK" mask="0x40" text="FSK Mode" icon=""/>
+            <bitfield name="TXE" mask="0x20" text="Transmitter Enable" icon=""/>
+            <bitfield name="TXK" mask="0x10" text="Transmitter Key" icon=""/>
+            <bitfield name="LOC" mask="0x04" text="PLL Lock" icon=""/>
+          </reg>
+          <reg size="1" name="PWR_ATTEN" offset="0x34" text="Power Attenuation Control Register" icon="io_flag.bmp">
+            <bitfield name="PCC" mask="0x38" text="Power Control Coarse bits" icon=""/>
+            <bitfield name="PCF" mask="0x07" text="Power Control Fine bits" icon=""/>
+          </reg>
+          <reg size="1" name="VCOTUNE" offset="0x36" text="VCO Tuning Register" icon="io_flag.bmp">
+            <bitfield name="VCOVDET" mask="0xC0" text="VCO Voltage Detector bits" icon=""/>
+            <bitfield name="VCOTUNE" mask="0x1F" text="VCO Tuning Register bits" icon=""/>
+          </reg>
+        </registers>
+      </module>
+      <module class="EEPROM" text="">
+        <registers name="EEPROM" memspace="DATAMEM" text="" icon="io_cpu.bmp">
+          <reg size="1" name="DEEAR" offset="0x3E" text="EERPOM Address Register" icon="io_cpu.bmp" mask="0x7F"/>
+          <reg size="1" name="DEEDR" offset="0x3D" text="EEPROM Data Register" icon="io_cpu.bmp" mask="0xFF"/>
+          <reg size="1" name="DEECR" offset="0x3C" text="EEPROM Control Register" icon="io_flag.bmp">
+            <bitfield name="BSY" mask="0x08" text="EERPOM Busy Bit" icon=""/>
+            <bitfield name="EEU" mask="0x04" text="EEPROM Unlock Bit" icon=""/>
+            <bitfield name="EEL" mask="0x02" text="EEPROM Load Bit" icon=""/>
+            <bitfield name="EER" mask="0x01" text="EEPROM Read Bit" icon=""/>
+          </reg>
+        </registers>
+      </module>
+      <module class="WATCHDOG" text="">
+        <registers name="WATCHDOG" memspace="DATAMEM" text="" icon="io_watch.bmp">
+          <reg size="1" name="WDTCR" offset="0x42" text="Watchdog Timer Control Register" icon="io_flag.bmp">
+            <bitfield name="WDTOE" mask="0x10" text="RW" icon=""/>
+            <bitfield name="WDE" mask="0x08" text="Watch Dog Enable" icon=""/>
+            <bitfield name="WDP" mask="0x07" text="Watch Dog Timer Prescaler bits" icon="" enum="WDOG_TIMER_PRESCALE_3BITS"/>
+          </reg>
+        </registers>
+        <enumerator name="WDOG_TIMER_PRESCALE_3BITS">
+          <enum val="0x00" text="Oscillator Cycles 16K"/>
+          <enum val="0x01" text="Oscillator Cycles 32K"/>
+          <enum val="0x02" text="Oscillator Cycles 64K"/>
+          <enum val="0x03" text="Oscillator Cycles 128K"/>
+          <enum val="0x04" text="Oscillator Cycles 256K"/>
+          <enum val="0x05" text="Oscillator Cycles 512K"/>
+          <enum val="0x06" text="Oscillator Cycles 1024K"/>
+          <enum val="0x07" text="Oscillator Cycles 2048K"/>
+        </enumerator>
+      </module>
+      <module class="TIMER_COUNTER_0" text="">
+        <registers name="TIMER_COUNTER_0" memspace="DATAMEM" text="" icon="io_timer.bmp">
+          <reg size="1" name="BTCNT" offset="0x40" text="Timer Count register" icon="io_timer.bmp" mask="0xFF"/>
+          <reg size="1" name="BTCR" offset="0x41" text="Bit Timer Counter Control Register" icon="io_timer.bmp">
+            <bitfield name="C" mask="0xC0" text="Timer Count Register bits" icon="" lsb="8"/>
+            <bitfield name="M" mask="0x30" text="Bit Timer Mode bits" icon=""/>
+            <bitfield name="IE" mask="0x08" text="Interrupt Enable" icon=""/>
+            <bitfield name="F2" mask="0x04" text="Flag 2" icon=""/>
+            <bitfield name="DATA" mask="0x02" text="Data Bit" icon=""/>
+            <bitfield name="F0" mask="0x01" text="Flag 0" icon=""/>
+          </reg>
+        </registers>
+      </module>
+      <module class="PORT" text="">
+        <registers name="PORT" memspace="DATAMEM" text="" icon="io_port.bmp">
+          <reg size="1" name="IO_ENAB" offset="0x50" text="I/O Enable Register" icon="io_port.bmp" mask="0x3F"/>
+          <reg size="1" name="IO_DATOUT" offset="0x51" text="I/O Data Out Register" icon="io_port.bmp" mask="0x3F"/>
+          <reg size="1" name="IO_DATIN" offset="0x52" text="I/O Data In register" icon="io_port.bmp" mask="0x3F"/>
+        </registers>
+      </module>
+      <module class="CPU" text="">
+        <registers name="CPU" memspace="DATAMEM" text="" icon="io_cpu.bmp">
+          <reg size="1" name="SREG" offset="0x5F" text="Status Register" icon="io_sreg.bmp">
+            <bitfield name="I" mask="0x80" text="Global Interrupt Enable" icon=""/>
+            <bitfield name="T" mask="0x40" text="Bit Copy Storage" icon=""/>
+            <bitfield name="H" mask="0x20" text="Half Carry Flag" icon=""/>
+            <bitfield name="S" mask="0x10" text="Sign Bit" icon=""/>
+            <bitfield name="V" mask="0x08" text="Two's Complement Overflow Flag" icon=""/>
+            <bitfield name="N" mask="0x04" text="Negative Flag" icon=""/>
+            <bitfield name="Z" mask="0x02" text="Zero Flag" icon=""/>
+            <bitfield name="C" mask="0x01" text="Carry Flag" icon=""/>
+          </reg>
+          <reg size="2" name="SP" offset="0x5D" text="Stack Pointer " icon="io_sph.bmp" mask="0x07FF"/>
+          <reg size="1" name="AVR_CONFIG" offset="0x53" text="AVR Configuration Register" icon="io_flag.bmp" mask="0x7F"/>
+          <reg size="1" name="B_DET" offset="0x54" text="Button Detect Register" icon="io_sph.bmp" mask="0x3F"/>
+          <reg size="1" name="BL_CONFIG" offset="0x55" text="Battery Low Configuration Register" icon="io_sph.bmp" mask="0xFF"/>
+        </registers>
+      </module>
+    </templates>
+    <modules>
+      <module implements="RF_CONTROL" name="RF_CONTROL">
+        <registers implements="RF_CONTROL" name="RF_CONTROL" offset="0x00" text=""/>
+      </module>
+      <module implements="EEPROM" name="EEPROM">
+        <registers implements="EEPROM" name="EEPROM" offset="0x00" text=""/>
+      </module>
+      <module implements="WATCHDOG" name="WATCHDOG">
+        <registers implements="WATCHDOG" name="WATCHDOG" offset="0x00" text=""/>
+      </module>
+      <module implements="TIMER_COUNTER_0" name="TIMER_COUNTER_0">
+        <registers implements="TIMER_COUNTER_0" name="TIMER_COUNTER_0" offset="0x00" text=""/>
+      </module>
+      <module implements="PORT" name="PORT">
+        <registers implements="PORT" name="PORT" offset="0x00" text=""/>
+      </module>
+      <module implements="CPU" name="CPU">
+        <registers implements="CPU" name="CPU" offset="0x00" text=""/>
+      </module>
+    </modules>
+    <lockbits>
+      <lockbit implements="LOCKBIT" name="LOCKBIT">
+        <registers implements="LOCKBIT" name="LOCKBIT"/>
+      </lockbit>
+    </lockbits>
+  </V2>
+</AVRPART>

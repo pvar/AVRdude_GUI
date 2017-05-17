@@ -1,0 +1,6 @@
+bin/*~
+bin/avr_prog
+*.pdf
+*.o
+*~
+*.txt

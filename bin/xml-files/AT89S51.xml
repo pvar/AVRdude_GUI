@@ -1,0 +1,424 @@
+<?xml version="1.0"?>
+<AVRPART>
+  <MODULE_LIST>[ADMIN:PROGRAMMING:LOCKBIT:MEMORY:FUSE:IO_MODULE:ICE_SETTINGS]</MODULE_LIST>
+  <ADMIN>
+    <PART_NAME>AT89S51</PART_NAME>
+    <SPEED>4MHz</SPEED>
+    <BUILD>1</BUILD>
+    <RELEASE_STATUS>RELEASED</RELEASE_STATUS>
+    <NO_INCLUDE_FILE>Y</NO_INCLUDE_FILE>
+    <SIGNATURE>
+      <ADDR000>$1E</ADDR000>
+      <ADDR001>$51</ADDR001>
+      <ADDR002>$06</ADDR002>
+    </SIGNATURE>
+  </ADMIN>
+  <PROGRAMMING>
+    <ISPInterface>
+      <NoFuseProg/>
+    </ISPInterface>
+    <OscCal/>
+    <FlashPageSize>1</FlashPageSize>
+    <EepromPageSize>0</EepromPageSize>
+  </PROGRAMMING>
+  <LOCKBIT>
+    <ICON/>
+    <ID/>
+    <TEXT>[LB1 = 1 :  LB2 = 1 : LB3 = 1] No memory lock features enabled. [LB1 = 0 :  LB2 = 1 : LB3 = 1] MOVC disabled. [LB1 = 0 :  LB2 = 0 : LB3 = 1] Same as previous, but verify is also disabled. [LB1 = 0 :  LB2 = 0 : LB3 = 0] Same as previous, but external execution is also disabled.</TEXT>
+    <NMB_TEXT>4</NMB_TEXT>
+    <NMB_LOCK_BITS>3</NMB_LOCK_BITS>
+    <TEXT1>
+      <MASK>0x1C</MASK>
+      <VALUE>0x00</VALUE>
+      <TEXT>Mode 1: No memory lock features enabled</TEXT>
+    </TEXT1>
+    <TEXT2>
+      <MASK>0x1C</MASK>
+      <VALUE>0x04</VALUE>
+      <TEXT>Mode 2: MOVC disabled</TEXT>
+    </TEXT2>
+    <TEXT3>
+      <MASK>0x1C</MASK>
+      <VALUE>0x0c</VALUE>
+      <TEXT>Mode 3: Verify disabled</TEXT>
+    </TEXT3>
+    <TEXT4>
+      <MASK>0x1C</MASK>
+      <VALUE>0x1C</VALUE>
+      <TEXT>Mode 4: External execution disabled</TEXT>
+    </TEXT4>
+    <LOCKBIT0>
+      <NAME>LB1</NAME>
+      <TEXT>Lockbit</TEXT>
+    </LOCKBIT0>
+    <LOCKBIT1>
+      <NAME>LB2</NAME>
+      <TEXT>Lockbit</TEXT>
+    </LOCKBIT1>
+    <LOCKBIT2>
+      <NAME>LB3</NAME>
+      <TEXT>Lockbit</TEXT>
+    </LOCKBIT2>
+  </LOCKBIT>
+  <MEMORY>
+    <ID>AVRSimMemory8bit.SimMemory8bit</ID>
+    <PROG_FLASH>4096</PROG_FLASH>
+    <EEPROM>0</EEPROM>
+    <IO_MEMORY>
+      <PORTA>
+        <IO_ADDR>0x18</IO_ADDR>
+        <MEM_ADDR>0x38</MEM_ADDR>
+        <PORTA0_MASK>0x01</PORTA0_MASK>
+        <PORTA1_MASK>0x02</PORTA1_MASK>
+        <PORTA2_MASK>0x04</PORTA2_MASK>
+        <PORTA3_MASK>0x08</PORTA3_MASK>
+        <PORTA4_MASK>0x10</PORTA4_MASK>
+        <PORTA5_MASK>0x20</PORTA5_MASK>
+        <PORTA6_MASK>0x40</PORTA6_MASK>
+        <PORTA7_MASK>0x80</PORTA7_MASK>
+      </PORTA>
+      <DDRA>
+        <IO_ADDR>0x17</IO_ADDR>
+        <MEM_ADDR>0x37</MEM_ADDR>
+        <DDA0_MASK>0x01</DDA0_MASK>
+        <DDA1_MASK>0x02</DDA1_MASK>
+        <DDA2_MASK>0x04</DDA2_MASK>
+        <DDA3_MASK>0x08</DDA3_MASK>
+        <DDA4_MASK>0x10</DDA4_MASK>
+        <DDA5_MASK>0x20</DDA5_MASK>
+        <DDA6_MASK>0x40</DDA6_MASK>
+        <DDA7_MASK>0x80</DDA7_MASK>
+      </DDRA>
+      <PINA>
+        <IO_ADDR>0x16</IO_ADDR>
+        <MEM_ADDR>0x36</MEM_ADDR>
+        <PINA0_MASK>0x01</PINA0_MASK>
+        <PINA1_MASK>0x02</PINA1_MASK>
+        <PINA2_MASK>0x04</PINA2_MASK>
+        <PINA3_MASK>0x08</PINA3_MASK>
+        <PINA4_MASK>0x10</PINA4_MASK>
+        <PINA5_MASK>0x20</PINA5_MASK>
+        <PINA6_MASK>0x40</PINA6_MASK>
+        <PINA7_MASK>0x80</PINA7_MASK>
+      </PINA>
+    </IO_MEMORY>
+  </MEMORY>
+  <FUSE>
+    <LIST>[LOW]</LIST>
+    <ICON/>
+    <ID/>
+    <TEXT/>
+  </FUSE>
+  <IO_MODULE>
+    <MODULE_LIST>[PORTA]</MODULE_LIST>
+    <PORTA>
+      <LIST>[PORTA:DDRA:PINA]</LIST>
+      <LINK/>
+      <ICON>io_port.bmp</ICON>
+      <ID>AVRSimIOPort.SimIOPort</ID>
+      <TEXT/>
+      <PORTA>
+        <NAME>PORTA</NAME>
+        <DESCRIPTION>Port A Data Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>0x18</IO_ADDR>
+        <MEM_ADDR>0x38</MEM_ADDR>
+        <ICON>io_port.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT7>
+          <NAME>PORTA7</NAME>
+          <DESCRIPTION>Port A Data Register bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>PORTA6</NAME>
+          <DESCRIPTION>Port A Data Register bit 6</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>PORTA5</NAME>
+          <DESCRIPTION>Port A Data Register bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>PORTA4</NAME>
+          <DESCRIPTION>Port A Data Register bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>PORTA3</NAME>
+          <DESCRIPTION>Port A Data Register bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>PORTA2</NAME>
+          <DESCRIPTION>Port A Data Register bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>PORTA1</NAME>
+          <DESCRIPTION>Port A Data Register bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>PORTA0</NAME>
+          <DESCRIPTION>Port A Data Register bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </PORTA>
+      <DDRA>
+        <NAME>DDRA</NAME>
+        <DESCRIPTION>Port A Data Direction Register</DESCRIPTION>
+        <TEXT/>
+        <IO_ADDR>0x17</IO_ADDR>
+        <MEM_ADDR>0x37</MEM_ADDR>
+        <ICON>io_flag.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT7>
+          <NAME>DDA7</NAME>
+          <DESCRIPTION>Data Direction Register, Port A, bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>DDA6</NAME>
+          <DESCRIPTION>Data Direction Register, Port A, bit 6</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>DDA5</NAME>
+          <DESCRIPTION>Data Direction Register, Port A, bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>DDA4</NAME>
+          <DESCRIPTION>Data Direction Register, Port A, bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>DDA3</NAME>
+          <DESCRIPTION>Data Direction Register, Port A, bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>DDA2</NAME>
+          <DESCRIPTION>Data Direction Register, Port A, bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>DDA1</NAME>
+          <DESCRIPTION>Data Direction Register, Port A, bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>DDA0</NAME>
+          <DESCRIPTION>Data Direction Register, Port A, bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>0</INIT_VAL>
+        </BIT0>
+      </DDRA>
+      <PINA>
+        <NAME>PINA</NAME>
+        <DESCRIPTION>Port A Input Pins</DESCRIPTION>
+        <TEXT>The Port A Input Pins address - PINA - is not a register, and this address enables access to the physical value on each Port A pin. When reading PORTA the Port A Data Latch is read, and when reading PINA, the logical values present on the pins are read.</TEXT>
+        <IO_ADDR>0x16</IO_ADDR>
+        <MEM_ADDR>0x36</MEM_ADDR>
+        <WRITE_INTRUSIVE/>
+        <ICON>io_port.bmp</ICON>
+        <DISPLAY_BITS>N</DISPLAY_BITS>
+        <BIT7>
+          <NAME>PINA7</NAME>
+          <DESCRIPTION>Input Pins, Port A bit 7</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>Hi-Z</INIT_VAL>
+        </BIT7>
+        <BIT6>
+          <NAME>PINA6</NAME>
+          <DESCRIPTION>Input Pins, Port A bit 6</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>Hi-Z</INIT_VAL>
+        </BIT6>
+        <BIT5>
+          <NAME>PINA5</NAME>
+          <DESCRIPTION>Input Pins, Port A bit 5</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>Hi-Z</INIT_VAL>
+        </BIT5>
+        <BIT4>
+          <NAME>PINA4</NAME>
+          <DESCRIPTION>Input Pins, Port A bit 4</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>Hi-Z</INIT_VAL>
+        </BIT4>
+        <BIT3>
+          <NAME>PINA3</NAME>
+          <DESCRIPTION>Input Pins, Port A bit 3</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>Hi-Z</INIT_VAL>
+        </BIT3>
+        <BIT2>
+          <NAME>PINA2</NAME>
+          <DESCRIPTION>Input Pins, Port A bit 2</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>Hi-Z</INIT_VAL>
+        </BIT2>
+        <BIT1>
+          <NAME>PINA1</NAME>
+          <DESCRIPTION>Input Pins, Port A bit 1</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>Hi-Z</INIT_VAL>
+        </BIT1>
+        <BIT0>
+          <NAME>PINA0</NAME>
+          <DESCRIPTION>Input Pins, Port A bit 0</DESCRIPTION>
+          <TEXT/>
+          <ACCESS>RW</ACCESS>
+          <INIT_VAL>Hi-Z</INIT_VAL>
+        </BIT0>
+      </PINA>
+    </PORTA>
+  </IO_MODULE>
+  <ICE_SETTINGS>
+    <MODULE_LIST>[STK500_2:STK500:AVRISPmkII]</MODULE_LIST>
+    <STK500_2>
+      <IspEnterProgMode>
+        <timeout>200</timeout>
+        <stabDelay>100</stabDelay>
+        <cmdexeDelay>25</cmdexeDelay>
+        <synchLoops>32</synchLoops>
+        <byteDelay>0</byteDelay>
+        <pollIndex>4</pollIndex>
+        <pollValue>0x69</pollValue>
+      </IspEnterProgMode>
+      <IspLeaveProgMode>
+        <preDelay>1</preDelay>
+        <postDelay>1</postDelay>
+      </IspLeaveProgMode>
+      <IspChipErase>
+        <eraseDelay>250</eraseDelay>
+        <pollMethod>0</pollMethod>
+      </IspChipErase>
+      <IspProgramFlash>
+        <mode>0x02</mode>
+        <blockSize>256</blockSize>
+        <delay>10</delay>
+        <cmd1>0x40</cmd1>
+        <cmd2>0x00</cmd2>
+        <cmd3>0x20</cmd3>
+        <pollVal1>0x00</pollVal1>
+        <pollVal2>0x00</pollVal2>
+      </IspProgramFlash>
+      <IspProgramEeprom>
+        <mode>0x02</mode>
+        <blockSize>4</blockSize>
+        <delay>6</delay>
+        <cmd1>0xC0</cmd1>
+        <cmd2>0x00</cmd2>
+        <cmd3>0xA0</cmd3>
+        <pollVal1>0x00</pollVal1>
+        <pollVal2>0xFF</pollVal2>
+      </IspProgramEeprom>
+      <IspReadFlash>
+        <blockSize>256</blockSize>
+      </IspReadFlash>
+      <IspReadEeprom>
+        <blockSize>256</blockSize>
+      </IspReadEeprom>
+      <IspReadFuse>
+        <pollIndex>4</pollIndex>
+      </IspReadFuse>
+      <IspReadLock>
+        <pollIndex>4</pollIndex>
+      </IspReadLock>
+      <IspReadSign>
+        <pollIndex>4</pollIndex>
+      </IspReadSign>
+      <IspReadOsccal>
+        <pollIndex>4</pollIndex>
+      </IspReadOsccal>
+    </STK500_2>
+    <STK500>
+      <DeviceId>0xE0</DeviceId>
+      <SelfTimed>0</SelfTimed>
+      <FullParallel>0</FullParallel>
+      <Polled>0</Polled>
+      <FPoll>0x00</FPoll>
+      <EPol1>0x00</EPol1>
+      <EPol2>0x00</EPol2>
+      <ComLockFuseRead>0</ComLockFuseRead>
+      <AT89>1</AT89>
+    </STK500>
+    <AVRISPmkII/>
+  </ICE_SETTINGS>
+  <V2>
+    <templates>
+      <module class="LOCKBIT">
+        <registers name="LOCKBIT" memspace="LOCKBIT">
+          <reg size="1" name="LOCKBIT" offset="0x00">
+            <bitfield name="LB" mask="0x1C" text="Memory Lock" icon="" enum="ENUM_LB"/>
+          </reg>
+        </registers>
+        <enumerator name="ENUM_LB">
+          <enum val="0x00" text="No memory lock features enabled" constname="NO_LOCK"/>
+          <enum val="0x01" text="MOVC disabled" constname="MOVC_DISABLED"/>
+          <enum val="0x03" text="Verify disabled" constname="VER_DISABLED"/>
+          <enum val="0x07" text="External execution disabled" constname="EXT_EXE_DISABLED"/>
+        </enumerator>
+      </module>
+      <module class="PORTA" text="">
+        <registers name="PORTA" memspace="DATAMEM" text="" icon="io_port.bmp">
+          <reg size="1" name="PORTA" offset="0x38" text="Port A Data Register" icon="io_port.bmp" mask="0xFF"/>
+          <reg size="1" name="DDRA" offset="0x37" text="Port A Data Direction Register" icon="io_flag.bmp" mask="0xFF"/>
+          <reg size="1" name="PINA" offset="0x36" text="Port A Input Pins" icon="io_port.bmp" mask="0xFF"/>
+        </registers>
+      </module>
+    </templates>
+    <modules>
+      <module implements="PORTA" name="PORTA">
+        <registers implements="PORTA" name="PORTA" offset="0x00" text=""/>
+      </module>
+    </modules>
+    <lockbits>
+      <lockbit implements="LOCKBIT" name="LOCKBIT">
+        <registers implements="LOCKBIT" name="LOCKBIT"/>
+      </lockbit>
+    </lockbits>
+  </V2>
+</AVRPART>

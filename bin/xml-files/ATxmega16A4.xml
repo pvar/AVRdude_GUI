@@ -1,0 +1,3049 @@
+<AVRPART>
+	<MODULE_LIST>[CORE:MEMORY:ADMIN:INTERRUPT_VECTOR:FUSE:LOCKBIT:PACKAGE:POWER:PROGVOLT:IO_MODULE:ICE_SETTINGS:PROGRAMMING]</MODULE_LIST>
+	<CORE>
+		<CORE_VERSION>V3X</CORE_VERSION>
+		<NEW_INSTRUCTIONS>[]</NEW_INSTRUCTIONS>
+		<INSTRUCTIONS_NOT_SUPPORTED>[]</INSTRUCTIONS_NOT_SUPPORTED>
+		<RAMP_REGISTERS>[]</RAMP_REGISTERS>
+		<GP_REG_FILE>
+			<NMB_REG>32</NMB_REG>
+			<START_ADDR>$00</START_ADDR>
+			<X_REG_HIGH>$1B</X_REG_HIGH>
+			<X_REG_LOW>$1A</X_REG_LOW>
+			<Y_REG_HIGH>$1D</Y_REG_HIGH>
+			<Y_REG_LOW>$1C</Y_REG_LOW>
+			<Z_REG_HIGH>$1F</Z_REG_HIGH>
+			<Z_REG_LOW>$1E</Z_REG_LOW>
+		</GP_REG_FILE>
+	</CORE>
+	<MEMORY>
+		<PROG_FLASH>20480</PROG_FLASH>
+		<EEPROM>1024</EEPROM>
+		<INT_SRAM>
+			<SIZE>2048</SIZE>
+			<START_ADDR>8192</START_ADDR>
+		</INT_SRAM>
+		<EXT_SRAM>
+			<SIZE>NaN</SIZE>
+			<START_ADDR>NaN</START_ADDR>
+		</EXT_SRAM>
+		<IO_MEMORY>
+			<IO_START_ADDR>0</IO_START_ADDR>
+			<IO_STOP_ADDR>63</IO_STOP_ADDR>
+			<EXT_IO_START_ADDR>64</EXT_IO_START_ADDR>
+			<EXT_IO_STOP_ADDR>4095</EXT_IO_STOP_ADDR>
+			<MEM_START_ADDR>0</MEM_START_ADDR>
+			<MEM_STOP_ADDR>4095</MEM_STOP_ADDR>
+			<SREG>
+				<IO_ADDR>0x3F</IO_ADDR>
+				<MEM_ADDR>0x5F</MEM_ADDR>
+				<C_MASK>0x01</C_MASK>
+				<Z_MASK>0x02</Z_MASK>
+				<N_MASK>0x04</N_MASK>
+				<V_MASK>0x08</V_MASK>
+				<S_MASK>0x10</S_MASK>
+				<H_MASK>0x20</H_MASK>
+				<T_MASK>0x40</T_MASK>
+				<I_MASK>0x80</I_MASK>
+			</SREG>
+			<SPH>
+				<IO_ADDR>0x3E</IO_ADDR>
+				<MEM_ADDR>0x5E</MEM_ADDR>
+				<SP8_MASK>0x01</SP8_MASK>
+				<SP9_MASK>0x02</SP9_MASK>
+				<SP10_MASK>0x04</SP10_MASK>
+				<SP11_MASK>0x08</SP11_MASK>
+				<SP12_MASK>0x10</SP12_MASK>
+				<SP13_MASK>0x20</SP13_MASK>
+				<SP14_MASK>0x40</SP14_MASK>
+				<SP15_MASK>0x80</SP15_MASK>
+			</SPH>
+			<SPL>
+				<IO_ADDR>0x3D</IO_ADDR>
+				<MEM_ADDR>0x5D</MEM_ADDR>
+				<SP0_MASK>0x01</SP0_MASK>
+				<SP1_MASK>0x02</SP1_MASK>
+				<SP2_MASK>0x04</SP2_MASK>
+				<SP3_MASK>0x08</SP3_MASK>
+				<SP4_MASK>0x10</SP4_MASK>
+				<SP5_MASK>0x20</SP5_MASK>
+				<SP6_MASK>0x40</SP6_MASK>
+				<SP7_MASK>0x80</SP7_MASK>
+			</SPL>
+		</IO_MEMORY>
+	</MEMORY>
+	<ADMIN>
+		<PART_NAME>ATxmega16A4</PART_NAME>
+		<SPEED>100MHZ</SPEED>
+		<BUILD>1</BUILD>
+		<RELEASE_STATUS>INTERNAL</RELEASE_STATUS>
+		<SIGNATURE>
+			<ADDR000>$1E</ADDR000>
+			<ADDR001>$94</ADDR001>
+			<ADDR002>$41</ADDR002>
+		</SIGNATURE>
+		<OCD_PARAMETERS>
+			<USE_JTAGID>1</USE_JTAGID>
+		</OCD_PARAMETERS>
+	</ADMIN>
+	<INTERRUPT_VECTOR>
+		<NMB_VECTORS>0</NMB_VECTORS>
+	</INTERRUPT_VECTOR>
+	<FUSE>
+		<LIST>[FUSE0:FUSE1:FUSE2:FUSE3:FUSE4]</LIST>
+		<ID/>
+		<ICON/>
+		<TEXT/>
+		<FUSE0>
+			<NMB_TEXT>8</NMB_TEXT>
+			<TEXT1>
+				<MASK>0x80</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 0 bit 7 - USERID7</TEXT>
+			</TEXT1>
+			<TEXT2>
+				<MASK>0x40</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 0 bit 6 - USERID6</TEXT>
+			</TEXT2>
+			<TEXT3>
+				<MASK>0x20</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 0 bit 5 - USERID5</TEXT>
+			</TEXT3>
+			<TEXT4>
+				<MASK>0x10</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 0 bit 4 - USERID4</TEXT>
+			</TEXT4>
+			<TEXT5>
+				<MASK>0x08</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 0 bit 3 - USERID3</TEXT>
+			</TEXT5>
+			<TEXT6>
+				<MASK>0x04</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 0 bit 2 - USERID2</TEXT>
+			</TEXT6>
+			<TEXT7>
+				<MASK>0x02</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 0 bit 1 - USERID1</TEXT>
+			</TEXT7>
+			<TEXT8>
+				<MASK>0x01</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 0 bit 0 - USERID0</TEXT>
+			</TEXT8>
+		</FUSE0>
+		<FUSE1>
+			<NMB_TEXT>8</NMB_TEXT>
+			<TEXT1>
+				<MASK>0x80</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 1 bit 7 - WDWP3</TEXT>
+			</TEXT1>
+			<TEXT2>
+				<MASK>0x40</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 1 bit 6 - WDWP2</TEXT>
+			</TEXT2>
+			<TEXT3>
+				<MASK>0x20</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 1 bit 5 - WDWP1</TEXT>
+			</TEXT3>
+			<TEXT4>
+				<MASK>0x10</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 1 bit 4 - WDWP0</TEXT>
+			</TEXT4>
+			<TEXT5>
+				<MASK>0x08</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 1 bit 3 - WDP3</TEXT>
+			</TEXT5>
+			<TEXT6>
+				<MASK>0x04</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 1 bit 2 - WDP2</TEXT>
+			</TEXT6>
+			<TEXT7>
+				<MASK>0x02</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 1 bit 1 - WDP1</TEXT>
+			</TEXT7>
+			<TEXT8>
+				<MASK>0x01</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 1 bit 0 - WDP0</TEXT>
+			</TEXT8>
+		</FUSE1>
+		<FUSE2>
+			<NMB_TEXT>8</NMB_TEXT>
+			<TEXT1>
+				<MASK>0x80</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 2 bit 7 - DVSDON</TEXT>
+			</TEXT1>
+			<TEXT2>
+				<MASK>0x40</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 2 bit 6 - BOOTRST</TEXT>
+			</TEXT2>
+			<TEXT3>
+				<MASK>0x20</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 2 bit 5 - NA</TEXT>
+			</TEXT3>
+			<TEXT4>
+				<MASK>0x10</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 2 bit 4 - BODACT1</TEXT>
+			</TEXT4>
+			<TEXT5>
+				<MASK>0x08</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 2 bit 3 - BODACT0</TEXT>
+			</TEXT5>
+			<TEXT6>
+				<MASK>0x04</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 2 bit 2 - NA</TEXT>
+			</TEXT6>
+			<TEXT7>
+				<MASK>0x02</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 2 bit 1 - BODPD1</TEXT>
+			</TEXT7>
+			<TEXT8>
+				<MASK>0x01</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 2 bit 0 - BODPD0</TEXT>
+			</TEXT8>
+		</FUSE2>
+		<FUSE3>
+			<NMB_TEXT>8</NMB_TEXT>
+			<TEXT1>
+				<MASK>0x80</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 3 bit 7 - NA</TEXT>
+			</TEXT1>
+			<TEXT2>
+				<MASK>0x40</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 3 bit 6 - NA</TEXT>
+			</TEXT2>
+			<TEXT3>
+				<MASK>0x20</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 3 bit 5 - NA</TEXT>
+			</TEXT3>
+			<TEXT4>
+				<MASK>0x10</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 3 bit 4 - NA</TEXT>
+			</TEXT4>
+			<TEXT5>
+				<MASK>0x08</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 3 bit 3 - SUT1</TEXT>
+			</TEXT5>
+			<TEXT6>
+				<MASK>0x04</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 3 bit 2 - SUT0</TEXT>
+			</TEXT6>
+			<TEXT7>
+				<MASK>0x02</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 3 bit 1 - WDLOCK</TEXT>
+			</TEXT7>
+			<TEXT8>
+				<MASK>0x01</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 3 bit 0 - JTAGEN</TEXT>
+			</TEXT8>
+		</FUSE3>
+		<FUSE4>
+			<NMB_TEXT>8</NMB_TEXT>
+			<TEXT1>
+				<MASK>0x80</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 4 bit 7 - NA</TEXT>
+			</TEXT1>
+			<TEXT2>
+				<MASK>0x40</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 4 bit 6 - NA</TEXT>
+			</TEXT2>
+			<TEXT3>
+				<MASK>0x20</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 4 bit 5 - NA</TEXT>
+			</TEXT3>
+			<TEXT4>
+				<MASK>0x10</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 4 bit 4 - NA</TEXT>
+			</TEXT4>
+			<TEXT5>
+				<MASK>0x08</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 4 bit 3 - EESAVE</TEXT>
+			</TEXT5>
+			<TEXT6>
+				<MASK>0x04</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 4 bit 2 - BOD2</TEXT>
+			</TEXT6>
+			<TEXT7>
+				<MASK>0x02</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 4 bit 1 - BOD1</TEXT>
+			</TEXT7>
+			<TEXT8>
+				<MASK>0x01</MASK>
+				<VALUE>0x00</VALUE>
+				<TEXT>Fuse 4 bit 0 - BOD0</TEXT>
+			</TEXT8>
+		</FUSE4>
+	</FUSE>
+	<LOCKBIT>
+		<ICON/>
+		<ID/>
+		<TEXT/>
+		<NMB_LOCK_BITS>0</NMB_LOCK_BITS>
+		<NMB_TEXT>8</NMB_TEXT>
+		<TEXT1>
+			<MASK>0x80</MASK>
+			<VALUE>0x00</VALUE>
+			<TEXT>Lockbit 7 - BLBB1</TEXT>
+		</TEXT1>
+		<TEXT2>
+			<MASK>0x40</MASK>
+			<VALUE>0x00</VALUE>
+			<TEXT>Lockbit 6 - BLBB0</TEXT>
+		</TEXT2>
+		<TEXT3>
+			<MASK>0x20</MASK>
+			<VALUE>0x00</VALUE>
+			<TEXT>Lockbit 5 - BLBA1</TEXT>
+		</TEXT3>
+		<TEXT4>
+			<MASK>0x10</MASK>
+			<VALUE>0x00</VALUE>
+			<TEXT>Lockbit 4 - BLBA0</TEXT>
+		</TEXT4>
+		<TEXT5>
+			<MASK>0x08</MASK>
+			<VALUE>0x00</VALUE>
+			<TEXT>Lockbit 3 - BLBAT1</TEXT>
+		</TEXT5>
+		<TEXT6>
+			<MASK>0x04</MASK>
+			<VALUE>0x00</VALUE>
+			<TEXT>Lockbit 2 - BLBAT0</TEXT>
+		</TEXT6>
+		<TEXT7>
+			<MASK>0x02</MASK>
+			<VALUE>0x00</VALUE>
+			<TEXT>Lockbit 1 - LB1</TEXT>
+		</TEXT7>
+		<TEXT8>
+			<MASK>0x01</MASK>
+			<VALUE>0x00</VALUE>
+			<TEXT>Lockbit 0 - LB0</TEXT>
+		</TEXT8>
+	</LOCKBIT>
+	<PACKAGE>
+		<PACKAGES>[]</PACKAGES>
+	</PACKAGE>
+	<PROGRAMMING>
+		<PDIInterface/>
+		<OscCal/>
+		<FlashPageSize>256</FlashPageSize>
+		<EepromPageSize>32</EepromPageSize>
+	</PROGRAMMING>
+	<ICE_SETTINGS>
+		<MODULE_LIST>[SIMULATOR2:STK600:JTAGICEmkII:AVRISPmkII:AVRONE:AVRDragon]</MODULE_LIST>
+		<SIMULATOR2>
+			<MODEL>libATxmega32A4U.dll</MODEL>
+		</SIMULATOR2>
+		<STK600/>
+		<AVRISPmkII/>
+		<AVRDragon/>
+		<JTAGICEmkII>
+			<ID>0x0944103F</ID>
+			<Interface>XmegaD2W</Interface>
+			<ucRead>0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00</ucRead>
+			<ucWrite>0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00</ucWrite>
+			<ucReadShadow>0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00</ucReadShadow>
+			<ucWriteShadow>0X00,0X00,0X00,0X00,0X00,0X00,0X00,0X00</ucWriteShadow>
+			<ucExtRead>0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00</ucExtRead>
+			<ucExtWrite>0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00</ucExtWrite>
+			<ucExtReadShadow>0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00</ucExtReadShadow>
+			<ucExtWriteShadow>0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00</ucExtWriteShadow>
+			<ucIDRAddress>0x00</ucIDRAddress>
+			<ucSPMCAddress>0x00</ucSPMCAddress>
+			<ucRAMPZAddress>0x00</ucRAMPZAddress>
+			<ulFlashPageSize>256</ulFlashPageSize>
+			<ulEepromPageSize>32</ulEepromPageSize>
+			<ulBootAddress>16384</ulBootAddress>
+			<BootAddress11>16384</BootAddress11>
+			<BootAddress10>16384</BootAddress10>
+			<BootAddress01>16384</BootAddress01>
+			<BootAddress00>16384</BootAddress00>
+			<ucUpperExtIOLoc>0x0000</ucUpperExtIOLoc>
+			<ulFlashSize>20480</ulFlashSize>
+			<ulRegStart>0x0000,32</ulRegStart>
+			<ulIoStart>0x0000,64</ulIoStart>
+			<DWENmaskExt>0x00</DWENmaskExt>
+			<DWENmaskHigh>0x00</DWENmaskHigh>
+			<DWENmaskLow>0x00</DWENmaskLow>
+			<SPIENmaskExt>0x00</SPIENmaskExt>
+			<SPIENmaskHigh>0x00</SPIENmaskHigh>
+			<SPIENmaskLow>0x00</SPIENmaskLow>
+			<ucEepromInst>0x00</ucEepromInst>
+			<ucFlashInst>0x00</ucFlashInst>
+			<ucSPHaddr>0x00</ucSPHaddr>
+			<ucSPLaddr>0x00</ucSPLaddr>
+			<DWdatareg>0x00</DWdatareg>
+			<DWbasePC>0x00</DWbasePC>
+			<Osccalshared>0x00</Osccalshared>
+			<ucAllowFullPageBitstream>0x00</ucAllowFullPageBitstream>
+			<uiStartSmallestBootLoaderSection>0x00</uiStartSmallestBootLoaderSection>
+			<EnablePageProgramming>0x00</EnablePageProgramming>
+			<ucUseJTAGID>0x01</ucUseJTAGID>
+			<CacheType>0x00</CacheType>
+			<ucPCMaskHigh>0x00</ucPCMaskHigh>
+			<ucPCMaskExtended>0x00</ucPCMaskExtended>
+			<EECRAddress>0x00</EECRAddress>
+		</JTAGICEmkII>
+		<AVRONE>
+			<ID>0x0944103F</ID>
+			<Interface>XmegaD2W</Interface>
+			<ucUseJTAGID>0x01</ucUseJTAGID>
+		</AVRONE>
+	</ICE_SETTINGS>
+	<V2>
+		<file xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude" time="2008-07-18T00:00:00" rev="0"/>
+		<versions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+			<version name="ATXMEGA16A4-AU" speed="32000000" vccmin="1.6" vccmax="3.6" range="industrial" package="44A"/>
+			<version name="ATXMEGA16A4-MU" speed="32000000" vccmin="1.6" vccmax="3.6" range="industrial" package="44M1"/>
+		</versions>
+		<memspaces xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+			<memspace name="PROGMEM" start="0x0000" size="0x5000" pagesize="256" width="2" pdioffset="0x00800000" text="Program Memory Space"/>
+			<memspace name="APP_SECTION" start="0x0000" size="0x4000" pagesize="256" width="2" pdioffset="0x00800000" text="Application Section" iarsegment="CODE"/>
+			<memspace name="APPTABLE_SECTION" start="0x3000" size="0x1000" pagesize="256" width="2" pdioffset="0x00803000" text="Application Table Section" iarsegment="CODE"/>
+			<memspace name="BOOT_SECTION" start="0x4000" size="0x1000" pagesize="256" width="2" pdioffset="0x00804000" text="Boot Section" iarsegment="CODE"/>
+			<memspace name="DATAMEM" start="0x0000" size="0x2800" width="1" pdioffset="0x01000000" text="Data Memory Space"/>
+			<memspace name="IO" start="0x0000" size="0x1000" width="1" pdioffset="0x01000000" text="IO Memory"/>
+			<memspace name="MAPPED_EEPROM" start="0x1000" size="0x0400" width="1" pdioffset="0x01001000" text="SRAM Mapped EEPROM"/>
+			<memspace name="INTERNAL_SRAM" start="0x2000" size="0x0800" width="1" pdioffset="0x01002000" text="Internal SRAM"/>
+			<memspace name="EEPROM" start="0x0000" size="0x0400" pagesize="32" width="1" pdioffset="0x008C0000" text="EEPROM Memory Space"/>
+			<memspace name="FUSE" start="0x0000" size="0x0006" width="1" pdioffset="0x008F0020" text="Fuses"/>
+			<memspace name="LOCKBIT" start="0x0000" size="0x0001" width="1" pdioffset="0x008F0027" text="Lockbits"/>
+			<memspace name="SIGNATURES" start="0x0000" size="0x0003" width="1" pdioffset="0x01000090" text="Signatures"/>
+			<memspace name="USER_SIGNATURES" start="0x0000" size="0x0100" width="1" pdioffset="0x008E0400" text="User Signatures"/>
+			<memspace name="PROD_SIGNATURES" start="0x0000" size="0x0034" width="1" pdioffset="0x008E0200" text="Production/Calibration Signatures"/>
+		</memspaces>
+		<interrupts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+			<interrupt-group module="OSC" ref="OSC" offset="1"/>
+			<interrupt-group module="PORTC" ref="PORT" offset="2"/>
+			<interrupt-group module="PORTR" ref="PORT" offset="4"/>
+			<interrupt-group module="DMA" ref="DMA" offset="6"/>
+			<interrupt-group module="RTC" ref="RTC" offset="10"/>
+			<interrupt-group module="TWIC" ref="TWI" offset="12"/>
+			<interrupt-group module="TCC0" ref="TC0" offset="14"/>
+			<interrupt-group module="TCC1" ref="TC1" offset="20"/>
+			<interrupt-group module="SPIC" ref="SPI" offset="24"/>
+			<interrupt-group module="USARTC0" ref="USART" offset="25"/>
+			<interrupt-group module="USARTC1" ref="USART" offset="28"/>
+			<interrupt-group module="AES" ref="AES" offset="31"/>
+			<interrupt-group module="NVM" ref="NVM" offset="32"/>
+			<interrupt-group module="PORTB" ref="PORT" offset="34"/>
+			<interrupt-group module="PORTE" ref="PORT" offset="43"/>
+			<interrupt-group module="TWIE" ref="TWI" offset="45"/>
+			<interrupt-group module="TCE0" ref="TC0" offset="47"/>
+			<interrupt-group module="TCE1" ref="TC1" offset="53"/>
+			<interrupt-group module="USARTE0" ref="USART" offset="58"/>
+			<interrupt-group module="PORTD" ref="PORT" offset="64"/>
+			<interrupt-group module="PORTA" ref="PORT" offset="66"/>
+			<interrupt-group module="ACA" ref="AC" offset="68"/>
+			<interrupt-group module="ADCA" ref="ADC" offset="71"/>
+			<interrupt-group module="TCD0" ref="TC0" offset="77"/>
+			<interrupt-group module="TCD1" ref="TC1" offset="83"/>
+			<interrupt-group module="SPID" ref="SPI" offset="87"/>
+			<interrupt-group module="USARTD0" ref="USART" offset="88"/>
+			<interrupt-group module="USARTD1" ref="USART" offset="91"/>
+		</interrupts>
+		<modules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+			<module implements="GPIO" name="GPIO" text="General Purpose IO Registers">
+				<registers implements="GPIO" name="GPIO" offset="0x0000" text="General Purpose IO Registers" globalregs="true"/>
+			</module>
+			<module implements="XOCD" name="OCD" text="On-Chip Debug System">
+				<registers implements="OCD" name="OCD" offset="0x002E" text="On-Chip Debug System"/>
+			</module>
+			<module implements="CPU" name="CPU" text="CPU Registers">
+				<registers implements="CPU" name="CPU" offset="0x0030" text="CPU Registers" globalregs="true"/>
+			</module>
+			<module implements="CLK" name="CLK" text="Clock System">
+				<registers implements="CLK" name="CLK" offset="0x0040" text="Clock System"/>
+			</module>
+			<module implements="SLEEP" name="SLEEP" text="Sleep Controller">
+				<registers implements="SLEEP" name="SLEEP" offset="0x0048" text="Sleep Controller"/>
+			</module>
+			<module implements="OSC" name="OSC" text="Oscillator Control">
+				<registers implements="OSC" name="OSC" offset="0x0050" text="Oscillator Control"/>
+			</module>
+			<module implements="DFLL" name="DFLLRC32M" text="DFLL for 32MHz RC Oscillator">
+				<registers implements="DFLL" name="DFLLRC32M" offset="0x0060" text="DFLL for 32MHz RC Oscillator"/>
+			</module>
+			<module implements="DFLL" name="DFLLRC2M" text="DFLL for 2MHz RC Oscillator">
+				<registers implements="DFLL" name="DFLLRC2M" offset="0x0068" text="DFLL for 2MHz RC Oscillator"/>
+			</module>
+			<module implements="CLK" name="PR" text="Power Reduction">
+				<registers implements="PR" name="PR" offset="0x0070" text="Power Reduction"/>
+			</module>
+			<module implements="RST" name="RST" text="Reset Controller">
+				<registers implements="RST" name="RST" offset="0x0078" text="Reset Controller"/>
+			</module>
+			<module implements="WDT" name="WDT" text="Watch-Dog Timer">
+				<registers implements="WDT" name="WDT" offset="0x0080" text="Watch-Dog Timer"/>
+			</module>
+			<module implements="MCU" name="MCU" text="MCU Control">
+				<registers implements="MCU" name="MCU" offset="0x0090" text="MCU Control"/>
+			</module>
+			<module implements="PMIC" name="PMIC" text="Programmable Interrupt Controller">
+				<registers implements="PMIC" name="PMIC" offset="0x00A0" text="Programmable Interrupt Controller"/>
+			</module>
+			<module implements="DMA" name="DMA" text="DMA Controller">
+				<registers implements="DMA" name="DMA" offset="0x0100" text="DMA Controller"/>
+			</module>
+			<module implements="EVSYS" name="EVSYS" text="Event System">
+				<registers implements="EVSYS" name="EVSYS" offset="0x0180" text="Event System"/>
+			</module>
+			<module implements="NVM" name="NVM" text="Non Volatile Memory">
+				<registers implements="NVM" name="NVM" offset="0x01C0" text="Non Volatile Memory Controller"/>
+			</module>
+			<module implements="AC" name="ACA" text="Analog Comparator A">
+				<registers implements="AC" name="ACA" offset="0x0380" text="Analog Comparator A"/>
+			</module>
+			<module implements="ADC" name="ADCA" text="Analog to Digital Converter A">
+				<registers implements="ADC" name="ADCA" offset="0x0200" text="Analog to Digital Converter A"/>
+			</module>
+			<module implements="DAC" name="DACB" text="Digital to Analog Converter B">
+				<registers implements="DAC" name="DACB" offset="0x0320" text="Digital to Analog Converter B"/>
+			</module>
+			<module implements="RTC" name="RTC" text="Real-Time Counter">
+				<registers implements="RTC" name="RTC" offset="0x0400" text="Real-Time Counter"/>
+			</module>
+			<module implements="TWI" name="TWIC" text="Two-Wire Interface C">
+				<registers implements="TWI" name="TWIC" offset="0x480" text="Two-Wire Interface C"/>
+			</module>
+			<module implements="TWI" name="TWIE" text="Two-Wire Interface E">
+				<registers implements="TWI" name="TWIE" offset="0x4A0" text="Two-Wire Interface E"/>
+			</module>
+			<module implements="PORT" name="PORT_CFG" text="Port Configuration">
+				<registers implements="PORTCFG" name="PORTCFG" offset="0x00B0" text="Port Configuration"/>
+			</module>
+			<module implements="PORT" name="VPORT0" text="Virtual Port 0">
+				<registers implements="VPORT" name="VPORT0" offset="0x0010" text="Virtual Port 0"/>
+			</module>
+			<module implements="PORT" name="VPORT1" text="Virtual Port 1">
+				<registers implements="VPORT" name="VPORT1" offset="0x0014" text="Virtual Port 1"/>
+			</module>
+			<module implements="PORT" name="VPORT2" text="Virtual Port 2">
+				<registers implements="VPORT" name="VPORT2" offset="0x0018" text="Virtual Port 2"/>
+			</module>
+			<module implements="PORT" name="VPORT3" text="Virtual Port 3">
+				<registers implements="VPORT" name="VPORT3" offset="0x001C" text="Virtual Port 3"/>
+			</module>
+			<module implements="PORT" name="PORTA" text="Port A">
+				<registers implements="PORT" name="PORTA" offset="0x0600" text="Port A"/>
+			</module>
+			<module implements="PORT" name="PORTB" text="Port B">
+				<registers implements="PORT" name="PORTB" offset="0x0620" text="Port B"/>
+			</module>
+			<module implements="PORT" name="PORTC" text="Port C">
+				<registers implements="PORT" name="PORTC" offset="0x0640" text="Port C"/>
+			</module>
+			<module implements="PORT" name="PORTD" text="Port D">
+				<registers implements="PORT" name="PORTD" offset="0x0660" text="Port D"/>
+			</module>
+			<module implements="PORT" name="PORTE" text="Port E">
+				<registers implements="PORT" name="PORTE" offset="0x0680" text="Port E"/>
+			</module>
+			<module implements="PORT" name="PORTR" text="Port R">
+				<registers implements="PORT" name="PORTR" offset="0x07E0" text="Port R"/>
+			</module>
+			<module implements="TC" name="TCC0" text="Timer/Counter C0">
+				<registers implements="TC0" name="TCC0" offset="0x800" text="Timer/Counter C0"/>
+			</module>
+			<module implements="TC" name="TCC1" text="Timer/Counter C1">
+				<registers implements="TC1" name="TCC1" offset="0x840" text="Timer/Counter C1"/>
+			</module>
+			<module implements="TC" name="AWEXC" text="Advanced Waveform Extension C">
+				<registers implements="AWEX" name="AWEXC" offset="0x880" text="Advanced Waveform Extension C"/>
+			</module>
+			<module implements="TC" name="HIRESC" text="High-Resolution Extension C">
+				<registers implements="HIRES" name="HIRESC" offset="0x890" text="High-Resolution Extension C"/>
+			</module>
+			<module implements="USART" name="USARTC0" text="Universal Asynchronous Receiver-Transmitter C0">
+				<registers implements="USART" name="USARTC0" offset="0x8A0" text="Universal Asynchronous Receiver-Transmitter C0"/>
+			</module>
+			<module implements="USART" name="USARTC1" text="Universal Asynchronous Receiver-Transmitter C1">
+				<registers implements="USART" name="USARTC1" offset="0x8B0" text="Universal Asynchronous Receiver-Transmitter C1"/>
+			</module>
+			<module implements="SPI" name="SPIC" text="Serial Peripheral Interface C">
+				<registers implements="SPI" name="SPIC" offset="0x8C0" text="Serial Peripheral Interface C"/>
+			</module>
+			<module implements="TC" name="TCD0" text="Timer/Counter D0">
+				<registers implements="TC0" name="TCD0" offset="0x900" text="Timer/Counter D0"/>
+			</module>
+			<module implements="TC" name="TCD1" text="Timer/Counter D1">
+				<registers implements="TC1" name="TCD1" offset="0x940" text="Timer/Counter D1"/>
+			</module>
+			<module implements="TC" name="HIRESD" text="High-Resolution Extension D">
+				<registers implements="HIRES" name="HIRESD" offset="0x990" text="High-Resolution Extension D"/>
+			</module>
+			<module implements="USART" name="USARTD0" text="Universal Asynchronous Receiver-Transmitter D0">
+				<registers implements="USART" name="USARTD0" offset="0x9A0" text="Universal Asynchronous Receiver-Transmitter D0"/>
+			</module>
+			<module implements="USART" name="USARTD1" text="Universal Asynchronous Receiver-Transmitter D1">
+				<registers implements="USART" name="USARTD1" offset="0x9B0" text="Universal Asynchronous Receiver-Transmitter D1"/>
+			</module>
+			<module implements="SPI" name="SPID" text="Serial Peripheral Interface D">
+				<registers implements="SPI" name="SPID" offset="0x9C0" text="Serial Peripheral Interface D"/>
+			</module>
+			<module implements="TC" name="TCE0" text="Timer/Counter E0">
+				<registers implements="TC0" name="TCE0" offset="0xA00" text="Timer/Counter E0"/>
+			</module>
+			<module implements="TC" name="HIRESE" text="High-Resolution Extension E">
+				<registers implements="HIRES" name="HIRESE" offset="0xA90" text="High-Resolution Extension E"/>
+			</module>
+			<module implements="USART" name="USARTE0" text="Universal Asynchronous Receiver-Transmitter E0">
+				<registers implements="USART" name="USARTE0" offset="0xAA0" text="Universal Asynchronous Receiver-Transmitter E0"/>
+			</module>
+			<module implements="IRCOM" name="IRCOM" text="IR Communication Module">
+				<registers implements="IRCOM" name="IRCOM" offset="0x8F8" text="IR Communication Module"/>
+			</module>
+			<module implements="AES" name="AES" text="AES Crypto Module">
+				<registers implements="AES" name="AES" offset="0x0C0" text="AES Crypto Module"/>
+			</module>
+		</modules>
+		<fuses xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+			<fuse implements="NVM" name="FUSE" text="Fuses">
+				<registers implements="NVM_FUSES" name="FUSE" offset="0x00" text="Fuses"/>
+			</fuse>
+		</fuses>
+		<lockbits xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+			<lockbit implements="NVM" name="LOCKBIT" text="Lockbits">
+				<registers implements="NVM_LOCKBITS" name="LOCKBIT" offset="0x00" text="Lockbits"/>
+			</lockbit>
+		</lockbits>
+		<prod_signatures xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+			<prod_signature implements="NVM" name="PROD_SIGNATURES" text="Production Signatures">
+				<registers implements="NVM_PROD_SIGNATURES" name="PROD_SIGNATURES" offset="0x00" text="Production Signatures"/>
+			</prod_signature>
+		</prod_signatures>
+		<properties xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+			<propertyset name="Signatures">
+				<property name="signature0" value="0x1E"/>
+				<property name="signature1" value="0x94"/>
+				<property name="signature2" value="0x41"/>
+				<property name="jtagid" value="0x0944103F"/>
+			</propertyset>
+		</properties>
+		<templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xi="http://www.w3.org/2001/XInclude">
+			<module class="GPIO" text="General Purpose IO">
+				<registers memspace="IO" name="GPIO" text="General Purpose IO Registers" globalregs="true">
+					<reg size="1" name="GPIOR0" offset="0x00" text="General Purpose IO Register 0"/>
+					<reg size="1" name="GPIOR1" offset="0x01" text="General Purpose IO Register 1"/>
+					<reg size="1" name="GPIOR2" offset="0x02" text="General Purpose IO Register 2"/>
+					<reg size="1" name="GPIOR3" offset="0x03" text="General Purpose IO Register 3"/>
+					<reg size="1" name="GPIOR4" offset="0x04" text="General Purpose IO Register 4"/>
+					<reg size="1" name="GPIOR5" offset="0x05" text="General Purpose IO Register 5"/>
+					<reg size="1" name="GPIOR6" offset="0x06" text="General Purpose IO Register 6"/>
+					<reg size="1" name="GPIOR7" offset="0x07" text="General Purpose IO Register 7"/>
+					<reg size="1" name="GPIOR8" offset="0x08" text="General Purpose IO Register 8"/>
+					<reg size="1" name="GPIOR9" offset="0x09" text="General Purpose IO Register 9"/>
+					<reg size="1" name="GPIORA" offset="0x0A" text="General Purpose IO Register 10"/>
+					<reg size="1" name="GPIORB" offset="0x0B" text="General Purpose IO Register 11"/>
+					<reg size="1" name="GPIORC" offset="0x0C" text="General Purpose IO Register 12"/>
+					<reg size="1" name="GPIORD" offset="0x0D" text="General Purpose IO Register 13"/>
+					<reg size="1" name="GPIORE" offset="0x0E" text="General Purpose IO Register 14"/>
+					<reg size="1" name="GPIORF" offset="0x0F" text="General Purpose IO Register 15"/>
+				</registers>
+			</module>
+			<module class="XOCD" text="On-Chip Debug System">
+				<registers memspace="IO" name="OCD" text="On-Chip Debug System">
+					<reg size="1" name="OCDR0" offset="0x00" text="OCD Register 0"/>
+					<reg size="1" name="OCDR1" offset="0x01" text="OCD Register 1">
+						<bitfield name="OCDRD" mask="0x01" text="OCDR Dirty"/>
+					</reg>
+				</registers>
+				<pinfunctions/>
+			</module>
+			<module class="CPU" text="CPU">
+				<registers memspace="IO" name="CPU" text="CPU registers" globalregs="true">
+					<reg offset="0x00"/>
+					<reg offset="0x01"/>
+					<reg offset="0x02"/>
+					<reg offset="0x03"/>
+					<reg size="1" name="CCP" offset="0x04" text="Configuration Change Protection">
+						<bitfield name="CCP" mask="0xFF" text="CCP signature" enum="CCP"/>
+					</reg>
+					<reg offset="0x05"/>
+					<reg offset="0x06"/>
+					<reg offset="0x07"/>
+					<reg size="1" name="RAMPD" offset="0x08" text="Ramp D"/>
+					<reg size="1" name="RAMPX" offset="0x09" text="Ramp X"/>
+					<reg size="1" name="RAMPY" offset="0x0A" text="Ramp Y"/>
+					<reg size="1" name="RAMPZ" offset="0x0B" text="Ramp Z"/>
+					<reg size="1" name="EIND" offset="0x0C" text="Extended Indirect Jump"/>
+					<reg size="1" name="SPL" offset="0x0D" text="Stack Pointer Low"/>
+					<reg size="1" name="SPH" offset="0x0E" text="Stack Pointer High"/>
+					<reg size="1" name="SREG" offset="0x0F" text="Status Register">
+						<bitfield name="I" mask="0x80" text="Global Interrupt Enable Flag"/>
+						<bitfield name="T" mask="0x40" text="Transfer Bit"/>
+						<bitfield name="H" mask="0x20" text="Half Carry Flag"/>
+						<bitfield name="S" mask="0x10" text="N Exclusive Or V Flag"/>
+						<bitfield name="V" mask="0x08" text="Two's Complement Overflow Flag"/>
+						<bitfield name="N" mask="0x04" text="Negative Flag"/>
+						<bitfield name="Z" mask="0x02" text="Zero Flag"/>
+						<bitfield name="C" mask="0x01" text="Carry Flag"/>
+					</reg>
+				</registers>
+				<enumerator name="CCP" text="CCP signatures">
+					<enum val="0x9D" name="SPM" text="SPM Instruction Protection"/>
+					<enum val="0xD8" name="IOREG" text="IO Register Protection"/>
+				</enumerator>
+<!--registers memspace="REGISTERS" offset="0x0000" name="REGFILE" text="Register file">
+                    <reg size="1" name="R0" offset="0x00" text="General Purpose Register 0"/>
+                    <reg size="1" name="R1" offset="0x01" text="General Purpose Register 1"/>
+                    <reg size="1" name="R2" offset="0x02" text="General Purpose Register 2"/>
+                    <reg size="1" name="R3" offset="0x03" text="General Purpose Register 3"/>
+                    <reg size="1" name="R4" offset="0x04" text="General Purpose Register 4"/>
+                    <reg size="1" name="R5" offset="0x05" text="General Purpose Register 5"/>
+                    <reg size="1" name="R6" offset="0x06" text="General Purpose Register 6"/>
+                    <reg size="1" name="R7" offset="0x07" text="General Purpose Register 7"/>
+                    <reg size="1" name="R8" offset="0x08" text="General Purpose Register 8"/>
+                    <reg size="1" name="R9" offset="0x09" text="General Purpose Register 9"/>
+                    <reg size="1" name="R10" offset="0x0A" text="General Purpose Register 10"/>
+                    <reg size="1" name="R11" offset="0x0B" text="General Purpose Register 11"/>
+                    <reg size="1" name="R12" offset="0x0C" text="General Purpose Register 12"/>
+                    <reg size="1" name="R13" offset="0x0D" text="General Purpose Register 13"/>
+                    <reg size="1" name="R14" offset="0x0E" text="General Purpose Register 14"/>
+                    <reg size="1" name="R15" offset="0x0F" text="General Purpose Register 15"/>
+                    <reg size="1" name="R16" offset="0x10" text="General Purpose Register 16"/>
+                    <reg size="1" name="R17" offset="0x11" text="General Purpose Register 17"/>
+                    <reg size="1" name="R18" offset="0x12" text="General Purpose Register 18"/>
+                    <reg size="1" name="R19" offset="0x13" text="General Purpose Register 19"/>
+                    <reg size="1" name="R20" offset="0x14" text="General Purpose Register 20"/>
+                    <reg size="1" name="R21" offset="0x15" text="General Purpose Register 21"/>
+                    <reg size="1" name="R22" offset="0x16" text="General Purpose Register 22"/>
+                    <reg size="1" name="R23" offset="0x17" text="General Purpose Register 23"/>
+                    <reg size="1" name="R24" offset="0x18" text="General Purpose Register 24"/>
+                    <reg size="1" name="R25" offset="0x19" text="General Purpose Register 25"/>
+                    <reg size="1" name="R26" offset="0x1A" text="General Purpose Register 26"/>
+                    <reg size="1" name="R27" offset="0x1B" text="General Purpose Register 27"/>
+                    <reg size="1" name="R28" offset="0x1C" text="General Purpose Register 28"/>
+                    <reg size="1" name="R29" offset="0x1D" text="General Purpose Register 29"/>
+                    <reg size="1" name="R30" offset="0x1E" text="General Purpose Register 30"/>
+                    <reg size="1" name="R31" offset="0x1F" text="General Purpose Register 31"/>
+            </registers!-->
+			</module>
+			<module class="CLK" text="Clock System">
+				<registers memspace="IO" name="CLK" text="Clock System">
+					<reg size="1" name="CTRL" offset="0x00" text="Control Register">
+						<bitfield name="SCLKSEL" mask="0x07" text="System Clock Selection" enum="CLK_SCLKSEL"/>
+					</reg>
+					<reg size="1" name="PSCTRL" offset="0x01" text="Prescaler Control Register"><bitfield name="PSADIV" mask="0x7C" text="Prescaler A Division Factor" enum="CLK_PSADIV"/><bitfield name="PSBCDIV" mask="0x03" text="Prescaler B and C Division factor" enum="CLK_PSBCDIV"/>/&gt;
+			</reg>
+					<reg size="1" name="LOCK" offset="0x02" text="Lock register">
+						<bitfield name="LOCK" mask="0x01" text="Clock System Lock"/>
+					</reg>
+					<reg size="1" name="RTCCTRL" offset="0x03" text="RTC Control Register">
+						<bitfield name="RTCSRC" mask="0x0E" text="RTC Clock Source" enum="CLK_RTCSRC"/>
+						<bitfield name="RTCEN" mask="0x01" text="RTC Clock Source Enable"/>
+					</reg>
+				</registers>
+				<enumerator name="CLK_SCLKSEL" text="System Clock Selection">
+					<enum val="0x00" name="RC2M" text="Internal 2MHz RC Oscillator"/>
+					<enum val="0x01" name="RC32M" text="Internal 32MHz RC Oscillator"/>
+					<enum val="0x02" name="RC32K" text="Internal 32kHz RC Oscillator"/>
+					<enum val="0x03" name="XOSC" text="External Crystal Oscillator or Clock"/>
+					<enum val="0x04" name="PLL" text="Phase Locked Loop"/>
+				</enumerator>
+				<enumerator name="CLK_PSADIV" text="Prescaler A Division Factor">
+					<enum val="0x00" name="1" text="Divide by 1"/>
+					<enum val="0x01" name="2" text="Divide by 2"/>
+					<enum val="0x03" name="4" text="Divide by 4"/>
+					<enum val="0x05" name="8" text="Divide by 8"/>
+					<enum val="0x07" name="16" text="Divide by 16"/>
+					<enum val="0x09" name="32" text="Divide by 32"/>
+					<enum val="0x0B" name="64" text="Divide by 64"/>
+					<enum val="0x0D" name="128" text="Divide by 128"/>
+					<enum val="0x0F" name="256" text="Divide by 256"/>
+					<enum val="0x11" name="512" text="Divide by 512"/>
+				</enumerator>
+				<enumerator name="CLK_PSBCDIV" text="Prescaler B and C Division Factor">
+					<enum val="0x00" name="1_1" text="Divide B by 1 and C by 1"/>
+					<enum val="0x01" name="1_2" text="Divide B by 1 and C by 2"/>
+					<enum val="0x02" name="4_1" text="Divide B by 4 and C by 1"/>
+					<enum val="0x03" name="2_2" text="Divide B by 2 and C by 2"/>
+				</enumerator>
+				<enumerator name="CLK_RTCSRC" text="RTC Clock Source">
+					<enum val="0x00" name="ULP" text="1kHz from internal 32kHz ULP"/>
+					<enum val="0x01" name="TOSC" text="1kHz from 32kHz crystal oscillator on TOSC"/>
+					<enum val="0x02" name="RCOSC" text="1kHz from internal 32kHz RC oscillator"/>
+					<enum val="0x05" name="TOSC32" text="32kHz from 32kHz crystal oscillator on TOSC"/>
+				</enumerator>
+				<registers memspace="IO" name="PR" text="Power Reduction">
+					<reg size="1" name="PRGEN" offset="0x00" text="General Power Reduction">
+						<bitfield name="AES" mask="0x10" text="AES"/>
+						<bitfield name="EBI" mask="0x08" text="External Bus Interface"/>
+						<bitfield name="RTC" mask="0x04" text="Real-time Counter"/>
+						<bitfield name="EVSYS" mask="0x02" text="Event System"/>
+						<bitfield name="DMA" mask="0x01" text="DMA-Controller"/>
+					</reg>
+					<reg size="1" name="PRPA" offset="0x01" text="Power Reduction Port A">
+						<bitfield name="DAC" mask="0x04" text="Port A DAC"/>
+						<bitfield name="ADC" mask="0x02" text="Port A ADC"/>
+						<bitfield name="AC" mask="0x01" text="Port A Analog Comparator"/>
+					</reg>
+					<reg size="1" name="PRPB" offset="0x02" text="Power Reduction Port B">
+						<bitfield name="DAC" mask="0x04" text="Port B DAC"/>
+						<bitfield name="ADC" mask="0x02" text="Port B ADC"/>
+						<bitfield name="AC" mask="0x01" text="Port B Analog Comparator"/>
+					</reg>
+					<reg size="1" name="PRPC" offset="0x03" text="Power Reduction Port C">
+						<bitfield name="TWI" mask="0x40" text="Port C Two-wire Interface"/>
+						<bitfield name="USART1" mask="0x20" text="Port C USART1"/>
+						<bitfield name="USART0" mask="0x10" text="Port C USART0"/>
+						<bitfield name="SPI" mask="0x08" text="Port C SPI"/>
+						<bitfield name="HIRES" mask="0x04" text="Port C AWEX"/>
+						<bitfield name="TC1" mask="0x02" text="Port C Timer/Counter1"/>
+						<bitfield name="TC0" mask="0x01" text="Port C Timer/Counter0"/>
+					</reg>
+					<reg size="1" name="PRPD" offset="0x04" text="Power Reduction Port D">
+						<bitfield name="TWI" mask="0x40" text="Port D Two-wire Interface"/>
+						<bitfield name="USART1" mask="0x20" text="Port D USART1"/>
+						<bitfield name="USART0" mask="0x10" text="Port D USART0"/>
+						<bitfield name="SPI" mask="0x08" text="Port D SPI"/>
+						<bitfield name="HIRES" mask="0x04" text="Port D AWEX"/>
+						<bitfield name="TC1" mask="0x02" text="Port D Timer/Counter1"/>
+						<bitfield name="TC0" mask="0x01" text="Port D Timer/Counter0"/>
+					</reg>
+					<reg size="1" name="PRPE" offset="0x05" text="Power Reduction Port E">
+						<bitfield name="TWI" mask="0x40" text="Port E Two-wire Interface"/>
+						<bitfield name="USART1" mask="0x20" text="Port E USART1"/>
+						<bitfield name="USART0" mask="0x10" text="Port E USART0"/>
+						<bitfield name="SPI" mask="0x08" text="Port E SPI"/>
+						<bitfield name="HIRES" mask="0x04" text="Port E AWEX"/>
+						<bitfield name="TC1" mask="0x02" text="Port E Timer/Counter1"/>
+						<bitfield name="TC0" mask="0x01" text="Port E Timer/Counter0"/>
+					</reg>
+					<reg size="1" name="PRPF" offset="0x06" text="Power Reduction Port F">
+						<bitfield name="TWI" mask="0x40" text="Port F Two-wire Interface"/>
+						<bitfield name="USART1" mask="0x20" text="Port F USART1"/>
+						<bitfield name="USART0" mask="0x10" text="Port F USART0"/>
+						<bitfield name="SPI" mask="0x08" text="Port F SPI"/>
+						<bitfield name="HIRES" mask="0x04" text="Port F AWEX"/>
+						<bitfield name="TC1" mask="0x02" text="Port F Timer/Counter1"/>
+						<bitfield name="TC0" mask="0x01" text="Port F Timer/Counter0"/>
+					</reg>
+				</registers>
+			</module>
+			<module class="SLEEP" text="Sleep Controller">
+				<registers memspace="IO" name="SLEEP" text="Sleep Controller">
+					<reg offset="0x00" size="1" name="CTRL" text="Control Register">
+						<bitfield name="SMODE" mask="0x0E" text="Sleep Mode" enum="SLEEP_SMODE"/>
+						<bitfield name="SEN" mask="0x01" text="Sleep Enable"/>
+					</reg>
+				</registers>
+				<enumerator name="SLEEP_SMODE" text="Sleep Mode">
+					<enum val="0x00" name="IDLE" text="Idle mode"/>
+					<enum val="0x02" name="PDOWN" text="Power-down Mode"/>
+					<enum val="0x03" name="PSAVE" text="Power-save Mode"/>
+					<enum val="0x06" name="STDBY" text="Standby Mode"/>
+					<enum val="0x07" name="ESTDBY" text="Extended Standby Mode"/>
+				</enumerator>
+			</module>
+			<module class="OSC" text="Oscillator">
+				<registers memspace="IO" name="OSC" text="Oscillator">
+					<reg size="1" name="CTRL" offset="0x00" text="Control Register">
+						<bitfield name="PLLEN" mask="0x10" text="PLL Enable"/>
+						<bitfield name="XOSCEN" mask="0x08" text="External Oscillator Enable"/>
+						<bitfield name="RC32KEN" mask="0x04" text="Internal 32kHz RC Oscillator Enable"/>
+						<bitfield name="RC32MEN" mask="0x02" text="Internal 32MHz RC Oscillator Enable"/>
+						<bitfield name="RC2MEN" mask="0x01" text="Internal 2MHz RC Oscillator Enable"/>
+					</reg>
+					<reg size="1" name="STATUS" offset="0x01" text="Status Register">
+						<bitfield name="PLLRDY" mask="0x10" text="PLL Ready"/>
+						<bitfield name="XOSCRDY" mask="0x08" text="External Oscillator Ready"/>
+						<bitfield name="RC32KRDY" mask="0x04" text="Internal 32kHz RC Oscillator Ready"/>
+						<bitfield name="RC32MRDY" mask="0x02" text="Internal 32MHz RC Oscillator Ready"/>
+						<bitfield name="RC2MRDY" mask="0x01" text="Internal 2MHz RC Oscillator Ready"/>
+					</reg>
+					<reg size="1" name="XOSCCTRL" offset="0x02" text="External Oscillator Control Register">
+						<bitfield name="FRQRANGE" mask="0xC0" text="Frequency Range" enum="OSC_FRQRANGE"/>
+						<bitfield name="X32KLPM" mask="0x20" text="32kHz XTAL OSC Low-power Mode"/>
+						<bitfield name="XOSCSEL" mask="0x0F" text="External Oscillator Selection and Startup Time" enum="OSC_XOSCSEL"/>
+					</reg>
+					<reg size="1" name="XOSCFAIL" offset="0x03" text="External Oscillator Failure Detection Register">
+						<bitfield name="XOSCFDIF" mask="0x02" text="Failure Detection Interrupt Flag"/>
+						<bitfield name="XOSCFDEN" mask="0x01" text="Failure Detection Enable"/>
+					</reg>
+					<reg size="1" name="RC32KCAL" offset="0x04" text="32kHz Internal Oscillator Calibration Register"/>
+					<reg size="1" name="PLLCTRL" offset="0x05" text="PLL Control REgister">
+						<bitfield name="PLLSRC" mask="0xC0" text="Clock Source" enum="OSC_PLLSRC"/>
+						<bitfield name="PLLFAC" mask="0x1F" text="Multiplication Factor"/>
+					</reg>
+					<reg size="1" name="DFLLCTRL" offset="0x06" text="DFLL Control Register">
+						<bitfield name="RC32MCREF" mask="0x02" text="32MHz Calibration Reference"/>
+						<bitfield name="RC2MCREF" mask="0x01" text="2MHz Calibration Reference"/>
+					</reg>
+				</registers>
+				<enumerator name="OSC_FRQRANGE" text="Oscillator Frequency Range">
+					<enum val="0x00" name="04TO2" text="0.4 - 2 MHz"/>
+					<enum val="0x01" name="2TO9" text="2 - 9 MHz"/>
+					<enum val="0x02" name="9TO12" text="9 - 12 MHz"/>
+					<enum val="0x03" name="12TO16" text="12 - 16 MHz"/>
+				</enumerator>
+				<enumerator name="OSC_XOSCSEL" text="External Oscillator Selection and Startup Time">
+					<enum val="0x00" name="EXTCLK" text="External Clock - 6 CLK"/>
+					<enum val="0x02" name="32KHz" text="32kHz TOSC - 32K CLK"/>
+					<enum val="0x03" name="XTAL_256CLK" text="0.4-16MHz XTAL - 256 CLK"/>
+					<enum val="0x07" name="XTAL_1KCLK" text="0.4-16MHz XTAL - 1K CLK"/>
+					<enum val="0x0B" name="XTAL_16KCLK" text="0.4-16MHz XTAL - 16K CLK"/>
+				</enumerator>
+				<enumerator name="OSC_PLLSRC" text="PLL Clock Source">
+					<enum val="0x00" name="RC2M" text="Internal 2MHz RC Oscillator"/>
+					<enum val="0x02" name="RC32M" text="Internal 32MHz RC Oscillator"/>
+					<enum val="0x03" name="XOSC" text="External Oscillator"/>
+				</enumerator>
+				<interrupt-group name="OSC">
+					<int name="OSCF" offset="0" text="External Oscillator Failure Interrupt (NMI)"/>
+				</interrupt-group>
+			</module>
+			<module class="DFLL" text="DFLL">
+				<registers memspace="IO" name="DFLL" text="DFLL">
+					<reg size="1" name="CTRL" offset="0x00" text="Control Register">
+						<bitfield name="ENABLE" mask="0x01" text="DFLL Enable"/>
+					</reg>
+					<reg offset="0x01"/>
+					<reg size="1" name="CALA" offset="0x02" text="Calibration Register A">
+						<bitfield name="CALL" mask="0x7F" text="DFLL Calibration bits [6:0]"/>
+					</reg>
+					<reg size="1" name="CALB" offset="0x03" text="Calibration Register B">
+						<bitfield name="CALH" mask="0x3F" text="DFLL Calibration bits [12:7]"/>
+					</reg>
+					<reg size="1" name="COMP0" offset="0x04" text="Oscillator Compare Register 0"/>
+					<reg size="1" name="COMP1" offset="0x05" text="Oscillator Compare Register 1"/>
+					<reg size="1" name="COMP2" mask="0x07" offset="0x06" text="Oscillator Compare Register 2"/>
+					<reg offset="0x07"/>
+				</registers>
+			</module>
+			<module class="RST" text="Reset">
+				<registers memspace="IO" name="RST" text="Reset">
+					<reg size="1" name="STATUS" offset="0x00" text="Status Register">
+						<bitfield name="SDRF" mask="0x40" text="Spike Detection Reset Flag"/>
+						<bitfield name="SRF" mask="0x20" text="Software Reset Flag"/>
+						<bitfield name="PDIRF" mask="0x10" text="Programming and Debug Interface Interface Reset Flag"/>
+						<bitfield name="WDRF" mask="0x08" text="Watchdog Reset Flag"/>
+						<bitfield name="BORF" mask="0x04" text="Brown-out Reset Flag"/>
+						<bitfield name="EXTRF" mask="0x02" text="External Reset Flag"/>
+						<bitfield name="PORF" mask="0x01" text="Power-on Reset Flag"/>
+					</reg>
+					<reg size="1" name="CTRL" offset="0x01" text="Control Register">
+						<bitfield name="SWRST" mask="0x01" text="Software Reset"/>
+					</reg>
+				</registers>
+			</module>
+			<module class="WDT" text="Watch-Dog Timer">
+				<registers memspace="IO" name="WDT" text="Watch-Dog Timer">
+					<reg size="1" name="CTRL" offset="0x00" text="Control">
+						<bitfield name="PER" mask="0x3C" text="Period" enum="WDT_PER"/>
+						<bitfield name="ENABLE" mask="0x02" text="Enable"/>
+						<bitfield name="CEN" mask="0x01" text="Change Enable"/>
+					</reg>
+					<reg size="1" name="WINCTRL" offset="0x01" text="Windowed Mode Control">
+						<bitfield name="WPER" mask="0x3C" text="Windowed Mode Period" enum="WDT_WPER"/>
+						<bitfield name="WEN" mask="0x02" text="Windowed Mode Enable"/>
+						<bitfield name="WCEN" mask="0x01" text="Windowed Mode Change Enable"/>
+					</reg>
+					<reg size="1" name="STATUS" offset="0x02" text="Status">
+						<bitfield name="SYNCBUSY" mask="0x01" text="Syncronization busy"/>
+					</reg>
+				</registers>
+				<enumerator name="WDT_PER" text="Period setting">
+					<enum name="8CLK" val="0x00" text="8 cycles (8ms @ 3.3V)"/>
+					<enum name="16CLK" val="0x01" text="16 cycles (16ms @ 3.3V)"/>
+					<enum name="32CLK" val="0x02" text="32 cycles (32ms @ 3.3V)"/>
+					<enum name="64CLK" val="0x03" text="64 cycles (64ms @ 3.3V)"/>
+					<enum name="125CLK" val="0x04" text="125 cycles (0.125s @ 3.3V)"/>
+					<enum name="250CLK" val="0x05" text="250 cycles (0.25s @ 3.3V)"/>
+					<enum name="500CLK" val="0x06" text="500 cycles (0.5s @ 3.3V)"/>
+					<enum name="1KCLK" val="0x07" text="1K cycles (1s @ 3.3V)"/>
+					<enum name="2KCLK" val="0x08" text="2K cycles (2s @ 3.3V)"/>
+					<enum name="4KCLK" val="0x09" text="4K cycles (4s @ 3.3V)"/>
+					<enum name="8KCLK" val="0x0A" text="8K cycles (8s @ 3.3V)"/>
+				</enumerator>
+				<enumerator name="WDT_WPER" text="Closed window period">
+					<enum name="8CLK" val="0x00" text="8 cycles (8ms @ 3.3V)"/>
+					<enum name="16CLK" val="0x01" text="16 cycles (16ms @ 3.3V)"/>
+					<enum name="32CLK" val="0x02" text="32 cycles (32ms @ 3.3V)"/>
+					<enum name="64CLK" val="0x03" text="64 cycles (64ms @ 3.3V)"/>
+					<enum name="125CLK" val="0x04" text="125 cycles (0.125s @ 3.3V)"/>
+					<enum name="250CLK" val="0x05" text="250 cycles (0.25s @ 3.3V)"/>
+					<enum name="500CLK" val="0x06" text="500 cycles (0.5s @ 3.3V)"/>
+					<enum name="1KCLK" val="0x07" text="1K cycles (1s @ 3.3V)"/>
+					<enum name="2KCLK" val="0x08" text="2K cycles (2s @ 3.3V)"/>
+					<enum name="4KCLK" val="0x09" text="4K cycles (4s @ 3.3V)"/>
+					<enum name="8KCLK" val="0x0A" text="8K cycles (8s @ 3.3V)"/>
+				</enumerator>
+			</module>
+			<module class="MCU" text="MCU Control">
+				<registers memspace="IO" name="MCU" text="MCU Control">
+					<reg size="1" name="DEVID0" offset="0x00" text="Device ID byte 0"/>
+					<reg size="1" name="DEVID1" offset="0x01" text="Device ID byte 1"/>
+					<reg size="1" name="DEVID2" offset="0x02" text="Device ID byte 2"/>
+					<reg size="1" name="REVID" offset="0x03" text="Revision ID"/>
+					<reg size="1" name="JTAGUID" offset="0x04" text="JTAG User ID"/>
+					<reg offset="0x05"/>
+					<reg size="1" name="MCUCR" offset="0x06" text="MCU Control">
+						<bitfield name="JTAGD" mask="0x01" text="JTAG Disable"/>
+					</reg>
+					<reg offset="0x07"/>
+					<reg size="1" name="EVSYSLOCK" offset="0x08" text="Event System Lock">
+						<bitfield name="EVSYS1LOCK" mask="0x10" text="Event Channel 4-7 Lock"/>
+						<bitfield name="EVSYS0LOCK" mask="0x01" text="Event Channel 0-3 Lock"/>
+					</reg>
+					<reg size="1" name="AWEXLOCK" offset="0x09" text="AWEX Lock">
+						<bitfield name="AWEXELOCK" mask="0x04" text="AWeX on T/C E0 Lock"/>
+						<bitfield name="AWEXCLOCK" mask="0x01" text="AWeX on T/C C0 Lock"/>
+					</reg>
+					<reg offset="0x0A"/>
+					<reg offset="0x0B"/>
+				</registers>
+			</module>
+			<module class="PMIC" text="Programmable Multi-level Interrupt Controller">
+				<registers memspace="IO" name="PMIC" text="Programmable Multi-level Interrupt Controller">
+					<reg size="1" name="STATUS" offset="0x00" text="Status Register">
+						<bitfield name="NMIEX" mask="0x80" text="Non-maskable Interrupt Executing"/>
+						<bitfield name="HILVLEX" mask="0x04" text="High Level Interrupt Executing"/>
+						<bitfield name="MEDLVLEX" mask="0x02" text="Medium Level Interrupt Executing"/>
+						<bitfield name="LOLVLEX" mask="0x01" text="Low Level Interrupt Executing"/>
+					</reg>
+					<reg size="1" name="INTPRI" offset="0x01" text="Interrupt Priority"/>
+					<reg size="1" name="CTRL" offset="0x02" text="Control Register">
+						<bitfield name="RREN" mask="0x80" text="Round-Robin Priority Enable"/>
+						<bitfield name="IVSEL" mask="0x40" text="Interrupt Vector Select"/>
+						<bitfield name="HILVLEN" mask="0x04" text="High Level Enable"/>
+						<bitfield name="MEDLVLEN" mask="0x02" text="Medium Level Enable"/>
+						<bitfield name="LOLVLEN" mask="0x01" text="Low Level Enable"/>
+					</reg>
+				</registers>
+			</module>
+			<module class="DMA" text="DMA Controller">
+				<registers name="DMA_CH" text="DMA Channel">
+					<reg size="1" name="CTRLA" offset="0x00" text="Channel Control">
+						<bitfield name="ENABLE" mask="0x80" text="Channel Enable"/>
+						<bitfield name="RESET" mask="0x40" text="Channel Software Reset"/>
+						<bitfield name="REPEAT" mask="0x20" text="Channel Repeat Mode"/>
+						<bitfield name="TRFREQ" mask="0x10" text="Channel Transfer Request"/>
+						<bitfield name="SINGLE" mask="0x04" text="Channel Single Shot Data Transfer"/>
+						<bitfield name="BURSTLEN" mask="0x03" text="Channel Transfer Mode" enum="DMA_CH_BURSTLEN"/>
+					</reg>
+					<reg size="1" name="CTRLB" offset="0x01" text="Channel Control">
+						<bitfield name="CHBUSY" mask="0x80" text="Block Transfer Busy"/>
+						<bitfield name="CHPEND" mask="0x40" text="Block Transfer Pending"/>
+						<bitfield name="ERRIF" mask="0x20" text="Block Transfer Error Interrupt Flag"/>
+						<bitfield name="TRNIF" mask="0x10" text="Transaction Complete Interrup Flag"/>
+						<bitfield name="ERRINTLVL" mask="0x0C" text="Transfer Error Interrupt Level" enum="DMA_CH_ERRINTLVL"/>
+						<bitfield name="TRNINTLVL" mask="0x03" text="Transaction Complete Interrupt Level" enum="DMA_CH_TRNINTLVL"/>
+					</reg>
+					<reg size="1" name="ADDRCTRL" offset="0x02" text="Address Control">
+						<bitfield name="SRCRELOAD" mask="0xC0" text="Channel Source Address Reload" enum="DMA_CH_SRCRELOAD"/>
+						<bitfield name="SRCDIR" mask="0x30" text="Channel Source Address Mode" enum="DMA_CH_SRCDIR"/>
+						<bitfield name="DESTRELOAD" mask="0x0C" text="Channel Destination Address Reload" enum="DMA_CH_DESTRELOAD"/>
+						<bitfield name="DESTDIR" mask="0x03" text="Channel Destination Address Mode" enum="DMA_CH_DESTDIR"/>
+					</reg>
+					<reg size="1" name="TRIGSRC" offset="0x03" text="Channel Trigger Source">
+						<bitfield name="TRIGSRC" mask="0xFF" text="Channel Trigger Source" enum="DMA_CH_TRIGSRC"/>
+					</reg>
+					<reg size="2" name="TRFCNT" offset="0x04" text="Channel Block Transfer Count"/>
+					<reg size="1" name="REPCNT" offset="0x06" text="Channel Repeat Count"/>
+					<reg offset="0x07"/>
+					<reg size="1" name="SRCADDR0" offset="0x08" text="Channel Source Address 0"/>
+					<reg size="1" name="SRCADDR1" offset="0x09" text="Channel Source Address 1"/>
+					<reg size="1" name="SRCADDR2" offset="0x0A" text="Channel Source Address 2"/>
+					<reg offset="0x0B"/>
+					<reg size="1" name="DESTADDR0" offset="0x0C" text="Channel Destination Address 0"/>
+					<reg size="1" name="DESTADDR1" offset="0x0D" text="Channel Destination Address 1"/>
+					<reg size="1" name="DESTADDR2" offset="0x0E" text="Channel Destination Address 2"/>
+					<reg offset="0x0F"/>
+				</registers>
+				<registers memspace="IO" name="DMA" text="DMA Controller">
+					<reg size="1" name="CTRL" offset="0x00" text="Control">
+						<bitfield name="ENABLE" mask="0x80" text="Enable"/>
+						<bitfield name="RESET" mask="0x40" text="Software Reset"/>
+						<bitfield name="DBUFMODE" mask="0x0C" text="Double Buffering Mode" enum="DMA_DBUFMODE"/>
+						<bitfield name="PRIMODE" mask="0x03" text="Channel Priority Mode" enum="DMA_PRIMODE"/>
+					</reg>
+					<reg offset="0x01"/>
+					<reg offset="0x02"/>
+					<reg size="1" name="INTFLAGS" offset="0x03" text="Transfer Interrupt Status">
+						<bitfield name="CH3ERRIF" mask="0x80" text="Channel 3 Block Transfer Error Interrupt Flag"/>
+						<bitfield name="CH2ERRIF" mask="0x40" text="Channel 2 Block Transfer Error Interrupt Flag"/>
+						<bitfield name="CH1ERRIF" mask="0x20" text="Channel 1 Block Transfer Error Interrupt Flag"/>
+						<bitfield name="CH0ERRIF" mask="0x10" text="Channel 0 Block Transfer Error Interrupt Flag"/>
+						<bitfield name="CH3TRNIF" mask="0x08" text="Channel 3 Transaction Complete Interrupt Flag"/>
+						<bitfield name="CH2TRNIF" mask="0x04" text="Channel 2 Transaction Complete Interrupt Flag"/>
+						<bitfield name="CH1TRNIF" mask="0x02" text="Channel 1 Transaction Complete Interrupt Flag"/>
+						<bitfield name="CH0TRNIF" mask="0x01" text="Channel 0 Transaction Complete Interrupt Flag"/>
+					</reg>
+					<reg size="1" name="STATUS" offset="0x04" text="Status">
+						<bitfield name="CH3BUSY" mask="0x80" text="Channel 3 Block Transfer Busy"/>
+						<bitfield name="CH2BUSY" mask="0x40" text="Channel 2 Block Transfer Busy"/>
+						<bitfield name="CH1BUSY" mask="0x20" text="Channel 1 Block Transfer Busy"/>
+						<bitfield name="CH0BUSY" mask="0x10" text="Channel 0 Block Transfer Busy"/>
+						<bitfield name="CH3PEND" mask="0x08" text="Channel 3 Block Transfer Pending"/>
+						<bitfield name="CH2PEND" mask="0x04" text="Channel 2 Block Transfer Pending"/>
+						<bitfield name="CH1PEND" mask="0x02" text="Channel 1 Block Transfer Pending"/>
+						<bitfield name="CH0PEND" mask="0x01" text="Channel 0 Block Transfer Pending"/>
+					</reg>
+					<reg offset="0x05"/>
+					<reg size="2" name="TEMP" offset="0x06" text="Temporary Register For 16/24-bit Access"/>
+					<reg offset="0x08"/>
+					<reg offset="0x09"/>
+					<reg offset="0x0A"/>
+					<reg offset="0x0B"/>
+					<reg offset="0x0C"/>
+					<reg offset="0x0D"/>
+					<reg offset="0x0E"/>
+					<reg offset="0x0F"/>
+					<registers implements="DMA_CH" name="CH0" offset="0x10" text="DMA Channel 0"/>
+					<registers implements="DMA_CH" name="CH1" offset="0x20" text="DMA Channel 1"/>
+					<registers implements="DMA_CH" name="CH2" offset="0x30" text="DMA Channel 2"/>
+					<registers implements="DMA_CH" name="CH3" offset="0x40" text="DMA Channel 3"/>
+				</registers>
+				<enumerator name="DMA_CH_BURSTLEN" text="Burst mode">
+					<enum name="1BYTE" val="0x00" text="1-byte burst mode"/>
+					<enum name="2BYTE" val="0x01" text="2-byte burst mode"/>
+					<enum name="4BYTE" val="0x02" text="4-byte burst mode"/>
+					<enum name="8BYTE" val="0x03" text="8-byte burst mode"/>
+				</enumerator>
+				<enumerator name="DMA_CH_SRCRELOAD" text="Source address reload mode">
+					<enum name="NONE" val="0x00" text="No reload"/>
+					<enum name="BLOCK" val="0x01" text="Reload at end of block"/>
+					<enum name="BURST" val="0x02" text="Reload at end of burst"/>
+					<enum name="TRANSACTION" val="0x03" text="Reload at end of transaction"/>
+				</enumerator>
+				<enumerator name="DMA_CH_SRCDIR" text="Source addressing mode">
+					<enum name="FIXED" val="0x00" text="Fixed"/>
+					<enum name="INC" val="0x01" text="Increment"/>
+					<enum name="DEC" val="0x02" text="Decrement"/>
+				</enumerator>
+				<enumerator name="DMA_CH_DESTRELOAD" text="Destination adress reload mode">
+					<enum name="NONE" val="0x00" text="No reload"/>
+					<enum name="BLOCK" val="0x01" text="Reload at end of block"/>
+					<enum name="BURST" val="0x02" text="Reload at end of burst"/>
+					<enum name="TRANSACTION" val="0x03" text="Reload at end of transaction"/>
+				</enumerator>
+				<enumerator name="DMA_CH_DESTDIR" text="Destination adressing mode">
+					<enum name="FIXED" val="0x00" text="Fixed"/>
+					<enum name="INC" val="0x01" text="Increment"/>
+					<enum name="DEC" val="0x02" text="Decrement"/>
+				</enumerator>
+				<enumerator name="DMA_CH_TRIGSRC" text="Transfer trigger source">
+					<enum name="OFF" val="0x00" text="Off software triggers only"/>
+					<enum name="EVSYS_CH0" val="0x01" text="Event System Channel 0"/>
+					<enum name="EVSYS_CH1" val="0x02" text="Event System Channel 1"/>
+					<enum name="EVSYS_CH2" val="0x03" text="Event System Channel 2"/>
+					<enum name="ADCA_CH0" val="0x10" text="ADCA Channel 0"/>
+					<enum name="ADCA_CH1" val="0x11" text="ADCA Channel 1"/>
+					<enum name="ADCA_CH2" val="0x12" text="ADCA Channel 2"/>
+					<enum name="ADCA_CH3" val="0x13" text="ADCA Channel 3"/>
+					<enum name="ADCA_CH4" val="0x14" text="ADCA Channel 0,1,2,3 combined"/>
+					<enum name="DACA_CH0" val="0x15" text="DACA Channel 0"/>
+					<enum name="DACA_CH1" val="0x16" text="DACA Channel 1"/>
+					<enum name="ADCB_CH0" val="0x20" text="ADCB Channel 0"/>
+					<enum name="ADCB_CH1" val="0x21" text="ADCB Channel 1"/>
+					<enum name="ADCB_CH2" val="0x22" text="ADCB Channel 2"/>
+					<enum name="ADCB_CH3" val="0x23" text="ADCB Channel 3"/>
+					<enum name="ADCB_CH4" val="0x24" text="ADCB Channel 0,1,2,3 combined"/>
+					<enum name="DACB_CH0" val="0x25" text="DACB Channel 0"/>
+					<enum name="DACB_CH1" val="0x26" text="DACB Channel 1"/>
+					<enum name="TCC0_OVF" val="0x40" text="Timer/Counter C0 Overflow"/>
+					<enum name="TCC0_ERR" val="0x41" text="Timer/Counter C0 Error"/>
+					<enum name="TCC0_CCA" val="0x42" text="Timer/Counter C0 Compare or Capture A"/>
+					<enum name="TCC0_CCB" val="0x43" text="Timer/Counter C0 Compare or Capture B"/>
+					<enum name="TCC0_CCC" val="0x44" text="Timer/Counter C0 Compare or Capture C"/>
+					<enum name="TCC0_CCD" val="0x45" text="Timer/Counter C0 Compare or Capture D"/>
+					<enum name="TCC1_OVF" val="0x46" text="Timer/Counter C1 Overflow"/>
+					<enum name="TCC1_ERR" val="0x47" text="Timer/Counter C1 Error"/>
+					<enum name="TCC1_CCA" val="0x48" text="Timer/Counter C1 Compare or Capture A"/>
+					<enum name="TCC1_CCB" val="0x49" text="Timer/Counter C1 Compare or Capture B"/>
+					<enum name="SPIC" val="0x4A" text="SPI C Transfer Complete"/>
+					<enum name="USARTC0_RXC" val="0x4B" text="USART C0 Receive Complete"/>
+					<enum name="USARTC0_DRE" val="0x4C" text="USART C0 Data Register Empty"/>
+					<enum name="USARTC1_RXC" val="0x4E" text="USART C1 Receive Complete"/>
+					<enum name="USARTC1_DRE" val="0x4F" text="USART C1 Data Register Empty"/>
+					<enum name="TCD0_OVF" val="0x60" text="Timer/Counter D0 Overflow"/>
+					<enum name="TCD0_ERR" val="0x61" text="Timer/Counter D0 Error"/>
+					<enum name="TCD0_CCA" val="0x62" text="Timer/Counter D0 Compare or Capture A"/>
+					<enum name="TCD0_CCB" val="0x63" text="Timer/Counter D0 Compare or Capture B"/>
+					<enum name="TCD0_CCC" val="0x64" text="Timer/Counter D0 Compare or Capture C"/>
+					<enum name="TCD0_CCD" val="0x65" text="Timer/Counter D0 Compare or Capture D"/>
+					<enum name="TCD1_OVF" val="0x66" text="Timer/Counter D1 Overflow"/>
+					<enum name="TCD1_ERR" val="0x67" text="Timer/Counter D1 Error"/>
+					<enum name="TCD1_CCA" val="0x68" text="Timer/Counter D1 Compare or Capture A"/>
+					<enum name="TCD1_CCB" val="0x69" text="Timer/Counter D1 Compare or Capture B"/>
+					<enum name="SPID" val="0x6A" text="SPI D Transfer Complete"/>
+					<enum name="USARTD0_RXC" val="0x6B" text="USART D0 Receive Complete"/>
+					<enum name="USARTD0_DRE" val="0x6C" text="USART D0 Data Register Empty"/>
+					<enum name="USARTD1_RXC" val="0x6E" text="USART D1 Receive Complete"/>
+					<enum name="USARTD1_DRE" val="0x6F" text="USART D1 Data Register Empty"/>
+					<enum name="TCE0_OVF" val="0x80" text="Timer/Counter E0 Overflow"/>
+					<enum name="TCE0_ERR" val="0x81" text="Timer/Counter E0 Error"/>
+					<enum name="TCE0_CCA" val="0x82" text="Timer/Counter E0 Compare or Capture A"/>
+					<enum name="TCE0_CCB" val="0x83" text="Timer/Counter E0 Compare or Capture B"/>
+					<enum name="TCE0_CCC" val="0x84" text="Timer/Counter E0 Compare or Capture C"/>
+					<enum name="TCE0_CCD" val="0x85" text="Timer/Counter E0 Compare or Capture D"/>
+					<enum name="TCE1_OVF" val="0x86" text="Timer/Counter E1 Overflow"/>
+					<enum name="TCE1_ERR" val="0x87" text="Timer/Counter E1 Error"/>
+					<enum name="TCE1_CCA" val="0x88" text="Timer/Counter E1 Compare or Capture A"/>
+					<enum name="TCE1_CCB" val="0x89" text="Timer/Counter E1 Compare or Capture B"/>
+					<enum name="SPIE" val="0x8A" text="SPI E Transfer Complete"/>
+					<enum name="USARTE0_RXC" val="0x8B" text="USART E0 Receive Complete"/>
+					<enum name="USARTE0_DRE" val="0x8C" text="USART E0 Data Register Empty"/>
+					<enum name="USARTE1_RXC" val="0x8E" text="USART E1 Receive Complete"/>
+					<enum name="USARTE1_DRE" val="0x8F" text="USART E1 Data Register Empty"/>
+					<enum name="TCF0_OVF" val="0xA0" text="Timer/Counter F0 Overflow"/>
+					<enum name="TCF0_ERR" val="0xA1" text="Timer/Counter F0 Error"/>
+					<enum name="TCF0_CCA" val="0xA2" text="Timer/Counter F0 Compare or Capture A"/>
+					<enum name="TCF0_CCB" val="0xA3" text="Timer/Counter F0 Compare or Capture B"/>
+					<enum name="TCF0_CCC" val="0xA4" text="Timer/Counter F0 Compare or Capture C"/>
+					<enum name="TCF0_CCD" val="0xA5" text="Timer/Counter F0 Compare or Capture D"/>
+					<enum name="TCF1_OVF" val="0xA6" text="Timer/Counter F1 Overflow"/>
+					<enum name="TCF1_ERR" val="0xA7" text="Timer/Counter F1 Error"/>
+					<enum name="TCF1_CCA" val="0xA8" text="Timer/Counter F1 Compare or Capture A"/>
+					<enum name="TCF1_CCB" val="0xA9" text="Timer/Counter F1 Compare or Capture B"/>
+					<enum name="SPIF" val="0xAA" text="SPI F Transfer Complete"/>
+					<enum name="USARTF0_RXC" val="0xAB" text="USART F0 Receive Complete"/>
+					<enum name="USARTF0_DRE" val="0xAC" text="USART F0 Data Register Empty"/>
+					<enum name="USARTF1_RXC" val="0xAE" text="USART F1 Receive Complete"/>
+					<enum name="USARTF1_DRE" val="0xAF" text="USART F1 Data Register Empty"/>
+				</enumerator>
+				<enumerator name="DMA_DBUFMODE" text="Double buffering mode">
+					<enum name="DISABLED" val="0x00" text="Double buffering disabled"/>
+					<enum name="CH01" val="0x01" text="Double buffering enabled on channel 0/1"/>
+					<enum name="CH23" val="0x02" text="Double buffering enabled on channel 2/3"/>
+					<enum name="CH01CH23" val="0x03" text="Double buffering enabled on ch. 0/1 and ch. 2/3"/>
+				</enumerator>
+				<enumerator name="DMA_PRIMODE" text="Priority mode">
+					<enum name="RR0123" val="0x00" text="Round Robin"/>
+					<enum name="CH0RR123" val="0x01" text="Channel 0 &gt; Round Robin on channel 1/2/3"/>
+					<enum name="CH01RR23" val="0x02" text="Channel 0 &gt; channel 1 &gt; Round Robin on channel 2/3"/>
+					<enum name="CH0123" val="0x03" text="Channel 0 &gt; channel 1 &gt; channel 2 &gt; channel 3"/>
+				</enumerator>
+				<enumerator name="DMA_CH_ERRINTLVL" text="Interrupt level">
+					<enum name="OFF" val="0x00" text="Interrupt disabled"/>
+					<enum name="LO" val="0x01" text="Low level"/>
+					<enum name="MED" val="0x02" text="Medium level"/>
+					<enum name="HI" val="0x03" text="High level"/>
+				</enumerator>
+				<enumerator name="DMA_CH_TRNINTLVL" text="Interrupt level">
+					<enum name="OFF" val="0x00" text="Interrupt disabled"/>
+					<enum name="LO" val="0x01" text="Low level"/>
+					<enum name="MED" val="0x02" text="Medium level"/>
+					<enum name="HI" val="0x03" text="High level"/>
+				</enumerator>
+				<interrupt-group name="DMA">
+					<int name="CH0" offset="0" text="Channel 0 Interrupt"/>
+					<int name="CH1" offset="1" text="Channel 1 Interrupt"/>
+					<int name="CH2" offset="2" text="Channel 2 Interrupt"/>
+					<int name="CH3" offset="3" text="Channel 3 Interrupt"/>
+				</interrupt-group>
+			</module>
+			<module class="EVSYS" text="Event System">
+				<registers memspace="IO" name="EVSYS" text="Event System">
+					<reg size="1" name="CH0MUX" offset="0x00" text="Event Channel 0 Multiplexer">
+						<bitfield name="CHMUX" mask="0xFF" text="Event Channel 0 Multiplexer" enum="EVSYS_CHMUX"/>
+					</reg>
+					<reg size="1" name="CH1MUX" offset="0x01" text="Event Channel 1 Multiplexer">
+						<bitfield name="CHMUX" mask="0xFF" text="Event Channel 1 Multiplexer" enum="EVSYS_CHMUX"/>
+					</reg>
+					<reg size="1" name="CH2MUX" offset="0x02" text="Event Channel 2 Multiplexer">
+						<bitfield name="CHMUX" mask="0xFF" text="Event Channel 2 Multiplexer" enum="EVSYS_CHMUX"/>
+					</reg>
+					<reg size="1" name="CH3MUX" offset="0x03" text="Event Channel 3 Multiplexer">
+						<bitfield name="CHMUX" mask="0xFF" text="Event Channel 3 Multiplexer" enum="EVSYS_CHMUX"/>
+					</reg>
+					<reg size="1" name="CH4MUX" offset="0x04" text="Event Channel 4 Multiplexer">
+						<bitfield name="CHMUX" mask="0xFF" text="Event Channel 4 Multiplexer" enum="EVSYS_CHMUX"/>
+					</reg>
+					<reg size="1" name="CH5MUX" offset="0x05" text="Event Channel 5 Multiplexer">
+						<bitfield name="CHMUX" mask="0xFF" text="Event Channel 5 Multiplexer" enum="EVSYS_CHMUX"/>
+					</reg>
+					<reg size="1" name="CH6MUX" offset="0x06" text="Event Channel 6 Multiplexer">
+						<bitfield name="CHMUX" mask="0xFF" text="Event Channel 6 Multiplexer" enum="EVSYS_CHMUX"/>
+					</reg>
+					<reg size="1" name="CH7MUX" offset="0x07" text="Event Channel 7 Multiplexer">
+						<bitfield name="CHMUX" mask="0xFF" text="Event Channel 7 Multiplexer" enum="EVSYS_CHMUX"/>
+					</reg>
+					<reg size="1" name="CH0CTRL" offset="0x08" text="Channel 0 Control Register">
+						<bitfield name="QDIRM" mask="0x60" text="Quadrature Decoder Index Recognition Mode"/>
+						<bitfield name="QDIEN" mask="0x10" text="Quadrature Decoder Index Enable"/>
+						<bitfield name="QDEN" mask="0x08" text="Quadrature Decoder Enable"/>
+						<bitfield name="DIGFILT" mask="0x07" text="Digital Filter" enum="EVSYS_DIGFILT"/>
+					</reg>
+					<reg size="1" name="CH1CTRL" offset="0x09" text="Channel 1 Control Register">
+						<bitfield name="DIGFILT" mask="0x07" text="Digital Filter" enum="EVSYS_DIGFILT"/>
+					</reg>
+					<reg size="1" name="CH2CTRL" offset="0x0A" text="Channel 2 Control Register">
+						<bitfield name="QDIRM" mask="0x60" text="Quadrature Decoder Index Recognition Mode" enum="EVSYS_QDIRM"/>
+						<bitfield name="QDIEN" mask="0x10" text="Quadrature Decoder Index Enable"/>
+						<bitfield name="QDEN" mask="0x08" text="Quadrature Decoder Enable"/>
+						<bitfield name="DIGFILT" mask="0x07" text="Digital Filter" enum="EVSYS_DIGFILT"/>
+					</reg>
+					<reg size="1" name="CH3CTRL" offset="0x0B" text="Channel 3 Control Register">
+						<bitfield name="DIGFILT" mask="0x07" text="Digital Filter" enum="EVSYS_DIGFILT"/>
+					</reg>
+					<reg size="1" name="CH4CTRL" offset="0x0C" text="Channel 4 Control Register">
+						<bitfield name="QDIRM" mask="0x60" text="Quadrature Decoder Index Recognition Mode" enum="EVSYS_QDIRM"/>
+						<bitfield name="QDIEN" mask="0x10" text="Quadrature Decoder Index Enable"/>
+						<bitfield name="QDEN" mask="0x08" text="Quadrature Decoder Enable"/>
+						<bitfield name="DIGFILT" mask="0x07" text="Digital Filter" enum="EVSYS_DIGFILT"/>
+					</reg>
+					<reg size="1" name="CH5CTRL" offset="0x0D" text="Channel 5 Control Register">
+						<bitfield name="DIGFILT" mask="0x07" text="Digital Filter" enum="EVSYS_DIGFILT"/>
+					</reg>
+					<reg size="1" name="CH6CTRL" offset="0x0E" text="Channel 6 Control Register">
+						<bitfield name="DIGFILT" mask="0x07" text="Digital Filter" enum="EVSYS_DIGFILT"/>
+					</reg>
+					<reg size="1" name="CH7CTRL" offset="0x0F" text="Channel 7 Control Register">
+						<bitfield name="DIGFILT" mask="0x07" text="Digital Filter" enum="EVSYS_DIGFILT"/>
+					</reg>
+					<reg size="1" name="STROBE" offset="0x10" text="Event Strobe"/>
+					<reg size="1" name="DATA" offset="0x11" text="Event Data"/>
+				</registers>
+				<enumerator name="EVSYS_QDIRM" text="Quadrature Decoder Index Recognition Mode">
+					<enum name="00" val="0x00" text="QDPH0 = 0, QDPH90 = 0"/>
+					<enum name="01" val="0x01" text="QDPH0 = 0, QDPH90 = 1"/>
+					<enum name="10" val="0x02" text="QDPH0 = 1, QDPH90 = 0"/>
+					<enum name="11" val="0x03" text="QDPH0 = 1, QDPH90 = 1"/>
+				</enumerator>
+				<enumerator name="EVSYS_DIGFILT" text="Digital filter coefficient">
+					<enum val="0x00" name="1SAMPLE" text="1 SAMPLE"/>
+					<enum val="0x01" name="2SAMPLES" text="2 SAMPLES"/>
+					<enum val="0x02" name="3SAMPLES" text="3 SAMPLES"/>
+					<enum val="0x03" name="4SAMPLES" text="4 SAMPLES"/>
+					<enum val="0x04" name="5SAMPLES" text="5 SAMPLES"/>
+					<enum val="0x05" name="6SAMPLES" text="6 SAMPLES"/>
+					<enum val="0x06" name="7SAMPLES" text="7 SAMPLES"/>
+					<enum val="0x07" name="8SAMPLES" text="8 SAMPLES"/>
+				</enumerator>
+				<enumerator name="EVSYS_CHMUX" text="Event Channel multiplexer input selection">
+					<enum val="0x00" name="OFF" text="Off"/>
+					<enum val="0x08" name="RTC_OVF" text="RTC Overflow"/>
+					<enum val="0x09" name="RTC_CMP" text="RTC Compare Match"/>
+					<enum val="0x10" name="ACA_CH0" text="Analog Comparator A Channel 0"/>
+					<enum val="0x11" name="ACA_CH1" text="Analog Comparator A Channel 1"/>
+					<enum val="0x12" name="ACA_WIN" text="Analog Comparator A Window"/>
+					<enum val="0x13" name="ACB_CH0" text="Analog Comparator B Channel 0"/>
+					<enum val="0x14" name="ACB_CH1" text="Analog Comparator B Channel 1"/>
+					<enum val="0x15" name="ACB_WIN" text="Analog Comparator B Window"/>
+					<enum val="0x20" name="ADCA_CH0" text="ADC A Channel 0"/>
+					<enum val="0x21" name="ADCA_CH1" text="ADC A Channel 1"/>
+					<enum val="0x22" name="ADCA_CH2" text="ADC A Channel 2"/>
+					<enum val="0x23" name="ADCA_CH3" text="ADC A Channel 3"/>
+					<enum val="0x24" name="ADCB_CH0" text="ADC B Channel 0"/>
+					<enum val="0x25" name="ADCB_CH1" text="ADC B Channel 1"/>
+					<enum val="0x26" name="ADCB_CH2" text="ADC B Channel 2"/>
+					<enum val="0x27" name="ADCB_CH3" text="ADC B Channel 3"/>
+					<enum val="0x50" name="PORTA_PIN0" text="Port A, Pin0"/>
+					<enum val="0x51" name="PORTA_PIN1" text="Port A, Pin1"/>
+					<enum val="0x52" name="PORTA_PIN2" text="Port A, Pin2"/>
+					<enum val="0x53" name="PORTA_PIN3" text="Port A, Pin3"/>
+					<enum val="0x54" name="PORTA_PIN4" text="Port A, Pin4"/>
+					<enum val="0x55" name="PORTA_PIN5" text="Port A, Pin5"/>
+					<enum val="0x56" name="PORTA_PIN6" text="Port A, Pin6"/>
+					<enum val="0x57" name="PORTA_PIN7" text="Port A, Pin7"/>
+					<enum val="0x58" name="PORTB_PIN0" text="Port B, Pin0"/>
+					<enum val="0x59" name="PORTB_PIN1" text="Port B, Pin1"/>
+					<enum val="0x5A" name="PORTB_PIN2" text="Port B, Pin2"/>
+					<enum val="0x5B" name="PORTB_PIN3" text="Port B, Pin3"/>
+					<enum val="0x5C" name="PORTB_PIN4" text="Port B, Pin4"/>
+					<enum val="0x5D" name="PORTB_PIN5" text="Port B, Pin5"/>
+					<enum val="0x5E" name="PORTB_PIN6" text="Port B, Pin6"/>
+					<enum val="0x5F" name="PORTB_PIN7" text="Port B, Pin7"/>
+					<enum val="0x60" name="PORTC_PIN0" text="Port C, Pin0"/>
+					<enum val="0x61" name="PORTC_PIN1" text="Port C, Pin1"/>
+					<enum val="0x62" name="PORTC_PIN2" text="Port C, Pin2"/>
+					<enum val="0x63" name="PORTC_PIN3" text="Port C, Pin3"/>
+					<enum val="0x64" name="PORTC_PIN4" text="Port C, Pin4"/>
+					<enum val="0x65" name="PORTC_PIN5" text="Port C, Pin5"/>
+					<enum val="0x66" name="PORTC_PIN6" text="Port C, Pin6"/>
+					<enum val="0x67" name="PORTC_PIN7" text="Port C, Pin7"/>
+					<enum val="0x68" name="PORTD_PIN0" text="Port D, Pin0"/>
+					<enum val="0x69" name="PORTD_PIN1" text="Port D, Pin1"/>
+					<enum val="0x6A" name="PORTD_PIN2" text="Port D, Pin2"/>
+					<enum val="0x6B" name="PORTD_PIN3" text="Port D, Pin3"/>
+					<enum val="0x6C" name="PORTD_PIN4" text="Port D, Pin4"/>
+					<enum val="0x6D" name="PORTD_PIN5" text="Port D, Pin5"/>
+					<enum val="0x6E" name="PORTD_PIN6" text="Port D, Pin6"/>
+					<enum val="0x6F" name="PORTD_PIN7" text="Port D, Pin7"/>
+					<enum val="0x70" name="PORTE_PIN0" text="Port E, Pin0"/>
+					<enum val="0x71" name="PORTE_PIN1" text="Port E, Pin1"/>
+					<enum val="0x72" name="PORTE_PIN2" text="Port E, Pin2"/>
+					<enum val="0x73" name="PORTE_PIN3" text="Port E, Pin3"/>
+					<enum val="0x74" name="PORTE_PIN4" text="Port E, Pin4"/>
+					<enum val="0x75" name="PORTE_PIN5" text="Port E, Pin5"/>
+					<enum val="0x76" name="PORTE_PIN6" text="Port E, Pin6"/>
+					<enum val="0x77" name="PORTE_PIN7" text="Port E, Pin7"/>
+					<enum val="0x78" name="PORTF_PIN0" text="Port F, Pin0"/>
+					<enum val="0x79" name="PORTF_PIN1" text="Port F, Pin1"/>
+					<enum val="0x7A" name="PORTF_PIN2" text="Port F, Pin2"/>
+					<enum val="0x7B" name="PORTF_PIN3" text="Port F, Pin3"/>
+					<enum val="0x7C" name="PORTF_PIN4" text="Port F, Pin4"/>
+					<enum val="0x7D" name="PORTF_PIN5" text="Port F, Pin5"/>
+					<enum val="0x7E" name="PORTF_PIN6" text="Port F, Pin6"/>
+					<enum val="0x7F" name="PORTF_PIN7" text="Port F, Pin7"/>
+					<enum val="0x80" name="PRESCALER_1" text="Prescaler, divide by 1"/>
+					<enum val="0x81" name="PRESCALER_2" text="Prescaler, divide by 2"/>
+					<enum val="0x82" name="PRESCALER_4" text="Prescaler, divide by 4"/>
+					<enum val="0x83" name="PRESCALER_8" text="Prescaler, divide by 8"/>
+					<enum val="0x84" name="PRESCALER_16" text="Prescaler, divide by 16"/>
+					<enum val="0x85" name="PRESCALER_32" text="Prescaler, divide by 32"/>
+					<enum val="0x86" name="PRESCALER_64" text="Prescaler, divide by 64"/>
+					<enum val="0x87" name="PRESCALER_128" text="Prescaler, divide by 128"/>
+					<enum val="0x88" name="PRESCALER_256" text="Prescaler, divide by 256"/>
+					<enum val="0x89" name="PRESCALER_512" text="Prescaler, divide by 512"/>
+					<enum val="0x8A" name="PRESCALER_1024" text="Prescaler, divide by 1024"/>
+					<enum val="0x8B" name="PRESCALER_2048" text="Prescaler, divide by 2048"/>
+					<enum val="0x8C" name="PRESCALER_4096" text="Prescaler, divide by 4096"/>
+					<enum val="0x8D" name="PRESCALER_8192" text="Prescaler, divide by 8192"/>
+					<enum val="0x8E" name="PRESCALER_16384" text="Prescaler, divide by 16384"/>
+					<enum val="0x8F" name="PRESCALER_32768" text="Prescaler, divide by 32768"/>
+					<enum val="0xC0" name="TCC0_OVF" text="Timer/Counter C0 Overflow"/>
+					<enum val="0xC1" name="TCC0_ERR" text="Timer/Counter C0 Error"/>
+					<enum val="0xC4" name="TCC0_CCA" text="Timer/Counter C0 Compare or Capture A"/>
+					<enum val="0xC5" name="TCC0_CCB" text="Timer/Counter C0 Compare or Capture B"/>
+					<enum val="0xC6" name="TCC0_CCC" text="Timer/Counter C0 Compare or Capture C"/>
+					<enum val="0xC7" name="TCC0_CCD" text="Timer/Counter C0 Compare or Capture D"/>
+					<enum val="0xC8" name="TCC1_OVF" text="Timer/Counter C1 Overflow"/>
+					<enum val="0xC9" name="TCC1_ERR" text="Timer/Counter C1 Error"/>
+					<enum val="0xCC" name="TCC1_CCA" text="Timer/Counter C1 Compare or Capture A"/>
+					<enum val="0xCD" name="TCC1_CCB" text="Timer/Counter C1 Compare or Capture B"/>
+					<enum val="0xD0" name="TCD0_OVF" text="Timer/Counter D0 Overflow"/>
+					<enum val="0xD1" name="TCD0_ERR" text="Timer/Counter D0 Error"/>
+					<enum val="0xD4" name="TCD0_CCA" text="Timer/Counter D0 Compare or Capture A"/>
+					<enum val="0xD5" name="TCD0_CCB" text="Timer/Counter D0 Compare or Capture B"/>
+					<enum val="0xD6" name="TCD0_CCC" text="Timer/Counter D0 Compare or Capture C"/>
+					<enum val="0xD7" name="TCD0_CCD" text="Timer/Counter D0 Compare or Capture D"/>
+					<enum val="0xD8" name="TCD1_OVF" text="Timer/Counter D1 Overflow"/>
+					<enum val="0xD9" name="TCD1_ERR" text="Timer/Counter D1 Error"/>
+					<enum val="0xDC" name="TCD1_CCA" text="Timer/Counter D1 Compare or Capture A"/>
+					<enum val="0xDD" name="TCD1_CCB" text="Timer/Counter D1 Compare or Capture B"/>
+					<enum val="0xE0" name="TCE0_OVF" text="Timer/Counter E0 Overflow"/>
+					<enum val="0xE1" name="TCE0_ERR" text="Timer/Counter E0 Error"/>
+					<enum val="0xE4" name="TCE0_CCA" text="Timer/Counter E0 Compare or Capture A"/>
+					<enum val="0xE5" name="TCE0_CCB" text="Timer/Counter E0 Compare or Capture B"/>
+					<enum val="0xE6" name="TCE0_CCC" text="Timer/Counter E0 Compare or Capture C"/>
+					<enum val="0xE7" name="TCE0_CCD" text="Timer/Counter E0 Compare or Capture D"/>
+					<enum val="0xE8" name="TCE1_OVF" text="Timer/Counter E1 Overflow"/>
+					<enum val="0xE9" name="TCE1_ERR" text="Timer/Counter E1 Error"/>
+					<enum val="0xEC" name="TCE1_CCA" text="Timer/Counter E1 Compare or Capture A"/>
+					<enum val="0xED" name="TCE1_CCB" text="Timer/Counter E1 Compare or Capture B"/>
+					<enum val="0xF0" name="TCF0_OVF" text="Timer/Counter F0 Overflow"/>
+					<enum val="0xF1" name="TCF0_ERR" text="Timer/Counter F0 Error"/>
+					<enum val="0xF4" name="TCF0_CCA" text="Timer/Counter F0 Compare or Capture A"/>
+					<enum val="0xF5" name="TCF0_CCB" text="Timer/Counter F0 Compare or Capture B"/>
+					<enum val="0xF6" name="TCF0_CCC" text="Timer/Counter F0 Compare or Capture C"/>
+					<enum val="0xF7" name="TCF0_CCD" text="Timer/Counter F0 Compare or Capture D"/>
+					<enum val="0xF8" name="TCF1_OVF" text="Timer/Counter F1 Overflow"/>
+					<enum val="0xF9" name="TCF1_ERR" text="Timer/Counter F1 Error"/>
+					<enum val="0xFC" name="TCF1_CCA" text="Timer/Counter F1 Compare or Capture A"/>
+					<enum val="0xFD" name="TCF1_CCB" text="Timer/Counter F1 Compare or Capture B"/>
+				</enumerator>
+			</module>
+			<module class="NVM" text="Non Volatile Memory Controller">
+				<registers memspace="IO" name="NVM" text="Non-volatile Memory Controller">
+					<reg name="ADDR0" offset="0x00" size="1" text="Address Register 0"/>
+					<reg name="ADDR1" offset="0x01" size="1" text="Address Register 1"/>
+					<reg name="ADDR2" offset="0x02" size="1" text="Address Register 2"/>
+					<reg offset="0x03"/>
+					<reg name="DATA0" offset="0x04" size="1" text="Data Register 0"/>
+					<reg name="DATA1" offset="0x05" size="1" text="Data Register 1"/>
+					<reg name="DATA2" offset="0x06" size="1" text="Data Register 2"/>
+					<reg offset="0x07"/>
+					<reg offset="0x08"/>
+					<reg offset="0x09"/>
+					<reg name="CMD" offset="0x0A" size="1" text="Command">
+						<bitfield enum="NVM_CMD" mask="0xFF" name="CMD" text="Command"/>
+					</reg>
+					<reg name="CTRLA" offset="0x0B" size="1" text="Control Register A">
+						<bitfield mask="0x01" name="CMDEX" text="Command Execute"/>
+					</reg>
+					<reg name="CTRLB" offset="0x0C" size="1" text="Control Register B">
+						<bitfield mask="0x08" name="EEMAPEN" text="EEPROM Mapping Enable"/>
+						<bitfield mask="0x04" name="FPRM" text="Flash Power Reduction Enable"/>
+						<bitfield mask="0x02" name="EPRM" text="EEPROM Power Reduction Enable"/>
+						<bitfield mask="0x01" name="SPMLOCK" text="SPM Lock"/>
+					</reg>
+					<reg name="INTCTRL" offset="0x0D" size="1" text="Interrupt Control">
+						<bitfield enum="NVM_SPMLVL" mask="0x0C" name="SPMLVL" text="SPM Interrupt Level"/>
+						<bitfield enum="NVM_EELVL" mask="0x03" name="EELVL" text="EEPROM Interrupt Level"/>
+					</reg>
+					<reg offset="0x0E"/>
+					<reg name="STATUS" offset="0x0F" size="1" text="Status">
+						<bitfield mask="0x80" name="NVMBUSY" text="Non-volatile Memory Busy"/>
+						<bitfield mask="0x40" name="FBUSY" text="Flash Memory Busy"/>
+						<bitfield mask="0x02" name="EELOAD" text="EEPROM Page Buffer Active Loading"/>
+						<bitfield mask="0x01" name="FLOAD" text="Flash Page Buffer Active Loading"/>
+					</reg>
+					<reg name="LOCKBITS" offset="0x10" size="1" text="Lock Bits">
+						<bitfield enum="NVM_BLBB" mask="0xC0" name="BLBB" text="Boot Lock Bits - Boot Section"/>
+						<bitfield enum="NVM_BLBA" mask="0x30" name="BLBA" text="Boot Lock Bits - Application Section"/>
+						<bitfield enum="NVM_BLBAT" mask="0x0C" name="BLBAT" text="Boot Lock Bits - Application Table"/>
+						<bitfield enum="NVM_LB" mask="0x03" name="LB" text="Lock Bits"/>
+					</reg>
+				</registers>
+				<enumerator name="NVM_CMD" text="NVM Command">
+					<enum name="NO_OPERATION" text="Noop/Ordinary LPM" val="0x00"/>
+					<enum name="READ_CALIB_ROW" text="Read calibration row" val="0x02"/>
+					<enum name="READ_USER_SIG_ROW" text="Read user signature row" val="0x01"/>
+					<enum name="READ_EEPROM" text="Read EEPROM" val="0x06"/>
+					<enum name="READ_FUSES" text="Read fuse byte" val="0x07"/>
+					<enum name="WRITE_LOCK_BITS" text="Write lock bits" val="0x08"/>
+					<enum name="ERASE_USER_SIG_ROW" text="Erase user signature row" val="0x18"/>
+					<enum name="WRITE_USER_SIG_ROW" text="Write user signature row" val="0x1A"/>
+					<enum name="ERASE_APP" text="Erase Application Section" val="0x20"/>
+					<enum name="ERASE_APP_PAGE" text="Erase Application Section page" val="0x22"/>
+					<enum name="LOAD_FLASH_BUFFER" text="Load Flash page buffer" val="0x23"/>
+					<enum name="WRITE_APP_PAGE" text="Write Application Section page" val="0x24"/>
+					<enum name="ERASE_WRITE_APP_PAGE" text="Erase-and-write Application Section page" val="0x25"/>
+					<enum name="ERASE_FLASH_BUFFER" text="Erase/flush Flash page buffer" val="0x26"/>
+					<enum name="ERASE_BOOT_PAGE" text="Erase Boot Section page" val="0x2A"/>
+					<enum name="WRITE_BOOT_PAGE" text="Write Boot Section page" val="0x2C"/>
+					<enum name="ERASE_WRITE_BOOT_PAGE" text="Erase-and-write Boot Section page" val="0x2D"/>
+					<enum name="ERASE_EEPROM" text="Erase EEPROM" val="0x30"/>
+					<enum name="ERASE_EEPROM_PAGE" text="Erase EEPROM page" val="0x32"/>
+					<enum name="LOAD_EEPROM_BUFFER" text="Load EEPROM page buffer" val="0x33"/>
+					<enum name="WRITE_EEPROM_PAGE" text="Write EEPROM page" val="0x34"/>
+					<enum name="ERASE_WRITE_EEPROM_PAGE" text="Erase-and-write EEPROM page" val="0x35"/>
+					<enum name="ERASE_EEPROM_BUFFER" text="Erase/flush EEPROM page buffer" val="0x36"/>
+					<enum name="APP_CRC" text="Generate Application section CRC" val="0x38"/>
+					<enum name="BOOT_CRC" text="Generate Boot Section CRC" val="0x39"/>
+					<enum name="FLASH_RANGE_CRC" text="Generate Flash Range CRC" val="0x3A"/>
+				</enumerator>
+				<enumerator name="NVM_SPMLVL" text="SPM ready interrupt level">
+					<enum name="OFF" text="Interrupt disabled" val="0x00"/>
+					<enum name="LO" text="Low level" val="0x01"/>
+					<enum name="MED" text="Medium level" val="0x02"/>
+					<enum name="HI" text="High level" val="0x03"/>
+				</enumerator>
+				<enumerator name="NVM_EELVL" text="EEPROM ready interrupt level">
+					<enum name="OFF" text="Interrupt disabled" val="0x00"/>
+					<enum name="LO" text="Low level" val="0x01"/>
+					<enum name="MED" text="Medium level" val="0x02"/>
+					<enum name="HI" text="High level" val="0x03"/>
+				</enumerator>
+				<enumerator name="NVM_BLBB" text="Boot lock bits - boot setcion">
+					<enum name="NOLOCK" text="No locks" val="0x03"/>
+					<enum name="WLOCK" text="Write not allowed" val="0x02"/>
+					<enum name="RLOCK" text="Read not allowed" val="0x01"/>
+					<enum name="RWLOCK" text="Read and write not allowed" val="0x00"/>
+				</enumerator>
+				<enumerator name="NVM_BLBA" text="Boot lock bits - application section">
+					<enum name="NOLOCK" text="No locks" val="0x03"/>
+					<enum name="WLOCK" text="Write not allowed" val="0x02"/>
+					<enum name="RLOCK" text="Read not allowed" val="0x01"/>
+					<enum name="RWLOCK" text="Read and write not allowed" val="0x00"/>
+				</enumerator>
+				<enumerator name="NVM_BLBAT" text="Boot lock bits - application table section">
+					<enum name="NOLOCK" text="No locks" val="0x03"/>
+					<enum name="WLOCK" text="Write not allowed" val="0x02"/>
+					<enum name="RLOCK" text="Read not allowed" val="0x01"/>
+					<enum name="RWLOCK" text="Read and write not allowed" val="0x00"/>
+				</enumerator>
+				<enumerator name="NVM_LB" text="Lock bits">
+					<enum name="NOLOCK" text="No locks" val="0x03"/>
+					<enum name="WLOCK" text="Write not allowed" val="0x02"/>
+					<enum name="RWLOCK" text="Read and write not allowed" val="0x00"/>
+				</enumerator>
+				<interrupt-group name="NVM">
+					<int name="EE" offset="0" text="EE Interrupt"/>
+					<int name="SPM" offset="1" text="SPM Interrupt"/>
+				</interrupt-group>
+				<registers memspace="LOCKBIT" name="NVM_LOCKBITS" text="Lock Bits">
+					<reg name="LOCKBITS" offset="0x00" size="1" text="Lock Bits">
+						<bitfield enum="NVM_BLBB" mask="0xC0" name="BLBB" text="Boot Lock Bits - Boot Section"/>
+						<bitfield enum="NVM_BLBA" mask="0x30" name="BLBA" text="Boot Lock Bits - Application Section"/>
+						<bitfield enum="NVM_BLBAT" mask="0x0C" name="BLBAT" text="Boot Lock Bits - Application Table"/>
+						<bitfield enum="NVM_LB" mask="0x03" name="LB" text="Lock Bits"/>
+					</reg>
+				</registers>
+				<registers memspace="FUSE" name="NVM_FUSES" text="Fuses">
+					<reg name="FUSEBYTE0" offset="0x00" size="1" text="User ID">
+						<bitfield mask="0xFF" name="USERID" text="User ID"/>
+					</reg>
+					<reg name="FUSEBYTE1" offset="0x01" size="1" text="Watchdog Configuration">
+						<bitfield enum="WD" mask="0xF0" name="WDWP" text="Watchdog Window Timeout Period"/>
+						<bitfield enum="WD" mask="0x0F" name="WDP" text="Watchdog Timeout Period"/>
+					</reg>
+					<reg name="FUSEBYTE2" offset="0x02" size="1" text="Reset Configuration">
+						<bitfield mask="0x80" name="DVSDON" text="Spike Detector Enable"/>
+						<bitfield enum="BOOTRST" mask="0x40" name="BOOTRST" text="Boot Loader Section Reset Vector"/>
+						<bitfield enum="BOD" mask="0x03" name="BODPD" text="BOD Operation in Power-Down Mode"/>
+					</reg>
+					<reg offset="0x03"/>
+					<reg name="FUSEBYTE4" offset="0x04" size="1" text="Start-up Configuration">
+						<bitfield mask="0x10" name="RSTDISBL" text="External Reset Disable"/>
+						<bitfield enum="SUT" mask="0x0C" name="SUT" text="Start-up Time"/>
+						<bitfield mask="0x02" name="WDLOCK" text="Watchdog Timer Lock"/>
+<!--bitfield name="JTAGEN" mask="0x01" text="JTAG Interface Enable"/-->
+					</reg>
+					<reg name="FUSEBYTE5" offset="0x05" size="1" text="EESAVE and BOD Level">
+						<bitfield enum="BOD" mask="0x30" name="BODACT" text="BOD Operation in Active Mode"/>
+						<bitfield mask="0x08" name="EESAVE" text="Preserve EEPROM Through Chip Erase"/>
+						<bitfield enum="BODLVL" mask="0x07" name="BODLVL" text="Brown Out Detection Voltage Level"/>
+					</reg>
+				</registers>
+				<enumerator name="BOOTRST" text="Boot Loader Section Reset Vector">
+					<enum name="BOOTLDR" text="Boot Loader Reset" val="0x00"/>
+					<enum name="APPLICATION" text="Application Reset" val="0x01"/>
+				</enumerator>
+				<enumerator name="BOD" text="BOD operation">
+					<enum name="INSAMPLEDMODE" text="BOD enabled in sampled mode" val="0x01"/>
+					<enum name="CONTINOUSLY" text="BOD enabled continuously" val="0x02"/>
+					<enum name="DISABLED" text="BOD Disabled" val="0x03"/>
+				</enumerator>
+				<enumerator name="WD" text="Watchdog (Window) Timeout Period">
+					<enum name="8CLK" text="8 cycles (8ms @ 3.3V)" val="0x00"/>
+					<enum name="16CLK" text="16 cycles (16ms @ 3.3V)" val="0x01"/>
+					<enum name="32CLK" text="32 cycles (32ms @ 3.3V)" val="0x02"/>
+					<enum name="64CLK" text="64 cycles (64ms @ 3.3V)" val="0x03"/>
+					<enum name="128CLK" text="128 cycles (0.125s @ 3.3V)" val="0x04"/>
+					<enum name="256CLK" text="256 cycles (0.25s @ 3.3V)" val="0x05"/>
+					<enum name="512CLK" text="512 cycles (0.5s @ 3.3V)" val="0x06"/>
+					<enum name="1KCLK" text="1K cycles (1s @ 3.3V)" val="0x07"/>
+					<enum name="2KCLK" text="2K cycles (2s @ 3.3V)" val="0x08"/>
+					<enum name="4KCLK" text="4K cycles (4s @ 3.3V)" val="0x09"/>
+					<enum name="8KCLK" text="8K cycles (8s @ 3.3V)" val="0x0A"/>
+				</enumerator>
+				<enumerator name="SUT" text="Start-up Time">
+					<enum name="0MS" text="0 ms" val="0x03"/>
+					<enum name="4MS" text="4 ms" val="0x01"/>
+					<enum name="64MS" text="64 ms" val="0x00"/>
+				</enumerator>
+				<enumerator name="BODLVL" text="Brown Out Detection Voltage Level">
+					<enum name="1V6" text="1.6 V" val="0x07"/>
+					<enum name="1V9" text="1.9 V" val="0x06"/>
+					<enum name="2V1" text="2.1 V" val="0x05"/>
+					<enum name="2V4" text="2.4 V" val="0x04"/>
+					<enum name="2V6" text="2.6 V" val="0x03"/>
+					<enum name="2V9" text="2.9 V" val="0x02"/>
+					<enum name="3V2" text="3.2 V" val="0x01"/>
+					<enum name="3V4" text="3.4 V" val="0x00"/>
+				</enumerator>
+				<registers enumoffsets="1" memspace="PROD_SIGNATURES" name="NVM_PROD_SIGNATURES" text="Production Signatures">
+					<reg name="RCOSC2M" offset="0x00" size="1" text="RCOSC 2MHz Calibration Value"/>
+					<reg offset="0x01"/>
+					<reg name="RCOSC32K" offset="0x02" size="1" text="RCOSC 32kHz Calibration Value"/>
+					<reg name="RCOSC32M" offset="0x03" size="1" text="RCOSC 32MHz Calibration Value"/>
+					<reg offset="0x04"/>
+					<reg offset="0x05"/>
+					<reg offset="0x06"/>
+					<reg offset="0x07"/>
+					<reg name="LOTNUM0" offset="0x08" size="1" text="Lot Number Byte 0, ASCII"/>
+					<reg name="LOTNUM1" offset="0x09" size="1" text="Lot Number Byte 1, ASCII"/>
+					<reg name="LOTNUM2" offset="0x0A" size="1" text="Lot Number Byte 2, ASCII"/>
+					<reg name="LOTNUM3" offset="0x0B" size="1" text="Lot Number Byte 3, ASCII"/>
+					<reg name="LOTNUM4" offset="0x0C" size="1" text="Lot Number Byte 4, ASCII"/>
+					<reg name="LOTNUM5" offset="0x0D" size="1" text="Lot Number Byte 5, ASCII"/>
+					<reg offset="0x0E"/>
+					<reg offset="0x0F"/>
+					<reg name="WAFNUM" offset="0x10" size="1" text="Wafer Number"/>
+					<reg offset="0x11"/>
+					<reg name="COORDX0" offset="0x12" size="1" text="Wafer Coordinate X Byte 0"/>
+					<reg name="COORDX1" offset="0x13" size="1" text="Wafer Coordinate X Byte 1"/>
+					<reg name="COORDY0" offset="0x14" size="1" text="Wafer Coordinate Y Byte 0"/>
+					<reg name="COORDY1" offset="0x15" size="1" text="Wafer Coordinate Y Byte 1"/>
+					<reg offset="0x16"/>
+					<reg offset="0x17"/>
+					<reg offset="0x18"/>
+					<reg offset="0x19"/>
+					<reg offset="0x1A"/>
+					<reg offset="0x1B"/>
+					<reg offset="0x1C"/>
+					<reg offset="0x1D"/>
+					<reg offset="0x1E"/>
+					<reg offset="0x1F"/>
+					<reg name="ADCACAL0" offset="0x20" size="1" text="ADCA Calibration Byte 0"/>
+					<reg name="ADCACAL1" offset="0x21" size="1" text="ADCA Calibration Byte 1"/>
+					<reg offset="0x22"/>
+					<reg offset="0x23"/>
+					<reg name="ADCBCAL0" offset="0x24" size="1" text="ADCB Calibration Byte 0"/>
+					<reg name="ADCBCAL1" offset="0x25" size="1" text="ADCB Calibration Byte 1"/>
+					<reg offset="0x26"/>
+					<reg offset="0x27"/>
+					<reg offset="0x28"/>
+					<reg offset="0x29"/>
+					<reg offset="0x2A"/>
+					<reg offset="0x2B"/>
+					<reg offset="0x2C"/>
+					<reg offset="0x2D"/>
+					<reg name="TEMPSENSE0" offset="0x2E" size="1" text="Temperature Sensor Calibration Byte 0"/>
+					<reg name="TEMPSENSE1" offset="0x2F" size="1" text="Temperature Sensor Calibration Byte 0"/>
+					<reg offset="0x30"/>
+					<reg offset="0x31"/>
+					<reg offset="0x32"/>
+					<reg offset="0x33"/>
+					<reg offset="0x34"/>
+					<reg offset="0x35"/>
+					<reg offset="0x36"/>
+					<reg offset="0x37"/>
+					<reg offset="0x38"/>
+					<reg offset="0x39"/>
+					<reg offset="0x3A"/>
+					<reg offset="0x3B"/>
+					<reg offset="0x3C"/>
+					<reg offset="0x3D"/>
+					<reg offset="0x3E"/>
+				</registers>
+			</module>
+			<module class="AC" text="Analog Comparator">
+				<registers memspace="IO" name="AC" text="Analog Comparator">
+					<reg offset="0x00" size="1" name="AC0CTRL" text="Analog Comparator 0 Control">
+						<bitfield name="INTMODE" mask="0xC0" text="Interrupt Mode" enum="AC_INTMODE"/>
+						<bitfield name="INTLVL" mask="0x30" text="Interrupt Level" enum="AC_INTLVL"/>
+						<bitfield name="HSMODE" mask="0x08" text="High-speed Mode"/>
+						<bitfield name="HYSMODE" mask="0x06" text="Hysteresis Mode" enum="AC_HYSMODE"/>
+						<bitfield name="ENABLE" mask="0x01" text="Enable"/>
+					</reg>
+					<reg offset="0x01" size="1" name="AC1CTRL" text="Analog Comparator 1 Control">
+						<bitfield name="INTMODE" mask="0xC0" text="Interrupt Mode" enum="AC_INTMODE"/>
+						<bitfield name="INTLVL" mask="0x30" text="Interrupt Level" enum="AC_INTLVL"/>
+						<bitfield name="HSMODE" mask="0x08" text="High-speed Mode"/>
+						<bitfield name="HYSMODE" mask="0x06" text="Hysteresis Mode" enum="AC_HYSMODE"/>
+						<bitfield name="ENABLE" mask="0x01" text="Enable"/>
+					</reg>
+					<reg offset="0x02" size="1" name="AC0MUXCTRL" text="Analog Comparator 0 MUX Control">
+						<bitfield name="MUXPOS" mask="0x38" text="MUX Positive Input" enum="AC_MUXPOS"/>
+						<bitfield name="MUXNEG" mask="0x07" text="MUX Negative Input" enum="AC_MUXNEG"/>
+					</reg>
+					<reg offset="0x03" size="1" name="AC1MUXCTRL" text="Analog Comparator 1 MUX Control">
+						<bitfield name="MUXPOS" mask="0x38" text="MUX Positive Input" enum="AC_MUXPOS"/>
+						<bitfield name="MUXNEG" mask="0x07" text="MUX Negative Input" enum="AC_MUXNEG"/>
+					</reg>
+					<reg offset="0x04" size="1" name="CTRLA" text="Control Register A">
+						<bitfield mask="0x01" name="AC0OUT" text="Analog Comparator 0 Output Enable"/>
+					</reg>
+					<reg offset="0x05" size="1" name="CTRLB" text="Control Register B">
+						<bitfield name="SCALEFAC" mask="0x3F" text="VCC Voltage Scaler Factor"/>
+					</reg>
+					<reg offset="0x06" size="1" name="WINCTRL" text="Window Mode Control">
+						<bitfield name="WEN" mask="0x10" text="Window Mode Enable"/>
+						<bitfield name="WINTMODE" mask="0x0C" text="Window Interrupt Mode" enum="AC_WINTMODE"/>
+						<bitfield name="WINTLVL" mask="0x03" text="Window Interrupt Level" enum="AC_WINTLVL"/>
+					</reg>
+					<reg offset="0x07" size="1" name="STATUS" text="Status">
+						<bitfield name="WSTATE" mask="0xC0" text="Window Mode State" enum="AC_WSTATE"/>
+						<bitfield name="AC1STATE" mask="0x20" text="Analog Comparator 1 State"/>
+						<bitfield name="AC0STATE" mask="0x10" text="Analog Comparator 0 State"/>
+						<bitfield name="WIF" mask="0x04" text="Window Mode Interrupt Flag"/>
+						<bitfield name="AC1IF" mask="0x02" text="Analog Comparator 1 Interrupt Flag"/>
+						<bitfield name="AC0IF" mask="0x01" text="Analog Comparator 0 Interrupt Flag"/>
+					</reg>
+				</registers>
+				<enumerator name="AC_INTMODE" text="Interrupt mode">
+					<enum name="BOTHEDGES" val="0x00" text="Interrupt on both edges"/>
+					<enum name="FALLING" val="0x02" text="Interrupt on falling edge"/>
+					<enum name="RISING" val="0x03" text="Interrupt on rising edge"/>
+				</enumerator>
+				<enumerator name="AC_INTLVL" text="Interrupt level">
+					<enum name="OFF" val="0x00" text="Interrupt disabled"/>
+					<enum name="LO" val="0x01" text="Low level"/>
+					<enum name="MED" val="0x02" text="Medium level"/>
+					<enum name="HI" val="0x03" text="High level"/>
+				</enumerator>
+				<enumerator name="AC_HYSMODE" text="Hysteresis mode selection">
+					<enum name="NO" val="0x00" text="No hysteresis"/>
+					<enum name="SMALL" val="0x01" text="Small hysteresis"/>
+					<enum name="LARGE" val="0x02" text="Large hysteresis"/>
+				</enumerator>
+				<enumerator name="AC_MUXPOS" text="Positive input multiplexer selection">
+					<enum name="PIN0" val="0x00" text="Pin 0"/>
+					<enum name="PIN1" val="0x01" text="Pin 1"/>
+					<enum name="PIN2" val="0x02" text="Pin 2"/>
+					<enum name="PIN3" val="0x03" text="Pin 3"/>
+					<enum name="PIN4" val="0x04" text="Pin 4"/>
+					<enum name="PIN5" val="0x05" text="Pin 5"/>
+					<enum name="PIN6" val="0x06" text="Pin 6"/>
+					<enum name="DAC" val="0x07" text="DAC output"/>
+				</enumerator>
+				<enumerator name="AC_MUXNEG" text="Negative input multiplexer selection">
+					<enum name="PIN0" val="0x00" text="Pin 0"/>
+					<enum name="PIN1" val="0x01" text="Pin 1"/>
+					<enum name="PIN3" val="0x02" text="Pin 3"/>
+					<enum name="PIN5" val="0x03" text="Pin 5"/>
+					<enum name="PIN7" val="0x04" text="Pin 7"/>
+					<enum name="DAC" val="0x05" text="DAC output"/>
+					<enum name="BANDGAP" val="0x06" text="Bandgap Reference"/>
+					<enum name="SCALER" val="0x07" text="Internal voltage scaler"/>
+				</enumerator>
+				<enumerator name="AC_WINTMODE" text="Windows interrupt mode">
+					<enum name="ABOVE" val="0x00" text="Interrupt on above window"/>
+					<enum name="INSIDE" val="0x01" text="Interrupt on inside window"/>
+					<enum name="BELOW" val="0x02" text="Interrupt on below window"/>
+					<enum name="OUTSIDE" val="0x03" text="Interrupt on outside window"/>
+				</enumerator>
+				<enumerator name="AC_WINTLVL" text="Window interrupt level">
+					<enum name="OFF" val="0x00" text="Interrupt disabled"/>
+					<enum name="LO" val="0x01" text="Low priority"/>
+					<enum name="MED" val="0x02" text="Medium priority"/>
+					<enum name="HI" val="0x03" text="High priority"/>
+				</enumerator>
+				<enumerator name="AC_WSTATE" text="Window mode state">
+					<enum name="ABOVE" val="0x00" text="Signal above window"/>
+					<enum name="INSIDE" val="0x01" text="Signal inside window"/>
+					<enum name="BELOW" val="0x02" text="Signal below window"/>
+				</enumerator>
+				<interrupt-group name="AC">
+					<int name="AC0" offset="0" text="AC0 Interrupt"/>
+					<int name="AC1" offset="1" text="AC1 Interrupt"/>
+					<int name="ACW" offset="2" text="ACW Window Mode Interrupt"/>
+				</interrupt-group>
+				<pinfunctions/>
+			</module>
+			<module class="ADC" text="Analog/Digital Converter">
+				<registers name="ADC_CH" text="ADC Channel">
+					<reg size="1" name="CTRL" offset="0x00" text="Control Register">
+						<bitfield name="START" mask="0x80" text="Channel Start Conversion"/>
+						<bitfield name="GAINFAC" mask="0x1C" text="Gain Factor" enum="ADC_CH_GAIN"/>
+						<bitfield name="INPUTMODE" mask="0x03" text="Input Mode Select" enum="ADC_CH_INPUTMODE"/>
+					</reg>
+					<reg size="1" name="MUXCTRL" offset="0x01" text="MUX Control">
+						<bitfield name="MUXPOS" mask="0x78" text="Positive Input Select" enum="ADC_CH_MUXPOS"/>
+						<bitfield name="MUXINT" mask="0x78" text="Internal Input Select" enum="ADC_CH_MUXINT" cond="INPUTMODE==INTERNAL"/>
+						<bitfield name="MUXNEG" mask="0x03" text="Negative Input Select" enum="ADC_CH_MUXNEG"/>
+					</reg>
+					<reg size="1" name="INTCTRL" offset="0x02" text="Channel Interrupt Control">
+						<bitfield name="INTMODE" mask="0x0C" text="Interrupt Mode" enum="ADC_CH_INTMODE"/>
+						<bitfield name="INTLVL" mask="0x03" text="Interrupt Level" enum="ADC_CH_INTLVL"/>
+					</reg>
+					<reg size="1" name="INTFLAGS" offset="0x03" text="Interrupt Flags">
+						<bitfield name="CHIF" mask="0x01" text="Channel Interrupt Flag"/>
+					</reg>
+					<reg size="2" name="RES" offset="0x04" text="Channel Result"/>
+					<reg offset="0x6"/>
+					<reg offset="0x7"/>
+				</registers>
+				<registers memspace="IO" name="ADC" text="Analog-to-Digital Converter">
+					<reg size="1" name="CTRLA" offset="0x00" text="Control Register A">
+						<bitfield name="DMASEL" mask="0xC0" text="DMA Selection" enum="ADC_DMASEL"/>
+						<bitfield name="CH3START" mask="0x20" text="Channel 3 Start Conversion"/>
+						<bitfield name="CH2START" mask="0x10" text="Channel 2 Start Conversion"/>
+						<bitfield name="CH1START" mask="0x08" text="Channel 1 Start Conversion"/>
+						<bitfield name="CH0START" mask="0x04" text="Channel 0 Start Conversion"/>
+						<bitfield name="FLUSH" mask="0x02" text="Flush Pipeline"/>
+						<bitfield name="ENABLE" mask="0x01" text="Enable ADC"/>
+					</reg>
+					<reg size="1" name="CTRLB" offset="0x01" text="Control Register B">
+						<bitfield name="CONMODE" mask="0x10" text="Conversion Mode"/>
+						<bitfield name="FREERUN" mask="0x08" text="Free Running Mode Enable"/>
+						<bitfield name="RESOLUTION" mask="0x06" text="Result Resolution" enum="ADC_RESOLUTION"/>
+					</reg>
+					<reg size="1" name="REFCTRL" offset="0x02" text="Reference Control">
+						<bitfield name="REFSEL" mask="0x30" text="Reference Selection" enum="ADC_REFSEL"/>
+						<bitfield name="BANDGAP" mask="0x02" text="Bandgap enable"/>
+						<bitfield name="TEMPREF" mask="0x01" text="Temperature Reference Enable"/>
+					</reg>
+					<reg size="1" name="EVCTRL" offset="0x03" text="Event Control">
+						<bitfield name="SWEEP" mask="0xC0" text="Channel Sweep Selection" enum="ADC_SWEEP"/>
+						<bitfield name="EVSEL" mask="0x38" text="Event Input Select" enum="ADC_EVSEL"/>
+						<bitfield name="EVACT" mask="0x07" text="Event Action Select" enum="ADC_EVACT"/>
+					</reg>
+					<reg size="1" name="PRESCALER" offset="0x04" text="Clock Prescaler">
+						<bitfield name="PRESCALER" mask="0x07" text="Clock Prescaler Selection" enum="ADC_PRESCALER"/>
+					</reg>
+					<reg offset="0x05"/>
+					<reg size="1" name="INTFLAGS" offset="0x06" text="Interrupt Flags">
+						<bitfield name="CH3IF" mask="0x08" text="Channel 3 Interrupt Flag"/>
+						<bitfield name="CH2IF" mask="0x04" text="Channel 2 Interrupt Flag"/>
+						<bitfield name="CH1IF" mask="0x02" text="Channel 1 Interrupt Flag"/>
+						<bitfield name="CH0IF" mask="0x01" text="Channel 0 Interrupt Flag"/>
+					</reg>
+					<reg size="1" name="TEMP" offset="0x07" text="Temporary register"/>
+					<reg offset="0x08"/>
+					<reg offset="0x09"/>
+					<reg offset="0x0A"/>
+					<reg offset="0x0B"/>
+					<reg size="2" name="CAL" offset="0x0C" text="Calibration Value"/>
+					<reg offset="0x0E"/>
+					<reg offset="0x0F"/>
+					<reg size="2" name="CH0RES" offset="0x10" text="Channel 0 Result"/>
+					<reg size="2" name="CH1RES" offset="0x12" text="Channel 1 Result"/>
+					<reg size="2" name="CH2RES" offset="0x14" text="Channel 2 Result"/>
+					<reg size="2" name="CH3RES" offset="0x16" text="Channel 3 Result"/>
+					<reg size="2" name="CMP" offset="0x18" text="Compare Value"/>
+					<reg offset="0x1A"/>
+					<reg offset="0x1B"/>
+					<reg offset="0x1C"/>
+					<reg offset="0x1D"/>
+					<reg offset="0x1E"/>
+					<reg offset="0x1F"/>
+					<registers implements="ADC_CH" name="CH0" offset="0x20" text="ADC Channel 0"/>
+					<registers implements="ADC_CH" name="CH1" offset="0x28" text="ADC Channel 1"/>
+					<registers implements="ADC_CH" name="CH2" offset="0x30" text="ADC Channel 2"/>
+					<registers implements="ADC_CH" name="CH3" offset="0x38" text="ADC Channel 3"/>
+				</registers>
+				<enumerator name="ADC_CH_MUXPOS" text="Positive input multiplexer selection">
+					<enum name="PIN0" val="0x00" text="Input pin 0"/>
+					<enum name="PIN1" val="0x01" text="Input pin 1"/>
+					<enum name="PIN2" val="0x02" text="Input pin 2"/>
+					<enum name="PIN3" val="0x03" text="Input pin 3"/>
+					<enum name="PIN4" val="0x04" text="Input pin 4"/>
+					<enum name="PIN5" val="0x05" text="Input pin 5"/>
+					<enum name="PIN6" val="0x06" text="Input pin 6"/>
+					<enum name="PIN7" val="0x07" text="Input pin 7"/>
+				</enumerator>
+				<enumerator name="ADC_CH_MUXINT" text="Internal input multiplexer selections">
+					<enum name="TEMP" val="0x00" text="Temperature Reference"/>
+					<enum name="BANDGAP" val="0x01" text="Bandgap Reference"/>
+					<enum name="SCALEDVCC" val="0x02" text="1/10 scaled VCC"/>
+					<enum name="DAC" val="0x03" text="DAC output"/>
+				</enumerator>
+				<enumerator name="ADC_CH_MUXNEG" text="Negative input multiplexer selection">
+					<enum name="PIN0" val="0x00" text="Input pin 0"/>
+					<enum name="PIN1" val="0x01" text="Input pin 1"/>
+					<enum name="PIN2" val="0x02" text="Input pin 2"/>
+					<enum name="PIN3" val="0x03" text="Input pin 3"/>
+				</enumerator>
+				<enumerator name="ADC_CH_INPUTMODE" text="Input mode">
+					<enum name="INTERNAL" val="0x00" text="Internal inputs, no gain"/>
+					<enum name="SINGLEENDED" val="0x01" text="Single-ended input, no gain"/>
+					<enum name="DIFF" val="0x02" text="Differential input, no gain"/>
+					<enum name="DIFFWGAIN" val="0x03" text="Differential input, with gain"/>
+				</enumerator>
+				<enumerator name="ADC_CH_GAIN" text="Gain factor">
+					<enum name="1X" val="0x00" text="1x gain"/>
+					<enum name="2X" val="0x01" text="2x gain"/>
+					<enum name="4X" val="0x02" text="4x gain"/>
+					<enum name="8X" val="0x03" text="8x gain"/>
+					<enum name="16X" val="0x04" text="16x gain"/>
+					<enum name="32X" val="0x05" text="32x gain"/>
+					<enum name="64X" val="0x06" text="64x gain"/>
+				</enumerator>
+				<enumerator name="ADC_RESOLUTION" text="Conversion result resolution">
+					<enum name="12BIT" val="0x00" text="12-bit right-adjusted result"/>
+					<enum name="8BIT" val="0x02" text="8-bit right-adjusted result"/>
+					<enum name="LEFT12BIT" val="0x03" text="12-bit left-adjusted result"/>
+				</enumerator>
+				<enumerator name="ADC_REFSEL" text="Voltage reference selection">
+					<enum name="INT1V" val="0x00" text="Internal 1V"/>
+					<enum name="VCC" val="0x01" text="Internal VCC / 1.6V"/>
+					<enum name="AREFA" val="0x02" text="External reference on PORT A"/>
+					<enum name="AREFB" val="0x03" text="External reference on PORT B"/>
+				</enumerator>
+				<enumerator name="ADC_SWEEP" text="Channel sweep selection">
+					<enum name="0" val="0x00" text="ADC Channel 0"/>
+					<enum name="01" val="0x01" text="ADC Channel 0,1"/>
+					<enum name="012" val="0x02" text="ADC Channel 0,1,2"/>
+					<enum name="0123" val="0x03" text="ADC Channel 0,1,2,3"/>
+				</enumerator>
+				<enumerator name="ADC_EVSEL" text="Event channel input selection">
+					<enum name="0123" val="0x00" text="Event Channel 0,1,2,3"/>
+					<enum name="1234" val="0x01" text="Event Channel 1,2,3,4"/>
+					<enum name="2345" val="0x02" text="Event Channel 2,3,4,5"/>
+					<enum name="3456" val="0x03" text="Event Channel 3,4,5,6"/>
+					<enum name="4567" val="0x04" text="Event Channel 4,5,6,7"/>
+					<enum name="567" val="0x05" text="Event Channel 5,6,7"/>
+					<enum name="67" val="0x06" text="Event Channel 6,7"/>
+					<enum name="7" val="0x07" text="Event Channel 7"/>
+				</enumerator>
+				<enumerator name="ADC_EVACT" text="Event action selection">
+					<enum name="NONE" val="0x00" text="No event action"/>
+					<enum name="CH0" val="0x01" text="First event triggers channel 0"/>
+					<enum name="CH01" val="0x02" text="First two events trigger channel 0,1"/>
+					<enum name="CH012" val="0x03" text="First three events trigger channel 0,1,2"/>
+					<enum name="CH0123" val="0x04" text="Events trigger channel 0,1,2,3"/>
+					<enum name="SWEEP" val="0x05" text="First event triggers sweep"/>
+					<enum name="SYNCHSWEEP" val="0x06" text="First event triggers synchronized sweep"/>
+				</enumerator>
+				<enumerator name="ADC_CH_INTMODE" text="Interupt mode">
+					<enum name="COMPLETE" val="0x00" text="Interrupt on conversion complete"/>
+					<enum name="BELOW" val="0x01" text="Interrupt on result below compare value"/>
+					<enum name="ABOVE" val="0x03" text="Interrupt on result above compare value"/>
+				</enumerator>
+				<enumerator name="ADC_CH_INTLVL" text="Interrupt level">
+					<enum name="OFF" val="0x00" text="Interrupt disabled"/>
+					<enum name="LO" val="0x01" text="Low level"/>
+					<enum name="MED" val="0x02" text="Medium level"/>
+					<enum name="HI" val="0x03" text="High level"/>
+				</enumerator>
+				<enumerator name="ADC_DMASEL" text="DMA request selection">
+					<enum name="OFF" val="0x00" text="Combined DMA request OFF"/>
+					<enum name="CH01" val="0x01" text="ADC Channel 0 or 1"/>
+					<enum name="CH012" val="0x02" text="ADC Channel 0 or 1 or 2"/>
+					<enum name="CH0123" val="0x03" text="ADC Channel 0 or 1 or 2 or 3"/>
+				</enumerator>
+				<enumerator name="ADC_PRESCALER" text="Clock prescaler">
+					<enum name="DIV4" val="0x00" text="Divide clock by 4"/>
+					<enum name="DIV8" val="0x01" text="Divide clock by 8"/>
+					<enum name="DIV16" val="0x02" text="Divide clock by 16"/>
+					<enum name="DIV32" val="0x03" text="Divide clock by 32"/>
+					<enum name="DIV64" val="0x04" text="Divide clock by 64"/>
+					<enum name="DIV128" val="0x05" text="Divide clock by 128"/>
+					<enum name="DIV256" val="0x06" text="Divide clock by 256"/>
+					<enum name="DIV512" val="0x07" text="Divide clock by 512"/>
+				</enumerator>
+				<interrupt-group name="ADC">
+					<int name="CH0" offset="0" text="Interrupt 0" creg="ADCICR0" freg="ADCIF0"/>
+					<int name="CH1" offset="1" text="Interrupt 1" creg="ADCICR1" freg="ADCIF1"/>
+					<int name="CH2" offset="2" text="Interrupt 2" creg="ADCICR2" freg="ADCIF2"/>
+					<int name="CH3" offset="3" text="Interrupt 3" creg="ADCICR3" freg="ADCIF3"/>
+				</interrupt-group>
+				<pinfunctions>
+					<fn name="ADC0" text="ADC input pin 0"/>
+					<fn name="ADC1" text="ADC input pin 1"/>
+					<fn name="ADC2" text="ADC input pin 2"/>
+					<fn name="ADC3" text="ADC input pin 3"/>
+					<fn name="ADC4" text="ADC input pin 4"/>
+					<fn name="ADC5" text="ADC input pin 5"/>
+					<fn name="ADC6" text="ADC input pin 6"/>
+					<fn name="ADC7" text="ADC input pin 7"/>
+				</pinfunctions>
+			</module>
+			<module class="DAC" text="Digital/Analog Converter">
+				<registers memspace="IO" name="DAC" text="Digital-to-Analog Converter">
+					<reg size="1" name="CTRLA" offset="0x00" text="Control Register A">
+						<bitfield name="IDOEN" mask="0x10" text="Internal Output Enable"/>
+						<bitfield name="CH1EN" mask="0x08" text="Channel 1 Output Enable"/>
+						<bitfield name="CH0EN" mask="0x04" text="Channel 0 Output Enable"/>
+						<bitfield name="LPMODE" mask="0x02" text="Low Power Mode"/>
+						<bitfield name="ENABLE" mask="0x01" text="Enable"/>
+					</reg>
+					<reg size="1" name="CTRLB" offset="0x01" text="Control Register B">
+						<bitfield name="CHSEL" mask="0x60" text="Channel Select" enum="DAC_CHSEL"/>
+						<bitfield name="CH1TRIG" mask="0x02" text="Channel 1 Event Trig Enable"/>
+						<bitfield name="CH0TRIG" mask="0x01" text="Channel 0 Event Trig Enable"/>
+					</reg>
+					<reg size="1" name="CTRLC" offset="0x02" text="Control Register C">
+						<bitfield name="REFSEL" mask="0x18" text="Reference Select" enum="DAC_REFSEL"/>
+						<bitfield name="LEFTADJ" mask="0x01" text="Left-adjust Result"/>
+					</reg>
+					<reg size="1" name="EVCTRL" offset="0x03" text="Event Input Control">
+						<bitfield name="EVSEL" mask="0x07" text="Event Input Selection" enum="DAC_EVSEL"/>
+					</reg>
+					<reg size="1" name="TIMCTRL" offset="0x04" text="Timing Control">
+						<bitfield name="CONINTVAL" mask="0x70" text="Conversion Intercal" enum="DAC_CONINTVAL"/>
+						<bitfield name="REFRESH" mask="0x0F" text="Refresh Timing Control" enum="DAC_REFRESH"/>
+					</reg>
+					<reg size="1" name="STATUS" offset="0x05" text="Status">
+						<bitfield name="CH1DRE" mask="0x02" text="Channel 1 Data Register Empty"/>
+						<bitfield name="CH0DRE" mask="0x01" text="Channel 0 Data Register Empty"/>
+					</reg>
+					<reg offset="0x06"/>
+					<reg offset="0x07"/>
+					<reg size="1" name="GAINCAL" offset="0x08" text="Gain Calibration">
+						<bitfield name="GAINCAL" mask="0x7F" text="Gain Calibration"/>
+					</reg>
+					<reg size="1" name="OFFSETCAL" offset="0x09" text="Offset Calibration">
+						<bitfield name="OFFSETCAL" mask="0x7F" text="Offset Calibration"/>
+					</reg>
+					<reg offset="0x0A"/>
+					<reg offset="0x0B"/>
+					<reg offset="0x0C"/>
+					<reg offset="0x0D"/>
+					<reg offset="0x0E"/>
+					<reg offset="0x0F"/>
+					<reg offset="0x10"/>
+					<reg offset="0x11"/>
+					<reg offset="0x12"/>
+					<reg offset="0x13"/>
+					<reg offset="0x14"/>
+					<reg offset="0x15"/>
+					<reg offset="0x16"/>
+					<reg offset="0x17"/>
+					<reg size="2" name="CH0DATA" offset="0x18" text="Channel 0 Data"/>
+					<reg size="2" name="CH1DATA" offset="0x1A" text="Channel 1 Data"/>
+				</registers>
+				<enumerator name="DAC_CHSEL" text="Output channel selection">
+					<enum name="SINGLE" val="0x00" text="Single channel operation (Channel A only)"/>
+					<enum name="DUAL" val="0x02" text="Dual channel operation (S/H on both channels)"/>
+				</enumerator>
+				<enumerator name="DAC_REFSEL" text="Reference voltage selection">
+					<enum name="INT1V" val="0x00" text="Internal 1V "/>
+					<enum name="AVCC" val="0x01" text="Analog supply voltage"/>
+					<enum name="AREFA" val="0x02" text="External reference on AREF on PORTA"/>
+					<enum name="AREFB" val="0x03" text="External reference on AREF on PORTB"/>
+				</enumerator>
+				<enumerator name="DAC_EVSEL" text="Event channel selection">
+					<enum name="0" val="0x00" text="Event Channel 0"/>
+					<enum name="1" val="0x01" text="Event Channel 1"/>
+					<enum name="2" val="0x02" text="Event Channel 2"/>
+					<enum name="3" val="0x03" text="Event Channel 3"/>
+					<enum name="4" val="0x04" text="Event Channel 4"/>
+					<enum name="5" val="0x05" text="Event Channel 5"/>
+					<enum name="6" val="0x06" text="Event Channel 6"/>
+					<enum name="7" val="0x07" text="Event Channel 7"/>
+				</enumerator>
+				<enumerator name="DAC_CONINTVAL" text="Conversion interval">
+					<enum name="1CLK" val="0x00" text="1 CLK / 2 CLK in S/H mode"/>
+					<enum name="2CLK" val="0x01" text="2 CLK / 3 CLK in S/H mode"/>
+					<enum name="4CLK" val="0x02" text="4 CLK / 6 CLK in S/H mode"/>
+					<enum name="8CLK" val="0x03" text="8 CLK / 12 CLK in S/H mode"/>
+					<enum name="16CLK" val="0x04" text="16 CLK / 24 CLK in S/H mode"/>
+					<enum name="32CLK" val="0x05" text="32 CLK / 48 CLK in S/H mode"/>
+					<enum name="64CLK" val="0x06" text="64 CLK / 96 CLK in S/H mode"/>
+					<enum name="128CLK" val="0x07" text="128 CLK / 192 CLK in S/H mode"/>
+				</enumerator>
+				<enumerator name="DAC_REFRESH" text="Refresh rate">
+					<enum name="16CLK" val="0x00" text="16 CLK"/>
+					<enum name="32CLK" val="0x01" text="32 CLK"/>
+					<enum name="64CLK" val="0x02" text="64 CLK"/>
+					<enum name="128CLK" val="0x03" text="128 CLK"/>
+					<enum name="256CLK" val="0x04" text="256 CLK"/>
+					<enum name="512CLK" val="0x05" text="512 CLK"/>
+					<enum name="1024CLK" val="0x06" text="1024 CLK"/>
+					<enum name="2048CLK" val="0x07" text="2048 CLK"/>
+					<enum name="4096CLK" val="0x08" text="4096 CLK"/>
+					<enum name="8192CLK" val="0x09" text="8192 CLK"/>
+					<enum name="16384CLK" val="0x0A" text="16384 CLK"/>
+					<enum name="32768CLK" val="0x0B" text="32768 CLK"/>
+					<enum name="65536CLK" val="0x0C" text="65536 CLK"/>
+					<enum name="OFF" val="0x0F" text="Auto refresh OFF"/>
+				</enumerator>
+				<pinfunctions/>
+			</module>
+			<module class="RTC" text="Real-Time Clounter">
+				<registers memspace="IO" name="RTC" text="Real-Time Counter">
+					<reg size="1" name="CTRL" offset="0x00" text="Control Register">
+						<bitfield name="PRESCALER" mask="0x07" text="Prescaling Factor" enum="RTC_PRESCALER"/>
+					</reg>
+					<reg size="1" name="STATUS" offset="0x01" text="Status Register">
+						<bitfield name="SYNCBUSY" mask="0x01" text="Synchronization Busy Flag"/>
+					</reg>
+					<reg size="1" name="INTCTRL" offset="0x02" text="Interrupt Control Register">
+						<bitfield name="COMPINTLVL" mask="0x0C" text="Compare Match Interrupt Level" enum="RTC_COMPINTLVL"/>
+						<bitfield name="OVFINTLVL" mask="0x03" text="Overflow Interrupt Level" enum="RTC_OVFINTLVL"/>
+					</reg>
+					<reg size="1" name="INTFLAGS" offset="0x03" text="Interrupt Flags">
+						<bitfield name="COMPIF" mask="0x02" text="Compare Match Interrupt Flag"/>
+						<bitfield name="OVFIF" mask="0x01" text="Overflow Interrupt Flag"/>
+					</reg>
+					<reg size="1" name="TEMP" offset="0x04" text="Temporary register"/>
+					<reg offset="0x05"/>
+					<reg offset="0x06"/>
+					<reg offset="0x07"/>
+					<reg size="2" name="CNT" offset="0x08" text="Count Register"/>
+					<reg size="2" name="PER" offset="0x0A" text="Period Register"/>
+					<reg size="2" name="COMP" offset="0x0C" text="Compare Register"/>
+				</registers>
+				<enumerator name="RTC_PRESCALER" text="Prescaler Factor">
+					<enum val="0x00" name="OFF" text="RTC Off"/>
+					<enum val="0x01" name="DIV1" text="RTC Clock"/>
+					<enum val="0x02" name="DIV2" text="RTC Clock / 2"/>
+					<enum val="0x03" name="DIV8" text="RTC Clock / 8"/>
+					<enum val="0x04" name="DIV16" text="RTC Clock / 16"/>
+					<enum val="0x05" name="DIV64" text="RTC Clock / 64"/>
+					<enum val="0x06" name="DIV256" text="RTC Clock / 256"/>
+					<enum val="0x07" name="DIV1024" text="RTC Clock / 1024"/>
+				</enumerator>
+				<enumerator name="RTC_COMPINTLVL" text="Compare Interrupt level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="RTC_OVFINTLVL" text="Overflow Interrupt level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<interrupt-group name="RTC">
+					<int name="OVF" offset="0" text="Overflow Interrupt"/>
+					<int name="COMP" offset="1" text="Compare Interrupt"/>
+				</interrupt-group>
+				<pinfunctions/>
+			</module>
+			<module class="TWI" text="Two-Wire Interface">
+				<registers name="TWI_MASTER">
+					<reg size="1" name="CTRLA" offset="0x00" text="Control Register A">
+						<bitfield name="INTLVL" mask="0xC0" text="Interrupt Level" enum="TWI_MASTER_INTLVL"/>
+						<bitfield name="RIEN" mask="0x20" text="Read Interrupt Enable"/>
+						<bitfield name="WIEN" mask="0x10" text="Write Interrupt Enable"/>
+						<bitfield name="ENABLE" mask="0x08" text="Enable TWI Master"/>
+					</reg>
+					<reg size="1" name="CTRLB" offset="0x01" text="Control Register B">
+						<bitfield name="TIMEOUT" mask="0x0C" text="Inactive Bus Timeout" enum="TWI_MASTER_TIMEOUT"/>
+						<bitfield name="QCEN" mask="0x02" text="Quick Command Enable"/>
+						<bitfield name="SMEN" mask="0x01" text="Smart Mode Enable"/>
+					</reg>
+					<reg size="1" name="CTRLC" offset="0x02" text="Control Register C">
+						<bitfield name="ACKACT" mask="0x04" text="Acknowledge Action"/>
+						<bitfield name="CMD" mask="0x03" text="Command" enum="TWI_MASTER_CMD"/>
+					</reg>
+					<reg size="1" name="STATUS" offset="0x03" text="Status Register">
+						<bitfield name="RIF" mask="0x80" text="Read Interrupt Flag"/>
+						<bitfield name="WIF" mask="0x40" text="Write Interrupt Flag"/>
+						<bitfield name="CLKHOLD" mask="0x20" text="Clock Hold"/>
+						<bitfield name="RXACK" mask="0x10" text="Received Acknowledge"/>
+						<bitfield name="ARBLOST" mask="0x08" text="Arbitration Lost"/>
+						<bitfield name="BUSERR" mask="0x04" text="Bus Error"/>
+						<bitfield name="BUSSTATE" mask="0x03" text="Bus State" enum="TWI_MASTER_BUSSTATE"/>
+					</reg>
+					<reg size="1" name="BAUD" offset="0x04" text="Baurd Rate Control Register"/>
+					<reg size="1" name="ADDR" offset="0x05" text="Address Register"/>
+					<reg size="1" name="DATA" offset="0x06" text="Data Register"/>
+				</registers>
+				<enumerator name="TWI_MASTER_INTLVL" text="Master Interrupt Level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="TWI_MASTER_TIMEOUT" text="Inactive Timeout">
+					<enum val="0x00" name="DISABLED" text="Bus Timeout Disabled"/>
+					<enum val="0x01" name="50US" text="50 Microseconds"/>
+					<enum val="0x02" name="100US" text="100 Microseconds"/>
+					<enum val="0x03" name="200US" text="200 Microseconds"/>
+				</enumerator>
+				<enumerator name="TWI_MASTER_CMD" text="Master Command">
+					<enum val="0x00" name="NOACT" text="No Action"/>
+					<enum val="0x01" name="REPSTART" text="Issue Repeated Start Condition"/>
+					<enum val="0x02" name="RECVTRANS" text="Receive or Transmit Data"/>
+					<enum val="0x03" name="STOP" text="Issue Stop Condition"/>
+				</enumerator>
+				<enumerator name="TWI_MASTER_BUSSTATE" text="Master Bus State">
+					<enum val="0x00" name="UNKNOWN" text="Unknown Bus State"/>
+					<enum val="0x01" name="IDLE" text="Bus is Idle"/>
+					<enum val="0x02" name="OWNER" text="This Module Controls The Bus"/>
+					<enum val="0x03" name="BUSY" text="The Bus is Busy"/>
+				</enumerator>
+				<registers name="TWI_SLAVE">
+					<reg size="1" name="CTRLA" offset="0x00" text="Control Register A">
+						<bitfield name="INTLVL" mask="0xC0" text="Interrupt Level" enum="TWI_SLAVE_INTLVL"/>
+						<bitfield name="DIEN" mask="0x20" text="Data Interrupt Enable"/>
+						<bitfield name="APIEN" mask="0x10" text="Address/Stop Interrupt Enable"/>
+						<bitfield name="ENABLE" mask="0x08" text="Enable TWI Slave"/>
+						<bitfield name="PIEN" mask="0x04" text="Stop Interrupt Enable"/>
+						<bitfield name="PMEN" mask="0x02" text="Promiscuous Mode Enable"/>
+						<bitfield name="SMEN" mask="0x01" text="Smart Mode Enable"/>
+					</reg>
+					<reg size="1" name="CTRLB" offset="0x01" text="Control Register B">
+						<bitfield name="ACKACT" mask="0x04" text="Acknowledge Action"/>
+						<bitfield name="CMD" mask="0x03" text="Command" enum="TWI_SLAVE_CMD"/>
+					</reg>
+					<reg size="1" name="STATUS" offset="0x02" text="Status Register">
+						<bitfield name="DIF" mask="0x80" text="Data Interrupt Flag"/>
+						<bitfield name="APIF" mask="0x40" text="Address/Stop Interrupt Flag"/>
+						<bitfield name="CLKHOLD" mask="0x20" text="Clock Hold"/>
+						<bitfield name="RXACK" mask="0x10" text="Received Acknowledge"/>
+						<bitfield name="COLL" mask="0x08" text="Collision"/>
+						<bitfield name="BUSERR" mask="0x04" text="Bus Error"/>
+						<bitfield name="DIR" mask="0x02" text="Read/Write Direction"/>
+						<bitfield name="AP" mask="0x01" text="Slave Address or Stop"/>
+					</reg>
+					<reg size="1" name="ADDR" offset="0x03" text="Address Register"/>
+					<reg size="1" name="DATA" offset="0x04" text="Data Register"/>
+					<reg size="1" name="ADDRMASK" offset="0x05" text="Address Mask Register">
+						<bitfield name="ADDRMASK" mask="0xFE" text="Address Mask"/>
+						<bitfield name="ADDREN" mask="0x01" text="Address Enable"/>
+					</reg>
+				</registers>
+				<enumerator name="TWI_SLAVE_INTLVL" text="Slave Interrupt Level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="TWI_SLAVE_CMD" text="Slave Command">
+					<enum val="0x00" name="NOACT" text="No Action"/>
+					<enum val="0x02" name="COMPTRANS" text="Used To Complete a Transaction"/>
+					<enum val="0x03" name="RESPONSE" text="Used in Response to Address/Data Interrupt"/>
+				</enumerator>
+				<registers memspace="IO" name="TWI" text="Two-Wire Interface">
+					<reg size="1" name="CTRL" offset="0x00" text="TWI Common Control Register">
+						<bitfield name="SDAHOLD" mask="0x02" text="SDA Hold Time Enable"/>
+						<bitfield name="EDIEN" mask="0x01" text="External Driver Interface Enable"/>
+					</reg>
+					<registers implements="TWI_MASTER" offset="0x0001" name="MASTER" text="TWI master module"/>
+					<registers implements="TWI_SLAVE" offset="0x0008" name="SLAVE" text="TWI slave module"/>
+				</registers>
+				<interrupt-group name="TWI">
+					<int name="TWIS" offset="0" text="TWI Slave Interrupt"/>
+					<int name="TWIM" offset="1" text="TWI Master Interrupt"/>
+				</interrupt-group>
+				<pinfunctions/>
+			</module>
+			<module class="PORT" text="Port Configuration">
+				<registers memspace="IO" name="PORTCFG" text="I/O port Configuration">
+					<reg size="1" name="MPCMASK" offset="0x00" text="Multi-pin Configuration Mask"/>
+					<reg offset="0x01"/>
+					<reg size="1" name="VPCTRLA" offset="0x02" text="Virtual Port Control Register A">
+						<bitfield name="VP1MAP" mask="0xF0" text="Virtual Port 1 Mapping" enum="PORTCFG_VP1MAP"/>
+						<bitfield name="VP0MAP" mask="0x0F" text="Virtual Port 0 Mapping" enum="PORTCFG_VP0MAP"/>
+					</reg>
+					<reg size="1" name="VPCTRLB" offset="0x03" text="Virtual Port Control Register B">
+						<bitfield name="VP3MAP" mask="0xF0" text="Virtual Port 3 Mapping" enum="PORTCFG_VP3MAP"/>
+						<bitfield name="VP2MAP" mask="0x0F" text="Virtual Port 2 Mapping" enum="PORTCFG_VP2MAP"/>
+					</reg>
+					<reg size="1" name="CLKEVOUT" offset="0x04" text="Clock and Event Out Register">
+						<bitfield name="CLKOUT" mask="0x03" text="Clock Output Port" enum="PORTCFG_CLKOUT"/>
+						<bitfield name="EVOUT" mask="0x30" text="Event Output Port" enum="PORTCFG_EVOUT"/>
+					</reg>
+				</registers>
+				<registers memspace="IO" name="VPORT" text="Virtual Port">
+					<reg size="1" name="DIR" offset="0x00" text="I/O Port Data Direction"/>
+					<reg size="1" name="OUT" offset="0x01" text="I/O Port Output"/>
+					<reg size="1" name="IN" offset="0x02" text="I/O Port Input"/>
+					<reg size="1" name="INTFLAGS" offset="0x03" text="Interrupt Flag Register">
+						<bitfield name="INT1IF" mask="0x02" text="Port Interrupt 1 Flag"/>
+						<bitfield name="INT0IF" mask="0x01" text="Port Interrupt 0 Flag"/>
+					</reg>
+				</registers>
+				<enumerator name="PORTCFG_VP0MAP" text="Virtual Port 0 Mapping">
+					<enum val="0x00" name="PORTA" text="Mapped To PORTA"/>
+					<enum val="0x01" name="PORTB" text="Mapped To PORTB"/>
+					<enum val="0x02" name="PORTC" text="Mapped To PORTC"/>
+					<enum val="0x03" name="PORTD" text="Mapped To PORTD"/>
+					<enum val="0x04" name="PORTE" text="Mapped To PORTE"/>
+					<enum val="0x05" name="PORTF" text="Mapped To PORTF"/>
+					<enum val="0x06" name="PORTG" text="Mapped To PORTG"/>
+					<enum val="0x07" name="PORTH" text="Mapped To PORTH"/>
+					<enum val="0x08" name="PORTJ" text="Mapped To PORTJ"/>
+					<enum val="0x09" name="PORTK" text="Mapped To PORTK"/>
+					<enum val="0x0A" name="PORTL" text="Mapped To PORTL"/>
+					<enum val="0x0B" name="PORTM" text="Mapped To PORTM"/>
+					<enum val="0x0C" name="PORTN" text="Mapped To PORTN"/>
+					<enum val="0x0D" name="PORTP" text="Mapped To PORTP"/>
+					<enum val="0x0E" name="PORTQ" text="Mapped To PORTQ"/>
+					<enum val="0x0F" name="PORTR" text="Mapped To PORTR"/>
+				</enumerator>
+				<enumerator name="PORTCFG_VP1MAP" text="Virtual Port 1 Mapping">
+					<enum val="0x00" name="PORTA" text="Mapped To PORTA"/>
+					<enum val="0x01" name="PORTB" text="Mapped To PORTB"/>
+					<enum val="0x02" name="PORTC" text="Mapped To PORTC"/>
+					<enum val="0x03" name="PORTD" text="Mapped To PORTD"/>
+					<enum val="0x04" name="PORTE" text="Mapped To PORTE"/>
+					<enum val="0x05" name="PORTF" text="Mapped To PORTF"/>
+					<enum val="0x06" name="PORTG" text="Mapped To PORTG"/>
+					<enum val="0x07" name="PORTH" text="Mapped To PORTH"/>
+					<enum val="0x08" name="PORTJ" text="Mapped To PORTJ"/>
+					<enum val="0x09" name="PORTK" text="Mapped To PORTK"/>
+					<enum val="0x0A" name="PORTL" text="Mapped To PORTL"/>
+					<enum val="0x0B" name="PORTM" text="Mapped To PORTM"/>
+					<enum val="0x0C" name="PORTN" text="Mapped To PORTN"/>
+					<enum val="0x0D" name="PORTP" text="Mapped To PORTP"/>
+					<enum val="0x0E" name="PORTQ" text="Mapped To PORTQ"/>
+					<enum val="0x0F" name="PORTR" text="Mapped To PORTR"/>
+				</enumerator>
+				<enumerator name="PORTCFG_VP2MAP" text="Virtual Port 2 Mapping">
+					<enum val="0x00" name="PORTA" text="Mapped To PORTA"/>
+					<enum val="0x01" name="PORTB" text="Mapped To PORTB"/>
+					<enum val="0x02" name="PORTC" text="Mapped To PORTC"/>
+					<enum val="0x03" name="PORTD" text="Mapped To PORTD"/>
+					<enum val="0x04" name="PORTE" text="Mapped To PORTE"/>
+					<enum val="0x05" name="PORTF" text="Mapped To PORTF"/>
+					<enum val="0x06" name="PORTG" text="Mapped To PORTG"/>
+					<enum val="0x07" name="PORTH" text="Mapped To PORTH"/>
+					<enum val="0x08" name="PORTJ" text="Mapped To PORTJ"/>
+					<enum val="0x09" name="PORTK" text="Mapped To PORTK"/>
+					<enum val="0x0A" name="PORTL" text="Mapped To PORTL"/>
+					<enum val="0x0B" name="PORTM" text="Mapped To PORTM"/>
+					<enum val="0x0C" name="PORTN" text="Mapped To PORTN"/>
+					<enum val="0x0D" name="PORTP" text="Mapped To PORTP"/>
+					<enum val="0x0E" name="PORTQ" text="Mapped To PORTQ"/>
+					<enum val="0x0F" name="PORTR" text="Mapped To PORTR"/>
+				</enumerator>
+				<enumerator name="PORTCFG_VP3MAP" text="Virtual Port 3 Mapping">
+					<enum val="0x00" name="PORTA" text="Mapped To PORTA"/>
+					<enum val="0x01" name="PORTB" text="Mapped To PORTB"/>
+					<enum val="0x02" name="PORTC" text="Mapped To PORTC"/>
+					<enum val="0x03" name="PORTD" text="Mapped To PORTD"/>
+					<enum val="0x04" name="PORTE" text="Mapped To PORTE"/>
+					<enum val="0x05" name="PORTF" text="Mapped To PORTF"/>
+					<enum val="0x06" name="PORTG" text="Mapped To PORTG"/>
+					<enum val="0x07" name="PORTH" text="Mapped To PORTH"/>
+					<enum val="0x08" name="PORTJ" text="Mapped To PORTJ"/>
+					<enum val="0x09" name="PORTK" text="Mapped To PORTK"/>
+					<enum val="0x0A" name="PORTL" text="Mapped To PORTL"/>
+					<enum val="0x0B" name="PORTM" text="Mapped To PORTM"/>
+					<enum val="0x0C" name="PORTN" text="Mapped To PORTN"/>
+					<enum val="0x0D" name="PORTP" text="Mapped To PORTP"/>
+					<enum val="0x0E" name="PORTQ" text="Mapped To PORTQ"/>
+					<enum val="0x0F" name="PORTR" text="Mapped To PORTR"/>
+				</enumerator>
+				<enumerator name="PORTCFG_CLKOUT" text="Clock Output Port">
+					<enum val="0x00" name="OFF" text="Clock Output Disabled"/>
+					<enum val="0x01" name="PC7" text="Clock Output on Port C pin 7"/>
+					<enum val="0x02" name="PD7" text="Clock Output on Port D pin 7"/>
+					<enum val="0x03" name="PE7" text="Clock Output on Port E pin 7"/>
+				</enumerator>
+				<enumerator name="PORTCFG_EVOUT" text="Event Output Port">
+					<enum val="0x00" name="OFF" text="Event Output Disabled"/>
+					<enum val="0x01" name="PC7" text="Event Channel 7 Output on Port C pin 7"/>
+					<enum val="0x02" name="PD7" text="Event Channel 7 Output on Port D pin 7"/>
+					<enum val="0x03" name="PE7" text="Event Channel 7 Output on Port E pin 7"/>
+				</enumerator>
+				<registers memspace="IO" name="PORT" text="I/O Ports">
+					<reg size="1" name="DIR" offset="0x00" text="I/O Port Data Direction"/>
+					<reg size="1" name="DIRSET" offset="0x01" text="I/O Port Data Direction Set"/>
+					<reg size="1" name="DIRCLR" offset="0x02" text="I/O Port Data Direction Clear"/>
+					<reg size="1" name="DIRTGL" offset="0x03" text="I/O Port Data Direction Toggle"/>
+					<reg size="1" name="OUT" offset="0x04" text="I/O Port Output"/>
+					<reg size="1" name="OUTSET" offset="0x05" text="I/O Port Output Set"/>
+					<reg size="1" name="OUTCLR" offset="0x06" text="I/O Port Output Clear"/>
+					<reg size="1" name="OUTTGL" offset="0x07" text="I/O Port Output Toggle"/>
+					<reg size="1" name="IN" offset="0x08" text="I/O port Input"/>
+					<reg size="1" name="INTCTRL" offset="0x09" text="Interrupt Control Register">
+						<bitfield name="INT1LVL" mask="0x0C" text="Port Interrupt 1 Level" enum="PORT_INT1LVL"/>
+						<bitfield name="INT0LVL" mask="0x03" text="Port Interrupt 0 Level" enum="PORT_INT0LVL"/>
+					</reg>
+					<reg size="1" name="INT0MASK" offset="0x0A" text="Port Interrupt 0 Mask"/>
+					<reg size="1" name="INT1MASK" offset="0x0B" text="Port Interrupt 1 Mask"/>
+					<reg size="1" name="INTFLAGS" offset="0x0C" text="Interrupt Flag Register">
+						<bitfield name="INT1IF" mask="0x02" text="Port Interrupt 1 Flag"/>
+						<bitfield name="INT0IF" mask="0x01" text="Port Interrupt 0 Flag"/>
+					</reg>
+					<reg offset="0x0D"/>
+					<reg offset="0x0E"/>
+					<reg offset="0x0F"/>
+					<reg size="1" name="PIN0CTRL" offset="0x10" text="Pin 0 Control Register">
+						<bitfield name="SRLEN" mask="0x80" text="Slew Rate Enable"/>
+						<bitfield name="INVEN" mask="0x40" text="Inverted I/O Enable"/>
+						<bitfield name="OPC" mask="0x38" text="Output/Pull Configuration" enum="PORT_OPC"/>
+						<bitfield name="ISC" mask="0x07" text="Input/Sense Configuration" enum="PORT_ISC"/>
+					</reg>
+					<reg size="1" name="PIN1CTRL" offset="0x11" text="Pin 1 Control Register">
+						<bitfield name="SRLEN" mask="0x80" text="Slew Rate Enable"/>
+						<bitfield name="INVEN" mask="0x40" text="Inverted I/O Enable"/>
+						<bitfield name="OPC" mask="0x38" text="Output/Pull Configuration" enum="PORT_OPC"/>
+						<bitfield name="ISC" mask="0x07" text="Input/Sense Configuration" enum="PORT_ISC"/>
+					</reg>
+					<reg size="1" name="PIN2CTRL" offset="0x12" text="Pin 2 Control Register">
+						<bitfield name="SRLEN" mask="0x80" text="Slew Rate Enable"/>
+						<bitfield name="INVEN" mask="0x40" text="Inverted I/O Enable"/>
+						<bitfield name="OPC" mask="0x38" text="Output/Pull Configuration" enum="PORT_OPC"/>
+						<bitfield name="ISC" mask="0x07" text="Input/Sense Configuration" enum="PORT_ISC"/>
+					</reg>
+					<reg size="1" name="PIN3CTRL" offset="0x13" text="Pin 3 Control Register">
+						<bitfield name="SRLEN" mask="0x80" text="Slew Rate Enable"/>
+						<bitfield name="INVEN" mask="0x40" text="Inverted I/O Enable"/>
+						<bitfield name="OPC" mask="0x38" text="Output/Pull Configuration" enum="PORT_OPC"/>
+						<bitfield name="ISC" mask="0x07" text="Input/Sense Configuration" enum="PORT_ISC"/>
+					</reg>
+					<reg size="1" name="PIN4CTRL" offset="0x14" text="Pin 4 Control Register">
+						<bitfield name="SRLEN" mask="0x80" text="Slew Rate Enable"/>
+						<bitfield name="INVEN" mask="0x40" text="Inverted I/O Enable"/>
+						<bitfield name="OPC" mask="0x38" text="Output/Pull Configuration" enum="PORT_OPC"/>
+						<bitfield name="ISC" mask="0x07" text="Input/Sense Configuration" enum="PORT_ISC"/>
+					</reg>
+					<reg size="1" name="PIN5CTRL" offset="0x15" text="Pin 5 Control Register">
+						<bitfield name="SRLEN" mask="0x80" text="Slew Rate Enable"/>
+						<bitfield name="INVEN" mask="0x40" text="Inverted I/O Enable"/>
+						<bitfield name="OPC" mask="0x38" text="Output/Pull Configuration" enum="PORT_OPC"/>
+						<bitfield name="ISC" mask="0x07" text="Input/Sense Configuration" enum="PORT_ISC"/>
+					</reg>
+					<reg size="1" name="PIN6CTRL" offset="0x16" text="Pin 6 Control Register">
+						<bitfield name="SRLEN" mask="0x80" text="Slew Rate Enable"/>
+						<bitfield name="INVEN" mask="0x40" text="Inverted I/O Enable"/>
+						<bitfield name="OPC" mask="0x38" text="Output/Pull Configuration" enum="PORT_OPC"/>
+						<bitfield name="ISC" mask="0x07" text="Input/Sense Configuration" enum="PORT_ISC"/>
+					</reg>
+					<reg size="1" name="PIN7CTRL" offset="0x17" text="Pin 7 Control Register">
+						<bitfield name="SRLEN" mask="0x80" text="Slew Rate Enable"/>
+						<bitfield name="INVEN" mask="0x40" text="Inverted I/O Enable"/>
+						<bitfield name="OPC" mask="0x38" text="Output/Pull Configuration" enum="PORT_OPC"/>
+						<bitfield name="ISC" mask="0x07" text="Input/Sense Configuration" enum="PORT_ISC"/>
+					</reg>
+				</registers>
+				<enumerator name="PORT_INT0LVL" text="Port Interrupt 0 Level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="PORT_INT1LVL" text="Port Interrupt 1 Level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="PORT_OPC" text="Output/Pull Configuration">
+					<enum val="0x00" name="TOTEM" text="Totempole"/>
+					<enum val="0x01" name="BUSKEEPER" text="Totempole w/ Bus keeper on Input and Output"/>
+					<enum val="0x02" name="PULLDOWN" text="Totempole w/ Pull-down on Input"/>
+					<enum val="0x03" name="PULLUP" text="Totempole w/ Pull-up on Input"/>
+					<enum val="0x04" name="WIREDOR" text="Wired OR"/>
+					<enum val="0x05" name="WIREDAND" text="Wired AND"/>
+					<enum val="0x06" name="WIREDORPULL" text="Wired OR w/ Pull-down"/>
+					<enum val="0x07" name="WIREDANDPULL" text="Wired AND w/ Pull-up"/>
+				</enumerator>
+				<enumerator name="PORT_ISC" text="Input/Sense Configuration">
+					<enum val="0x00" name="BOTHEDGES" text="Sense Both Edges"/>
+					<enum val="0x01" name="RISING" text="Sense Rising Edge"/>
+					<enum val="0x02" name="FALLING" text="Sense Falling Edge"/>
+					<enum val="0x03" name="LEVEL" text="Sense Level (Transparent For Events)"/>
+					<enum val="0x07" name="INPUT_DISABLE" text="Disable Digital Input Buffer"/>
+				</enumerator>
+				<interrupt-group name="PORT">
+					<int name="INT0" offset="0" text="External Interrupt 0" creg="INTCTRL" freg="INTFLAGS"/>
+					<int name="INT1" offset="1" text="External Interrupt 1" creg="INTCTRL" freg="INTFLAGS"/>
+				</interrupt-group>
+				<pinfunctions>
+					<fn name="PIN0" text="PORT Pin 0"/>
+					<fn name="PIN1" text="PORT Pin 1"/>
+					<fn name="PIN2" text="PORT Pin 2"/>
+					<fn name="PIN3" text="PORT Pin 3"/>
+					<fn name="PIN4" text="PORT Pin 4"/>
+					<fn name="PIN5" text="PORT Pin 5"/>
+					<fn name="PIN6" text="PORT Pin 6"/>
+					<fn name="PIN7" text="PORT Pin 7"/>
+				</pinfunctions>
+			</module>
+			<module class="TC" text="16-bit Timer/Counter With PWM">
+				<registers memspace="IO" name="TC0" text="16-bit Timer/Counter 0">
+					<reg offset="0x00" size="1" name="CTRLA" text="Control Register A">
+						<bitfield mask="0x0F" name="CLKSEL" text="Clock Selection" enum="TC_CLKSEL"/>
+					</reg>
+					<reg offset="0x01" size="1" name="CTRLB" text="Control Register B">
+						<bitfield mask="0x80" name="CCDEN" text="Compare or Capture D Enable"/>
+						<bitfield mask="0x40" name="CCCEN" text="Compare or Capture C Enable"/>
+						<bitfield mask="0x20" name="CCBEN" text="Compare or Capture B Enable"/>
+						<bitfield mask="0x10" name="CCAEN" text="Compare or Capture A Enable"/>
+						<bitfield mask="0x07" name="WGMODE" text="Waveform generation mode" enum="TC_WGMODE"/>
+					</reg>
+					<reg offset="0x02" size="1" name="CTRLC" text="Control register C">
+						<bitfield name="CMPD" mask="0x08" text="Compare D Output Value"/>
+						<bitfield name="CMPC" mask="0x04" text="Compare C Output Value"/>
+						<bitfield name="CMPB" mask="0x02" text="Compare B Output Value"/>
+						<bitfield name="CMPA" mask="0x01" text="Compare A Output Value"/>
+					</reg>
+					<reg offset="0x03" size="1" name="CTRLD" text="Control Register D">
+						<bitfield name="EVACT" mask="0xE0" text="Event Action" enum="TC_EVACT"/>
+						<bitfield name="EVDLY" mask="0x10" text="Event Delay"/>
+						<bitfield name="EVSEL" mask="0x0F" text="Event Source Select" enum="TC_EVSEL"/>
+					</reg>
+					<reg offset="0x04" size="1" name="CTRLE" text="Control Register E">
+						<bitfield name="BYTEM" mask="0x01" text="Byte Mode"/>
+					</reg>
+					<reg offset="0x05"/>
+					<reg offset="0x06" size="1" name="INTCTRLA" text="Interrupt Control Register A">
+						<bitfield name="ERRINTLVL" mask="0x0C" text="Error Interrupt Level" enum="TC_ERRINTLVL"/>
+						<bitfield name="OVFINTLVL" mask="0x03" text="Overflow interrupt level" enum="TC_OVFINTLVL"/>
+					</reg>
+					<reg offset="0x07" size="1" name="INTCTRLB" text="Interrupt Control Register B">
+						<bitfield name="CCDINTLVL" mask="0xC0" text="Compare or Capture D Interrupt Level" enum="TC_CCDINTLVL"/>
+						<bitfield name="CCCINTLVL" mask="0x30" text="Compare or Capture C Interrupt Level" enum="TC_CCCINTLVL"/>
+						<bitfield name="CCBINTLVL" mask="0x0C" text="Compare or Capture B Interrupt Level" enum="TC_CCBINTLVL"/>
+						<bitfield name="CCAINTLVL" mask="0x03" text="Compare or Capture A Interrupt Level" enum="TC_CCAINTLVL"/>
+					</reg>
+					<reg offset="0x08" size="1" name="CTRLFCLR" text="Control Register F Clear">
+						<bitfield name="CMD" mask="0x0C" text="Command"/>
+						<bitfield name="LUPD" mask="0x02" text="Lock Update"/>
+						<bitfield name="DIR" mask="0x01" text="Direction"/>
+					</reg>
+					<reg offset="0x09" size="1" name="CTRLFSET" text="Control Register F Set">
+						<bitfield name="CMD" mask="0x0C" text="Command" enum="TC_CMD"/>
+						<bitfield name="LUPD" mask="0x02" text="Lock Update"/>
+						<bitfield name="DIR" mask="0x01" text="Direction"/>
+					</reg>
+					<reg offset="0x0A" size="1" name="CTRLGCLR" text="Control Register G Clear">
+						<bitfield name="CCDBV" mask="0x10" text="Compare or Capture D Buffer Valid"/>
+						<bitfield name="CCCBV" mask="0x08" text="Compare or Capture C Buffer Valid"/>
+						<bitfield name="CCBBV" mask="0x04" text="Compare or Capture B Buffer Valid"/>
+						<bitfield name="CCABV" mask="0x02" text="Compare or Capture A Buffer Valid"/>
+						<bitfield name="PERBV" mask="0x01" text="Period Buffer Valid"/>
+					</reg>
+					<reg offset="0x0B" size="1" name="CTRLGSET" text="Control Register G Set">
+						<bitfield name="CCDBV" mask="0x10" text="Compare or Capture D Buffer Valid"/>
+						<bitfield name="CCCBV" mask="0x08" text="Compare or Capture C Buffer Valid"/>
+						<bitfield name="CCBBV" mask="0x04" text="Compare or Capture B Buffer Valid"/>
+						<bitfield name="CCABV" mask="0x02" text="Compare or Capture A Buffer Valid"/>
+						<bitfield name="PERBV" mask="0x01" text="Period Buffer Valid"/>
+					</reg>
+					<reg offset="0x0C" size="1" name="INTFLAGS" text="Interrupt Flag Register">
+						<bitfield name="CCDIF" mask="0x80" text="Compare or Capture D Interrupt Flag"/>
+						<bitfield name="CCCIF" mask="0x40" text="Compare or Capture C Interrupt Flag"/>
+						<bitfield name="CCBIF" mask="0x20" text="Compare or Capture B Interrupt Flag"/>
+						<bitfield name="CCAIF" mask="0x10" text="Compare or Capture A Interrupt Flag"/>
+						<bitfield name="ERRIF" mask="0x02" text="Error Interrupt Flag"/>
+						<bitfield name="OVFIF" mask="0x01" text="Overflow Interrupt Flag"/>
+					</reg>
+					<reg offset="0x0D"/>
+					<reg offset="0x0E"/>
+					<reg offset="0x0F" size="1" name="TEMP" text="Temporary Register For 16-bit Access"/>
+					<reg offset="0x10"/>
+					<reg offset="0x11"/>
+					<reg offset="0x12"/>
+					<reg offset="0x13"/>
+					<reg offset="0x14"/>
+					<reg offset="0x15"/>
+					<reg offset="0x16"/>
+					<reg offset="0x17"/>
+					<reg offset="0x18"/>
+					<reg offset="0x19"/>
+					<reg offset="0x1A"/>
+					<reg offset="0x1B"/>
+					<reg offset="0x1C"/>
+					<reg offset="0x1D"/>
+					<reg offset="0x1E"/>
+					<reg offset="0x1F"/>
+					<reg offset="0x20" size="2" name="CNT" text="Count"/>
+					<reg offset="0x22"/>
+					<reg offset="0x23"/>
+					<reg offset="0x24"/>
+					<reg offset="0x25"/>
+					<reg offset="0x26" size="2" name="PER" text="Period"/>
+					<reg offset="0x28" size="2" name="CCA" text="Compare or Capture A"/>
+					<reg offset="0x2A" size="2" name="CCB" text="Compare or Capture B"/>
+					<reg offset="0x2C" size="2" name="CCC" text="Compare or Capture C"/>
+					<reg offset="0x2E" size="2" name="CCD" text="Compare or Capture D"/>
+					<reg offset="0x30"/>
+					<reg offset="0x31"/>
+					<reg offset="0x32"/>
+					<reg offset="0x33"/>
+					<reg offset="0x34"/>
+					<reg offset="0x35"/>
+					<reg offset="0x36" size="2" name="PERBUF" text="Period Buffer"/>
+					<reg offset="0x38" size="2" name="CCABUF" text="Compare Or Capture A Buffer"/>
+					<reg offset="0x3A" size="2" name="CCBBUF" text="Compare Or Capture B Buffer"/>
+					<reg offset="0x3C" size="2" name="CCCBUF" text="Compare Or Capture C Buffer"/>
+					<reg offset="0x3E" size="2" name="CCDBUF" text="Compare Or Capture D Buffer"/>
+				</registers>
+				<registers memspace="IO" name="TC1" text="16-bit Timer/Counter 1">
+					<reg offset="0x00" size="1" name="CTRLA" text="Control  Register A">
+						<bitfield name="CLKSEL" mask="0x0F" text="Clock Selection" enum="TC_CLKSEL"/>
+					</reg>
+					<reg offset="0x01" size="1" name="CTRLB" text="Control Register B">
+						<bitfield name="CCBEN" mask="0x20" text="Compare or Capture B Enable"/>
+						<bitfield name="CCAEN" mask="0x10" text="Compare or Capture A Enable"/>
+						<bitfield name="WGMODE" mask="0x07" text="Waveform generation mode" enum="TC_WGMODE"/>
+					</reg>
+					<reg offset="0x02" size="1" name="CTRLC" text="Control register C">
+						<bitfield name="CMPB" mask="0x02" text="Compare B Output Value"/>
+						<bitfield name="CMPA" mask="0x01" text="Compare A Output Value"/>
+					</reg>
+					<reg offset="0x03" size="1" name="CTRLD" text="Control Register D">
+						<bitfield name="EVACT" mask="0xE0" text="Event Action" enum="TC_EVACT"/>
+						<bitfield name="EVDLY" mask="0x10" text="Event Delay"/>
+						<bitfield name="EVSEL" mask="0x0F" text="Event Source Select" enum="TC_EVSEL"/>
+					</reg>
+					<reg offset="0x04" size="1" name="CTRLE" text="Control Register E">
+						<bitfield name="BYTEM" mask="0x01" text="Byte Mode"/>
+					</reg>
+					<reg offset="0x05"/>
+					<reg offset="0x06" size="1" name="INTCTRLA" text="Interrupt Control Register A">
+						<bitfield name="ERRINTLVL" mask="0x0C" text="Error Interrupt Level" enum="TC_ERRINTLVL"/>
+						<bitfield name="OVFINTLVL" mask="0x03" text="Overflow interrupt level" enum="TC_OVFINTLVL"/>
+					</reg>
+					<reg offset="0x07" size="1" name="INTCTRLB" text="Interrupt Control Register B">
+						<bitfield name="CCBINTLVL" mask="0x0C" text="Compare or Capture B Interrupt Level" enum="TC_CCBINTLVL"/>
+						<bitfield name="CCAINTLVL" mask="0x03" text="Compare or Capture A Interrupt Level" enum="TC_CCAINTLVL"/>
+					</reg>
+					<reg offset="0x08" size="1" name="CTRLFCLR" text="Control Register F Clear">
+						<bitfield name="CMD" mask="0x0C" text="Command"/>
+						<bitfield name="LUPD" mask="0x02" text="Lock Update"/>
+						<bitfield name="DIR" mask="0x01" text="Direction"/>
+					</reg>
+					<reg offset="0x09" size="1" name="CTRLFSET" text="Control Register F Set">
+						<bitfield name="CMD" mask="0x0C" text="Command" enum="TC_CMD"/>
+						<bitfield name="LUPD" mask="0x02" text="Lock Update"/>
+						<bitfield name="DIR" mask="0x01" text="Direction"/>
+					</reg>
+					<reg offset="0x0A" size="1" name="CTRLGCLR" text="Control Register G Clear">
+						<bitfield name="CCBBV" mask="0x04" text="Compare or Capture B Buffer Valid"/>
+						<bitfield name="CCABV" mask="0x02" text="Compare or Capture A Buffer Valid"/>
+						<bitfield name="PERBV" mask="0x01" text="Period Buffer Valid"/>
+					</reg>
+					<reg offset="0x0B" size="1" name="CTRLGSET" text="Control Register G Set">
+						<bitfield name="CCBBV" mask="0x04" text="Compare or Capture B Buffer Valid"/>
+						<bitfield name="CCABV" mask="0x02" text="Compare or Capture A Buffer Valid"/>
+						<bitfield name="PERBV" mask="0x01" text="Period Buffer Valid"/>
+					</reg>
+					<reg offset="0x0C" size="1" name="INTFLAGS" text="Interrupt Flag Register">
+						<bitfield name="CCBIF" mask="0x20" text="Compare or Capture B Interrupt Flag"/>
+						<bitfield name="CCAIF" mask="0x10" text="Compare or Capture A Interrupt Flag"/>
+						<bitfield name="ERRIF" mask="0x02" text="Error Interrupt Flag"/>
+						<bitfield name="OVFIF" mask="0x01" text="Overflow Interrupt Flag"/>
+					</reg>
+					<reg offset="0x0D"/>
+					<reg offset="0x0E"/>
+					<reg offset="0x0F" size="1" name="TEMP" text="Temporary Register For 16-bit Access"/>
+					<reg offset="0x10"/>
+					<reg offset="0x11"/>
+					<reg offset="0x12"/>
+					<reg offset="0x13"/>
+					<reg offset="0x14"/>
+					<reg offset="0x15"/>
+					<reg offset="0x16"/>
+					<reg offset="0x17"/>
+					<reg offset="0x18"/>
+					<reg offset="0x19"/>
+					<reg offset="0x1A"/>
+					<reg offset="0x1B"/>
+					<reg offset="0x1C"/>
+					<reg offset="0x1D"/>
+					<reg offset="0x1E"/>
+					<reg offset="0x1F"/>
+					<reg offset="0x20" size="2" name="CNT" text="Count"/>
+					<reg offset="0x22"/>
+					<reg offset="0x23"/>
+					<reg offset="0x24"/>
+					<reg offset="0x25"/>
+					<reg offset="0x26" size="2" name="PER" text="Period"/>
+					<reg offset="0x28" size="2" name="CCA" text="Compare or Capture A"/>
+					<reg offset="0x2A" size="2" name="CCB" text="Compare or Capture B"/>
+					<reg offset="0x2C"/>
+					<reg offset="0x2D"/>
+					<reg offset="0x2E"/>
+					<reg offset="0x2F"/>
+					<reg offset="0x30"/>
+					<reg offset="0x31"/>
+					<reg offset="0x32"/>
+					<reg offset="0x33"/>
+					<reg offset="0x34"/>
+					<reg offset="0x35"/>
+					<reg offset="0x36" size="2" name="PERBUF" text="Period Buffer"/>
+					<reg size="2" name="CCABUF" offset="0x38" text="Compare Or Capture A Buffer"/>
+					<reg size="2" name="CCBBUF" offset="0x3A" text="Compare Or Capture B Buffer"/>
+				</registers>
+				<enumerator name="TC_CLKSEL" text="Clock Selection">
+					<enum val="0x00" name="OFF" text="Timer Off"/>
+					<enum val="0x01" name="DIV1" text="System Clock"/>
+					<enum val="0x02" name="DIV2" text="System Clock / 2"/>
+					<enum val="0x03" name="DIV4" text="System Clock / 4"/>
+					<enum val="0x04" name="DIV8" text="System Clock / 8"/>
+					<enum val="0x05" name="DIV64" text="System Clock / 64"/>
+					<enum val="0x06" name="DIV256" text="System Clock / 256"/>
+					<enum val="0x07" name="DIV1024" text="System Clock / 1024"/>
+					<enum val="0x08" name="EVCH0" text="Event Channel 0"/>
+					<enum val="0x09" name="EVCH1" text="Event Channel 1"/>
+					<enum val="0x0A" name="EVCH2" text="Event Channel 2"/>
+					<enum val="0x0B" name="EVCH3" text="Event Channel 3"/>
+					<enum val="0x0C" name="EVCH4" text="Event Channel 4"/>
+					<enum val="0x0D" name="EVCH5" text="Event Channel 5"/>
+					<enum val="0x0E" name="EVCH6" text="Event Channel 6"/>
+					<enum val="0x0F" name="EVCH7" text="Event Channel 7"/>
+				</enumerator>
+				<enumerator name="TC_WGMODE" text="Waveform Generation Mode">
+					<enum val="0x00" name="NORMAL" text="Normal Mode"/>
+					<enum val="0x01" name="FRQ" text="Frequency Generation Mode"/>
+					<enum val="0x03" name="SS" text="Single Slope"/>
+					<enum val="0x05" name="DS_T" text="Dual Slope, Update on TOP"/>
+					<enum val="0x06" name="DS_TB" text="Dual Slope, Update on TOP and BOTTOM"/>
+					<enum val="0x07" name="DS_B" text="Dual Slope, Update on BOTTOM"/>
+				</enumerator>
+				<enumerator name="TC_EVACT" text="Event Action">
+					<enum val="0x00" name="OFF" text="No Event Action"/>
+					<enum val="0x01" name="CAPT" text="Input Capture"/>
+					<enum val="0x02" name="UPDOWN" text="Externally Controlled Up/Down Count"/>
+					<enum val="0x03" name="QDEC" text="Quadrature Decode"/>
+					<enum val="0x04" name="RESTART" text="Restart"/>
+					<enum val="0x05" name="FRQ" text="Frequency Capture"/>
+					<enum val="0x06" name="PW" text="Pulse-width Capture"/>
+				</enumerator>
+				<enumerator name="TC_EVSEL" text="Event Selection">
+					<enum val="0x00" name="OFF" text="No Event Source"/>
+					<enum val="0x08" name="CH0" text="Event Channel 0"/>
+					<enum val="0x09" name="CH1" text="Event Channel 1"/>
+					<enum val="0x0A" name="CH2" text="Event Channel 2"/>
+					<enum val="0x0B" name="CH3" text="Event Channel 3"/>
+					<enum val="0x0C" name="CH4" text="Event Channel 4"/>
+					<enum val="0x0D" name="CH5" text="Event Channel 5"/>
+					<enum val="0x0E" name="CH6" text="Event Channel 6"/>
+					<enum val="0x0F" name="CH7" text="Event Channel 7"/>
+				</enumerator>
+				<enumerator name="TC_ERRINTLVL" text="Error Interrupt Level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="TC_OVFINTLVL" text="Overflow Interrupt Level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="TC_CCDINTLVL" text="Compare or Capture D Interrupt Level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="TC_CCCINTLVL" text="Compare or Capture C Interrupt Level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="TC_CCBINTLVL" text="Compare or Capture B Interrupt Level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="TC_CCAINTLVL" text="Compare or Capture A Interrupt Level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="TC_CMD" text="Timer/Counter Command">
+					<enum val="0x00" name="NONE" text="No Command"/>
+					<enum val="0x01" name="UPDATE" text="Force Update"/>
+					<enum val="0x02" name="RESTART" text="Force Restart"/>
+					<enum val="0x03" name="RESET" text="Force Hard Reset"/>
+				</enumerator>
+				<registers memspace="IO" name="AWEX" text="Advanced Waveform Extension">
+					<reg size="1" name="CTRL" offset="0x00" text="Control Register">
+						<bitfield name="PGM" mask="0x20" text="Pattern Generation Mode"/>
+						<bitfield name="CWCM" mask="0x10" text="Common Waveform Channel Mode"/>
+						<bitfield name="DTICCDEN" mask="0x08" text="Dead Time Insertion Compare Channel D Enable"/>
+						<bitfield name="DTICCCEN" mask="0x04" text="Dead Time Insertion Compare Channel C Enable"/>
+						<bitfield name="DTICCBEN" mask="0x02" text="Dead Time Insertion Compare Channel B Enable"/>
+						<bitfield name="DTICCAEN" mask="0x01" text="Dead Time Insertion Compare Channel A Enable"/>
+					</reg>
+					<reg offset="0x01"/>
+					<reg size="1" name="FDEMASK" offset="0x02" text="Fault Detection Event Mask"/>
+					<reg size="1" name="FDCTRL" offset="0x03" text="Fault Detection Control Register">
+						<bitfield name="FDDBD" mask="0x10" text="Fault Detect on Disable Break Disable"/>
+						<bitfield name="FDMODE" mask="0x04" text="Fault Detect Mode"/>
+						<bitfield name="FDACT" mask="0x03" text="Fault Detect Action" enum="AWEX_FDACT"/>
+					</reg>
+					<reg size="1" name="STATUS" offset="0x04" text="Status Register">
+						<bitfield name="FDF" mask="0x04" text="Fault Detect Flag"/>
+						<bitfield name="DTHSBUFV" mask="0x02" text="Dead Time High Side Buffer Valid"/>
+						<bitfield name="DTLSBUFV" mask="0x01" text="Dead Time Low Side Buffer Valid"/>
+					</reg>
+					<reg offset="0x05"/>
+					<reg size="1" name="DTBOTH" offset="0x06" text="Dead Time Both Sides"/>
+					<reg size="1" name="DTBOTHBUF" offset="0x07" text="Dead Time Both Sides Buffer"/>
+					<reg size="1" name="DTLS" offset="0x08" text="Dead Time Low Side"/>
+					<reg size="1" name="DTHS" offset="0x09" text="Dead Time High Side"/>
+					<reg size="1" name="DTLSBUF" offset="0x0A" text="Dead Time Low Side Buffer"/>
+					<reg size="1" name="DTHSBUF" offset="0x0B" text="Dead Time High Side Buffer"/>
+					<reg size="1" name="OUTOVEN" offset="0x0C" text="Output Override Enable"/>
+				</registers>
+				<enumerator name="AWEX_FDACT" text="Fault Detect Action">
+					<enum val="0x00" name="NONE" text="No Fault Protection"/>
+					<enum val="0x01" name="CLEAROE" text="Clear Output Enable Bits"/>
+					<enum val="0x03" name="CLEARDIR" text="Clear I/O Port Direction Bits"/>
+				</enumerator>
+				<registers memspace="IO" name="HIRES" text="High-Resolution Extension">
+					<reg size="1" name="CTRLA" offset="0x00" text="Control Register">
+						<bitfield name="HREN" mask="0x03" text="High Resolution Enable" enum="HIRES_HREN"/>
+					</reg>
+				</registers>
+				<enumerator name="HIRES_HREN" text="High Resolution Enable">
+					<enum val="0x00" name="NONE" text="No Fault Protection"/>
+					<enum val="0x01" name="TC0" text="Enable High Resolution on Timer/Counter 0"/>
+					<enum val="0x02" name="TC1" text="Enable High Resolution on Timer/Counter 1"/>
+					<enum val="0x03" name="BOTH" text="Enable High Resolution both Timer/Counters"/>
+				</enumerator>
+				<interrupt-group name="TC0">
+					<int name="OVF" offset="0" text="Overflow Interrupt"/>
+					<int name="ERR" offset="1" text="Error Interrupt"/>
+					<int name="CCA" offset="2" text="Compare or Capture A Interrupt"/>
+					<int name="CCB" offset="3" text="Compare or Capture B Interrupt"/>
+					<int name="CCC" offset="4" text="Compare or Capture C Interrupt"/>
+					<int name="CCD" offset="5" text="Compare or Capture D Interrupt"/>
+				</interrupt-group>
+				<interrupt-group name="TC1">
+					<int name="OVF" offset="0" text="Overflow Interrupt"/>
+					<int name="ERR" offset="1" text="Error Interrupt"/>
+					<int name="CCA" offset="2" text="Compare or Capture A Interrupt"/>
+					<int name="CCB" offset="3" text="Compare or Capture B Interrupt"/>
+				</interrupt-group>
+				<pinfunctions/>
+			</module>
+			<module class="USART" text="Universal Asynchronous Receiver-Transmitter">
+				<registers memspace="IO" name="USART" text="Universal Synchronous/Asynchronous Receiver/Transmitter">
+					<reg size="1" name="DATA" offset="0x00" text="Data Register"/>
+					<reg size="1" name="STATUS" offset="0x01" text="Status Register">
+						<bitfield name="RXCIF" mask="0x80" text="Receive Interrupt Flag"/>
+						<bitfield name="TXCIF" mask="0x40" text="Transmit Interrupt Flag"/>
+						<bitfield name="DREIF" mask="0x20" text="Data Register Empty Flag"/>
+						<bitfield name="FERR" mask="0x10" text="Frame Error"/>
+						<bitfield name="BUFOVF" mask="0x08" text="Buffer Overflow"/>
+						<bitfield name="PERR" mask="0x04" text="Parity Error"/>
+						<bitfield name="RXB8" mask="0x01" text="Receive Bit 8"/>
+					</reg>
+					<reg offset="0x02"/>
+					<reg size="1" name="CTRLA" offset="0x03" text="Control Register A">
+						<bitfield name="RXCINTLVL" mask="0x30" text="Receive Interrupt Level" enum="USART_RXCINTLVL"/>
+						<bitfield name="TXCINTLVL" mask="0x0C" text="Transmit Interrupt Level" enum="USART_TXCINTLVL"/>
+						<bitfield name="DREINTLVL" mask="0x03" text="Data Register Empty Interrupt Level" enum="USART_DREINTLVL"/>
+					</reg>
+					<reg size="1" name="CTRLB" offset="0x04" text="Control Register B">
+						<bitfield name="RXEN" mask="0x10" text="Receiver Enable"/>
+						<bitfield name="TXEN" mask="0x08" text="Transmitter Enable"/>
+						<bitfield name="CLK2X" mask="0x04" text="Double transmission speed"/>
+						<bitfield name="MPCM" mask="0x02" text="Multi-processor Communication Mode"/>
+						<bitfield name="TXB8" mask="0x01" text="Transmit bit 8"/>
+					</reg>
+					<reg size="1" name="CTRLC" offset="0x05" text="Control Register C">
+						<bitfield name="CMODE" mask="0xC0" text="Communication Mode" enum="USART_CMODE"/>
+						<bitfield name="PMODE" mask="0x30" text="Parity Mode" enum="USART_PMODE"/>
+						<bitfield name="SBMODE" mask="0x08" text="Stop Bit Mode"/>
+						<bitfield name="CHSIZE" mask="0x07" text="Character Size" enum="USART_CHSIZE"/>
+					</reg>
+					<reg size="1" name="BAUDCTRLA" offset="0x06" text="Baud Rate Control Register A">
+						<bitfield name="BSEL" mask="0xFF" text="Baud Rate Selection Bits [7:0]"/>
+					</reg>
+					<reg size="1" name="BAUDCTRLB" offset="0x07" text="Baud Rate Control Register B">
+						<bitfield name="BSCALE" mask="0xF0" text="Baud Rate Scale"/>
+						<bitfield name="BSEL" mask="0x0F" text="Baud Rate Selection bits[11:8]"/>
+					</reg>
+				</registers>
+				<enumerator name="USART_RXCINTLVL" text="Receive Complete Interrupt level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="USART_TXCINTLVL" text="Transmit Complete Interrupt level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="USART_DREINTLVL" text="Data Register Empty Interrupt level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<enumerator name="USART_CHSIZE" text="Character Size">
+					<enum val="0x00" name="5BIT" text="Character size: 5 bit"/>
+					<enum val="0x01" name="6BIT" text="Character size: 6 bit"/>
+					<enum val="0x02" name="7BIT" text="Character size: 7 bit"/>
+					<enum val="0x03" name="8BIT" text="Character size: 8 bit"/>
+					<enum val="0x07" name="9BIT" text="Character size: 9 bit"/>
+				</enumerator>
+				<enumerator name="USART_CMODE" text="Communication Mode">
+					<enum val="0x00" name="ASYNCHRONOUS" text="Asynchronous Mode"/>
+					<enum val="0x01" name="SYNCHRONOUS" text="Synchronous Mode"/>
+					<enum val="0x02" name="IRDA" text="IrDA Mode"/>
+					<enum val="0x03" name="MSPI" text="Master SPI Mode"/>
+				</enumerator>
+				<enumerator name="USART_PMODE" text="Parity Mode">
+					<enum val="0x00" name="DISABLED" text="No Parity"/>
+					<enum val="0x02" name="EVEN" text="Even Parity"/>
+					<enum val="0x03" name="ODD" text="Odd Parity"/>
+				</enumerator>
+				<interrupt-group name="USART">
+					<int name="RXC" offset="0" text="Reception Complete Interrupt"/>
+					<int name="DRE" offset="1" text="Data Register Empty Interrupt"/>
+					<int name="TXC" offset="2" text="Transmission Complete Interrupt"/>
+				</interrupt-group>
+				<pinfunctions/>
+			</module>
+			<module class="SPI" text="Serial Peripheral Interface">
+				<registers memspace="IO" name="SPI" text="Serial Peripheral Interface">
+					<reg size="1" name="CTRL" offset="0x0" text="Control Register">
+						<bitfield name="CLK2X" mask="0x80" text="Enable Double Speed"/>
+						<bitfield name="ENABLE" mask="0x40" text="Enable Module"/>
+						<bitfield name="DORD" mask="0x20" text="Data Order Setting"/>
+						<bitfield name="MASTER" mask="0x10" text="Master Operation Enable"/>
+						<bitfield name="MODE" mask="0x0C" text="SPI Mode" enum="SPI_MODE"/>
+						<bitfield name="PRESCALER" mask="0x03" text="Prescaler" enum="SPI_PRESCALER"/>
+					</reg>
+					<reg size="1" name="INTCTRL" offset="0x01" text="Interrupt Control Register">
+						<bitfield name="INTLVL" mask="0x03" text="Interrupt level" enum="SPI_INTLVL"/>
+					</reg>
+					<reg size="1" name="STATUS" offset="0x02" text="Status Register">
+						<bitfield name="IF" mask="0x80" text="Interrupt Flag"/>
+						<bitfield name="WRCOL" mask="0x40" text="Write Collision"/>
+					</reg>
+					<reg size="1" name="DATA" offset="0x03" text="Data Register"/>
+				</registers>
+				<enumerator name="SPI_MODE" text="SPI Mode">
+					<enum val="0x00" name="0" text="SPI Mode 0"/>
+					<enum val="0x01" name="1" text="SPI Mode 1"/>
+					<enum val="0x02" name="2" text="SPI Mode 2"/>
+					<enum val="0x03" name="3" text="SPI Mode 3"/>
+				</enumerator>
+				<enumerator name="SPI_PRESCALER" text="Prescaler setting">
+					<enum val="0x00" name="DIV4" text="System Clock / 4"/>
+					<enum val="0x01" name="DIV16" text="System Clock / 16"/>
+					<enum val="0x02" name="DIV64" text="System Clock / 64"/>
+					<enum val="0x03" name="DIV128" text="System Clock / 128"/>
+				</enumerator>
+				<enumerator name="SPI_INTLVL" text="Interrupt level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<interrupt-group name="SPI">
+					<int name="INT" offset="0" text="SPI Interrupt"/>
+				</interrupt-group>
+				<pinfunctions/>
+			</module>
+			<module class="IRCOM" text="IR Communication Module">
+				<registers memspace="IO" name="IRCOM" text="IR Communication Module">
+					<reg offset="0x00" size="1" name="CTRL" text="Control Register">
+						<bitfield mask="0x0F" name="EVSEL" text="Event Channel Select" enum="IRDA_EVSEL"/>
+					</reg>
+					<reg offset="0x01" size="1" name="TXPLCTRL" text="IrDA Transmitter Pulse Length Control Register"/>
+					<reg offset="0x02" size="1" name="RXPLCTRL" text="IrDA Receiver Pulse Length Control Register"/>
+				</registers>
+				<enumerator name="IRDA_EVSEL" text="Event channel selection">
+					<enum val="0x00" name="OFF" text="No Event Source"/>
+					<enum val="0x08" name="0" text="Event Channel 0"/>
+					<enum val="0x09" name="1" text="Event Channel 1"/>
+					<enum val="0x0A" name="2" text="Event Channel 2"/>
+					<enum val="0x0B" name="3" text="Event Channel 3"/>
+					<enum val="0x0C" name="4" text="Event Channel 4"/>
+					<enum val="0x0D" name="5" text="Event Channel 5"/>
+					<enum val="0x0E" name="6" text="Event Channel 6"/>
+					<enum val="0x0F" name="7" text="Event Channel 7"/>
+				</enumerator>
+				<pinfunctions/>
+			</module>
+			<module class="AES" text="AES Module">
+				<registers memspace="IO" name="AES" text="AES Module">
+					<reg size="1" name="CTRL" offset="0x00" text="AES Control Register">
+						<bitfield name="START" mask="0x80" text="Start/Run"/>
+						<bitfield name="AUTO" mask="0x40" text="Auto Start Trigger"/>
+						<bitfield name="RESET" mask="0x20" text="AES Software Reset"/>
+						<bitfield name="DECRYPT" mask="0x10" text="Decryption / Direction"/>
+						<bitfield name="XOR" mask="0x04" text="State XOR Load Enable"/>
+					</reg>
+					<reg size="1" name="STATUS" offset="0x01" text="AES Status Register">
+						<bitfield name="ERROR" mask="0x80" text="AES Error"/>
+						<bitfield name="SRIF" mask="0x01" text="State Ready Interrupt Flag"/>
+					</reg>
+					<reg size="1" name="STATE" offset="0x02" text="AES State Register"/>
+					<reg size="1" name="KEY" offset="0x03" text="AES Key Register"/>
+					<reg size="1" name="INTCTRL" offset="0x04" text="AES Interrupt Control Register">
+						<bitfield name="INTLVL" mask="0x03" text="Interrupt level" enum="AES_INTLVL"/>
+					</reg>
+				</registers>
+				<enumerator name="AES_INTLVL" text="Interrupt level">
+					<enum val="0x00" name="OFF" text="Interrupt Disabled"/>
+					<enum val="0x01" name="LO" text="Low Level"/>
+					<enum val="0x02" name="MED" text="Medium Level"/>
+					<enum val="0x03" name="HI" text="High Level"/>
+				</enumerator>
+				<interrupt-group name="AES">
+					<int name="INT" offset="0" text="AES Interrupt"/>
+				</interrupt-group>
+				<pinfunctions/>
+			</module>
+		</templates>
+	</V2>
+</AVRPART>
