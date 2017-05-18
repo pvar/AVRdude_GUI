@@ -38,7 +38,6 @@ gtkGUI::gtkGUI()
         builder->get_widget("main_window", main_window);
         builder->get_widget("combo_family", cb_family);
         builder->get_widget("combo_device", cb_device);
-        builder->get_widget("combo_speed", cb_speed);
         builder->get_widget("combo_protocol", cb_protocol);
         builder->get_widget("signature_test", btn_check_sig);
         builder->get_widget("erase_device", btn_erase_dev);
@@ -54,24 +53,22 @@ gtkGUI::gtkGUI()
         /* create the tree-models */
         tm_family = Gtk::ListStore::create(cbm_generic);
         tm_device = Gtk::ListStore::create(cbm_generic);
-        tm_speed = Gtk::ListStore::create(cbm_generic);
         tm_port = Gtk::ListStore::create(cbm_generic);
         tm_protocol = Gtk::ListStore::create(cbm_generic);
 
         /* assign tree-models to combo boxes*/
         cb_family->set_model(tm_family);
         cb_device->set_model(tm_device);
-        cb_speed->set_model(tm_speed);
         cb_protocol->set_model(tm_protocol);
 
         /* define visible columns */
         cb_family->pack_start(cbm_generic.col_name);
         cb_device->pack_start(cbm_generic.col_name);
-        cb_speed->pack_start(cbm_generic.col_name);
         cb_protocol->pack_start(cbm_generic.col_name);
 
+        Gtk::TreeModel::Row row;
         /* populate tree-model with device families */
-        Gtk::TreeModel::Row row = *(tm_family->append());
+        row = *(tm_family->append());
         row[cbm_generic.col_name] = "AT 90S xxxx";
         row[cbm_generic.col_data] = "AT90S";
         row = *(tm_family->append());
@@ -93,6 +90,60 @@ gtkGUI::gtkGUI()
         //row[cbm_generic.col_name] = "AT Xmega";
         //row[cbm_generic.col_data] = "ATxmega";
         cb_family->set_active(5);
+
+        /* populate tree-model with supported protocols */
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "USBasp programmer";
+        row[cbm_generic.col_data] = "usbasp";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "\"usbtiny\" type programmer";
+        row[cbm_generic.col_data] = "usbtiny";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Arduino programmer";
+        row[cbm_generic.col_data] = "arduino";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel STK200";
+        row[cbm_generic.col_data] = "stk200";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel STK500";
+        row[cbm_generic.col_data] = "stk500generic";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel STK500 HV Serial";
+        row[cbm_generic.col_data] = "stk500hvsp";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel STK500 Parallel";
+        row[cbm_generic.col_data] = "stk500pp";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel STK600";
+        row[cbm_generic.col_data] = "stk600";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel STK600 HV Serial";
+        row[cbm_generic.col_data] = "stk600hvsp";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel STK600 Parallel";
+        row[cbm_generic.col_data] = "stk600pp";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel Butterfly";
+        row[cbm_generic.col_data] = "butterfly";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel AVR ISP";
+        row[cbm_generic.col_data] = "avrisp";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel AVR ISP mkII ";
+        row[cbm_generic.col_data] = "avrisp2";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel AVR ISP V2";
+        row[cbm_generic.col_data] = "avrispv2";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel AppNote AVR109 Boot Loader";
+        row[cbm_generic.col_data] = "avr109";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel Low Cost Serial Programmer";
+        row[cbm_generic.col_data] = "avr910";
+        row = *(tm_protocol->append());
+        row[cbm_generic.col_name] = "Atmel AppNote AVR911 AVROSP";
+        row[cbm_generic.col_data] = "avr911";
+        cb_protocol->set_active(0);
 
         // connect signal handlers
         dev_combo_signal = cb_device->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_device));

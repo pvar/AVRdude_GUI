@@ -61,14 +61,12 @@ class gtkGUI
                 /* tree-models for combo boxes */
                 Glib::RefPtr<Gtk::ListStore> tm_family;
                 Glib::RefPtr<Gtk::ListStore> tm_device;
-                Glib::RefPtr<Gtk::ListStore> tm_speed;
                 Glib::RefPtr<Gtk::ListStore> tm_port;
                 Glib::RefPtr<Gtk::ListStore> tm_protocol;
 
                 // widgets
                 Gtk::ComboBox *cb_family     = nullptr;
                 Gtk::ComboBox *cb_device     = nullptr;
-                Gtk::ComboBox *cb_speed      = nullptr;
                 Gtk::ComboBox *cb_protocol   = nullptr;
                 Gtk::Button *btn_fuse_read   = nullptr;
                 Gtk::Button *btn_fuse_write  = nullptr;
