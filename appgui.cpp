@@ -228,6 +228,10 @@ void gtkGUI::cb_new_family (void)
         check_button_erase.block(true);
         check_button_check.block(true);
         check_button_verify.block(true);
+        /* reset avrdude settings */
+        auto_verify->set_active(true);
+        auto_erase->set_active(true);
+        auto_check->set_active(true);
         /* clear device tree-view */
         tm_device->clear();
         /* insert family members */
