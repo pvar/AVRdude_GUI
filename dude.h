@@ -17,8 +17,8 @@ class Dude
                 void setup( gboolean auto_erase,
                             gboolean auto_verify,
                             gboolean auto_check,
-                            Glib::ustring protocol,
-                            Glib::ustring device );
+                            Glib::ustring programmer,
+                            Glib::ustring microcontroller );
 
                 Glib::ustring device_write (Glib::ustring file, gint target);
                 Glib::ustring device_read (Glib::ustring file, gint source);
