@@ -272,6 +272,10 @@ void gtkGUI::cb_new_device (void)
         /* clear old labels and fuses */
         this->display_fuses(false);
         this->display_specs(false);
+        /* reset avrdude settings */
+        auto_verify->set_active(true);
+        auto_erase->set_active(true);
+        auto_check->set_active(true);
         /* do not proceed if invalid device was selected */
         if (device.size() < 1)
                 return;
