@@ -5,7 +5,7 @@
 #include <iostream>
 #include <iomanip>
 #include "micro.h"
-//#include "dude.h"
+#include "dude.h"
 
 using namespace std;
 
