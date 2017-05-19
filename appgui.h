@@ -54,10 +54,16 @@ class gtkGUI
                 list<FuseWidget> *fuse_tab_widgets = nullptr;
                 /* object for retrieving microcontroller data */
                 Micro *microcontroller;
+                /* object for interfacing with avrdude */
+                Dude *avrdude;
                 /* record-model for the tree-models used by combo boxes */
                 CBRecordModel cbm_generic;
                 /* signal connection handler for temporarily disconnecting combo-box signals */
                 sigc::connection dev_combo_signal;
+                sigc::connection dev_combo_programmer;
+                sigc::connection check_button_erase;
+                sigc::connection check_button_check;
+                sigc::connection check_button_verify;
 
                 /* tree-models for combo boxes */
                 Glib::RefPtr<Gtk::ListStore> tm_family;

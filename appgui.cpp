@@ -17,7 +17,9 @@ CBRecordModel::CBRecordModel()
 gtkGUI::gtkGUI()
 {
         get_executable_path();
+
         microcontroller = new Micro(exec_path, "");
+        avrdude = new Dude();
 
         // create object builder
         Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create();
@@ -149,12 +151,12 @@ gtkGUI::gtkGUI()
         cb_protocol->set_active(0);
 
         // connect signal handlers
-        auto_erase->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
-        auto_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
-        auto_check->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
-        cb_protocol->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
         cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
         dev_combo_signal = cb_device->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_device));
+        dev_combo_programmer = cb_protocol->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        check_button_erase = auto_erase->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        check_button_check = auto_check->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        check_button_verify = auto_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
 }
 
 gtkGUI::~gtkGUI()
@@ -220,8 +222,12 @@ void gtkGUI::cb_new_family (void)
         if (device_map == nullptr)
                 return;
 
-        /* disconnect on-change signal */
-        dev_combo_signal.disconnect();
+        /* block on-change signals */
+        dev_combo_signal.block(true);
+        dev_combo_programmer.block(true);
+        check_button_erase.block(true);
+        check_button_check.block(true);
+        check_button_verify.block(true);
         /* clear device tree-view */
         tm_device->clear();
         /* insert family members */
@@ -239,11 +245,14 @@ void gtkGUI::cb_new_family (void)
                 row[cbm_generic.col_data] = iter->second;
                 //cout << iter->first << " => " << iter->second << endl;
         }
-
         /* set default selected entry */
         cb_device->set_active(0);
-        /* reconnect on-change signal */
-        dev_combo_signal = cb_device->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_device));
+        /* unblock on-change signals */
+        dev_combo_signal.unblock();
+        dev_combo_programmer.unblock();
+        check_button_erase.unblock();
+        check_button_check.unblock();
+        check_button_verify.unblock();
 }
 
 void gtkGUI::cb_new_device (void)
@@ -297,7 +306,51 @@ void gtkGUI::cb_new_device (void)
 
 void gtkGUI::cb_dude_settings (void)
 {
-        cout << "Dude settings!" << endl;
+        gboolean auto_erase_flag, auto_verify_flag, auto_check_flag;
+        Glib::ustring microcontroller, programmer;
+        Gtk::TreeModel::iterator selection;
+
+        /* get selected microcontroller */
+        selection = cb_device->get_active();
+        if (selection) {
+                Gtk::TreeModel::Row row = *selection;
+                if (row)
+                        microcontroller = row[cbm_generic.col_name];
+        }
+
+        /* do not proceed if invalid or no microcontroller was selected */
+        if ((microcontroller.size() < 1) || (microcontroller == "None"))
+                return;
+
+        /* get selected programmer */
+        selection = cb_protocol->get_active();
+        if (selection) {
+                Gtk::TreeModel::Row row = *selection;
+                if (row)
+                        programmer = row[cbm_generic.col_data];
+        }
+
+        /* do not proceed if invalid programmer was selected */
+        if (programmer.size() < 1)
+                return;
+
+        /* read checkbuttons' state */
+        if (auto_erase->get_active())
+                auto_erase_flag = true;
+        else
+                auto_erase_flag = false;
+
+        if (auto_verify->get_active())
+                auto_verify_flag = true;
+        else
+                auto_verify_flag = false;
+
+        if (auto_check->get_active())
+                auto_check_flag = true;
+        else
+                auto_check_flag = false;
+
+        avrdude->setup( auto_erase_flag, auto_verify_flag, auto_check_flag, programmer, microcontroller );
 }
 
 void gtkGUI::display_specs (gboolean have_specs)
