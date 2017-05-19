@@ -34,10 +34,11 @@ struct OptionEntry {
 /* preliminary specifications of a micro */
 struct DeviceSpecifications {
         Glib::ustring max_speed;
-        Glib::ustring signature;
         Glib::ustring sram_size;
         Glib::ustring flash_size;
         Glib::ustring eeprom_size;
+        Glib::ustring signature;
+        Glib::ustring raw_sig;
 };
 
 /* full description of all fuse settings of a micro */
