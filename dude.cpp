@@ -67,7 +67,9 @@ Glib::ustring Dude::get_signature (void)
         command.append("avrdude");
         command.append(device);
         command.append(protocol);
-        command.append(options).append("-F ");
+        command.append(options);
+        /* parameters to disable some extra checks for this operation */
+        command.append("-F -u ");
         /* execute command and get output */
         output = execute (command);
         /* find signature location in output */
@@ -75,11 +77,11 @@ Glib::ustring Dude::get_signature (void)
         /* extract signature */
         actual_signature = output.substr (sig_pos + 14, 6);
 
-        cout << "\n\nraw output: " << output << "\n\n" << endl;
-        cout << "executed command: " << command << endl;
-        cout << "extracted signature: " << actual_signature << endl;
+        //cout << "\n\nraw output: " << output << "\n\n" << endl;
+        //cout << "executed command: " << command << endl;
+        //cout << "extracted signature: " << actual_signature << endl;
 
-        return actual_signature;
+        return actual_signature.uppercase();
 }
 
 
