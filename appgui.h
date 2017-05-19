@@ -43,6 +43,7 @@ class gtkGUI
 
         protected:
                 /* references to structures holding microcontroller data */
+                /* these structures are maintained by the instance of Micro class */
                 DeviceSpecifications *specifications = nullptr;
                 DeviceFuseSettings *settings = nullptr;
                 list<FuseWarning> *warnings = nullptr;
@@ -58,7 +59,8 @@ class gtkGUI
                 Dude *avrdude;
                 /* record-model for the tree-models used by combo boxes */
                 CBRecordModel cbm_generic;
-                /* signal connection handler for temporarily disconnecting combo-box signals */
+
+                /* signal connection handlers */
                 sigc::connection dev_combo_signal;
                 sigc::connection dev_combo_programmer;
                 sigc::connection check_button_erase;
@@ -106,8 +108,11 @@ class gtkGUI
                 void display_specs (gboolean have_specs);
                 void display_fuses (gboolean have_fuses);
                 void calculate_fuses (void);
+                void check_sig (void);
+                void erase_dev (void);
 
                 // utilities
+                void populate_static_treemodels (void);
                 void get_executable_path (void);
                 void clear_fuse_widget(FuseWidget* settings_widget);
                 bool data_prep_start (void);

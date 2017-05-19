@@ -61,7 +61,7 @@ gtkGUI::gtkGUI()
         tm_port = Gtk::ListStore::create(cbm_generic);
         tm_protocol = Gtk::ListStore::create(cbm_generic);
 
-        /* assign tree-models to combo boxes*/
+        /* assign tree-models to combo-boxes*/
         cb_family->set_model(tm_family);
         cb_device->set_model(tm_device);
         cb_protocol->set_model(tm_protocol);
@@ -71,6 +71,26 @@ gtkGUI::gtkGUI()
         cb_device->pack_start(cbm_generic.col_name);
         cb_protocol->pack_start(cbm_generic.col_name);
 
+        /* add microcontroller families and programmer names to tree-models */
+        populate_static_treemodels();
+
+        // connect signal handlers
+        btn_check_sig->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::check_sig));
+        btn_erase_dev->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::erase_dev));
+        cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
+        dev_combo_signal = cb_device->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_device));
+        dev_combo_programmer = cb_protocol->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        check_button_erase = auto_erase->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        check_button_check = auto_check->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        check_button_verify = auto_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+}
+
+gtkGUI::~gtkGUI()
+{
+}
+
+void gtkGUI::populate_static_treemodels (void)
+{
         Gtk::TreeModel::Row row;
         /* populate tree-model with device families */
         row = *(tm_family->append());
@@ -149,18 +169,6 @@ gtkGUI::gtkGUI()
         row[cbm_generic.col_name] = "Atmel AppNote AVR911 AVROSP";
         row[cbm_generic.col_data] = "avr911";
         cb_protocol->set_active(0);
-
-        // connect signal handlers
-        cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
-        dev_combo_signal = cb_device->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_device));
-        dev_combo_programmer = cb_protocol->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
-        check_button_erase = auto_erase->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
-        check_button_check = auto_check->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
-        check_button_verify = auto_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
-}
-
-gtkGUI::~gtkGUI()
-{
 }
 
 void gtkGUI::get_executable_path (void)
@@ -232,6 +240,8 @@ void gtkGUI::cb_new_family (void)
         auto_verify->set_active(true);
         auto_erase->set_active(true);
         auto_check->set_active(true);
+        /* update object settings */
+        cb_dude_settings ();
         /* clear device tree-view */
         tm_device->clear();
         /* insert family members */
@@ -289,6 +299,8 @@ void gtkGUI::cb_new_device (void)
         auto_verify->set_active(true);
         auto_erase->set_active(true);
         auto_check->set_active(true);
+        /* update object settings */
+        cb_dude_settings ();
         /* do not proceed if invalid device was selected */
         if (device.size() < 1)
                 return;
@@ -355,6 +367,18 @@ void gtkGUI::cb_dude_settings (void)
                 auto_check_flag = false;
 
         avrdude->setup( auto_erase_flag, auto_verify_flag, auto_check_flag, programmer, microcontroller );
+}
+
+void gtkGUI::check_sig (void)
+{
+        Glib::ustring actual_signature = avrdude->get_signature();
+
+        // check against this: specifications->raw_sig
+}
+
+void gtkGUI::erase_dev (void)
+{
+
 }
 
 void gtkGUI::display_specs (gboolean have_specs)
