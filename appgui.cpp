@@ -49,6 +49,9 @@ gtkGUI::gtkGUI()
         builder->get_widget("dev_signature", lbl_signature);
         builder->get_widget("fuse_parameters", ent_fusebytes);
         builder->get_widget("fuse_settings_grid", fuse_grid);
+        builder->get_widget("dude_auto_erase", auto_erase);
+        builder->get_widget("dude_auto_verify", auto_verify);
+        builder->get_widget("dude_auto_check", auto_check);
 
         /* create the tree-models */
         tm_family = Gtk::ListStore::create(cbm_generic);
@@ -146,8 +149,12 @@ gtkGUI::gtkGUI()
         cb_protocol->set_active(0);
 
         // connect signal handlers
-        dev_combo_signal = cb_device->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_device));
+        auto_erase->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        auto_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        auto_check->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        cb_protocol->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
         cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
+        dev_combo_signal = cb_device->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_device));
 }
 
 gtkGUI::~gtkGUI()
@@ -282,6 +289,11 @@ void gtkGUI::cb_new_device (void)
         this->display_specs(true);
         /* display fuse settings */
         this->display_fuses(true);
+}
+
+void gtkGUI::cb_dude_settings (void)
+{
+        cout << "Dude settings!" << endl;
 }
 
 void gtkGUI::display_specs (gboolean have_specs)
