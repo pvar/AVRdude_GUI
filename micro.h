@@ -38,7 +38,6 @@ struct DeviceSpecifications {
         Glib::ustring flash_size;
         Glib::ustring eeprom_size;
         Glib::ustring signature;
-        Glib::ustring raw_sig;
 };
 
 /* full description of all fuse settings of a micro */

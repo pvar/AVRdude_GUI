@@ -596,14 +596,11 @@ Glib::ustring Micro::get_signature_bytes (xmlpp::Node* signature_node)
         xmlpp::Node::NodeList children = signature_node->get_children();
         Glib::ustring signatrure;
 
+        signatrure = "0x";
         for (iter = children.begin(); iter != children.end(); ++iter) {
                 text = dynamic_cast<const xmlpp::TextNode*>(*iter);
-                if (!text) {
-                        specifications->raw_sig += (get_txt_value((*iter))).substr(1, 2);
-                        signatrure += "0x";
+                if (!text)
                         signatrure += (get_txt_value((*iter))).substr(1, 2);
-                        signatrure += " ";
-                }
         }
         signatrure.resize(17);
         return signatrure;
