@@ -47,7 +47,7 @@ gtkGUI::gtkGUI()
         builder->get_widget("dev_mem_eeprom", lbl_spec_eeprom);
         builder->get_widget("dev_max_speed", lbl_spec_speed);
         builder->get_widget("dev_signature", lbl_signature);
-        builder->get_widget("fuse_parameters", ent_fusebytes);
+        builder->get_widget("fuse_parameters", lbl_fusebytes);
         builder->get_widget("fuse_settings_grid", fuse_grid);
         builder->get_widget("dude_auto_erase", auto_erase);
         builder->get_widget("dude_auto_verify", auto_verify);
@@ -505,5 +505,5 @@ void gtkGUI::calculate_fuses ()
         fuse_parameters += converter_stream.str();
         fuse_parameters += ":m";
 
-        ent_fusebytes->set_text(fuse_parameters);
+        lbl_fusebytes->set_label(fuse_parameters);
 }

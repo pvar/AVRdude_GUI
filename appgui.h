@@ -87,7 +87,7 @@ class gtkGUI
                 Gtk::Label *lbl_spec_eeprom   = nullptr;
                 Gtk::Label *lbl_spec_speed    = nullptr;
                 Gtk::Label *lbl_signature     = nullptr;
-                Gtk::Entry *ent_fusebytes     = nullptr;
+                Gtk::Label *lbl_fusebytes     = nullptr;
                 Gtk::Grid *fuse_grid          = nullptr;
                 Gtk::CheckButton *auto_erase  = nullptr;
                 Gtk::CheckButton *auto_verify = nullptr;
