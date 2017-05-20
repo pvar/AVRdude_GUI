@@ -305,7 +305,7 @@ void gtkGUI::cb_new_device (void)
         if (device.size() < 1)
                 return;
         /* clear signature-test result */
-        lbl_sig_tst->set_label("Unverified...");
+        lbl_sig_tst->set_label("Unverified device selection.");
         /* creatre new instance if Micro */
         microcontroller = new Micro(exec_path, device);
         /* prepare data for selected device */
@@ -371,9 +371,19 @@ void gtkGUI::cb_dude_settings (void)
 
 void gtkGUI::check_sig (void)
 {
+        Glib::ustring selected_signature = specifications->signature.substr(2,7);
         Glib::ustring actual_signature = avrdude->get_signature();
 
-        // check against this: specifications->raw_sig
+        //cout << "actuall signature: " << actual_signature << endl;
+        //cout << "expected signature: " << selected_signature << endl;
+
+        if (actual_signature == selected_signature) {
+                //cout << "we have a match!" << endl;
+                lbl_sig_tst->set_label("Matching device detected :)");
+        } else {
+                //cout << "!! mismatch !!" << endl;
+                lbl_sig_tst->set_label("Unexpected device signature!");
+        }
 }
 
 void gtkGUI::erase_dev (void)
@@ -394,7 +404,7 @@ void gtkGUI::display_specs (gboolean have_specs)
                 lbl_spec_eeprom->set_label("NA");
                 lbl_spec_sram->set_label("NA");
                 lbl_spec_speed->set_label("NA");
-                lbl_signature->set_label("0x00 0x00 0x00");
+                lbl_signature->set_label("0x000000");
         }
 }
 void gtkGUI::clear_fuse_widget(FuseWidget* settings_widget)

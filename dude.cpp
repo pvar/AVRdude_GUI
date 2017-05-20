@@ -75,7 +75,7 @@ Glib::ustring Dude::get_signature (void)
         /* find signature location in output */
         Glib::ustring::size_type sig_pos = output.find ("signature = 0x", 0);
         /* extract signature */
-        actual_signature = output.substr (sig_pos + 14, 6);
+        actual_signature = output.substr(sig_pos + 14, 6);
 
         //cout << "\n\nraw output: " << output << "\n\n" << endl;
         //cout << "executed command: " << command << endl;

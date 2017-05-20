@@ -602,7 +602,6 @@ Glib::ustring Micro::get_signature_bytes (xmlpp::Node* signature_node)
                 if (!text)
                         signatrure += (get_txt_value((*iter))).substr(1, 2);
         }
-        signatrure.resize(17);
         return signatrure;
 }
 
