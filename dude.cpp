@@ -61,7 +61,7 @@ void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_chec
 
 Glib::ustring Dude::get_signature (void)
 {
-        Glib::ustring command, output, actual_signature;
+        Glib::ustring command, actual_signature;
 
         /* prepare command to be executed */
         command.append("avrdude");
@@ -70,43 +70,42 @@ Glib::ustring Dude::get_signature (void)
         command.append(options);
         /* parameters to disable some extra checks for this operation */
         command.append("-F -u ");
-        /* execute command and get output */
-        output = execute (command);
+        /* execute command */
+        execute (command);
         /* find signature location in output */
-        Glib::ustring::size_type sig_pos = output.find ("signature = 0x", 0);
+        Glib::ustring::size_type sig_pos = exec_output.find ("signature = 0x", 0);
         /* extract signature */
-        actual_signature = output.substr(sig_pos + 14, 6);
+        actual_signature = exec_output.substr(sig_pos + 14, 6);
 
-        //cout << "\n\nraw output: " << output << "\n\n" << endl;
-        //cout << "executed command: " << command << endl;
         //cout << "extracted signature: " << actual_signature << endl;
-
         return actual_signature.uppercase();
 }
 
 
 Glib::ustring Dude::device_erase (void)
 {
-        Glib::ustring command, output;
+        Glib::ustring command, processed_output;
 
-        /* execute command and get output */
-        output = execute (command);
+        /* execute command */
+        execute (command);
 
-        return output;
+        /* get and process output */
+        processed_output = exec_output;
+
+        return processed_output;
 }
 
-Glib::ustring Dude::execute (Glib::ustring command)
+void Dude::execute (Glib::ustring command)
 {
         char line[256];
-        Glib::ustring output;
+        exec_output.clear();
 
         command.append(" 2>&1");
         FILE *stream = popen(command.c_str(), "r");
         if (stream) {
                 while (!feof(stream))
                         if (fgets(line, 256, stream) != NULL)
-                                output.append(line);
+                                exec_output.append(line);
                 pclose(stream);
         }
-        return output;
 }

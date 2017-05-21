@@ -73,6 +73,9 @@ class gtkGUI
                 Glib::RefPtr<Gtk::ListStore> tm_port;
                 Glib::RefPtr<Gtk::ListStore> tm_protocol;
 
+                /* text buffer for diaplsying avrdude output */
+                Glib::RefPtr<Gtk::TextBuffer> dude_output_buffer;
+
                 // widgets
                 Gtk::CheckButton *auto_erase  = nullptr;
                 Gtk::CheckButton *auto_verify = nullptr;
@@ -99,9 +102,11 @@ class gtkGUI
                 Gtk::Label *lbl_spec_speed    = nullptr;
                 Gtk::Label *lbl_signature     = nullptr;
                 Gtk::Label *lbl_fusebytes     = nullptr;
+                Gtk::Label *lbl_dude_output   = nullptr;
                 Gtk::Grid *fuse_grid          = nullptr;
                 Gtk::Box *box_flash_ops       = nullptr;
                 Gtk::Box *box_eeprom_ops      = nullptr;
+                Gtk::TextView *tv_dude_output = nullptr;
 
                 // signal handlers
                 void cb_new_device (void);

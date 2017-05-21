@@ -56,7 +56,11 @@ gtkGUI::gtkGUI()
         builder->get_widget("fuse_settings_grid", fuse_grid);
         builder->get_widget("fw_flash_box", box_flash_ops);
         builder->get_widget("fw_eeprom_box", box_eeprom_ops);
+        builder->get_widget("avrdude_output", tv_dude_output);
 
+        /* create empty text buffer and assign to text view */
+        dude_output_buffer = Gtk::TextBuffer::create();
+        tv_dude_output->set_buffer(dude_output_buffer);
 
         /* create the tree-models */
         tm_family = Gtk::ListStore::create(cbm_generic);
@@ -392,6 +396,9 @@ void gtkGUI::check_sig (void)
 
         //cout << "actuall signature: " << actual_signature << endl;
         //cout << "expected signature: " << selected_signature << endl;
+
+        /* display execution output */
+        dude_output_buffer->set_text(avrdude->exec_output);
 
         if (actual_signature == selected_signature) {
                 //cout << "we have a match!" << endl;

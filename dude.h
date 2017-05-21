@@ -20,6 +20,8 @@ class Dude
                             Glib::ustring programmer,
                             Glib::ustring microcontroller );
 
+                Glib::ustring exec_output;
+
                 Glib::ustring device_write (Glib::ustring file, gint target);
                 Glib::ustring device_read (Glib::ustring file, gint source);
                 Glib::ustring device_erase (void);
@@ -30,7 +32,7 @@ class Dude
                 Glib::ustring options;
                 Glib::ustring device;
 
-                Glib::ustring execute (Glib::ustring command);
+                void execute (Glib::ustring command);
 };
 
 #endif

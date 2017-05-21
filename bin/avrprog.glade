@@ -45,6 +45,8 @@ Author: Varelas Panagiotis
           <object class="GtkBox" id="tab-grid-1">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
             <property name="margin_top">10</property>
             <property name="margin_bottom">10</property>
             <property name="orientation">vertical</property>
@@ -53,8 +55,6 @@ Author: Varelas Panagiotis
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="valign">start</property>
-                <property name="margin_left">10</property>
-                <property name="margin_right">10</property>
                 <property name="vexpand">True</property>
                 <child>
                   <object class="GtkGrid" id="avrdude_grid">
@@ -283,8 +283,6 @@ Author: Varelas Panagiotis
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="valign">center</property>
-                <property name="margin_left">10</property>
-                <property name="margin_right">10</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
                 <child>
@@ -348,8 +346,6 @@ Author: Varelas Panagiotis
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="valign">end</property>
-                <property name="margin_left">10</property>
-                <property name="margin_right">10</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
                 <property name="row_homogeneous">True</property>
@@ -678,51 +674,14 @@ Author: Varelas Panagiotis
           <object class="GtkGrid" id="tab-grid-3">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
             <property name="margin_top">10</property>
             <property name="margin_bottom">10</property>
-            <child>
-              <object class="GtkSeparator" id="separator3">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_top">32</property>
-                <property name="margin_bottom">8</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">3</property>
-                <property name="width">6</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="avrdude_status">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">start</property>
-                <property name="margin_left">10</property>
-                <property name="margin_right">10</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Ready...</property>
-                <attributes>
-                  <attribute name="font-desc" value="Monospace 10"/>
-                  <attribute name="style" value="italic"/>
-                  <attribute name="foreground" value="#4e4e9a9a0606"/>
-                </attributes>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">4</property>
-                <property name="width">6</property>
-                <property name="height">5</property>
-              </packing>
-            </child>
             <child>
               <object class="GtkBox" id="fw_flash_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_left">10</property>
-                <property name="margin_right">10</property>
                 <property name="vexpand">True</property>
                 <property name="orientation">vertical</property>
                 <child>
@@ -865,9 +824,7 @@ Author: Varelas Panagiotis
               <object class="GtkBox" id="fw_eeprom_box">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_left">10</property>
-                <property name="margin_right">10</property>
-                <property name="vexpand">True</property>
+                <property name="margin_bottom">16</property>
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkLabel" id="label11">
@@ -993,13 +950,43 @@ Author: Varelas Panagiotis
               <object class="GtkSeparator">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_top">32</property>
-                <property name="margin_bottom">32</property>
+                <property name="margin_top">16</property>
+                <property name="margin_bottom">16</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
                 <property name="width">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="vscrollbar_policy">always</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkTextView" id="avrdude_output">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="margin_left">5</property>
+                    <property name="margin_right">5</property>
+                    <property name="margin_top">3</property>
+                    <property name="margin_bottom">3</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <property name="cursor_visible">False</property>
+                    <property name="monospace">True</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+                <property name="width">6</property>
+                <property name="height">5</property>
               </packing>
             </child>
           </object>
