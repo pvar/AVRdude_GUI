@@ -233,9 +233,12 @@ void gtkGUI::cb_new_family (void)
         if (device_map == nullptr)
                 return;
 
+        /* clear old labels and fuses */
+        this->display_fuses(false);
+        this->display_specs(false);
         /* disable flash and eeprom operations */
-        enable_flash_box (false);
-        enable_eeprom_box (false);
+        box_flash_ops->set_sensitive(false);
+        box_eeprom_ops->set_sensitive(false);
         /* block on-change signals */
         dev_combo_signal.block(true);
         dev_combo_programmer.block(true);
@@ -302,8 +305,8 @@ void gtkGUI::cb_new_device (void)
         this->display_fuses(false);
         this->display_specs(false);
         /* disable flash and eeprom operations */
-        enable_flash_box (false);
-        enable_eeprom_box (false);
+        box_flash_ops->set_sensitive(false);
+        box_eeprom_ops->set_sensitive(false);
         /* reset avrdude settings */
         auto_verify->set_active(true);
         auto_erase->set_active(true);
@@ -324,23 +327,13 @@ void gtkGUI::cb_new_device (void)
         settings = microcontroller->get_fuse_settings();
         warnings = microcontroller->get_fuse_warnings();
         /* enable flash and eeprom operations */
-        enable_flash_box (true);
+        box_flash_ops->set_sensitive(true);
         if (specifications->eeprom_exists)
-                enable_eeprom_box (true);
+                box_eeprom_ops->set_sensitive(true);
         /* display specifications */
         this->display_specs(true);
         /* display fuse settings */
         this->display_fuses(true);
-}
-
-void gtkGUI::enable_flash_box (gboolean state)
-{
-        box_flash_ops->set_sensitive(state);
-}
-
-void gtkGUI::enable_eeprom_box (gboolean state)
-{
-        box_eeprom_ops->set_sensitive(state);
 }
 
 void gtkGUI::cb_dude_settings (void)

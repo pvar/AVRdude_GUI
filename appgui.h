@@ -118,8 +118,6 @@ class gtkGUI
                 void get_executable_path (void);
                 void clear_fuse_widget(FuseWidget* settings_widget);
                 bool data_prep_start (void);
-                void enable_flash_box (gboolean state);
-                void enable_eeprom_box (gboolean state);
 };
 
 #endif
