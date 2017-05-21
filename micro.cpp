@@ -371,13 +371,19 @@ int Micro::parse_specifications (xmlpp::Node *root_node)
         tmp_node = xml_node->get_first_child("EEPROM");
         /* if no such node was found, it must be a device without EEPROM */
         if (!tmp_node) {
+                specs->eeprom_exists = false;
                 txtvalue = "0 Bytes";
                 specs->sram_size = txtvalue;
         } else {
+                specs->eeprom_exists = true;
                 xml_node = tmp_node;
                 /* get node content */
                 txtvalue = this->get_txt_value(xml_node);
                 numvalue = ::atof(txtvalue.c_str()) / 1024;
+                /* check for zero eeprom size */
+                if (numvalue == 0)
+                        specs->eeprom_exists = false;
+                /* express size in KBytes */
                 if (numvalue > 1)
                         txtvalue = float_to_string(numvalue) + " KB";
                 else

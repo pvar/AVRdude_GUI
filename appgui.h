@@ -74,6 +74,9 @@ class gtkGUI
                 Glib::RefPtr<Gtk::ListStore> tm_protocol;
 
                 // widgets
+                Gtk::CheckButton *auto_erase  = nullptr;
+                Gtk::CheckButton *auto_verify = nullptr;
+                Gtk::CheckButton *auto_check  = nullptr;
                 Gtk::ComboBox *cb_family      = nullptr;
                 Gtk::ComboBox *cb_device      = nullptr;
                 Gtk::ComboBox *cb_protocol    = nullptr;
@@ -97,9 +100,8 @@ class gtkGUI
                 Gtk::Label *lbl_signature     = nullptr;
                 Gtk::Label *lbl_fusebytes     = nullptr;
                 Gtk::Grid *fuse_grid          = nullptr;
-                Gtk::CheckButton *auto_erase  = nullptr;
-                Gtk::CheckButton *auto_verify = nullptr;
-                Gtk::CheckButton *auto_check  = nullptr;
+                Gtk::Box *box_flash_ops       = nullptr;
+                Gtk::Box *box_eeprom_ops      = nullptr;
 
                 // signal handlers
                 void cb_new_device (void);
@@ -116,6 +118,8 @@ class gtkGUI
                 void get_executable_path (void);
                 void clear_fuse_widget(FuseWidget* settings_widget);
                 bool data_prep_start (void);
+                void enable_flash_box (gboolean state);
+                void enable_eeprom_box (gboolean state);
 };
 
 #endif

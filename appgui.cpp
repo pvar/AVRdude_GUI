@@ -37,6 +37,9 @@ gtkGUI::gtkGUI()
         }
 
         // use builder to instantiate GTK widgets
+        builder->get_widget("dude_auto_erase", auto_erase);
+        builder->get_widget("dude_auto_verify", auto_verify);
+        builder->get_widget("dude_auto_check", auto_check);
         builder->get_widget("main_window", main_window);
         builder->get_widget("combo_family", cb_family);
         builder->get_widget("combo_device", cb_device);
@@ -51,9 +54,9 @@ gtkGUI::gtkGUI()
         builder->get_widget("dev_signature", lbl_signature);
         builder->get_widget("fuse_parameters", lbl_fusebytes);
         builder->get_widget("fuse_settings_grid", fuse_grid);
-        builder->get_widget("dude_auto_erase", auto_erase);
-        builder->get_widget("dude_auto_verify", auto_verify);
-        builder->get_widget("dude_auto_check", auto_check);
+        builder->get_widget("fw_flash_box", box_flash_ops);
+        builder->get_widget("fw_eeprom_box", box_eeprom_ops);
+
 
         /* create the tree-models */
         tm_family = Gtk::ListStore::create(cbm_generic);
@@ -230,6 +233,9 @@ void gtkGUI::cb_new_family (void)
         if (device_map == nullptr)
                 return;
 
+        /* disable flash and eeprom operations */
+        enable_flash_box (false);
+        enable_eeprom_box (false);
         /* block on-change signals */
         dev_combo_signal.block(true);
         dev_combo_programmer.block(true);
@@ -295,13 +301,16 @@ void gtkGUI::cb_new_device (void)
         /* clear old labels and fuses */
         this->display_fuses(false);
         this->display_specs(false);
+        /* disable flash and eeprom operations */
+        enable_flash_box (false);
+        enable_eeprom_box (false);
         /* reset avrdude settings */
         auto_verify->set_active(true);
         auto_erase->set_active(true);
         auto_check->set_active(true);
         /* update object settings */
         cb_dude_settings ();
-        /* do not proceed if invalid device was selected */
+        /* do not proceed if invalid (or "None") device */
         if (device.size() < 1)
                 return;
         /* clear signature-test result */
@@ -314,10 +323,24 @@ void gtkGUI::cb_new_device (void)
         specifications = microcontroller->get_specifications();
         settings = microcontroller->get_fuse_settings();
         warnings = microcontroller->get_fuse_warnings();
+        /* enable flash and eeprom operations */
+        enable_flash_box (true);
+        if (specifications->eeprom_exists)
+                enable_eeprom_box (true);
         /* display specifications */
         this->display_specs(true);
         /* display fuse settings */
         this->display_fuses(true);
+}
+
+void gtkGUI::enable_flash_box (gboolean state)
+{
+        box_flash_ops->set_sensitive(state);
+}
+
+void gtkGUI::enable_eeprom_box (gboolean state)
+{
+        box_eeprom_ops->set_sensitive(state);
 }
 
 void gtkGUI::cb_dude_settings (void)
