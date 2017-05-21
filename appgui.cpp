@@ -62,6 +62,23 @@ gtkGUI::gtkGUI()
         dude_output_buffer = Gtk::TextBuffer::create();
         tv_dude_output->set_buffer(dude_output_buffer);
 
+        /* set custom style provider for application window */
+        Glib::ustring data = ".console {font:Monospace 9; color:#008000;}";
+        auto css = Gtk::CssProvider::create();
+        if (not css->load_from_data(data)) {
+                cerr << "Failed to load css\n";
+                std::exit(1);
+        }
+        auto screen = Gdk::Screen::get_default();
+        Glib::RefPtr<Gtk::StyleContext> win_context = main_window->get_style_context();
+        win_context->add_provider_for_screen(screen, css, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
+        /* add style-class to textview displaying execution output */
+        Glib::RefPtr<Gtk::StyleContext> context = tv_dude_output->get_style_context();
+        context->add_class("console");
+
+
+
         /* create the tree-models */
         tm_family = Gtk::ListStore::create(cbm_generic);
         tm_device = Gtk::ListStore::create(cbm_generic);

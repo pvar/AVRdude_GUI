@@ -108,4 +108,6 @@ void Dude::execute (Glib::ustring command)
                                 exec_output.append(line);
                 pclose(stream);
         }
+        /* remove first character -- usually a newline */
+        exec_output.erase(0,1);
 }
