@@ -68,7 +68,7 @@ Glib::ustring Dude::get_signature (void)
         command.append(device);
         command.append(protocol);
         command.append(options);
-        /* parameters to disable some extra checks for this operation */
+        /* extra parameters for this operation (disable signature and fuse checks) */
         command.append("-F -u ");
         /* execute command */
         execute (command);
@@ -86,6 +86,15 @@ Glib::ustring Dude::device_erase (void)
 {
         Glib::ustring command, processed_output;
 
+        /* prepare command to be executed */
+        command.append("avrdude");
+        command.append(device);
+        command.append(protocol);
+        command.append(options);
+        /* parameter for executing a chip erase */
+        command.append("-e ");
+        /* extra parameters for this operation (disable fuse checking) */
+        command.append("-u ");
         /* execute command */
         execute (command);
 
@@ -109,5 +118,5 @@ void Dude::execute (Glib::ustring command)
                 pclose(stream);
         }
         /* remove first character -- usually a newline */
-        exec_output.erase(0,1);
+        exec_output = "> " + command + "\n" + exec_output;
 }

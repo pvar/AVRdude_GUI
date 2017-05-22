@@ -127,7 +127,7 @@ class gtkGUI
                 void get_executable_path (void);
                 void clear_fuse_widget(FuseWidget* settings_widget);
                 bool data_prep_start (void);
-
+                void update_console_view (void);
                 void lock_and_clear (void);
                 void unlock_and_update (void);
 };

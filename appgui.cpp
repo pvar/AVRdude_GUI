@@ -65,15 +65,15 @@ gtkGUI::gtkGUI()
         tv_dude_output->set_buffer(dude_output_buffer);
 
         /* set custom style provider for application window */
-        Glib::ustring data = ".console {font:Monospace 9; color:#008000;}";
-        auto css = Gtk::CssProvider::create();
+        Glib::ustring data = ".console {font: Monospace 9; color: #008000;}";
+        Glib::RefPtr<Gtk::CssProvider> css = Gtk::CssProvider::create();
         if (not css->load_from_data(data)) {
                 cerr << "Failed to load css\n";
                 std::exit(1);
         }
-        auto screen = Gdk::Screen::get_default();
+        Glib::RefPtr<Gdk::Screen> screen = Gdk::Screen::get_default();
         Glib::RefPtr<Gtk::StyleContext> win_context = main_window->get_style_context();
-        win_context->add_provider_for_screen(screen, css, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+        win_context->add_provider_for_screen(screen, css, GTK_STYLE_PROVIDER_PRIORITY_USER);
 
         /* add style-class to textview displaying execution output */
         Glib::RefPtr<Gtk::StyleContext> context = tv_dude_output->get_style_context();
@@ -447,7 +447,10 @@ void gtkGUI::check_sig (void)
 
 void gtkGUI::erase_dev (void)
 {
+        avrdude->device_erase();
 
+        /* display execution output */
+        dude_output_buffer->set_text(avrdude->exec_output);
 }
 
 void gtkGUI::display_specs (gboolean have_specs)
