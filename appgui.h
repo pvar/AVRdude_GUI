@@ -42,6 +42,9 @@ class gtkGUI
                 void data_prep (void);
 
         protected:
+                /* fuse-byte values */
+                guint fusebytes[3] = {0, 0, 0};
+
                 /* references to structures holding microcontroller data */
                 /* these structures are maintained by the instance of Micro class */
                 DeviceSpecifications *specifications = nullptr;
@@ -114,6 +117,7 @@ class gtkGUI
                 void cb_dude_settings (void);
                 void display_specs (gboolean have_specs);
                 void display_fuses (gboolean have_fuses);
+                void display_fuse_bytes ();
                 void calculate_fuses (void);
                 void check_sig (void);
                 void erase_dev (void);
@@ -123,6 +127,9 @@ class gtkGUI
                 void get_executable_path (void);
                 void clear_fuse_widget(FuseWidget* settings_widget);
                 bool data_prep_start (void);
+
+                void lock_and_clear (void);
+                void unlock_and_update (void);
 };
 
 #endif

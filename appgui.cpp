@@ -54,6 +54,8 @@ gtkGUI::gtkGUI()
         builder->get_widget("dev_signature", lbl_signature);
         builder->get_widget("fuse_parameters", lbl_fusebytes);
         builder->get_widget("fuse_settings_grid", fuse_grid);
+        builder->get_widget("write_fuses", btn_fuse_read);
+        builder->get_widget("read_fuses", btn_fuse_write);
         builder->get_widget("fw_flash_box", box_flash_ops);
         builder->get_widget("fw_eeprom_box", box_eeprom_ops);
         builder->get_widget("avrdude_output", tv_dude_output);
@@ -254,24 +256,14 @@ void gtkGUI::cb_new_family (void)
         if (device_map == nullptr)
                 return;
 
-        /* clear old labels and fuses */
-        this->display_fuses(false);
-        this->display_specs(false);
-        /* disable flash and eeprom operations */
-        box_flash_ops->set_sensitive(false);
-        box_eeprom_ops->set_sensitive(false);
         /* block on-change signals */
         dev_combo_signal.block(true);
         dev_combo_programmer.block(true);
         check_button_erase.block(true);
         check_button_check.block(true);
         check_button_verify.block(true);
-        /* reset avrdude settings */
-        auto_verify->set_active(true);
-        auto_erase->set_active(true);
-        auto_check->set_active(true);
-        /* update object settings */
-        cb_dude_settings ();
+        /* reset settings and lock controls */
+        lock_and_clear();
         /* clear device tree-view */
         tm_device->clear();
         /* insert family members */
@@ -299,12 +291,12 @@ void gtkGUI::cb_new_family (void)
         check_button_verify.unblock();
 }
 
+
 void gtkGUI::cb_new_device (void)
 {
-        /*
-          delete current instance of Micro and "mark" as empty
-          (this will also delete specifications, warnings and settings,
-          as they are references to structs created inside microcontroller)
+        /* delete current instance of Micro and "mark" as empty
+           !! this will also delete specifications, warnings and settings
+           !! these are references to structs created inside microcontroller
         */
         if (microcontroller) {
                 delete this->microcontroller;
@@ -322,23 +314,11 @@ void gtkGUI::cb_new_device (void)
                 }
         }
 
-        /* clear old labels and fuses */
-        this->display_fuses(false);
-        this->display_specs(false);
-        /* disable flash and eeprom operations */
-        box_flash_ops->set_sensitive(false);
-        box_eeprom_ops->set_sensitive(false);
-        /* reset avrdude settings */
-        auto_verify->set_active(true);
-        auto_erase->set_active(true);
-        auto_check->set_active(true);
-        /* update object settings */
-        cb_dude_settings ();
-        /* do not proceed if invalid (or "None") device */
+        /* reset settings and lock controls */
+        lock_and_clear();
+        /* do not proceed if "None" device */
         if (device.size() < 1)
                 return;
-        /* clear signature-test result */
-        lbl_sig_tst->set_label("Unverified device selection.");
         /* creatre new instance if Micro */
         microcontroller = new Micro(exec_path, device);
         /* prepare data for selected device */
@@ -347,14 +327,53 @@ void gtkGUI::cb_new_device (void)
         specifications = microcontroller->get_specifications();
         settings = microcontroller->get_fuse_settings();
         warnings = microcontroller->get_fuse_warnings();
-        /* enable flash and eeprom operations */
+        /* update labels and unlock controls */
+        unlock_and_update();
+}
+
+void gtkGUI::lock_and_clear (void)
+{
+        /* clear old labels and fuses */
+        display_fuses(false);
+        display_specs(false);
+        /* disable avrdude operations */
+        btn_check_sig->set_sensitive(false);
+        btn_erase_dev->set_sensitive(false);
+        btn_fuse_read->set_sensitive(false);
+        btn_fuse_write->set_sensitive(false);
+        box_flash_ops->set_sensitive(false);
+        box_eeprom_ops->set_sensitive(false);
+        /* reset avrdude settings */
+        auto_verify->set_active(true);
+        auto_erase->set_active(true);
+        auto_check->set_active(true);
+        /* update object settings */
+        cb_dude_settings ();
+        /* clear signature-test result */
+        lbl_sig_tst->set_label("Unverified device selection.");
+
+}
+
+void gtkGUI::unlock_and_update (void)
+{
+        /* enable avrdude operations */
+        btn_check_sig->set_sensitive(true);
+        btn_erase_dev->set_sensitive(true);
+        btn_fuse_read->set_sensitive(true);
+        btn_fuse_write->set_sensitive(true);
         box_flash_ops->set_sensitive(true);
         if (specifications->eeprom_exists)
                 box_eeprom_ops->set_sensitive(true);
         /* display specifications */
-        this->display_specs(true);
+        display_specs(true);
         /* display fuse settings */
-        this->display_fuses(true);
+        display_fuses(true);
+        /* clear fuse-byte values */
+        fusebytes[0] = 255;
+        fusebytes[1] = 255;
+        fusebytes[2] = 255;
+        /* display fuse bytes */
+        display_fuse_bytes();
 }
 
 void gtkGUI::cb_dude_settings (void)
@@ -577,9 +596,6 @@ void gtkGUI::display_fuses (gboolean have_fuses)
 
 void gtkGUI::calculate_fuses ()
 {
-        /* fuse-byte values */
-        guint fusebytes[3] = {0, 0, 0};
-
         /* clear fuse-byte values */
         fusebytes[0] = 0;
         fusebytes[1] = 0;
@@ -620,25 +636,28 @@ void gtkGUI::calculate_fuses ()
         fusebytes[1] ^= 255;
         fusebytes[2] ^= 255;
 
-        //-U lfuse:w:LOW_BYTE:m -U hfuse:w:HIGH_BYTE:m -U efuse:w:EXT_BYTE:m
+        /* display fuse bytes */
+        display_fuse_bytes();
+}
+
+void gtkGUI::display_fuse_bytes ()
+{
         string fuse_parameters;
         stringstream converter_stream;
 
-        fuse_parameters = "-U lfuse:w:0x";
+        fuse_parameters = "LOW: 0x";
         converter_stream << hex << setw(2) << setfill('0');
         converter_stream << fusebytes[0];
         fuse_parameters += converter_stream.str();
         converter_stream.str(string());
-        fuse_parameters += ":m  -U hfuse:w:0x";
+        fuse_parameters += "   HIGH: 0x";
         converter_stream << hex << setw(2) << setfill('0');
         converter_stream << fusebytes[1];
         fuse_parameters += converter_stream.str();
         converter_stream.str(string());
-        fuse_parameters += ":m  -U efuse:w:0x";
+        fuse_parameters += "   EXTENDED: 0x";
         converter_stream << hex << setw(2) << setfill('0');
         converter_stream << fusebytes[2];
         fuse_parameters += converter_stream.str();
-        fuse_parameters += ":m";
-
         lbl_fusebytes->set_label(fuse_parameters);
 }
