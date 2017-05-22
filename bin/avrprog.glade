@@ -484,7 +484,7 @@ Author: Varelas Panagiotis
                   <object class="GtkSeparator">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_bottom">8</property>
+                    <property name="margin_bottom">4</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -562,7 +562,7 @@ Author: Varelas Panagiotis
                   <object class="GtkSeparator">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_bottom">8</property>
+                    <property name="margin_bottom">4</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -770,7 +770,7 @@ Author: Varelas Panagiotis
                   <object class="GtkSeparator">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_bottom">8</property>
+                    <property name="margin_bottom">4</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -911,7 +911,7 @@ Author: Varelas Panagiotis
                   <object class="GtkSeparator">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_bottom">8</property>
+                    <property name="margin_bottom">4</property>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -1031,7 +1031,7 @@ Author: Varelas Panagiotis
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="double_buffered">False</property>
-                <property name="margin_top">24</property>
+                <property name="margin_top">8</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
                 <property name="vscrollbar_policy">always</property>
@@ -1056,9 +1056,26 @@ Author: Varelas Panagiotis
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
+                <property name="top_attach">3</property>
                 <property name="width">6</property>
                 <property name="height">5</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label15">
+                <property name="width_request">80</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">end</property>
+                <property name="margin_top">16</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Console messages</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+                <property name="width">6</property>
               </packing>
             </child>
           </object>
