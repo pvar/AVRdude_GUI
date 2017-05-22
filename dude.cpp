@@ -10,6 +10,9 @@ Dude::~Dude()
 
 void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_check, Glib::ustring programmer, Glib::ustring microcontroller )
 {
+        exec_error = no_error;
+        raw_exec_output.clear();
+        processed_output.clear();
         device.clear();
         protocol.clear();
         options.clear();
@@ -37,7 +40,7 @@ void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_chec
         }
 
         /* set protocol parameter */
-        device.append(" -c ").append(programmer).append(" ");
+        protocol.append(" -c ").append(programmer).append(" ");
 
         /* check if should disable automatic erase of flash */
         if (!auto_erase)
@@ -58,10 +61,9 @@ void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_chec
         //cout << "options: " << options<< endl;
 }
 
-
-Glib::ustring Dude::get_signature (void)
+void Dude::get_signature (void)
 {
-        Glib::ustring command, actual_signature;
+        Glib::ustring command, tmp_string;
 
         /* prepare command to be executed */
         command.append("avrdude");
@@ -72,19 +74,21 @@ Glib::ustring Dude::get_signature (void)
         command.append("-F -u ");
         /* execute command */
         execute (command);
-        /* find signature location in output */
-        Glib::ustring::size_type sig_pos = exec_output.find ("signature = 0x", 0);
-        /* extract signature */
-        actual_signature = exec_output.substr(sig_pos + 14, 6);
-
-        //cout << "extracted signature: " << actual_signature << endl;
-        return actual_signature.uppercase();
+        /* check output for errors */
+        check_for_errors();
+        /* only proceed if execution was successful */
+        if (exec_error == no_error) {
+                /* find signature position */
+                Glib::ustring::size_type sig_pos = raw_exec_output.find ("signature = 0x", 0);
+                /* extract signature */
+                tmp_string = raw_exec_output.substr(sig_pos + 14, 6);
+                processed_output = tmp_string.uppercase();
+        }
 }
 
-
-Glib::ustring Dude::device_erase (void)
+void Dude::device_erase (void)
 {
-        Glib::ustring command, processed_output;
+        Glib::ustring command;
 
         /* prepare command to be executed */
         command.append("avrdude");
@@ -97,26 +101,79 @@ Glib::ustring Dude::device_erase (void)
         command.append("-u ");
         /* execute command */
         execute (command);
-
-        /* get and process output */
-        processed_output = exec_output;
-
-        return processed_output;
+        /* check output for errors */
+        check_for_errors();
 }
 
 void Dude::execute (Glib::ustring command)
 {
+        /* clear all output from previous execution */
+        raw_exec_output.clear();
+        processed_output.clear();
+        /* temporary buffer for gathiering output */
         char line[256];
-        exec_output.clear();
-
+        /* make sure all messages will be fed into stdout */
         command.append(" 2>&1");
+        /* execute command and gather all output */
         FILE *stream = popen(command.c_str(), "r");
         if (stream) {
                 while (!feof(stream))
                         if (fgets(line, 256, stream) != NULL)
-                                exec_output.append(line);
+                                raw_exec_output.append(line);
                 pclose(stream);
         }
-        /* remove first character -- usually a newline */
-        exec_output = "> " + command + "\n" + exec_output;
+        /* add executed command at the beginning of output string */
+        raw_exec_output = "> " + command + "\n" + raw_exec_output;
+}
+
+void Dude::check_for_errors (void)
+{
+        Glib::ustring::size_type output_len = raw_exec_output.size();
+        Glib::ustring::size_type substr_pos;
+
+        /* check if signature was not read */
+        substr_pos = raw_exec_output.find ("error reading signature data", 0);
+        if (substr_pos < output_len) {
+                processed_output = "cannot read signature!";
+                exec_error = cannot_read_signature;
+                return;
+        }
+
+        /* check if encountered unexpected singature */
+        substr_pos = raw_exec_output.find ("Double check chip, or use -F to override this check.", 0);
+        if (substr_pos < output_len) {
+                processed_output = "unexpected singature!";
+                exec_error = invalid_signature;
+                return;
+        }
+
+        /* check if an invalid part was declared */
+        substr_pos = raw_exec_output.find ("Valid parts are:", 0);
+        if (substr_pos < output_len) {
+                processed_output = "unknown device!";
+                exec_error = unknown_device;
+                return;
+        }
+
+        /* check if avrdude executable is not present */
+        substr_pos = raw_exec_output.find ("command not found", 0);
+        if (substr_pos < output_len) {
+                processed_output = "command not found!";
+                exec_error = command_not_found;
+                return;
+        }
+
+        /* check if user lacks the necessary permissions */
+        /*
+        substr_pos = raw_exec_output.find ("command not found", 0);
+        if (substr_pos < output_len) {
+                processed_output = "insufficient permissions";
+                exec_error = insufficient_permissions;
+                return;
+        }
+        */
+
+        /* check for other errors... */
+
+        exec_error = no_error;
 }

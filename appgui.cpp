@@ -427,14 +427,17 @@ void gtkGUI::cb_dude_settings (void)
 
 void gtkGUI::check_sig (void)
 {
+        /* read signature from device */
+        avrdude->get_signature();
+        /* display execution output */
+        dude_output_buffer->set_text(avrdude->raw_exec_output);
+        /* get actuall signature from processed output */
+        Glib::ustring actual_signature = avrdude->processed_output;
+        /* get expected signature from specifications */
         Glib::ustring selected_signature = specifications->signature.substr(2,7);
-        Glib::ustring actual_signature = avrdude->get_signature();
 
         //cout << "actuall signature: " << actual_signature << endl;
         //cout << "expected signature: " << selected_signature << endl;
-
-        /* display execution output */
-        dude_output_buffer->set_text(avrdude->exec_output);
 
         if (actual_signature == selected_signature) {
                 //cout << "we have a match!" << endl;
@@ -447,10 +450,10 @@ void gtkGUI::check_sig (void)
 
 void gtkGUI::erase_dev (void)
 {
+        /* execute chip-erase */
         avrdude->device_erase();
-
         /* display execution output */
-        dude_output_buffer->set_text(avrdude->exec_output);
+        dude_output_buffer->set_text(avrdude->raw_exec_output);
 }
 
 void gtkGUI::display_specs (gboolean have_specs)
