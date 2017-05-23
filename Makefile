@@ -20,7 +20,7 @@ OUTPUT = bin/avr_prog
 
 STANDARD = -std=c++11
 WARNINGS = -Wall
-TUNNING = -O0 -fshort-enums
+TUNNING = -O0 -fshort-enums -pg
 ERRORS = -Werror
 FLAGS = $(STANDARD) $(WARNINGS) $(ERRORS) $(TUNNING)
 

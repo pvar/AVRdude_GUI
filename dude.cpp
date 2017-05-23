@@ -128,52 +128,26 @@ void Dude::execute (Glib::ustring command)
 
 void Dude::check_for_errors (void)
 {
+        gint index, error_code_index;
+        gint max_index = er_strings.size();
+        Glib::ustring::size_type er_str_pos;
         Glib::ustring::size_type output_len = raw_exec_output.size();
-        Glib::ustring::size_type substr_pos;
 
-        /* check if signature was not read */
-        substr_pos = raw_exec_output.find ("error reading signature data", 0);
-        if (substr_pos < output_len) {
-                processed_output = "cannot read signature!";
-                exec_error = cannot_read_signature;
+        /* iterate through available error-strings and check if found in execution output string */
+        for (index = 0; index < max_index; index++) {
+                er_str_pos = raw_exec_output.find (er_strings[index], 0);
+                if (er_str_pos < output_len) {
+                        error_code_index = index;
+                        break;
+                }
+
+        }
+
+        /* check if no string found in output */
+        if (error_code_index >= max_index) {
+                exec_error = no_error;
                 return;
         }
 
-        /* check if encountered unexpected singature */
-        substr_pos = raw_exec_output.find ("Double check chip, or use -F to override this check.", 0);
-        if (substr_pos < output_len) {
-                processed_output = "unexpected singature!";
-                exec_error = invalid_signature;
-                return;
-        }
-
-        /* check if an invalid part was declared */
-        substr_pos = raw_exec_output.find ("Valid parts are:", 0);
-        if (substr_pos < output_len) {
-                processed_output = "unknown device!";
-                exec_error = unknown_device;
-                return;
-        }
-
-        /* check if avrdude executable is not present */
-        substr_pos = raw_exec_output.find ("command not found", 0);
-        if (substr_pos < output_len) {
-                processed_output = "command not found!";
-                exec_error = command_not_found;
-                return;
-        }
-
-        /* check if user lacks the necessary permissions */
-        /*
-        substr_pos = raw_exec_output.find ("command not found", 0);
-        if (substr_pos < output_len) {
-                processed_output = "insufficient permissions";
-                exec_error = insufficient_permissions;
-                return;
-        }
-        */
-
-        /* check for other errors... */
-
-        exec_error = no_error;
+        exec_error = er_codes[error_code_index];
 }

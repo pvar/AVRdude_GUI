@@ -94,10 +94,8 @@ map <Glib::ustring, Glib::ustring>* Micro::get_device_list (void)
                 }
                 closedir (directory);
         } else {
-                delete path_xml_files;
                 return nullptr;
         }
-        delete path_xml_files;
 
         //cout << "device XML-files: " << device_map->size() << endl;
         return device_map;

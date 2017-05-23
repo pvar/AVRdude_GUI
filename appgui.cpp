@@ -157,7 +157,7 @@ void gtkGUI::populate_static_treemodels (void)
         row[cbm_generic.col_data] = "stk200";
         row = *(tm_protocol->append());
         row[cbm_generic.col_name] = "Atmel STK500";
-        row[cbm_generic.col_data] = "stk500generic";
+        row[cbm_generic.col_data] = "stk500";
         row = *(tm_protocol->append());
         row[cbm_generic.col_name] = "Atmel STK500 HV Serial";
         row[cbm_generic.col_data] = "stk500hvsp";
