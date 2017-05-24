@@ -128,7 +128,7 @@ void Dude::execute (Glib::ustring command)
 
 void Dude::check_for_errors (void)
 {
-        gint index, error_code_index = 0;
+        gint index, error_code_index = -1;
         gint max_index = er_strings.size();
         Glib::ustring::size_type er_str_pos;
         Glib::ustring::size_type output_len = raw_exec_output.size();
@@ -144,7 +144,7 @@ void Dude::check_for_errors (void)
         }
 
         /* check if no string found in output */
-        if (error_code_index >= max_index) {
+        if (error_code_index == -1) {
                 exec_error = no_error;
                 return;
         }
