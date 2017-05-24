@@ -4,3 +4,4 @@ bin/avr_prog
 *.o
 *~
 *.txt
+gmon.out
