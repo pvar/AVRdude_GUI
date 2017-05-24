@@ -32,7 +32,6 @@ Author: Varelas Panagiotis
     <property name="height_request">480</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">AVR programmer GUI</property>
     <property name="resizable">False</property>
     <property name="window_position">center</property>
     <property name="default_width">670</property>
@@ -784,7 +783,7 @@ Author: Varelas Panagiotis
                     <property name="can_focus">False</property>
                     <property name="margin_bottom">5</property>
                     <child>
-                      <object class="GtkEntry" id="path_hex">
+                      <object class="GtkEntry" id="flash_file">
                         <property name="height_request">36</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -797,7 +796,7 @@ Author: Varelas Panagiotis
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="open_hex">
+                      <object class="GtkButton" id="open_flash">
                         <property name="label" translatable="yes">...</property>
                         <property name="width_request">64</property>
                         <property name="height_request">36</property>
@@ -824,7 +823,7 @@ Author: Varelas Panagiotis
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkButton" id="read_hex">
+                      <object class="GtkButton" id="read_flash">
                         <property name="label" translatable="yes">Read</property>
                         <property name="width_request">150</property>
                         <property name="height_request">36</property>
@@ -840,7 +839,7 @@ Author: Varelas Panagiotis
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="verify_hex">
+                      <object class="GtkButton" id="verify_flash">
                         <property name="label" translatable="yes">Verify</property>
                         <property name="width_request">150</property>
                         <property name="height_request">36</property>
@@ -856,7 +855,7 @@ Author: Varelas Panagiotis
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="write_hex">
+                      <object class="GtkButton" id="write_flash">
                         <property name="label" translatable="yes">Write</property>
                         <property name="width_request">150</property>
                         <property name="height_request">36</property>
@@ -925,7 +924,7 @@ Author: Varelas Panagiotis
                     <property name="can_focus">False</property>
                     <property name="margin_bottom">5</property>
                     <child>
-                      <object class="GtkEntry" id="path_hex1">
+                      <object class="GtkEntry" id="eeprom_file">
                         <property name="height_request">36</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -938,7 +937,7 @@ Author: Varelas Panagiotis
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="open_hex1">
+                      <object class="GtkButton" id="open_eeprom">
                         <property name="label" translatable="yes">...</property>
                         <property name="width_request">64</property>
                         <property name="height_request">36</property>
@@ -965,7 +964,7 @@ Author: Varelas Panagiotis
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkButton" id="read_hex1">
+                      <object class="GtkButton" id="read_erom">
                         <property name="label" translatable="yes">Read</property>
                         <property name="width_request">150</property>
                         <property name="height_request">36</property>
@@ -981,7 +980,7 @@ Author: Varelas Panagiotis
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkButton" id="write_hex1">
+                      <object class="GtkButton" id="write_erom">
                         <property name="label" translatable="yes">Write</property>
                         <property name="width_request">150</property>
                         <property name="height_request">36</property>

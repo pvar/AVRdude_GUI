@@ -36,6 +36,10 @@ gtkGUI::gtkGUI()
                 return;
         }
 
+        Gtk::Button *btn_firm_read, *btn_firm_write, *btn_firm_verify;
+        Gtk::Button *btn_erom_read, *btn_erom_write;
+        Gtk::Button *btn_open_eeprom, *btn_open_flash;
+
         // use builder to instantiate GTK widgets
         builder->get_widget("dude_auto_erase", auto_erase);
         builder->get_widget("dude_auto_verify", auto_verify);
@@ -59,6 +63,15 @@ gtkGUI::gtkGUI()
         builder->get_widget("fw_flash_box", box_flash_ops);
         builder->get_widget("fw_eeprom_box", box_eeprom_ops);
         builder->get_widget("avrdude_output", tv_dude_output);
+        builder->get_widget("open_eeprom", btn_open_eeprom);
+        builder->get_widget("open_flash", btn_open_flash);
+        builder->get_widget("read_erom", btn_erom_read);
+        builder->get_widget("write_erom", btn_erom_write);
+        builder->get_widget("read_flash", btn_firm_read);
+        builder->get_widget("write_flash", btn_firm_write);
+        builder->get_widget("verify_flash", btn_firm_verify);
+        builder->get_widget("eeprom_file", ent_eeprom_file);
+        builder->get_widget("flash_file", ent_flash_file);
 
         /* create empty text buffer and assign to text view */
         dude_output_buffer = Gtk::TextBuffer::create();
@@ -78,8 +91,6 @@ gtkGUI::gtkGUI()
         /* add style-class to textview displaying execution output */
         Glib::RefPtr<Gtk::StyleContext> context = tv_dude_output->get_style_context();
         context->add_class("console");
-
-
 
         /* create the tree-models */
         tm_family = Gtk::ListStore::create(cbm_generic);
@@ -101,6 +112,11 @@ gtkGUI::gtkGUI()
         populate_static_treemodels();
 
         // connect signal handlers
+        btn_open_flash->signal_clicked().connect( sigc::bind<browser_type>( sigc::mem_fun(*this, &gtkGUI::select_file), f_open) );
+        btn_open_eeprom->signal_clicked().connect( sigc::bind<browser_type>( sigc::mem_fun(*this, &gtkGUI::select_file), e_open) );
+        btn_erom_write->signal_clicked().connect( sigc::bind<browser_type>( sigc::mem_fun(*this, &gtkGUI::select_file), e_save) );
+        btn_firm_write->signal_clicked().connect( sigc::bind<browser_type>( sigc::mem_fun(*this, &gtkGUI::select_file), f_save) );
+
         btn_check_sig->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::check_sig));
         btn_erase_dev->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::erase_dev));
         cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
@@ -666,4 +682,81 @@ void gtkGUI::display_fuse_bytes ()
         converter_stream << fusebytes[2];
         fuse_parameters += converter_stream.str();
         lbl_fusebytes->set_label(fuse_parameters);
+}
+
+void gtkGUI::select_file(browser_type action)
+{
+        Gtk::FileChooserDialog *browser;
+
+        /* initialize file-chooser dialog */
+        if ((action == f_open) || (action == e_open))
+                browser = new Gtk::FileChooserDialog("Choose file to from", Gtk::FILE_CHOOSER_ACTION_OPEN);
+        else
+                browser = new Gtk::FileChooserDialog("Choose or create file to write to", Gtk::FILE_CHOOSER_ACTION_SAVE);
+
+        /* prepare file browser popup */
+        browser->set_transient_for(*main_window);
+        Gtk::Box* fb_box = browser->get_vbox();
+        fb_box->set_margin_left (8);
+        fb_box->set_margin_right (8);
+        fb_box->set_margin_top (8);
+        fb_box->set_margin_bottom (8);
+
+        /* add filters for certain file types */
+        Glib::RefPtr<Gtk::FileFilter> filter_all = Gtk::FileFilter::create();
+        filter_all->set_name("All files");
+        filter_all->add_pattern("*");
+        browser->add_filter(filter_all);
+        Glib::RefPtr<Gtk::FileFilter> filter_hex = Gtk::FileFilter::create();
+        filter_hex->set_name("*.hex files");
+        filter_hex->add_pattern("*.hex");
+        browser->add_filter(filter_hex);
+        Glib::RefPtr<Gtk::FileFilter> filter_bin = Gtk::FileFilter::create();
+        filter_bin->set_name("*.bin files");
+        filter_bin->add_pattern("*.bin");
+        browser->add_filter(filter_bin);
+        Glib::RefPtr<Gtk::FileFilter> filter_elf = Gtk::FileFilter::create();
+        filter_elf->set_name("*.elf files");
+        filter_elf->add_pattern("*.elf");
+        browser->add_filter(filter_elf);
+        Glib::RefPtr<Gtk::FileFilter> filter_obj = Gtk::FileFilter::create();
+        filter_obj->set_name("*.o files");
+        filter_obj->add_pattern("*.o");
+        browser->add_filter(filter_obj);
+        Glib::RefPtr<Gtk::FileFilter> filter_txt = Gtk::FileFilter::create();
+        filter_txt->set_name("*.txt files");
+        filter_txt->add_pattern("*.txt");
+        browser->add_filter(filter_txt);
+
+        /* add buttons and responses */
+        browser->add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+        browser->add_button("Select", Gtk::RESPONSE_OK);
+
+        /* open browser and close when a response is received */
+        int result = browser->run();
+        browser->close();
+
+        /* check received signal */
+        switch(result) {
+                /* get filename and put it in relevant entry */
+                case(Gtk::RESPONSE_OK): {
+                        //std::cout << "RESPONSE OK" << std::endl;
+                        std::string filename = browser->get_filename();
+                        if (action == f_open)
+                                ent_flash_file->set_text(filename);
+                        else if (action == e_open)
+                                ent_eeprom_file->set_text(filename);
+                        break;
+                }
+                /* do nothing... */
+                case(Gtk::RESPONSE_CANCEL): {
+                        //std::cout << "RESPONSE CANCEL" << std::endl;
+                        break;
+                }
+                /* do nothing... */
+                default: {
+                        //std::cout << "NO RESPONSE" << std::endl;
+                        break;
+                }
+        }
 }
