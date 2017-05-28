@@ -6,7 +6,7 @@
 
 using namespace std;
 
-enum memory_type { flash, eeprom, fuse };
+//enum memory_type { flash, eeprom, fuse };
 enum error_codes {
                         no_error,
                         invalid_signature,
@@ -60,8 +60,10 @@ class Dude
                             Glib::ustring microcontroller);
                 void device_erase (void);
                 void get_signature (void);
-                Glib::ustring device_write (Glib::ustring file, gint target);
-                Glib::ustring device_read (Glib::ustring file, gint source);
+                void eeprom_write (Glib::ustring file);
+                void eeprom_read (Glib::ustring file);
+                void flash_write (Glib::ustring file);
+                void flash_read (Glib::ustring file);
 
         protected:
                 Glib::ustring protocol;

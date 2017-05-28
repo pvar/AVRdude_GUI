@@ -53,7 +53,7 @@ void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_chec
                 options.append("-V ");
         /* disable safemode prompting */
         options.append("-s ");
-        /* disable progress-bars */
+        /* disable progress-bars and all unecessary messages */
         options.append("-q ");
 
         //cout << "protocol: " << protocol << endl;
@@ -63,9 +63,8 @@ void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_chec
 
 void Dude::get_signature (void)
 {
-        Glib::ustring command, tmp_string;
-
         /* prepare command to be executed */
+        Glib::ustring command, tmp_string;
         command.append("avrdude");
         command.append(device);
         command.append(protocol);
@@ -88,14 +87,13 @@ void Dude::get_signature (void)
 
 void Dude::device_erase (void)
 {
-        Glib::ustring command;
-
         /* prepare command to be executed */
+        Glib::ustring command;
         command.append("avrdude");
         command.append(device);
         command.append(protocol);
         command.append(options);
-        /* parameter for executing a chip erase */
+        /* parameter for executing chip erase */
         command.append("-e ");
         /* extra parameters for this operation (disable fuse checking) */
         command.append("-u ");
@@ -124,6 +122,70 @@ void Dude::execute (Glib::ustring command)
         }
         /* add executed command at the beginning of output string */
         raw_exec_output = "> " + command + "\n" + raw_exec_output;
+}
+
+void Dude::eeprom_write (Glib::ustring file)
+{
+        cout << "eeprom write!" << endl;
+        /* prepare command to be executed */
+        Glib::ustring command;
+        command.append("avrdude");
+        command.append(device);
+        command.append(protocol);
+        command.append(options);
+        /* parameter for copying file to eeprom */
+        command.append("-U eeprom:w:" + file + ":a");
+        /* execute command */
+cout << command << endl;
+        execute (command);
+}
+
+void Dude::eeprom_read (Glib::ustring file)
+{
+        cout << "eeprom read!" << endl;
+        /* prepare command to be executed */
+        Glib::ustring command;
+        command.append("avrdude");
+        command.append(device);
+        command.append(protocol);
+        command.append(options);
+        /* parameter for copying eeprom to file */
+        command.append("-U eeprom:r:" + file + ":h");
+        /* execute command */
+cout << command << endl;
+        execute (command);
+}
+
+void Dude::flash_write (Glib::ustring file)
+{
+        cout << "flash write!" << endl;
+        /* prepare command to be executed */
+        Glib::ustring command;
+        command.append("avrdude");
+        command.append(device);
+        command.append(protocol);
+        command.append(options);
+        /* parameter for copying file to flash */
+        command.append("-U flash:w:" + file + ":a");
+        /* execute command */
+cout << command << endl;
+        execute (command);
+}
+
+void Dude::flash_read (Glib::ustring file)
+{
+        cout << "flash read!" << endl;
+        /* prepare command to be executed */
+        Glib::ustring command;
+        command.append("avrdude");
+        command.append(device);
+        command.append(protocol);
+        command.append(options);
+        /* parameter for copying flash to file */
+        command.append("-U flash:r:" + file + ":r");
+        /* execute command */
+cout << command << endl;
+        execute (command);
 }
 
 void Dude::check_for_errors (void)

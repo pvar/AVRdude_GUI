@@ -112,11 +112,13 @@ gtkGUI::gtkGUI()
         populate_static_treemodels();
 
         // connect signal handlers
-        btn_open_flash->signal_clicked().connect( sigc::bind<browser_type>( sigc::mem_fun(*this, &gtkGUI::select_file), f_open) );
-        btn_open_eeprom->signal_clicked().connect( sigc::bind<browser_type>( sigc::mem_fun(*this, &gtkGUI::select_file), e_open) );
-        btn_erom_write->signal_clicked().connect( sigc::bind<browser_type>( sigc::mem_fun(*this, &gtkGUI::select_file), e_save) );
-        btn_firm_write->signal_clicked().connect( sigc::bind<browser_type>( sigc::mem_fun(*this, &gtkGUI::select_file), f_save) );
-
+        btn_open_flash->signal_clicked().connect( sigc::bind<file_op>( sigc::mem_fun(*this, &gtkGUI::select_file), open_f) );
+        btn_open_eeprom->signal_clicked().connect( sigc::bind<file_op>( sigc::mem_fun(*this, &gtkGUI::select_file), open_e) );
+        btn_erom_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::eeprom_read));
+        btn_erom_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::eeprom_write));
+        btn_firm_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_read));
+        btn_firm_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_write));
+        btn_firm_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_verify));
         btn_check_sig->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::check_sig));
         btn_erase_dev->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::erase_dev));
         cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
@@ -444,17 +446,15 @@ void gtkGUI::cb_dude_settings (void)
 void gtkGUI::check_sig (void)
 {
         /* read signature from device */
-        avrdude->get_signature();
-        /* display execution output */
-        dude_output_buffer->set_text(avrdude->raw_exec_output);
+        execution_chores (sig_check, "");
+
         /* get actuall signature from processed output */
         Glib::ustring actual_signature = avrdude->processed_output;
         /* get expected signature from specifications */
         Glib::ustring selected_signature = specifications->signature.substr(2,7);
-
+        /* check for signature match */
         //cout << "actuall signature: " << actual_signature << endl;
         //cout << "expected signature: " << selected_signature << endl;
-
         if (actual_signature == selected_signature) {
                 //cout << "we have a match!" << endl;
                 lbl_sig_tst->set_label("Matching device detected :)");
@@ -467,9 +467,9 @@ void gtkGUI::check_sig (void)
 void gtkGUI::erase_dev (void)
 {
         /* execute chip-erase */
-        avrdude->device_erase();
-        /* display execution output */
-        dude_output_buffer->set_text(avrdude->raw_exec_output);
+        execution_chores (dev_erase, "");
+
+
 }
 
 void gtkGUI::display_specs (gboolean have_specs)
@@ -684,13 +684,14 @@ void gtkGUI::display_fuse_bytes ()
         lbl_fusebytes->set_label(fuse_parameters);
 }
 
-void gtkGUI::select_file(browser_type action)
+void gtkGUI::select_file(file_op action)
 {
-        Gtk::FileChooserDialog *browser;
+        if (browser != nullptr)
+                delete browser;
 
         /* initialize file-chooser dialog */
-        if ((action == f_open) || (action == e_open))
-                browser = new Gtk::FileChooserDialog("Choose file to from", Gtk::FILE_CHOOSER_ACTION_OPEN);
+        if ((action == open_f) || (action == open_e))
+                browser = new Gtk::FileChooserDialog("Choose firmware file to read from", Gtk::FILE_CHOOSER_ACTION_OPEN);
         else
                 browser = new Gtk::FileChooserDialog("Choose or create file to write to", Gtk::FILE_CHOOSER_ACTION_SAVE);
 
@@ -740,23 +741,130 @@ void gtkGUI::select_file(browser_type action)
         switch(result) {
                 /* get filename and put it in relevant entry */
                 case(Gtk::RESPONSE_OK): {
-                        //std::cout << "RESPONSE OK" << std::endl;
-                        std::string filename = browser->get_filename();
-                        if (action == f_open)
+                        //cout << "RESPONSE OK" << endl;
+                        string filename = browser->get_filename();
+                        if (action == open_f)
                                 ent_flash_file->set_text(filename);
-                        else if (action == e_open)
+                        else if (action == open_e)
                                 ent_eeprom_file->set_text(filename);
                         break;
                 }
                 /* do nothing... */
                 case(Gtk::RESPONSE_CANCEL): {
-                        //std::cout << "RESPONSE CANCEL" << std::endl;
+                        //cout << "RESPONSE CANCEL" << endl;
                         break;
                 }
                 /* do nothing... */
                 default: {
-                        //std::cout << "NO RESPONSE" << std::endl;
+                        //cout << "NO RESPONSE" << endl;
                         break;
                 }
         }
+}
+
+void gtkGUI::eeprom_read(void)
+{
+        /* select or create file to save to */
+        select_file(save_e);
+        /* get file from file-chooser */
+        string filename = browser->get_filename();
+        /* warn and exit if no file specified */
+        if (filename.empty() == true)
+                return;
+        /* read eeprom memory */
+        execution_chores (eeprom_r, filename);
+
+
+}
+
+void gtkGUI::eeprom_write(void)
+{
+        /* get file from relevant entry */
+        Glib::ustring filename = ent_eeprom_file->get_text();
+        /* warn and exit if no file specified */
+        if (filename.empty() == true) {
+
+                return;
+        }
+        /* write eeprom memory */
+        execution_chores (eeprom_w, filename);
+
+}
+
+void gtkGUI::flash_read(void)
+{
+        /* select or create file to save to */
+        select_file(save_f);
+        /* get file from file-chooser */
+        string filename = browser->get_filename();
+        /* exit if no file specified */
+        if (filename.empty() == true)
+                return;
+        /* read flash memory */
+        execution_chores (flash_r, filename);
+
+}
+
+void gtkGUI::flash_write(void)
+{
+        /* get file from relevant entry */
+        Glib::ustring filename = ent_flash_file->get_text();
+        /* warn and exit if no file specified */
+        if (filename.empty() == true) {
+
+                return;
+        }
+        /* write flash memory */
+        execution_chores (flash_w, filename);
+
+}
+
+void gtkGUI::flash_verify(void)
+{
+}
+
+gint gtkGUI::execution_chores (op_code task, Glib::ustring data)
+{
+        /* execute corresponding command */
+        switch(task) {
+                case (sig_check): {
+                        avrdude->get_signature();
+                        break;
+                }
+                case (dev_erase): {
+                        avrdude->device_erase();
+                        break;
+                }
+                case (eeprom_w): {
+                        avrdude->eeprom_write(data);
+                        break;
+                }
+                case (eeprom_r): {
+                        avrdude->eeprom_read(data);
+                        break;
+                }
+                case (flash_w): {
+                        avrdude->flash_write(data);
+                        break;
+                }
+                case (flash_r): {
+                        avrdude->flash_read(data);
+                        break;
+                }
+                default: {
+                        break;
+                }
+        }
+
+        /* display execution output */
+        dude_output_buffer->set_text(avrdude->raw_exec_output);
+
+        /* check if done without errors */
+        if (avrdude->exec_error == no_error)
+                return 0;
+
+        /* display error message */
+
+
+        return -1;
 }

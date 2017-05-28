@@ -9,7 +9,8 @@
 
 using namespace std;
 
-enum browser_type { f_open, f_save, e_open, e_save };
+enum file_op { open_f, save_f, open_e, save_e };
+enum op_code { sig_check, dev_erase, eeprom_w, eeprom_r, flash_w, flash_r, fuse_w, fuse_r };
 
 class CBRecordModel : public Gtk::TreeModel::ColumnRecord
 {
@@ -106,6 +107,7 @@ class gtkGUI
                 Gtk::TextView *tv_dude_output  = nullptr;
                 Gtk::Entry *ent_flash_file     = nullptr;
                 Gtk::Entry *ent_eeprom_file    = nullptr;
+                Gtk::FileChooserDialog *browser= nullptr;
 
                 // signal handlers
                 void cb_new_device (void);
@@ -117,6 +119,12 @@ class gtkGUI
                 void calculate_fuses (void);
                 void check_sig (void);
                 void erase_dev (void);
+                void eeprom_read (void);
+                void eeprom_write (void);
+                void flash_read (void);
+                void flash_write (void);
+                void flash_verify (void);
+                void select_file (file_op action);
 
                 // utilities
                 void populate_static_treemodels (void);
@@ -126,7 +134,8 @@ class gtkGUI
                 void update_console_view (void);
                 void lock_and_clear (void);
                 void unlock_and_update (void);
-                void select_file(browser_type action);
+                gint execution_chores (op_code task, Glib::ustring data);
+                //void msg_popup (Glib::ustring title, Glib::ustring message);
 };
 
 #endif

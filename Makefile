@@ -20,9 +20,10 @@ OUTPUT = bin/avr_prog
 
 STANDARD = -std=c++11
 WARNINGS = -Wall
-TUNNING = -O0 -fshort-enums -pg
+TUNNING = -O0 -fshort-enums
+DEBUGING = -g -fno-omit-frame-pointer
 ERRORS = -Werror
-FLAGS = $(STANDARD) $(WARNINGS) $(ERRORS) $(TUNNING)
+FLAGS = $(STANDARD) $(WARNINGS) $(ERRORS) $(TUNNING) $(DEBUGING)
 
 LIBGTK=`pkg-config --cflags --libs gtkmm-3.0`
 LIBXML=`pkg-config --cflags --libs libxml++-2.6`
@@ -43,4 +44,4 @@ clean:
 ### ---------------------------------------------------------------------------
 
 %.o: %.cpp
-	 $(CC) $(FLAGS) -c -g -o $@ $^ $(LIBS)
+	 $(CC) $(FLAGS) -c -o $@ $^ $(LIBS)
