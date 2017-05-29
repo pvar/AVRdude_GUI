@@ -89,10 +89,15 @@ class gtkGUI
                 Gtk::ComboBox *cb_family       = nullptr;
                 Gtk::ComboBox *cb_device       = nullptr;
                 Gtk::ComboBox *cb_protocol     = nullptr;
+                Gtk::Grid *fuse_grid           = nullptr;
+                Gtk::Box *box_flash_ops        = nullptr;
+                Gtk::Box *box_eeprom_ops       = nullptr;
+
                 Gtk::Button *btn_fuse_read     = nullptr;
                 Gtk::Button *btn_fuse_write    = nullptr;
                 Gtk::Button *btn_check_sig     = nullptr;
                 Gtk::Button *btn_erase_dev     = nullptr;
+
                 Gtk::Label *lbl_sig_tst        = nullptr;
                 Gtk::Label *lbl_spec_flash     = nullptr;
                 Gtk::Label *lbl_spec_sram      = nullptr;
@@ -101,10 +106,6 @@ class gtkGUI
                 Gtk::Label *lbl_signature      = nullptr;
                 Gtk::Label *lbl_fusebytes      = nullptr;
                 Gtk::Label *lbl_dude_output    = nullptr;
-                Gtk::Grid *fuse_grid           = nullptr;
-                Gtk::Box *box_flash_ops        = nullptr;
-                Gtk::Box *box_eeprom_ops       = nullptr;
-                Gtk::TextView *tv_dude_output  = nullptr;
                 Gtk::Entry *ent_flash_file     = nullptr;
                 Gtk::Entry *ent_eeprom_file    = nullptr;
                 Gtk::FileChooserDialog *browser= nullptr;
@@ -125,6 +126,8 @@ class gtkGUI
                 void flash_read (void);
                 void flash_write (void);
                 void flash_verify (void);
+                void fuse_write (void);
+                void fuse_read (void);
                 void select_file (file_op action);
 
                 // utilities

@@ -66,8 +66,11 @@ class Dude
                 void flash_write (Glib::ustring file);
                 void flash_read (Glib::ustring file);
                 void flash_verify (Glib::ustring file);
+                void fuse_write (Glib::ustring data);
+                void fuse_read (void);
 
         protected:
+                Glib::ustring oneliner;
                 Glib::ustring protocol;
                 Glib::ustring options;
                 Glib::ustring device;

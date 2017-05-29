@@ -16,6 +16,7 @@ void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_chec
         device.clear();
         protocol.clear();
         options.clear();
+        oneliner.clear();
 
         /* set device parameter */
         device.append(" -p ");
@@ -56,6 +57,12 @@ void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_chec
         /* disable progress-bars and all unecessary messages */
         options.append("-q ");
 
+        /* prepare initial part of command to be exetuded */
+        oneliner.append("avrdude");
+        oneliner.append(device);
+        oneliner.append(protocol);
+        oneliner.append(options);
+
         //cout << "protocol: " << protocol << endl;
         //cout << "device: " << device << endl;
         //cout << "options: " << options<< endl;
@@ -65,12 +72,8 @@ void Dude::get_signature (void)
 {
         /* prepare command to be executed */
         Glib::ustring command, tmp_string;
-        command.append("avrdude");
-        command.append(device);
-        command.append(protocol);
-        command.append(options);
-        /* extra parameters for this operation (disable signature and fuse checks) */
-        command.append("-F -u ");
+        command.append(oneliner);
+        command.append("-F -u "); // disable signature and fuse checks
         /* execute command */
         execute (command);
         /* check output for errors */
@@ -89,14 +92,9 @@ void Dude::device_erase (void)
 {
         /* prepare command to be executed */
         Glib::ustring command;
-        command.append("avrdude");
-        command.append(device);
-        command.append(protocol);
-        command.append(options);
-        /* parameter for executing chip erase */
-        command.append("-e ");
-        /* extra parameters for this operation (disable fuse checking) */
-        command.append("-u ");
+        command.append(oneliner);
+        command.append("-e "); // chip erase
+        command.append("-u "); // disable fuse checking
         /* execute command */
         execute (command);
         /* check output for errors */
@@ -129,12 +127,8 @@ void Dude::eeprom_write (Glib::ustring file)
         cout << "eeprom write!" << endl;
         /* prepare command to be executed */
         Glib::ustring command;
-        command.append("avrdude");
-        command.append(device);
-        command.append(protocol);
-        command.append(options);
-        /* parameter for copying file to eeprom */
-        command.append("-U eeprom:w:\"" + file + "\":a");
+        command.append(oneliner);
+        command.append("-U eeprom:w:\"" + file + "\":a"); // write file to eeprom
         /* execute command */
 cout << command << endl;
         execute (command);
@@ -145,12 +139,8 @@ void Dude::eeprom_read (Glib::ustring file)
         cout << "eeprom read!" << endl;
         /* prepare command to be executed */
         Glib::ustring command;
-        command.append("avrdude");
-        command.append(device);
-        command.append(protocol);
-        command.append(options);
-        /* parameter for copying eeprom to file */
-        command.append("-U eeprom:r:\"" + file + "\":h");
+        command.append(oneliner);
+        command.append("-U eeprom:r:\"" + file + "\":h"); // copy eeprom to file
         /* execute command */
 cout << command << endl;
         execute (command);
@@ -161,12 +151,8 @@ void Dude::eeprom_verify (Glib::ustring file)
         cout << "eeprom verify!" << endl;
         /* prepare command to be executed */
         Glib::ustring command;
-        command.append("avrdude");
-        command.append(device);
-        command.append(protocol);
-        command.append(options);
-        /* parameter for copying flash to file */
-        command.append("-U eeprom:v:\"" + file + "\":a");
+        command.append(oneliner);
+        command.append("-U eeprom:v:\"" + file + "\":a"); // verify eeprom against file
         /* execute command */
 cout << command << endl;
         execute (command);
@@ -177,12 +163,8 @@ void Dude::flash_write (Glib::ustring file)
         cout << "flash write!" << endl;
         /* prepare command to be executed */
         Glib::ustring command;
-        command.append("avrdude");
-        command.append(device);
-        command.append(protocol);
-        command.append(options);
-        /* parameter for copying file to flash */
-        command.append("-U flash:w:\"" + file + "\":a");
+        command.append(oneliner);
+        command.append("-U flash:w:\"" + file + "\":a"); // write file to flash
         /* execute command */
 cout << command << endl;
         execute (command);
@@ -193,12 +175,8 @@ void Dude::flash_read (Glib::ustring file)
         cout << "flash read!" << endl;
         /* prepare command to be executed */
         Glib::ustring command;
-        command.append("avrdude");
-        command.append(device);
-        command.append(protocol);
-        command.append(options);
-        /* parameter for copying flash to file */
-        command.append("-U flash:r:\"" + file + "\":r");
+        command.append(oneliner);
+        command.append("-U flash:r:\"" + file + "\":r"); // copy flash to file
         /* execute command */
 cout << command << endl;
         execute (command);
@@ -209,12 +187,36 @@ void Dude::flash_verify (Glib::ustring file)
         cout << "flash verify!" << endl;
         /* prepare command to be executed */
         Glib::ustring command;
-        command.append("avrdude");
-        command.append(device);
-        command.append(protocol);
-        command.append(options);
-        /* parameter for copying flash to file */
-        command.append("-U flash:v:\"" + file + "\":a");
+        command.append(oneliner);
+        command.append("-U flash:v:\"" + file + "\":a"); // verify flash against file
+        /* execute command */
+cout << command << endl;
+        execute (command);
+}
+
+void Dude::fuse_write (Glib::ustring data)
+{
+        cout << "fuse write!" << endl;
+        /* get number of fuse bytes */
+
+        /* prepare command to be executed */
+        Glib::ustring command;
+        command.append(oneliner);
+        command.append("-U lfuse:w:value:m -U hfuse:w:value:m -U efuse:w:value:m"); // write fuse bytes
+        /* execute command */
+cout << command << endl;
+        execute (command);
+}
+
+void Dude::fuse_read (void)
+{
+        cout << "fuse read!" << endl;
+        /* get number of fuse bytes */
+
+        /* prepare command to be executed */
+        Glib::ustring command;
+        command.append(oneliner);
+        command.append("-U lfuse:r:-:d -U hfuse:r:-:d -U efuse:r:-:d -q"); // read fuse bytes
         /* execute command */
 cout << command << endl;
         execute (command);

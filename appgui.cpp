@@ -39,6 +39,7 @@ gtkGUI::gtkGUI()
         Gtk::Button *btn_firm_read, *btn_firm_write, *btn_firm_verify;
         Gtk::Button *btn_erom_read, *btn_erom_write, *btn_erom_verify;
         Gtk::Button *btn_open_eeprom, *btn_open_flash;
+        Gtk::TextView *tv_dude_output;
 
         // use builder to instantiate GTK widgets
         builder->get_widget("dude_auto_erase", auto_erase);
@@ -58,8 +59,6 @@ gtkGUI::gtkGUI()
         builder->get_widget("dev_signature", lbl_signature);
         builder->get_widget("fuse_parameters", lbl_fusebytes);
         builder->get_widget("fuse_settings_grid", fuse_grid);
-        builder->get_widget("write_fuses", btn_fuse_read);
-        builder->get_widget("read_fuses", btn_fuse_write);
         builder->get_widget("fw_flash_box", box_flash_ops);
         builder->get_widget("fw_eeprom_box", box_eeprom_ops);
         builder->get_widget("avrdude_output", tv_dude_output);
@@ -73,6 +72,8 @@ gtkGUI::gtkGUI()
         builder->get_widget("verify_flash", btn_firm_verify);
         builder->get_widget("eeprom_file", ent_eeprom_file);
         builder->get_widget("flash_file", ent_flash_file);
+        builder->get_widget("write_fuses", btn_fuse_write);
+        builder->get_widget("read_fuses", btn_fuse_read);
 
         /* create empty text buffer and assign to text view */
         dude_output_buffer = Gtk::TextBuffer::create();
@@ -121,6 +122,8 @@ gtkGUI::gtkGUI()
         btn_firm_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_read));
         btn_firm_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_write));
         btn_firm_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_verify));
+        btn_fuse_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::fuse_write));
+        btn_fuse_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::fuse_read));
         btn_check_sig->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::check_sig));
         btn_erase_dev->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::erase_dev));
         cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
@@ -849,18 +852,37 @@ void gtkGUI::flash_verify(void)
 
 }
 
+void gtkGUI::fuse_write(void)
+{
+        Glib::ustring data = "0x00 0x00 0x00";
+        /* get number of fuse bytes available */
+
+
+        /* write fuse bytes */
+        execution_chores (fuse_w, data);
+}
+
+void gtkGUI::fuse_read(void)
+{
+        /* get number of fuse bytes available */
+
+        /* read fuse bytes */
+        execution_chores (fuse_r, "");
+
+        /* process values and apply fuse-widgets */
+
+}
+
 gint gtkGUI::execution_chores (op_code task, Glib::ustring data)
 {
         /* execute corresponding command */
         switch(task) {
-                case (sig_check): {
+                case (sig_check):
                         avrdude->get_signature();
                         break;
-                }
-                case (dev_erase): {
+                case (dev_erase):
                         avrdude->device_erase();
                         break;
-                }
                 case (eeprom_w): {
                         avrdude->eeprom_write(data);
                         break;
@@ -883,6 +905,14 @@ gint gtkGUI::execution_chores (op_code task, Glib::ustring data)
                 }
                 case (flash_v): {
                         avrdude->flash_verify(data);
+                        break;
+                }
+                case (fuse_r): {
+                        avrdude->fuse_read();
+                        break;
+                }
+                case (fuse_w): {
+                        avrdude->fuse_write(data);
                         break;
                 }
                 default: {
