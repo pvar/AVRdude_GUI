@@ -62,8 +62,10 @@ class Dude
                 void get_signature (void);
                 void eeprom_write (Glib::ustring file);
                 void eeprom_read (Glib::ustring file);
+                void eeprom_verify (Glib::ustring file);
                 void flash_write (Glib::ustring file);
                 void flash_read (Glib::ustring file);
+                void flash_verify (Glib::ustring file);
 
         protected:
                 Glib::ustring protocol;

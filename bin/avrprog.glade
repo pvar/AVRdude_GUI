@@ -996,15 +996,15 @@ Author: Varelas Panagiotis
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkAlignment">
+                      <object class="GtkButton" id="verify_eeprom">
+                        <property name="label" translatable="yes">Verify</property>
                         <property name="width_request">150</property>
+                        <property name="height_request">36</property>
                         <property name="visible">True</property>
-                        <property name="can_focus">False</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
                         <property name="halign">end</property>
                         <property name="hexpand">True</property>
-                        <child>
-                          <placeholder/>
-                        </child>
                       </object>
                       <packing>
                         <property name="left_attach">2</property>

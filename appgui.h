@@ -10,7 +10,7 @@
 using namespace std;
 
 enum file_op { open_f, save_f, open_e, save_e };
-enum op_code { sig_check, dev_erase, eeprom_w, eeprom_r, flash_w, flash_r, fuse_w, fuse_r };
+enum op_code { sig_check, dev_erase, eeprom_w, eeprom_r, eeprom_v, flash_w, flash_r, flash_v, fuse_w, fuse_r };
 
 class CBRecordModel : public Gtk::TreeModel::ColumnRecord
 {
@@ -121,6 +121,7 @@ class gtkGUI
                 void erase_dev (void);
                 void eeprom_read (void);
                 void eeprom_write (void);
+                void eeprom_verify (void);
                 void flash_read (void);
                 void flash_write (void);
                 void flash_verify (void);

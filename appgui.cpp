@@ -37,7 +37,7 @@ gtkGUI::gtkGUI()
         }
 
         Gtk::Button *btn_firm_read, *btn_firm_write, *btn_firm_verify;
-        Gtk::Button *btn_erom_read, *btn_erom_write;
+        Gtk::Button *btn_erom_read, *btn_erom_write, *btn_erom_verify;
         Gtk::Button *btn_open_eeprom, *btn_open_flash;
 
         // use builder to instantiate GTK widgets
@@ -67,6 +67,7 @@ gtkGUI::gtkGUI()
         builder->get_widget("open_flash", btn_open_flash);
         builder->get_widget("read_erom", btn_erom_read);
         builder->get_widget("write_erom", btn_erom_write);
+        builder->get_widget("verify_eeprom", btn_erom_verify);
         builder->get_widget("read_flash", btn_firm_read);
         builder->get_widget("write_flash", btn_firm_write);
         builder->get_widget("verify_flash", btn_firm_verify);
@@ -116,6 +117,7 @@ gtkGUI::gtkGUI()
         btn_open_eeprom->signal_clicked().connect( sigc::bind<file_op>( sigc::mem_fun(*this, &gtkGUI::select_file), open_e) );
         btn_erom_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::eeprom_read));
         btn_erom_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::eeprom_write));
+        btn_erom_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::eeprom_verify));
         btn_firm_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_read));
         btn_firm_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_write));
         btn_firm_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_verify));
@@ -737,7 +739,7 @@ void gtkGUI::select_file(file_op action)
         int result = browser->run();
         browser->close();
 
-        /* check received signal */
+        /* check signal from file-chooser */
         switch(result) {
                 /* get filename and put it in relevant entry */
                 case(Gtk::RESPONSE_OK): {
@@ -791,6 +793,20 @@ void gtkGUI::eeprom_write(void)
 
 }
 
+void gtkGUI::eeprom_verify(void)
+{
+        /* get file from relevant entry */
+        Glib::ustring filename = ent_eeprom_file->get_text();
+        /* warn and exit if no file specified */
+        if (filename.empty() == true) {
+
+                return;
+        }
+        /* verify flash memory */
+        execution_chores (eeprom_v, filename);
+
+}
+
 void gtkGUI::flash_read(void)
 {
         /* select or create file to save to */
@@ -821,6 +837,16 @@ void gtkGUI::flash_write(void)
 
 void gtkGUI::flash_verify(void)
 {
+        /* get file from relevant entry */
+        Glib::ustring filename = ent_flash_file->get_text();
+        /* warn and exit if no file specified */
+        if (filename.empty() == true) {
+
+                return;
+        }
+        /* verify flash memory */
+        execution_chores (flash_v, filename);
+
 }
 
 gint gtkGUI::execution_chores (op_code task, Glib::ustring data)
@@ -843,12 +869,20 @@ gint gtkGUI::execution_chores (op_code task, Glib::ustring data)
                         avrdude->eeprom_read(data);
                         break;
                 }
+                case (eeprom_v): {
+                        avrdude->eeprom_verify(data);
+                        break;
+                }
                 case (flash_w): {
                         avrdude->flash_write(data);
                         break;
                 }
                 case (flash_r): {
                         avrdude->flash_read(data);
+                        break;
+                }
+                case (flash_v): {
+                        avrdude->flash_verify(data);
                         break;
                 }
                 default: {

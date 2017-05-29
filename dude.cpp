@@ -134,7 +134,7 @@ void Dude::eeprom_write (Glib::ustring file)
         command.append(protocol);
         command.append(options);
         /* parameter for copying file to eeprom */
-        command.append("-U eeprom:w:" + file + ":a");
+        command.append("-U eeprom:w:\"" + file + "\":a");
         /* execute command */
 cout << command << endl;
         execute (command);
@@ -150,7 +150,23 @@ void Dude::eeprom_read (Glib::ustring file)
         command.append(protocol);
         command.append(options);
         /* parameter for copying eeprom to file */
-        command.append("-U eeprom:r:" + file + ":h");
+        command.append("-U eeprom:r:\"" + file + "\":h");
+        /* execute command */
+cout << command << endl;
+        execute (command);
+}
+
+void Dude::eeprom_verify (Glib::ustring file)
+{
+        cout << "eeprom verify!" << endl;
+        /* prepare command to be executed */
+        Glib::ustring command;
+        command.append("avrdude");
+        command.append(device);
+        command.append(protocol);
+        command.append(options);
+        /* parameter for copying flash to file */
+        command.append("-U eeprom:v:\"" + file + "\":a");
         /* execute command */
 cout << command << endl;
         execute (command);
@@ -166,7 +182,7 @@ void Dude::flash_write (Glib::ustring file)
         command.append(protocol);
         command.append(options);
         /* parameter for copying file to flash */
-        command.append("-U flash:w:" + file + ":a");
+        command.append("-U flash:w:\"" + file + "\":a");
         /* execute command */
 cout << command << endl;
         execute (command);
@@ -182,7 +198,23 @@ void Dude::flash_read (Glib::ustring file)
         command.append(protocol);
         command.append(options);
         /* parameter for copying flash to file */
-        command.append("-U flash:r:" + file + ":r");
+        command.append("-U flash:r:\"" + file + "\":r");
+        /* execute command */
+cout << command << endl;
+        execute (command);
+}
+
+void Dude::flash_verify (Glib::ustring file)
+{
+        cout << "flash verify!" << endl;
+        /* prepare command to be executed */
+        Glib::ustring command;
+        command.append("avrdude");
+        command.append(device);
+        command.append(protocol);
+        command.append(options);
+        /* parameter for copying flash to file */
+        command.append("-U flash:v:\"" + file + "\":a");
         /* execute command */
 cout << command << endl;
         execute (command);
