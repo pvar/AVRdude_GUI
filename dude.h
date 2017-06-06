@@ -47,9 +47,13 @@ class Dude
                 Dude();
                 virtual ~Dude();
 
-                /* public data members */
+                /* fuse-byte values as read from the device */
+                guint dev_fusebytes[3] = {255, 255, 255};
+                /* console output from last command execution */
                 Glib::ustring raw_exec_output;
+                /* the most interesting part of outpout -- according to the nature of executed command and the outcome */
                 Glib::ustring processed_output;
+                /* the code of the error that occured during last execution */
                 error_codes exec_error;
 
                 /* public function members */
