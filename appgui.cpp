@@ -19,7 +19,11 @@ gtkGUI::gtkGUI()
         get_executable_path();
 
         microcontroller = new Micro(exec_path, "");
+
         avrdude = new Dude();
+
+        /* connect exec_done signal -- add a "listener" */
+        avrdude->signal_exec_done().connect(sigc::mem_fun(this, &gtkGUI::execution_done) );
 
         // create object builder
         Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create();
@@ -448,7 +452,7 @@ void gtkGUI::cb_dude_settings (void)
 void gtkGUI::check_sig (void)
 {
         /* read signature from device */
-        execution_chores (sig_check, "");
+        avrdude->get_signature();
 
         /* get actuall signature from processed output */
         Glib::ustring actual_signature = avrdude->processed_output;
@@ -469,8 +473,7 @@ void gtkGUI::check_sig (void)
 void gtkGUI::erase_dev (void)
 {
         /* execute chip-erase */
-        execution_chores (dev_erase, "");
-
+        avrdude->device_erase();
 
 }
 
@@ -781,8 +784,7 @@ void gtkGUI::eeprom_read(void)
         if (filename.empty() == true)
                 return;
         /* read eeprom memory */
-        execution_chores (eeprom_r, filename);
-
+        avrdude->eeprom_read(filename);
 
 }
 
@@ -796,7 +798,7 @@ void gtkGUI::eeprom_write(void)
                 return;
         }
         /* write eeprom memory */
-        execution_chores (eeprom_w, filename);
+        avrdude->eeprom_write(filename);
 
 }
 
@@ -810,7 +812,7 @@ void gtkGUI::eeprom_verify(void)
                 return;
         }
         /* verify flash memory */
-        execution_chores (eeprom_v, filename);
+        avrdude->eeprom_verify(filename);
 
 }
 
@@ -824,8 +826,7 @@ void gtkGUI::flash_read(void)
         if (filename.empty() == true)
                 return;
         /* read flash memory */
-        execution_chores (flash_r, filename);
-
+        avrdude->flash_read(filename);
 }
 
 void gtkGUI::flash_write(void)
@@ -838,8 +839,7 @@ void gtkGUI::flash_write(void)
                 return;
         }
         /* write flash memory */
-        execution_chores (flash_w, filename);
-
+        avrdude->flash_write(filename);
 }
 
 void gtkGUI::flash_verify(void)
@@ -852,8 +852,7 @@ void gtkGUI::flash_verify(void)
                 return;
         }
         /* verify flash memory */
-        execution_chores (flash_v, filename);
-
+        avrdude->flash_write(filename);
 }
 
 void gtkGUI::fuse_write(void)
@@ -863,7 +862,7 @@ void gtkGUI::fuse_write(void)
 
 
         /* write fuse bytes */
-        execution_chores (fuse_w, data);
+        avrdude->fuse_write(data);
 }
 
 void gtkGUI::fuse_read(void)
@@ -871,68 +870,21 @@ void gtkGUI::fuse_read(void)
         /* get number of fuse bytes available */
 
         /* read fuse bytes */
-        execution_chores (fuse_r, "");
+        avrdude->fuse_read();
 
         /* process values and apply fuse-widgets */
 
 }
 
-gint gtkGUI::execution_chores (op_code task, Glib::ustring data)
+void gtkGUI::execution_done ()
 {
-        /* execute corresponding command */
-        switch(task) {
-                case (sig_check):
-                        avrdude->get_signature();
-                        break;
-                case (dev_erase):
-                        avrdude->device_erase();
-                        break;
-                case (eeprom_w): {
-                        avrdude->eeprom_write(data);
-                        break;
-                }
-                case (eeprom_r): {
-                        avrdude->eeprom_read(data);
-                        break;
-                }
-                case (eeprom_v): {
-                        avrdude->eeprom_verify(data);
-                        break;
-                }
-                case (flash_w): {
-                        avrdude->flash_write(data);
-                        break;
-                }
-                case (flash_r): {
-                        avrdude->flash_read(data);
-                        break;
-                }
-                case (flash_v): {
-                        avrdude->flash_verify(data);
-                        break;
-                }
-                case (fuse_r): {
-                        avrdude->fuse_read();
-                        break;
-                }
-                case (fuse_w): {
-                        avrdude->fuse_write(data);
-                        break;
-                }
-                default: {
-                        break;
-                }
-        }
-
         /* display execution output */
         dude_output_buffer->set_text(avrdude->raw_exec_output);
 
-        /* check if done without errors */
-        if (avrdude->exec_error == no_error)
-                return 0;
+        /* check for error and display message */
+        if (avrdude->exec_error != no_error) {
+                cout << "some error has occured!" << endl;
+        }
 
-        /* display error message */
-
-
-        return -1;
+        /* proceed to post-execution processing... */
 }

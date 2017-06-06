@@ -1,6 +1,7 @@
 #ifndef PROGGUI_H
 #define PROGGUI_H
 
+#include <sigc++/sigc++.h>
 #include <gtkmm.h>
 #include <iostream>
 #include <iomanip>
@@ -128,7 +129,7 @@ class gtkGUI
                 void update_console_view (void);
                 void lock_and_clear (void);
                 void unlock_and_update (void);
-                gint execution_chores (op_code task, Glib::ustring data);
+                void execution_done (void);
                 //void msg_popup (Glib::ustring title, Glib::ustring message);
 };
 

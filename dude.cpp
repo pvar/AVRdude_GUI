@@ -8,6 +8,11 @@ Dude::~Dude()
 {
 }
 
+Dude::type_sig_exec_done Dude::signal_exec_done()
+{
+        return sig_exec_done;
+}
+
 void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_check, Glib::ustring programmer, Glib::ustring microcontroller )
 {
         exec_error = no_error;
@@ -120,6 +125,9 @@ void Dude::execute (Glib::ustring command)
         }
         /* add executed command at the beginning of output string */
         raw_exec_output = "> " + command + "\n" + raw_exec_output;
+
+        /* emit signal for execution completion  */
+        sig_exec_done.emit();
 }
 
 void Dude::eeprom_write (Glib::ustring file)

@@ -1,6 +1,7 @@
 #ifndef DUDE_H
 #define DUDE_H
 
+#include <sigc++/sigc++.h>
 #include <glibmm.h>
 #include <iostream>
 
@@ -73,7 +74,12 @@ class Dude
                 void fuse_write (Glib::ustring data);
                 void fuse_read (void);
 
+                typedef sigc::signal<void> type_sig_exec_done;
+                type_sig_exec_done signal_exec_done();
+
         protected:
+                type_sig_exec_done sig_exec_done;
+
                 Glib::ustring oneliner;
                 Glib::ustring protocol;
                 Glib::ustring options;
