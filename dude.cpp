@@ -103,18 +103,18 @@ void Dude::device_erase (void)
 
 void Dude::execute (Glib::ustring command)
 {
-        /* clear all output from previous execution */
+        /* clear output messages from previous execution */
         raw_exec_output.clear();
         processed_output.clear();
-        /* temporary buffer for gathiering output */
-        char line[256];
+        /* temporary buffer for gathiering output messages */
+        char line[200];
         /* make sure all messages will be fed into stdout */
         command.append(" 2>&1");
         /* execute command and gather all output */
         FILE *stream = popen(command.c_str(), "r");
         if (stream) {
                 while (!feof(stream))
-                        if (fgets(line, 256, stream) != NULL)
+                        if (fgets(line, sizeof(line), stream) != NULL)
                                 raw_exec_output.append(line);
                 pclose(stream);
         }

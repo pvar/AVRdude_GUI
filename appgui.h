@@ -22,7 +22,6 @@ class CBRecordModel : public Gtk::TreeModel::ColumnRecord
 
 struct FuseWidget {
         FuseWidget();
-
         Gtk::CheckButton *check;
         Gtk::ComboBox *combo;
         Gtk::Label *reg_label;
