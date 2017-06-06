@@ -243,7 +243,7 @@ int Micro::parse_settings (xmlpp::Node *root_node)
                 (settings->fuse_settings)->splice(pos, *fuse_listing);
                 delete entry;
         }
-        settings->fuse_bytes = fuse_byte_counter;
+        settings->fusebytes_count = fuse_byte_counter;
 
         /* print fuse setting list ---------------------------------------------------------------*/
         //cout << endl;

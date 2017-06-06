@@ -51,7 +51,7 @@ class DeviceFuseSettings {
 
                 list<FuseSetting> *fuse_settings = nullptr;
                 map <Glib::ustring, list<OptionEntry>*> *option_lists = nullptr;
-                guint fuse_bytes;
+                guint fusebytes_count;
 };
 
 class Micro
