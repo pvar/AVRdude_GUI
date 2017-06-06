@@ -346,10 +346,6 @@ void gtkGUI::cb_new_device (void)
         microcontroller = new Micro(exec_path, device);
         /* prepare data for selected device */
         microcontroller->parse_data();
-        /* get references to structs with microcontroller data */
-        specifications = microcontroller->get_specifications();
-        settings = microcontroller->get_fuse_settings();
-        warnings = microcontroller->get_fuse_warnings();
         /* update labels and unlock controls */
         unlock_and_update();
 }
@@ -385,7 +381,7 @@ void gtkGUI::unlock_and_update (void)
         btn_fuse_read->set_sensitive(true);
         btn_fuse_write->set_sensitive(true);
         box_flash_ops->set_sensitive(true);
-        if (specifications->eeprom_exists)
+        if (microcontroller->specifications->eeprom_exists)
                 box_eeprom_ops->set_sensitive(true);
         /* display specifications */
         display_specs(true);
@@ -456,7 +452,7 @@ void gtkGUI::check_sig (void)
         /* get actuall signature from processed output */
         Glib::ustring actual_signature = avrdude->processed_output;
         /* get expected signature from specifications */
-        Glib::ustring selected_signature = specifications->signature.substr(2,7);
+        Glib::ustring selected_signature = microcontroller->specifications->signature.substr(2,7);
         /* check for signature match */
         //cout << "actuall signature: " << actual_signature << endl;
         //cout << "expected signature: " << selected_signature << endl;
@@ -480,11 +476,11 @@ void gtkGUI::erase_dev (void)
 void gtkGUI::display_specs (gboolean have_specs)
 {
         if (have_specs) {
-                lbl_spec_flash->set_label(specifications->flash_size);
-                lbl_spec_eeprom->set_label(specifications->eeprom_size);
-                lbl_spec_sram->set_label(specifications->sram_size);
-                lbl_spec_speed->set_label(specifications->max_speed);
-                lbl_signature->set_label(specifications->signature);
+                lbl_spec_flash->set_label(microcontroller->specifications->flash_size);
+                lbl_spec_eeprom->set_label(microcontroller->specifications->eeprom_size);
+                lbl_spec_sram->set_label(microcontroller->specifications->sram_size);
+                lbl_spec_speed->set_label(microcontroller->specifications->max_speed);
+                lbl_signature->set_label(microcontroller->specifications->signature);
         } else {
                 lbl_spec_flash->set_label("NA");
                 lbl_spec_eeprom->set_label("NA");
@@ -543,7 +539,7 @@ void gtkGUI::display_fuses (gboolean have_fuses)
         fuse_tab_widgets = new list<FuseWidget>;
         /* loop through fuse-options: create and display corresponding widgets */
         list<FuseSetting>::iterator iter;
-        for (iter = ((this->settings)->fuse_settings)->begin(); iter != ((this->settings)->fuse_settings)->end(); ++iter) {
+        for (iter = ((microcontroller->settings)->fuse_settings)->begin(); iter != ((microcontroller->settings)->fuse_settings)->end(); ++iter) {
                 /* create a new instance of FuseWidget */
                 FuseWidget *widget_entry = new FuseWidget;
                 /* create new instance of signal connection */
@@ -579,7 +575,7 @@ void gtkGUI::display_fuses (gboolean have_fuses)
                         /* create pointer to treemodel */
                         widget_entry->model = Gtk::ListStore::create(cbm_generic);
                         /* prepare to loop through the enumerator members */
-                        list<OptionEntry>* this_enum_list = (*(this->settings)->option_lists)[(*iter).fenum];
+                        list<OptionEntry>* this_enum_list = (*(microcontroller->settings)->option_lists)[(*iter).fenum];
                         list<OptionEntry>::iterator enum_iter = this_enum_list->begin();
                         /* prepare adjusted bit-mask with value of enumerator pseudo entry */
                         widget_entry->max_value = enum_iter->value;

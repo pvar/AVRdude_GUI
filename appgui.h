@@ -47,11 +47,6 @@ class gtkGUI
                 /* fuse-byte values */
                 guint fusebytes[3] = {0, 0, 0};
 
-                /* references to structures holding microcontroller data */
-                /* these structures are maintained by the instance of Micro class */
-                DeviceSpecifications *specifications = nullptr;
-                DeviceFuseSettings *settings = nullptr;
-                list<FuseWarning> *warnings = nullptr;
                 /* path to executable */
                 Glib::ustring exec_path;
                 /* device to XML-file mapping */

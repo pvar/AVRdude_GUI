@@ -161,21 +161,6 @@ void Micro::parse_data ()
         return;
 }
 
-DeviceSpecifications* Micro::get_specifications (void)
-{
-        return this->specifications;
-}
-
-DeviceFuseSettings* Micro::get_fuse_settings (void)
-{
-        return this->settings;
-}
-
-list<FuseWarning>* Micro::get_fuse_warnings (void)
-{
-        return this->warnings;
-}
-
 // ============================= PROTECTED METHODS =============================
 
 

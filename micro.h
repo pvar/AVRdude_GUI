@@ -61,18 +61,14 @@ class Micro
                 void parse_data();
                 map <Glib::ustring, Glib::ustring>* get_device_list (void);
 
-                DeviceSpecifications* get_specifications (void);
-                DeviceFuseSettings* get_fuse_settings (void);
-                list<FuseWarning>* get_fuse_warnings (void);
+                DeviceSpecifications *specifications = nullptr;
+                DeviceFuseSettings *settings = nullptr;
+                list<FuseWarning> *warnings = nullptr;
 
         protected:
                 /* data */
                 Glib::ustring device_xml;
                 Glib::ustring exec_path;
-
-                DeviceSpecifications *specifications = nullptr;
-                DeviceFuseSettings *settings = nullptr;
-                list<FuseWarning> *warnings = nullptr;
 
                 /* xml parsing */
                 gint parse_specifications (xmlpp::Node *root_node);
