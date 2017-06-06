@@ -88,15 +88,14 @@ class gtkGUI
                 Gtk::Button *btn_fuse_write    = nullptr;
                 Gtk::Button *btn_check_sig     = nullptr;
                 Gtk::Button *btn_erase_dev     = nullptr;
-
                 Gtk::Label *lbl_sig_tst        = nullptr;
                 Gtk::Label *lbl_spec_flash     = nullptr;
                 Gtk::Label *lbl_spec_sram      = nullptr;
                 Gtk::Label *lbl_spec_eeprom    = nullptr;
                 Gtk::Label *lbl_spec_speed     = nullptr;
+                Gtk::Label *lbl_spec_xml       = nullptr;
                 Gtk::Label *lbl_signature      = nullptr;
                 Gtk::Label *lbl_fusebytes      = nullptr;
-                Gtk::Label *lbl_dude_output    = nullptr;
                 Gtk::Entry *ent_flash_file     = nullptr;
                 Gtk::Entry *ent_eeprom_file    = nullptr;
                 Gtk::FileChooserDialog *browser= nullptr;

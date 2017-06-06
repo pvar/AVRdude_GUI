@@ -38,6 +38,8 @@ struct DeviceSpecifications {
         Glib::ustring flash_size;
         Glib::ustring eeprom_size;
         Glib::ustring signature;
+        Glib::ustring xml_filename;
+        Glib::ustring xml_version;
         gboolean eeprom_exists;
 };
 

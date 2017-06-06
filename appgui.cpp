@@ -52,6 +52,7 @@ gtkGUI::gtkGUI()
         builder->get_widget("signature_test", btn_check_sig);
         builder->get_widget("erase_device", btn_erase_dev);
         builder->get_widget("signature_test_result", lbl_sig_tst);
+        builder->get_widget("dev_xml_file", lbl_spec_xml);
         builder->get_widget("dev_mem_flash", lbl_spec_flash);
         builder->get_widget("dev_mem_sram", lbl_spec_sram);
         builder->get_widget("dev_mem_eeprom", lbl_spec_eeprom);
@@ -476,16 +477,23 @@ void gtkGUI::erase_dev (void)
 void gtkGUI::display_specs (gboolean have_specs)
 {
         if (have_specs) {
+                Glib::ustring xmlfile;
+                xmlfile = microcontroller->specifications->xml_filename;
+                xmlfile.append(" (build ");
+                xmlfile.append(microcontroller->specifications->xml_version);
+                xmlfile.append(")");
                 lbl_spec_flash->set_label(microcontroller->specifications->flash_size);
                 lbl_spec_eeprom->set_label(microcontroller->specifications->eeprom_size);
                 lbl_spec_sram->set_label(microcontroller->specifications->sram_size);
                 lbl_spec_speed->set_label(microcontroller->specifications->max_speed);
                 lbl_signature->set_label(microcontroller->specifications->signature);
+                lbl_spec_xml->set_label(xmlfile);
         } else {
                 lbl_spec_flash->set_label("NA");
                 lbl_spec_eeprom->set_label("NA");
                 lbl_spec_sram->set_label("NA");
                 lbl_spec_speed->set_label("NA");
+                lbl_spec_xml->set_label("NA");
                 lbl_signature->set_label("0x000000");
         }
 }

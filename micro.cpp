@@ -148,9 +148,9 @@ void Micro::parse_data ()
                         }
 
                         /* should check return status! */
-                        this->parse_specifications(root_node);
-                        this->parse_settings(root_node);
-                        this->parse_warnings(root_node);
+                        parse_specifications(root_node);
+                        parse_settings(root_node);
+                        parse_warnings(root_node);
                         /* --------------------------- */
                 }
         } catch(const exception& ex) {
@@ -316,6 +316,9 @@ int Micro::parse_specifications (xmlpp::Node *root_node)
         Glib::ustring txtvalue;
         gfloat numvalue;
 
+        /* put xml filename in specifications */
+        specs->xml_filename = this->device_xml;
+
         /* go to ADMIN node */
         xml_node = xml_node->get_first_child("ADMIN");
         /* go to SPEED node */
@@ -325,6 +328,14 @@ int Micro::parse_specifications (xmlpp::Node *root_node)
         txtvalue.resize(txtvalue.size() - 3);
         specs->max_speed = txtvalue + " MHz";
         //cout << "speed: " << specs->max_speed << endl;
+        /* go up to ADMIN node */
+        xml_node = xml_node->get_parent();
+        /* go to BUILD node */
+        xml_node = xml_node->get_first_child("BUILD");
+        /* get node content */
+        txtvalue = this->get_txt_value(xml_node);
+        specs->xml_version = txtvalue;
+        //cout << "build: " << specs->xml_version << endl;
         /* go up to ADMIN node */
         xml_node = xml_node->get_parent();
         /* go to SIGNATURE node */
