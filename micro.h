@@ -61,8 +61,13 @@ class Micro
                 void parse_data();
                 map <Glib::ustring, Glib::ustring>* get_device_list (void);
 
+                /* user defined fuse-byte values */
+                guint usr_fusebytes[3] = {255, 255, 255};
+                /* device specifications extracted from XML description */
                 DeviceSpecifications *specifications = nullptr;
+                /* description of all fuse settings, extracted from XML */
                 DeviceFuseSettings *settings = nullptr;
+                /* list of fuse warnings, extracted from XML */
                 list<FuseWarning> *warnings = nullptr;
 
         protected:

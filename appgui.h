@@ -44,9 +44,6 @@ class gtkGUI
                 void data_prep (void);
 
         protected:
-                /* fuse-byte values */
-                guint fusebytes[3] = {0, 0, 0};
-
                 /* path to executable */
                 Glib::ustring exec_path;
                 /* device to XML-file mapping */

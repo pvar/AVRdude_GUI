@@ -388,9 +388,9 @@ void gtkGUI::unlock_and_update (void)
         /* display fuse settings */
         display_fuses(true);
         /* clear fuse-byte values */
-        fusebytes[0] = 255;
-        fusebytes[1] = 255;
-        fusebytes[2] = 255;
+        microcontroller->usr_fusebytes[0] = 255;
+        microcontroller->usr_fusebytes[1] = 255;
+        microcontroller->usr_fusebytes[2] = 255;
         /* display fuse bytes */
         display_fuse_bytes();
 }
@@ -620,9 +620,9 @@ void gtkGUI::display_fuses (gboolean have_fuses)
 void gtkGUI::calculate_fuses ()
 {
         /* clear fuse-byte values */
-        fusebytes[0] = 0;
-        fusebytes[1] = 0;
-        fusebytes[2] = 0;
+        microcontroller->usr_fusebytes[0] = 0;
+        microcontroller->usr_fusebytes[1] = 0;
+        microcontroller->usr_fusebytes[2] = 0;
 
         Gtk::TreeModel::iterator selected;
         Gtk::TreeModel::Row selected_row;
@@ -645,19 +645,19 @@ void gtkGUI::calculate_fuses ()
                                 selected_row = *selected;
                                 guint this_value = atoi(string((selected_row[cbm_generic.col_data])).c_str());
                                 guint adjusted_value = (fwidget->bitmask * this_value) / fwidget->max_value;
-                                fusebytes[fwidget->bytenum] |= (adjusted_value ^ fwidget->bitmask);
+                                microcontroller->usr_fusebytes[fwidget->bytenum] |= (adjusted_value ^ fwidget->bitmask);
                                 //cout << "value: "<< this_value << "\t\tadj val: " << adjusted_value << "\t\tmask: " << (adjusted_value ^ fwidget->bitmask) << endl;
                         } else {
                                 if ((fwidget->check)->get_active())
-                                        fusebytes[fwidget->bytenum] |= fwidget->bitmask;
+                                        microcontroller->usr_fusebytes[fwidget->bytenum] |= fwidget->bitmask;
                         }
                 }
         }
 
         /* negate calculated values (they are expected this way) */
-        fusebytes[0] ^= 255;
-        fusebytes[1] ^= 255;
-        fusebytes[2] ^= 255;
+        microcontroller->usr_fusebytes[0] ^= 255;
+        microcontroller->usr_fusebytes[1] ^= 255;
+        microcontroller->usr_fusebytes[2] ^= 255;
 
         /* display fuse bytes */
         display_fuse_bytes();
@@ -670,17 +670,17 @@ void gtkGUI::display_fuse_bytes ()
 
         fuse_parameters = "LOW: 0x";
         converter_stream << hex << setw(2) << setfill('0');
-        converter_stream << fusebytes[0];
+        converter_stream << microcontroller->usr_fusebytes[0];
         fuse_parameters += converter_stream.str();
         converter_stream.str(string());
         fuse_parameters += "   HIGH: 0x";
         converter_stream << hex << setw(2) << setfill('0');
-        converter_stream << fusebytes[1];
+        converter_stream << microcontroller->usr_fusebytes[1];
         fuse_parameters += converter_stream.str();
         converter_stream.str(string());
         fuse_parameters += "   EXTENDED: 0x";
         converter_stream << hex << setw(2) << setfill('0');
-        converter_stream << fusebytes[2];
+        converter_stream << microcontroller->usr_fusebytes[2];
         fuse_parameters += converter_stream.str();
         lbl_fusebytes->set_label(fuse_parameters);
 }
