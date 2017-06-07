@@ -4,6 +4,7 @@
 #include <sigc++/sigc++.h>
 #include <glibmm.h>
 #include <iostream>
+#include <thread>
 
 using namespace std;
 
@@ -50,19 +51,19 @@ class Dude
 
                 /* fuse-byte values as read from the device */
                 guint dev_fusebytes[3] = {255, 255, 255};
-                /* console output from last command execution */
+                /* console output from command execution */
                 Glib::ustring raw_exec_output;
-                /* the most interesting part of outpout -- according to the nature of executed command and the outcome */
+                /* usefull part of output -- according to nature of executed command */
                 Glib::ustring processed_output;
-                /* the code of the error that occured during last execution */
+                /* error code that occured during last execution */
                 error_codes exec_error;
 
-                /* public function members */
                 void setup (gboolean auto_erase,
                             gboolean auto_verify,
                             gboolean auto_check,
                             Glib::ustring programmer,
                             Glib::ustring microcontroller);
+
                 void device_erase (void);
                 void get_signature (void);
                 void eeprom_write (Glib::ustring file);
@@ -78,6 +79,8 @@ class Dude
                 type_sig_exec_done signal_exec_done();
 
         protected:
+                std::thread* avrdude_thread;
+
                 // execution has been completed!
                 // this signal is meant to be connected to a function of another object
                 // (the connection will be initialized by that other object)
@@ -92,9 +95,11 @@ class Dude
                 Glib::ustring protocol;
                 Glib::ustring options;
                 Glib::ustring device;
+                Glib::ustring command;
 
-                void execute (Glib::ustring command);
-                void post_execution (void);
+                void execute (void);
+                void execution_begin (void);
+                void execution_end (void);
                 void check_for_errors (void);
 };
 

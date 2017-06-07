@@ -2,7 +2,8 @@
 
 Dude::Dude() // : local_sig_exec_done()
 {
-        local_sig_exec_done.connect(sigc::mem_fun(*this, &Dude::post_execution));
+        avrdude_thread = nullptr;
+        local_sig_exec_done.connect(sigc::mem_fun(*this, &Dude::execution_end));
 }
 
 Dude::~Dude()
@@ -77,11 +78,12 @@ void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_chec
 void Dude::get_signature (void)
 {
         /* prepare command to be executed */
-        Glib::ustring command, tmp_string;
+        Glib::ustring tmp_string;
+        command.clear();
         command.append(oneliner);
         command.append("-F -u "); // disable signature and fuse checks
         /* execute command */
-        execute (command);
+        execute ();
 
         /* check output for errors */
         check_for_errors();
@@ -98,15 +100,15 @@ void Dude::get_signature (void)
 void Dude::device_erase (void)
 {
         /* prepare command to be executed */
-        Glib::ustring command;
+        command.clear();
         command.append(oneliner);
         command.append("-e "); // chip erase
         command.append("-u "); // disable fuse checking
         /* execute command */
-        execute (command);
+        execution_begin ();
 }
 
-void Dude::execute (Glib::ustring command)
+void Dude::execute (void)
 {
         /* clear output messages from previous execution */
         raw_exec_output.clear();
@@ -126,13 +128,30 @@ void Dude::execute (Glib::ustring command)
         /* add executed command at the beginning of output string */
         raw_exec_output = "> " + command + "\n" + raw_exec_output;
 
-        /* emit signal for execution completion -- notify function of this object */
-        local_sig_exec_done.emit();
+        /* check if in thread... */
+        if (avrdude_thread)
+                /* emit signal for execution completion -- notify function of this object */
+                local_sig_exec_done.emit();
 }
 
-void Dude::post_execution (void)
+void Dude::execution_begin (void)
 {
-        cout << "DUDE: execution finished!" << endl;
+        if (avrdude_thread)
+                cout << "An avrdude thread is already active... Cannot start an extra one!" << endl;
+        else
+                avrdude_thread = new thread( [this] { execute(); } );
+}
+
+void Dude::execution_end (void)
+{
+        //cout << "DUDE: execution finished!" << endl;
+
+        /* synchronize threads and delete the one used by avrdude */
+        if (avrdude_thread->joinable())
+                avrdude_thread->join();
+        delete avrdude_thread;
+        avrdude_thread = nullptr;
+
         /* check output for errors */
         check_for_errors();
 
@@ -144,72 +163,72 @@ void Dude::eeprom_write (Glib::ustring file)
 {
         cout << "eeprom write!" << endl;
         /* prepare command to be executed */
-        Glib::ustring command;
+        command.clear();
         command.append(oneliner);
         command.append("-U eeprom:w:\"" + file + "\":a"); // write file to eeprom
         /* execute command */
 cout << command << endl;
-        execute (command);
+        execution_begin ();
 }
 
 void Dude::eeprom_read (Glib::ustring file)
 {
         cout << "eeprom read!" << endl;
         /* prepare command to be executed */
-        Glib::ustring command;
+        command.clear();
         command.append(oneliner);
         command.append("-U eeprom:r:\"" + file + "\":h"); // copy eeprom to file
         /* execute command */
 cout << command << endl;
-        execute (command);
+        execution_begin ();
 }
 
 void Dude::eeprom_verify (Glib::ustring file)
 {
         cout << "eeprom verify!" << endl;
         /* prepare command to be executed */
-        Glib::ustring command;
+        command.clear();
         command.append(oneliner);
         command.append("-U eeprom:v:\"" + file + "\":a"); // verify eeprom against file
         /* execute command */
 cout << command << endl;
-        execute (command);
+        execution_begin ();
 }
 
 void Dude::flash_write (Glib::ustring file)
 {
         cout << "flash write!" << endl;
         /* prepare command to be executed */
-        Glib::ustring command;
+        command.clear();
         command.append(oneliner);
         command.append("-U flash:w:\"" + file + "\":a"); // write file to flash
         /* execute command */
 cout << command << endl;
-        execute (command);
+        execution_begin ();
 }
 
 void Dude::flash_read (Glib::ustring file)
 {
         cout << "flash read!" << endl;
         /* prepare command to be executed */
-        Glib::ustring command;
+        command.clear();
         command.append(oneliner);
         command.append("-U flash:r:\"" + file + "\":r"); // copy flash to file
         /* execute command */
 cout << command << endl;
-        execute (command);
+        execution_begin ();
 }
 
 void Dude::flash_verify (Glib::ustring file)
 {
         cout << "flash verify!" << endl;
         /* prepare command to be executed */
-        Glib::ustring command;
+        command.clear();
         command.append(oneliner);
         command.append("-U flash:v:\"" + file + "\":a"); // verify flash against file
         /* execute command */
 cout << command << endl;
-        execute (command);
+        execution_begin ();
 }
 
 void Dude::fuse_write (Glib::ustring data)
@@ -218,12 +237,12 @@ void Dude::fuse_write (Glib::ustring data)
         /* get number of fuse bytes */
 
         /* prepare command to be executed */
-        Glib::ustring command;
+        command.clear();
         command.append(oneliner);
         command.append("-U lfuse:w:value:m -U hfuse:w:value:m -U efuse:w:value:m"); // write fuse bytes
         /* execute command */
 cout << command << endl;
-        execute (command);
+        execution_begin ();
 }
 
 void Dude::fuse_read (void)
@@ -232,12 +251,12 @@ void Dude::fuse_read (void)
         /* get number of fuse bytes */
 
         /* prepare command to be executed */
-        Glib::ustring command;
+        command.clear();
         command.append(oneliner);
         command.append("-U lfuse:r:-:d -U hfuse:r:-:d -U efuse:r:-:d -q"); // read fuse bytes
         /* execute command */
 cout << command << endl;
-        execute (command);
+        execution_begin ();
 }
 
 void Dude::check_for_errors (void)

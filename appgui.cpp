@@ -459,8 +459,6 @@ void gtkGUI::check_sig (void)
         /* get expected signature from specifications */
         Glib::ustring selected_signature = microcontroller->specifications->signature.substr(2,7);
         /* check for signature match */
-        //cout << "actuall signature: " << actual_signature << endl;
-        //cout << "expected signature: " << selected_signature << endl;
         if (actual_signature == selected_signature) {
                 //cout << "we have a match!" << endl;
                 lbl_sig_tst->set_label("Matching device detected :)");
@@ -878,7 +876,8 @@ void gtkGUI::fuse_read(void)
 
 void gtkGUI::execution_done ()
 {
-        cout << "APPGUI: execution finished!" << endl;
+        //cout << "APPGUI: execution finished!" << endl;
+
         /* display execution output */
         dude_output_buffer->set_text(avrdude->raw_exec_output);
 

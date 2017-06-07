@@ -27,7 +27,9 @@ FLAGS = $(STANDARD) $(WARNINGS) $(ERRORS) $(TUNNING) $(DEBUGING)
 
 LIBGTK=`pkg-config --cflags --libs gtkmm-3.0`
 LIBXML=`pkg-config --cflags --libs libxml++-2.6`
-LIBS = $(LIBGTK) $(LIBXML) -rdynamic -lm
+THREADS=`pkg-config --libs gthread-2.0`
+
+LIBS = $(LIBGTK) $(LIBXML) $(THREADS) -rdynamic -lm
 
 ### ---------------------------------------------------------------------------
 ### TARGETS
