@@ -1,7 +1,8 @@
 #include "dude.h"
 
-Dude::Dude()
+Dude::Dude() // : local_sig_exec_done()
 {
+        local_sig_exec_done.connect(sigc::mem_fun(*this, &Dude::post_execution));
 }
 
 Dude::~Dude()
@@ -81,6 +82,7 @@ void Dude::get_signature (void)
         command.append("-F -u "); // disable signature and fuse checks
         /* execute command */
         execute (command);
+
         /* check output for errors */
         check_for_errors();
         /* only proceed if execution was successful */
@@ -102,8 +104,6 @@ void Dude::device_erase (void)
         command.append("-u "); // disable fuse checking
         /* execute command */
         execute (command);
-        /* check output for errors */
-        check_for_errors();
 }
 
 void Dude::execute (Glib::ustring command)
@@ -126,7 +126,17 @@ void Dude::execute (Glib::ustring command)
         /* add executed command at the beginning of output string */
         raw_exec_output = "> " + command + "\n" + raw_exec_output;
 
-        /* emit signal for execution completion  */
+        /* emit signal for execution completion -- notify function of this object */
+        local_sig_exec_done.emit();
+}
+
+void Dude::post_execution (void)
+{
+        cout << "DUDE: execution finished!" << endl;
+        /* check output for errors */
+        check_for_errors();
+
+        /* emit signal for execution completion -- notify function of caller object */
         sig_exec_done.emit();
 }
 

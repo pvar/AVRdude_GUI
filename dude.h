@@ -78,7 +78,15 @@ class Dude
                 type_sig_exec_done signal_exec_done();
 
         protected:
+                // execution has been completed!
+                // this signal is meant to be connected to a function of another object
+                // (the connection will be initialized by that other object)
                 type_sig_exec_done sig_exec_done;
+
+                // execution has been completed!
+                // this is meant to be used internally -- to notify a function of this object
+                // (dispatcher is like sigc<void>, but is suitable for inter-thread communication)
+                Glib::Dispatcher local_sig_exec_done;
 
                 Glib::ustring oneliner;
                 Glib::ustring protocol;
@@ -86,6 +94,7 @@ class Dude
                 Glib::ustring device;
 
                 void execute (Glib::ustring command);
+                void post_execution (void);
                 void check_for_errors (void);
 };
 

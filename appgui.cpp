@@ -878,6 +878,7 @@ void gtkGUI::fuse_read(void)
 
 void gtkGUI::execution_done ()
 {
+        cout << "APPGUI: execution finished!" << endl;
         /* display execution output */
         dude_output_buffer->set_text(avrdude->raw_exec_output);
 
