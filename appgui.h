@@ -45,33 +45,33 @@ class gtkGUI
                 void data_prep (void);
 
         protected:
-                /* path to executable */
+                // path to executable
                 Glib::ustring exec_path;
-                /* device to XML-file mapping */
+                // device to XML-file mapping
                 map <Glib::ustring, Glib::ustring> *device_map = nullptr;
-                /* list of widgets used for fuse-settings */
+                // list of widgets used for fuse-settings
                 list<FuseWidget> *fuse_tab_widgets = nullptr;
-                /* object for retrieving microcontroller data */
+                // object for retrieving microcontroller data
                 Micro *microcontroller;
-                /* object for interfacing with avrdude */
+                // object for interfacing with avrdude
                 Dude *avrdude;
-                /* record-model for the tree-models used by combo boxes */
+                // record-model for the tree-models used by combo boxes
                 CBRecordModel cbm_generic;
 
-                /* signal connection handlers */
+                // signal connection handlers
                 sigc::connection dev_combo_signal;
                 sigc::connection dev_combo_programmer;
                 sigc::connection check_button_erase;
                 sigc::connection check_button_check;
                 sigc::connection check_button_verify;
 
-                /* tree-models for combo boxes */
+                // tree-models for combo boxes
                 Glib::RefPtr<Gtk::ListStore> tm_family;
                 Glib::RefPtr<Gtk::ListStore> tm_device;
                 Glib::RefPtr<Gtk::ListStore> tm_port;
                 Glib::RefPtr<Gtk::ListStore> tm_protocol;
 
-                /* text buffer for diaplsying avrdude output */
+                // text buffer for diaplsying avrdude output
                 Glib::RefPtr<Gtk::TextBuffer> dude_output_buffer;
 
                 // widgets

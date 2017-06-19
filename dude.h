@@ -8,7 +8,7 @@
 
 using namespace std;
 
-//enum memory_type { flash, eeprom, fuse };
+// enum memory_type { flash, eeprom, fuse };
 enum error_codes {
                         no_error,
                         invalid_signature,
@@ -19,7 +19,7 @@ enum error_codes {
                         programmer_not_found
                  };
 
-/* an array af strings that indicate an error has occured */
+// array af strings that indicate an error has occured
 const vector<Glib::ustring> er_strings = {
                                                 "error reading signature data",
                                                 "Double check chip, or use -F to override this check.",
@@ -29,10 +29,8 @@ const vector<Glib::ustring> er_strings = {
                                                 "could not find",
                                                 "did not find any USB device"
                                          };
-/*
-   an array af the correspsonding error-codes
-   these two arrays should always have the same length
-*/
+// array af the correspsonding error-codes
+// (these two arrays should always have the same length)
 const vector<error_codes> er_codes = {
                                         cannot_read_signature,
                                         invalid_signature,
@@ -49,13 +47,13 @@ class Dude
                 Dude();
                 virtual ~Dude();
 
-                /* fuse-byte values as read from the device */
+                // fuse-byte values as read from the device
                 guint dev_fusebytes[3] = {255, 255, 255};
-                /* console output from command execution */
+                // console output from command execution
                 Glib::ustring raw_exec_output;
-                /* usefull part of output -- according to nature of executed command */
+                // usefull part of output -- according to nature of executed command
                 Glib::ustring processed_output;
-                /* error code that occured during last execution */
+                // error code that occured during last execution
                 error_codes exec_error;
 
                 void setup (gboolean auto_erase,
@@ -64,8 +62,9 @@ class Dude
                             Glib::ustring programmer,
                             Glib::ustring microcontroller);
 
-                void device_erase (void);
-                void get_signature (void);
+                // basic avrdude operations
+                void dev_clear (void);
+                void sig_read (void);
                 void eeprom_write (Glib::ustring file);
                 void eeprom_read (Glib::ustring file);
                 void eeprom_verify (Glib::ustring file);
@@ -75,6 +74,7 @@ class Dude
                 void fuse_write (Glib::ustring data);
                 void fuse_read (void);
 
+                // signal for end-of-execution
                 typedef sigc::signal<void> type_sig_exec_done;
                 type_sig_exec_done signal_exec_done();
 

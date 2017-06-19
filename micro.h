@@ -7,7 +7,7 @@
 
 using namespace std;
 
-/* description of a single fuse warning */
+// description of a single fuse warning
 struct FuseWarning {
         guint fbyte;
         guint fmask;
@@ -15,7 +15,7 @@ struct FuseWarning {
         string warning;
 };
 
-/* description of a single fuse setting */
+// description of a single fuse setting
 struct FuseSetting {
         gboolean single_option; // wether it's a boolean or an enumerator
         Glib::ustring fname;    // setting name
@@ -25,13 +25,13 @@ struct FuseSetting {
         guint offset;           // fuse byte
 };
 
-/* description of an one of many options in a single fuse setting */
+// description of an one of many options in a single fuse setting
 struct OptionEntry {
         Glib::ustring ename;    // entry name
         guint value;            // entry value
 };
 
-/* preliminary specifications of a micro */
+// preliminary specifications of a micro
 struct DeviceSpecifications {
         Glib::ustring max_speed;
         Glib::ustring sram_size;
@@ -43,7 +43,7 @@ struct DeviceSpecifications {
         gboolean eeprom_exists;
 };
 
-/* full description of all fuse settings of a micro */
+// full description of all fuse settings of a micro
 class DeviceFuseSettings {
         public:
                 DeviceFuseSettings();
@@ -63,21 +63,21 @@ class Micro
                 void parse_data();
                 map <Glib::ustring, Glib::ustring>* get_device_list (void);
 
-                /* user defined fuse-byte values */
+                // user defined fuse-byte values
                 guint usr_fusebytes[3] = {255, 255, 255};
-                /* device specifications extracted from XML description */
+                // device specifications extracted from XML description
                 DeviceSpecifications *specifications = nullptr;
-                /* description of all fuse settings, extracted from XML */
+                // description of all fuse settings, extracted from XML
                 DeviceFuseSettings *settings = nullptr;
-                /* list of fuse warnings, extracted from XML */
+                // list of fuse warnings, extracted from XML
                 list<FuseWarning> *warnings = nullptr;
 
         protected:
-                /* data */
+                // data
                 Glib::ustring device_xml;
                 Glib::ustring exec_path;
 
-                /* xml parsing */
+                // xml parsing
                 gint parse_specifications (xmlpp::Node *root_node);
                 gint parse_settings (xmlpp::Node *root_node);
                 gint parse_warnings (xmlpp::Node *root_node);
@@ -90,7 +90,7 @@ class Micro
                 Glib::ustring get_txt_value (xmlpp::Node* starting_node);
                 Glib::ustring get_att_value (xmlpp::Node* xml_node, Glib::ustring att_name);
 
-                /* utilities */
+                // utilities
                 Glib::ustring float_to_string (gfloat number);
 };
 

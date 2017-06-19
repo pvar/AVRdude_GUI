@@ -22,7 +22,7 @@ gtkGUI::gtkGUI()
 
         avrdude = new Dude();
 
-        /* connect exec_done signal -- add a "listener" */
+        // connect exec_done signal -- add a "listener"
         avrdude->signal_exec_done().connect(sigc::mem_fun(this, &gtkGUI::execution_done) );
 
         // create object builder
@@ -80,11 +80,11 @@ gtkGUI::gtkGUI()
         builder->get_widget("write_fuses", btn_fuse_write);
         builder->get_widget("read_fuses", btn_fuse_read);
 
-        /* create empty text buffer and assign to text view */
+        // create empty text buffer and assign to text view
         dude_output_buffer = Gtk::TextBuffer::create();
         tv_dude_output->set_buffer(dude_output_buffer);
 
-        /* set custom style provider for application window */
+        // set custom style provider for application window
         Glib::ustring data = ".console {font: Monospace 9; color: #008000;}";
         Glib::RefPtr<Gtk::CssProvider> css = Gtk::CssProvider::create();
         if (not css->load_from_data(data)) {
@@ -95,27 +95,27 @@ gtkGUI::gtkGUI()
         Glib::RefPtr<Gtk::StyleContext> win_context = main_window->get_style_context();
         win_context->add_provider_for_screen(screen, css, GTK_STYLE_PROVIDER_PRIORITY_USER);
 
-        /* add style-class to textview displaying execution output */
+        // add style-class to textview displaying execution output
         Glib::RefPtr<Gtk::StyleContext> context = tv_dude_output->get_style_context();
         context->add_class("console");
 
-        /* create the tree-models */
+        // create the tree-models
         tm_family = Gtk::ListStore::create(cbm_generic);
         tm_device = Gtk::ListStore::create(cbm_generic);
         tm_port = Gtk::ListStore::create(cbm_generic);
         tm_protocol = Gtk::ListStore::create(cbm_generic);
 
-        /* assign tree-models to combo-boxes*/
+        // assign tree-models to combo-boxes*/
         cb_family->set_model(tm_family);
         cb_device->set_model(tm_device);
         cb_protocol->set_model(tm_protocol);
 
-        /* define visible columns */
+        // define visible columns
         cb_family->pack_start(cbm_generic.col_name);
         cb_device->pack_start(cbm_generic.col_name);
         cb_protocol->pack_start(cbm_generic.col_name);
 
-        /* add microcontroller families and programmer names to tree-models */
+        // add microcontroller families and programmer names to tree-models
         populate_static_treemodels();
 
         // connect signal handlers
@@ -146,7 +146,7 @@ gtkGUI::~gtkGUI()
 void gtkGUI::populate_static_treemodels (void)
 {
         Gtk::TreeModel::Row row;
-        /* populate tree-model with device families */
+        // populate tree-model with device families
         row = *(tm_family->append());
         row[cbm_generic.col_name] = "AT 90S xxxx";
         row[cbm_generic.col_data] = "AT90S";
@@ -170,7 +170,7 @@ void gtkGUI::populate_static_treemodels (void)
         //row[cbm_generic.col_data] = "ATxmega";
         cb_family->set_active(5);
 
-        /* populate tree-model with supported protocols */
+        // populate tree-model with supported protocols
         row = *(tm_protocol->append());
         row[cbm_generic.col_name] = "USBasp programmer";
         row[cbm_generic.col_data] = "usbasp";
@@ -257,11 +257,11 @@ bool gtkGUI::data_prep_start (void)
 {
         //cout << "DATA PREPARATION..." << endl;
 
-        /* get supported devices */
+        // get supported devices
         device_map = microcontroller->get_device_list();
-        /* update device combo box */
+        // update device combo box
         this->cb_new_family();
-        /* do not repeat timer */
+        // do not repeat timer
         return FALSE;
 }
 
@@ -269,7 +269,7 @@ void gtkGUI::cb_new_family (void)
 {
         Gtk::TreeModel::Row row;
 
-        /* get selected family */
+        // get selected family
         Glib::ustring family;
         Gtk::TreeModel::iterator selected_family = cb_family->get_active();
         if (selected_family) {
@@ -280,38 +280,38 @@ void gtkGUI::cb_new_family (void)
                 }
         }
 
-        /* exit if device_map is not yet populated */
+        // exit if device_map is not yet populated
         if (device_map == nullptr)
                 return;
 
-        /* block on-change signals */
+        // block on-change signals
         dev_combo_signal.block(true);
         dev_combo_programmer.block(true);
         check_button_erase.block(true);
         check_button_check.block(true);
         check_button_verify.block(true);
-        /* reset settings and lock controls */
+        // reset settings and lock controls
         lock_and_clear();
-        /* clear device tree-view */
+        // clear device tree-view
         tm_device->clear();
-        /* insert family members */
+        // insert family members
         row = *(tm_device->append());
         row[cbm_generic.col_name] = "None";
         row[cbm_generic.col_data] = "";
         for (map<Glib::ustring, Glib::ustring>::iterator iter = device_map->begin(); iter != device_map->end(); ++iter) {
-                /* ignore devices family-irrelevant names */
+                // ignore devices family-irrelevant names
                 string name_part = iter->first.substr (0, family.size());
                 if (name_part != family)
                         continue;
-                /* add new entry to treeview of device combo box */
+                // add new entry to treeview of device combo box
                 row = *(tm_device->append());
                 row[cbm_generic.col_name] = iter->first;
                 row[cbm_generic.col_data] = iter->second;
                 //cout << iter->first << " => " << iter->second << endl;
         }
-        /* set default selected entry */
+        // set default selected entry
         cb_device->set_active(0);
-        /* unblock on-change signals */
+        // unblock on-change signals
         dev_combo_signal.unblock();
         dev_combo_programmer.unblock();
         check_button_erase.unblock();
@@ -322,16 +322,15 @@ void gtkGUI::cb_new_family (void)
 
 void gtkGUI::cb_new_device (void)
 {
-        /* delete current instance of Micro and "mark" as empty
-           !! this will also delete specifications, warnings and settings
-           !! these are references to structs created inside microcontroller
-        */
+        // delete current instance of Micro and "mark" as empty
+        //  !! this will also delete specifications, warnings and settings
+        //  !! these are references to structs created inside microcontroller
         if (microcontroller) {
                 delete this->microcontroller;
                 this->microcontroller = nullptr;
         }
 
-        /* get selected device */
+        // get selected device
         Glib::ustring device;
         Gtk::TreeModel::iterator selected_device = cb_device->get_active();
         if (selected_device) {
@@ -342,45 +341,45 @@ void gtkGUI::cb_new_device (void)
                 }
         }
 
-        /* reset settings and lock controls */
+        // reset settings and lock controls
         lock_and_clear();
-        /* do not proceed if "None" device */
+        // do not proceed if "None" device
         if (device.size() < 1)
                 return;
-        /* creatre new instance if Micro */
+        // creatre new instance if Micro
         microcontroller = new Micro(exec_path, device);
-        /* prepare data for selected device */
+        // prepare data for selected device
         microcontroller->parse_data();
-        /* update labels and unlock controls */
+        // update labels and unlock controls
         unlock_and_update();
 }
 
 void gtkGUI::lock_and_clear (void)
 {
-        /* clear old labels and fuses */
+        // clear old labels and fuses
         display_fuses(false);
         display_specs(false);
-        /* disable avrdude operations */
+        // disable avrdude operations
         btn_check_sig->set_sensitive(false);
         btn_erase_dev->set_sensitive(false);
         btn_fuse_read->set_sensitive(false);
         btn_fuse_write->set_sensitive(false);
         box_flash_ops->set_sensitive(false);
         box_eeprom_ops->set_sensitive(false);
-        /* reset avrdude settings */
+        // reset avrdude settings
         auto_verify->set_active(true);
         auto_erase->set_active(true);
         auto_check->set_active(true);
-        /* update object settings */
+        // update object settings
         cb_dude_settings ();
-        /* clear signature-test result */
+        // clear signature-test result
         lbl_sig_tst->set_label("Unverified device selection.");
 
 }
 
 void gtkGUI::unlock_and_update (void)
 {
-        /* enable avrdude operations */
+        // enable avrdude operations
         btn_check_sig->set_sensitive(true);
         btn_erase_dev->set_sensitive(true);
         btn_fuse_read->set_sensitive(true);
@@ -388,15 +387,15 @@ void gtkGUI::unlock_and_update (void)
         box_flash_ops->set_sensitive(true);
         if (microcontroller->specifications->eeprom_exists)
                 box_eeprom_ops->set_sensitive(true);
-        /* display specifications */
+        // display specifications
         display_specs(true);
-        /* display fuse settings */
+        // display fuse settings
         display_fuses(true);
-        /* clear fuse-byte values */
+        // clear fuse-byte values
         microcontroller->usr_fusebytes[0] = 255;
         microcontroller->usr_fusebytes[1] = 255;
         microcontroller->usr_fusebytes[2] = 255;
-        /* display fuse bytes */
+        // display fuse bytes
         display_fuse_bytes();
 }
 
@@ -406,7 +405,7 @@ void gtkGUI::cb_dude_settings (void)
         Glib::ustring microcontroller, programmer;
         Gtk::TreeModel::iterator selection;
 
-        /* get selected microcontroller */
+        // get selected microcontroller
         selection = cb_device->get_active();
         if (selection) {
                 Gtk::TreeModel::Row row = *selection;
@@ -414,11 +413,11 @@ void gtkGUI::cb_dude_settings (void)
                         microcontroller = row[cbm_generic.col_name];
         }
 
-        /* do not proceed if invalid or no microcontroller was selected */
+        // do not proceed if invalid or no microcontroller was selected
         if ((microcontroller.size() < 1) || (microcontroller == "None"))
                 return;
 
-        /* get selected programmer */
+        // get selected programmer
         selection = cb_protocol->get_active();
         if (selection) {
                 Gtk::TreeModel::Row row = *selection;
@@ -426,11 +425,11 @@ void gtkGUI::cb_dude_settings (void)
                         programmer = row[cbm_generic.col_data];
         }
 
-        /* do not proceed if invalid programmer was selected */
+        // do not proceed if invalid programmer was selected
         if (programmer.size() < 1)
                 return;
 
-        /* read checkbuttons' state */
+        // read checkbuttons' state
         if (auto_erase->get_active())
                 auto_erase_flag = true;
         else
@@ -451,14 +450,14 @@ void gtkGUI::cb_dude_settings (void)
 
 void gtkGUI::check_sig (void)
 {
-        /* read signature from device */
-        avrdude->get_signature();
+        // read signature from device
+        avrdude->sig_read();
 
-        /* get actuall signature from processed output */
+        // get actuall signature from processed output
         Glib::ustring actual_signature = avrdude->processed_output;
-        /* get expected signature from specifications */
+        // get expected signature from specifications
         Glib::ustring selected_signature = microcontroller->specifications->signature.substr(2,7);
-        /* check for signature match */
+        // check for signature match
         if (actual_signature == selected_signature) {
                 //cout << "we have a match!" << endl;
                 lbl_sig_tst->set_label("Matching device detected :)");
@@ -470,8 +469,8 @@ void gtkGUI::check_sig (void)
 
 void gtkGUI::erase_dev (void)
 {
-        /* execute chip-erase */
-        avrdude->device_erase();
+        // execute chip-erase
+        avrdude->dev_clear();
 
 }
 
@@ -525,110 +524,110 @@ void gtkGUI::clear_fuse_widget(FuseWidget* settings_widget)
 void gtkGUI::display_fuses (gboolean have_fuses)
 {
         if (!have_fuses) {
-                /* return if widget-list is uninitialized */
+                // return if widget-list is uninitialized
                 if (fuse_tab_widgets == nullptr)
                         return;
 
-                /* loop through fuse-widget list: hide and delete corresponding widgets */
+                // loop through fuse-widget list: hide and delete corresponding widgets
                 list<FuseWidget>::iterator iter;
                 for (iter = fuse_tab_widgets->begin(); iter != fuse_tab_widgets->end(); ++iter)
                         clear_fuse_widget(&(*iter));
 
-                /* delete fuse-widget list and "mark" as empty */
+                // delete fuse-widget list and "mark" as empty
                 delete fuse_tab_widgets;
                 fuse_tab_widgets = nullptr;
                 return;
         }
 
-        /* used to populate tree-models */
+        // used to populate tree-models
         Gtk::TreeModel::Row row;
-        /* index to next grid-line */
+        // index to next grid-line
         guint grid_line = 1;
-        /* create list of fuse-widgets */
+        // create list of fuse-widgets
         fuse_tab_widgets = new list<FuseWidget>;
-        /* loop through fuse-options: create and display corresponding widgets */
+        // loop through fuse-options: create and display corresponding widgets
         list<FuseSetting>::iterator iter;
         for (iter = ((microcontroller->settings)->fuse_settings)->begin(); iter != ((microcontroller->settings)->fuse_settings)->end(); ++iter) {
-                /* create a new instance of FuseWidget */
+                // create a new instance of FuseWidget
                 FuseWidget *widget_entry = new FuseWidget;
-                /* create new instance of signal connection */
+                // create new instance of signal connection
                 widget_entry->callback = new sigc::connection;
-                /* decide what kind of widget is needed */
+                // decide what kind of widget is needed
                 if ((*iter).single_option) {
-                        /* check if name of register (not a normal setting) */
+                        // check if name of register (not a normal setting)
                         if ((*iter).offset == 512) {
-                                /* widget is not a checkbutton (not a normal setting) */
-                                /* create pointer to label */
+                                // widget is not a checkbutton (not a normal setting)
+                                // create pointer to label
                                 widget_entry->reg_label = new Gtk::Label((*iter).fdesc);
-                                /* set align, indent and width of the widgets */
+                                // set align, indent and width of the widgets
                                 (widget_entry->reg_label)->set_halign(Gtk::Align::ALIGN_START);
                                 (widget_entry->reg_label)->set_margin_start(24);
                                 (widget_entry->reg_label)->set_margin_top(16);
                                 (widget_entry->reg_label)->set_margin_bottom(4);
-                                /* put label in grid */
+                                // put label in grid
                                 fuse_grid->attach(*(widget_entry->reg_label), 0, grid_line++, 1, 1);
-                                /* show widget */
+                                // show widget
                                 (widget_entry->reg_label)->show();
                         } else {
-                                /* widget is a checkbutton (normal setting) */
-                                /* create pointer to checkbutton */
+                                // widget is a checkbutton (normal setting)
+                                // create pointer to checkbutton
                                 widget_entry->check = new Gtk::CheckButton((*iter).fdesc);
-                                /* add callback for on_change event */
+                                // add callback for on_change event
                                 *(widget_entry->callback) = (widget_entry->check)->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuses));
-                                /* put checkbutton in grid */
+                                // put checkbutton in grid
                                 fuse_grid->attach(*(widget_entry->check), 0, grid_line++, 1, 1);
-                                /* show widget */
+                                // show widget
                                 (widget_entry->check)->show();
                         }
                 } else {
-                        /* create pointer to treemodel */
+                        // create pointer to treemodel
                         widget_entry->model = Gtk::ListStore::create(cbm_generic);
-                        /* prepare to loop through the enumerator members */
+                        // prepare to loop through the enumerator members
                         list<OptionEntry>* this_enum_list = (*(microcontroller->settings)->option_lists)[(*iter).fenum];
                         list<OptionEntry>::iterator enum_iter = this_enum_list->begin();
-                        /* prepare adjusted bit-mask with value of enumerator pseudo entry */
+                        // prepare adjusted bit-mask with value of enumerator pseudo entry
                         widget_entry->max_value = enum_iter->value;
                         enum_iter++;
-                        /* loop through the rest of the entries */
+                        // loop through the rest of the entries
                         for (; enum_iter != this_enum_list->end(); ++enum_iter) {
                                 row = *(widget_entry->model->append());
                                 row[cbm_generic.col_name] = enum_iter->ename;
                                 row[cbm_generic.col_data] = to_string(enum_iter->value);
                         }
-                        /* create pointer to label */
+                        // create pointer to label
                         widget_entry->combo_label = new Gtk::Label((*iter).fdesc);
-                        /* create pointer to combobox */
+                        // create pointer to combobox
                         widget_entry->combo = new Gtk::ComboBox();
-                        /* assign treemodel to combobox */
+                        // assign treemodel to combobox
                         (widget_entry->combo)->set_model(widget_entry->model);
-                        /* define visible columns */
+                        // define visible columns
                         (widget_entry->combo)->pack_start(cbm_generic.col_name);
-                        /* add callback for on_change event */
+                        // add callback for on_change event
                         *(widget_entry->callback) = (widget_entry->combo)->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuses));
-                        /* set align, indent and width of the widgets */
+                        // set align, indent and width of the widgets
                         (widget_entry->combo_label)->set_halign(Gtk::Align::ALIGN_START);
                         (widget_entry->combo_label)->set_margin_start(24);
                         (widget_entry->combo)->set_margin_start(24);
-                        /* put widgets in grid */
+                        // put widgets in grid
                         fuse_grid->attach(*(widget_entry->combo_label), 0, grid_line++, 1, 1);
                         fuse_grid->attach(*(widget_entry->combo), 0, grid_line++, 1, 1);
-                        /* select first entry */
+                        // select first entry
                         (widget_entry->combo)->set_active(0);
-                        /* show widgets */
+                        // show widgets
                         (widget_entry->combo_label)->show();
                         (widget_entry->combo)->show();
                 }
-                /* copy bit-mask and fuse-byte offset */
+                // copy bit-mask and fuse-byte offset
                 widget_entry->bitmask = (*iter).fmask;
                 widget_entry->bytenum = (*iter).offset;
-                /* put widget_entry in fuse_tab_widgets */
+                // put widget_entry in fuse_tab_widgets
                 fuse_tab_widgets->push_back(*widget_entry);
         }
 }
 
 void gtkGUI::calculate_fuses ()
 {
-        /* clear fuse-byte values */
+        // clear fuse-byte values
         microcontroller->usr_fusebytes[0] = 0;
         microcontroller->usr_fusebytes[1] = 0;
         microcontroller->usr_fusebytes[2] = 0;
@@ -636,16 +635,18 @@ void gtkGUI::calculate_fuses ()
         Gtk::TreeModel::iterator selected;
         Gtk::TreeModel::Row selected_row;
 
-        /* calculate fuse-bytes from settings...
+        /*
+                calculate fuse-bytes from settings...
 
-              combo setting: factor = bitmask / MAX(enum_value)
-              combo setting: adjusted_value = selected_enum_value * factor
-              combo setting: adjusted_value XOR bitmask
+                combo setting: factor = bitmask / MAX(enum_value)
+                combo setting: adjusted_value = selected_enum_value * factor
+                combo setting: adjusted_value XOR bitmask
 
-              single setting: just keep the bitmask
+                single setting: just keep the bitmask
 
-              fuse bytes: bitmasks are ORed and the result is negated
+                fuse bytes: bitmasks are ORed and the result is negated
         */
+
         list<FuseWidget>::iterator fwidget = fuse_tab_widgets->begin();
         for (fwidget++; fwidget != fuse_tab_widgets->end(); ++fwidget) {
                 if ((fwidget->bytenum >= 0) && (fwidget->bytenum <= 2)) {
@@ -663,12 +664,12 @@ void gtkGUI::calculate_fuses ()
                 }
         }
 
-        /* negate calculated values (they are expected this way) */
+        // negate calculated values (they are expected this way)
         microcontroller->usr_fusebytes[0] ^= 255;
         microcontroller->usr_fusebytes[1] ^= 255;
         microcontroller->usr_fusebytes[2] ^= 255;
 
-        /* display fuse bytes */
+        // display fuse bytes
         display_fuse_bytes();
 }
 
@@ -699,13 +700,13 @@ void gtkGUI::select_file(file_op action)
         if (browser != nullptr)
                 delete browser;
 
-        /* initialize file-chooser dialog */
+        // initialize file-chooser dialog
         if ((action == open_f) || (action == open_e))
                 browser = new Gtk::FileChooserDialog("Choose firmware file to read from", Gtk::FILE_CHOOSER_ACTION_OPEN);
         else
                 browser = new Gtk::FileChooserDialog("Choose or create file to write to", Gtk::FILE_CHOOSER_ACTION_SAVE);
 
-        /* prepare file browser popup */
+        // prepare file browser popup
         browser->set_transient_for(*main_window);
         Gtk::Box* fb_box = browser->get_vbox();
         fb_box->set_margin_left (8);
@@ -713,7 +714,7 @@ void gtkGUI::select_file(file_op action)
         fb_box->set_margin_top (8);
         fb_box->set_margin_bottom (8);
 
-        /* add filters for certain file types */
+        // add filters for certain file types
         Glib::RefPtr<Gtk::FileFilter> filter_all = Gtk::FileFilter::create();
         filter_all->set_name("All files");
         filter_all->add_pattern("*");
@@ -739,17 +740,17 @@ void gtkGUI::select_file(file_op action)
         filter_txt->add_pattern("*.txt");
         browser->add_filter(filter_txt);
 
-        /* add buttons and responses */
+        // add buttons and responses
         browser->add_button("_Cancel", Gtk::RESPONSE_CANCEL);
         browser->add_button("Select", Gtk::RESPONSE_OK);
 
-        /* open browser and close when a response is received */
+        // open browser and close when a response is received
         int result = browser->run();
         browser->close();
 
-        /* check signal from file-chooser */
+        // check signal from file-chooser
         switch(result) {
-                /* get filename and put it in relevant entry */
+                // get filename and put it in relevant entry
                 case(Gtk::RESPONSE_OK): {
                         //cout << "RESPONSE OK" << endl;
                         string filename = browser->get_filename();
@@ -759,12 +760,12 @@ void gtkGUI::select_file(file_op action)
                                 ent_eeprom_file->set_text(filename);
                         break;
                 }
-                /* do nothing... */
+                // do nothing...
                 case(Gtk::RESPONSE_CANCEL): {
                         //cout << "RESPONSE CANCEL" << endl;
                         break;
                 }
-                /* do nothing... */
+                // do nothing...
                 default: {
                         //cout << "NO RESPONSE" << endl;
                         break;
@@ -774,103 +775,103 @@ void gtkGUI::select_file(file_op action)
 
 void gtkGUI::eeprom_read(void)
 {
-        /* select or create file to save to */
+        // select or create file to save to
         select_file(save_e);
-        /* get file from file-chooser */
+        // get file from file-chooser
         string filename = browser->get_filename();
-        /* warn and exit if no file specified */
+        // warn and exit if no file specified
         if (filename.empty() == true)
                 return;
-        /* read eeprom memory */
+        // read eeprom memory
         avrdude->eeprom_read(filename);
 
 }
 
 void gtkGUI::eeprom_write(void)
 {
-        /* get file from relevant entry */
+        // get file from relevant entry
         Glib::ustring filename = ent_eeprom_file->get_text();
-        /* warn and exit if no file specified */
+        // warn and exit if no file specified
         if (filename.empty() == true) {
 
                 return;
         }
-        /* write eeprom memory */
+        // write eeprom memory
         avrdude->eeprom_write(filename);
 
 }
 
 void gtkGUI::eeprom_verify(void)
 {
-        /* get file from relevant entry */
+        // get file from relevant entry
         Glib::ustring filename = ent_eeprom_file->get_text();
-        /* warn and exit if no file specified */
+        // warn and exit if no file specified
         if (filename.empty() == true) {
 
                 return;
         }
-        /* verify flash memory */
+        // verify flash memory
         avrdude->eeprom_verify(filename);
 
 }
 
 void gtkGUI::flash_read(void)
 {
-        /* select or create file to save to */
+        // select or create file to save to
         select_file(save_f);
-        /* get file from file-chooser */
+        // get file from file-chooser
         string filename = browser->get_filename();
-        /* exit if no file specified */
+        // exit if no file specified
         if (filename.empty() == true)
                 return;
-        /* read flash memory */
+        // read flash memory
         avrdude->flash_read(filename);
 }
 
 void gtkGUI::flash_write(void)
 {
-        /* get file from relevant entry */
+        // get file from relevant entry
         Glib::ustring filename = ent_flash_file->get_text();
-        /* warn and exit if no file specified */
+        // warn and exit if no file specified
         if (filename.empty() == true) {
 
                 return;
         }
-        /* write flash memory */
+        // write flash memory
         avrdude->flash_write(filename);
 }
 
 void gtkGUI::flash_verify(void)
 {
-        /* get file from relevant entry */
+        // get file from relevant entry
         Glib::ustring filename = ent_flash_file->get_text();
-        /* warn and exit if no file specified */
+        // warn and exit if no file specified
         if (filename.empty() == true) {
 
                 return;
         }
-        /* verify flash memory */
+        // verify flash memory
         avrdude->flash_write(filename);
 }
 
 void gtkGUI::fuse_write(void)
 {
         Glib::ustring data = "0x00 0x00 0x00";
-        /* get number of fuse bytes available */
+        // get number of fuse bytes available
 
 
-        /* write fuse bytes */
+        // write fuse bytes
         avrdude->fuse_write(data);
 }
 
 void gtkGUI::fuse_read(void)
 {
-        /* get number of fuse bytes available */
+        // get number of fuse bytes available
 
-        /* read fuse bytes */
+        // read fuse bytes
         avrdude->fuse_read();
 
-        /* process values and apply fuse-widgets */
+        // process values and apply fuse-widgets
 
 }
 
@@ -878,13 +879,13 @@ void gtkGUI::execution_done ()
 {
         //cout << "APPGUI: execution finished!" << endl;
 
-        /* display execution output */
+        // display execution output
         dude_output_buffer->set_text(avrdude->raw_exec_output);
 
-        /* check for error and display message */
+        // check for errors and display relevant messages
         if (avrdude->exec_error != no_error) {
                 cout << "some error has occured!" << endl;
         }
 
-        /* proceed to post-execution processing... */
+        // proceed to post-execution processing...
 }
