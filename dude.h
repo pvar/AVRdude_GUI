@@ -2,9 +2,9 @@
 #define DUDE_H
 
 #include <sigc++/sigc++.h>
-#include <glibmm.h>
 #include <iostream>
 #include <thread>
+#include <glibmm.h>
 
 // enum memory_type { flash, eeprom, fuse };
 enum error_codes {
