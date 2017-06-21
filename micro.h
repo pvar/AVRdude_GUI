@@ -5,14 +5,12 @@
 #include <iostream>
 #include <dirent.h>
 
-using namespace std;
-
 // description of a single fuse warning
 struct FuseWarning {
         guint fbyte;
         guint fmask;
         guint fresult;
-        string warning;
+        std::string warning;
 };
 
 // description of a single fuse setting
@@ -49,8 +47,8 @@ class DeviceFuseSettings {
                 DeviceFuseSettings();
                 virtual ~DeviceFuseSettings();
 
-                list<FuseSetting> *fuse_settings = nullptr;
-                map <Glib::ustring, list<OptionEntry>*> *option_lists = nullptr;
+                std::list<FuseSetting> *fuse_settings = nullptr;
+                std::map <Glib::ustring, std::list<OptionEntry>*> *option_lists = nullptr;
                 guint fusebytes_count;
 };
 
@@ -61,7 +59,7 @@ class Micro
                 virtual ~Micro();
 
                 void parse_data();
-                map <Glib::ustring, Glib::ustring>* get_device_list (void);
+                std::map <Glib::ustring, Glib::ustring>* get_device_list (void);
 
                 // user defined fuse-byte values
                 guint usr_fusebytes[3] = {255, 255, 255};
@@ -70,7 +68,7 @@ class Micro
                 // description of all fuse settings, extracted from XML
                 DeviceFuseSettings *settings = nullptr;
                 // list of fuse warnings, extracted from XML
-                list<FuseWarning> *warnings = nullptr;
+                std::list<FuseWarning> *warnings = nullptr;
 
         protected:
                 // data
@@ -82,8 +80,8 @@ class Micro
                 gint parse_settings (xmlpp::Node *root_node);
                 gint parse_warnings (xmlpp::Node *root_node);
 
-                list<OptionEntry>* get_lst_enum (xmlpp::Node* xml_node);
-                list<FuseSetting>* get_lst_fuse (xmlpp::Node* xml_node, guint offset);
+                std::list<OptionEntry>* get_lst_enum (xmlpp::Node* xml_node);
+                std::list<FuseSetting>* get_lst_fuse (xmlpp::Node* xml_node, guint offset);
                 Glib::ustring get_signature_bytes (xmlpp::Node* signature_node);
 
                 xmlpp::Node* get_child_with_attr (xmlpp::Node* starting_node, Glib::ustring att_name, Glib::ustring att_value);

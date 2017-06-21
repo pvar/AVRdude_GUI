@@ -8,8 +8,6 @@
 #include "micro.h"
 #include "dude.h"
 
-using namespace std;
-
 enum file_op { open_f, save_f, open_e, save_e };
 enum op_code { sig_check, dev_erase, eeprom_w, eeprom_r, eeprom_v, flash_w, flash_r, flash_v, fuse_w, fuse_r };
 
@@ -17,8 +15,8 @@ class CBRecordModel : public Gtk::TreeModel::ColumnRecord
 {
         public:
                 CBRecordModel();
-                Gtk::TreeModelColumn<string> col_name;
-                Gtk::TreeModelColumn<string> col_data;
+                Gtk::TreeModelColumn<std::string> col_name;
+                Gtk::TreeModelColumn<std::string> col_data;
 };
 
 struct FuseWidget {
@@ -48,9 +46,9 @@ class gtkGUI
                 // path to executable
                 Glib::ustring exec_path;
                 // device to XML-file mapping
-                map <Glib::ustring, Glib::ustring> *device_map = nullptr;
+                std::map <Glib::ustring, Glib::ustring> *device_map = nullptr;
                 // list of widgets used for fuse-settings
-                list<FuseWidget> *fuse_tab_widgets = nullptr;
+                std::list<FuseWidget> *fuse_tab_widgets = nullptr;
                 // object for retrieving microcontroller data
                 Micro *microcontroller;
                 // object for interfacing with avrdude

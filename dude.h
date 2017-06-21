@@ -6,8 +6,6 @@
 #include <iostream>
 #include <thread>
 
-using namespace std;
-
 // enum memory_type { flash, eeprom, fuse };
 enum error_codes {
                         no_error,
@@ -20,7 +18,7 @@ enum error_codes {
                  };
 
 // array af strings that indicate an error has occured
-const vector<Glib::ustring> er_strings = {
+const std::vector<Glib::ustring> er_strings = {
                                                 "error reading signature data",
                                                 "Double check chip, or use -F to override this check.",
                                                 "Valid parts are:",
@@ -31,7 +29,7 @@ const vector<Glib::ustring> er_strings = {
                                          };
 // array af the correspsonding error-codes
 // (these two arrays should always have the same length)
-const vector<error_codes> er_codes = {
+const std::vector<error_codes> er_codes = {
                                         cannot_read_signature,
                                         invalid_signature,
                                         unknown_device,

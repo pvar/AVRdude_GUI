@@ -1,5 +1,7 @@
 #include "micro.h"
 
+using namespace std;
+
 DeviceFuseSettings::DeviceFuseSettings()
 {
         this->fuse_settings = new list<FuseSetting>;

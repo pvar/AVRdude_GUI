@@ -1,5 +1,7 @@
 #include "dude.h"
 
+using namespace std;
+
 Dude::Dude() // : local_sig_exec_done()
 {
         avrdude_thread = nullptr;

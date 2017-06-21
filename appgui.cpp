@@ -1,5 +1,7 @@
 #include "appgui.h"
 
+using namespace std;
+
 FuseWidget::FuseWidget()
 {
         this->check = nullptr;
