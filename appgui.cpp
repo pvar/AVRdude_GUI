@@ -126,16 +126,16 @@ gtkGUI::gtkGUI()
         // connect signal handlers
         btn_open_flash->signal_clicked().connect( sigc::bind<file_op>( sigc::mem_fun(*this, &gtkGUI::select_file), open_f) );
         btn_open_eeprom->signal_clicked().connect( sigc::bind<file_op>( sigc::mem_fun(*this, &gtkGUI::select_file), open_e) );
-        btn_erom_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::eeprom_read));
-        btn_erom_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::eeprom_write));
-        btn_erom_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::eeprom_verify));
-        btn_firm_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_read));
-        btn_firm_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_write));
-        btn_firm_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::flash_verify));
-        btn_fuse_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::fuse_write));
-        btn_fuse_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::fuse_read));
-        btn_check_sig->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::check_sig));
-        btn_erase_dev->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::erase_dev));
+        btn_erom_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_eeprom_read));
+        btn_erom_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_eeprom_write));
+        btn_erom_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_eeprom_verify));
+        btn_firm_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_flash_read));
+        btn_firm_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_flash_write));
+        btn_firm_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_flash_verify));
+        btn_fuse_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_fuse_write));
+        btn_fuse_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_fuse_read));
+        btn_check_sig->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_check_signature));
+        btn_erase_dev->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_erase_devive));
         cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
         dev_combo_signal = cb_device->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_device));
         dev_combo_programmer = cb_protocol->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
@@ -453,10 +453,10 @@ void gtkGUI::cb_dude_settings (void)
         avrdude->setup( auto_erase_flag, auto_verify_flag, auto_check_flag, programmer, microcontroller );
 }
 
-void gtkGUI::check_sig (void)
+void gtkGUI::cb_check_signature (void)
 {
         // read signature from device
-        avrdude->sig_read();
+        avrdude->do_read_signature();
 
         // get actuall signature from processed output
         Glib::ustring actual_signature = avrdude->processed_output;
@@ -472,10 +472,10 @@ void gtkGUI::check_sig (void)
         }
 }
 
-void gtkGUI::erase_dev (void)
+void gtkGUI::cb_erase_devive (void)
 {
         // execute chip-erase
-        avrdude->dev_clear();
+        avrdude->do_clear_device();
 
 }
 
@@ -778,7 +778,7 @@ void gtkGUI::select_file(file_op action)
         }
 }
 
-void gtkGUI::eeprom_read(void)
+void gtkGUI::cb_eeprom_read(void)
 {
         // select or create file to save to
         select_file(save_e);
@@ -788,11 +788,11 @@ void gtkGUI::eeprom_read(void)
         if (filename.empty() == true)
                 return;
         // read eeprom memory
-        avrdude->eeprom_read(filename);
+        avrdude->do_eeprom_read(filename);
 
 }
 
-void gtkGUI::eeprom_write(void)
+void gtkGUI::cb_eeprom_write(void)
 {
         // get file from relevant entry
         Glib::ustring filename = ent_eeprom_file->get_text();
@@ -802,11 +802,11 @@ void gtkGUI::eeprom_write(void)
                 return;
         }
         // write eeprom memory
-        avrdude->eeprom_write(filename);
+        avrdude->do_eeprom_write(filename);
 
 }
 
-void gtkGUI::eeprom_verify(void)
+void gtkGUI::cb_eeprom_verify(void)
 {
         // get file from relevant entry
         Glib::ustring filename = ent_eeprom_file->get_text();
@@ -816,11 +816,11 @@ void gtkGUI::eeprom_verify(void)
                 return;
         }
         // verify flash memory
-        avrdude->eeprom_verify(filename);
+        avrdude->do_eeprom_verify(filename);
 
 }
 
-void gtkGUI::flash_read(void)
+void gtkGUI::cb_flash_read(void)
 {
         // select or create file to save to
         select_file(save_f);
@@ -830,10 +830,10 @@ void gtkGUI::flash_read(void)
         if (filename.empty() == true)
                 return;
         // read flash memory
-        avrdude->flash_read(filename);
+        avrdude->do_flash_read(filename);
 }
 
-void gtkGUI::flash_write(void)
+void gtkGUI::cb_flash_write(void)
 {
         // get file from relevant entry
         Glib::ustring filename = ent_flash_file->get_text();
@@ -843,10 +843,10 @@ void gtkGUI::flash_write(void)
                 return;
         }
         // write flash memory
-        avrdude->flash_write(filename);
+        avrdude->do_flash_write(filename);
 }
 
-void gtkGUI::flash_verify(void)
+void gtkGUI::cb_flash_verify(void)
 {
         // get file from relevant entry
         Glib::ustring filename = ent_flash_file->get_text();
@@ -856,25 +856,25 @@ void gtkGUI::flash_verify(void)
                 return;
         }
         // verify flash memory
-        avrdude->flash_write(filename);
+        avrdude->do_flash_write(filename);
 }
 
-void gtkGUI::fuse_write(void)
+void gtkGUI::cb_fuse_write(void)
 {
         Glib::ustring data = "0x00 0x00 0x00";
         // get number of fuse bytes available
 
 
         // write fuse bytes
-        avrdude->fuse_write(data);
+        avrdude->do_fuse_write(data);
 }
 
-void gtkGUI::fuse_read(void)
+void gtkGUI::cb_fuse_read(void)
 {
         // get number of fuse bytes available
 
         // read fuse bytes
-        avrdude->fuse_read();
+        avrdude->do_fuse_read();
 
         // process values and apply fuse-widgets
 

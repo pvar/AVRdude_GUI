@@ -61,16 +61,16 @@ class Dude
                             Glib::ustring microcontroller);
 
                 // basic avrdude operations
-                void dev_clear (void);
-                void sig_read (void);
-                void eeprom_write (Glib::ustring file);
-                void eeprom_read (Glib::ustring file);
-                void eeprom_verify (Glib::ustring file);
-                void flash_write (Glib::ustring file);
-                void flash_read (Glib::ustring file);
-                void flash_verify (Glib::ustring file);
-                void fuse_write (Glib::ustring data);
-                void fuse_read (void);
+                void do_clear_device (void);
+                void do_read_signature (void);
+                void do_eeprom_write (Glib::ustring file);
+                void do_eeprom_read (Glib::ustring file);
+                void do_eeprom_verify (Glib::ustring file);
+                void do_flash_write (Glib::ustring file);
+                void do_flash_read (Glib::ustring file);
+                void do_flash_verify (Glib::ustring file);
+                void do_fuse_write (Glib::ustring data);
+                void do_fuse_read (void);
 
                 // signal for end-of-execution
                 typedef sigc::signal<void> type_sig_exec_done;

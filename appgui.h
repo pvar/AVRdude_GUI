@@ -103,21 +103,21 @@ class gtkGUI
                 void cb_new_device (void);
                 void cb_new_family (void);
                 void cb_dude_settings (void);
+                void cb_check_signature (void);
+                void cb_erase_devive (void);
+                void cb_eeprom_read (void);
+                void cb_eeprom_write (void);
+                void cb_eeprom_verify (void);
+                void cb_flash_read (void);
+                void cb_flash_write (void);
+                void cb_flash_verify (void);
+                void cb_fuse_write (void);
+                void cb_fuse_read (void);
                 void display_specs (gboolean have_specs);
                 void display_fuses (gboolean have_fuses);
-                void display_fuse_bytes ();
                 void calculate_fuses (void);
-                void check_sig (void);
-                void erase_dev (void);
-                void eeprom_read (void);
-                void eeprom_write (void);
-                void eeprom_verify (void);
-                void flash_read (void);
-                void flash_write (void);
-                void flash_verify (void);
-                void fuse_write (void);
-                void fuse_read (void);
                 void select_file (file_op action);
+                void display_fuse_bytes ();
 
                 // utilities
                 void populate_static_treemodels (void);

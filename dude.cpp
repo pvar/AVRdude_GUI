@@ -82,7 +82,7 @@ void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_chec
         //cout << "options: " << options<< endl;
 }
 
-void Dude::sig_read (void)
+void Dude::do_read_signature (void)
 {
         // prepare command to be executed
         Glib::ustring tmp_string;
@@ -104,7 +104,7 @@ void Dude::sig_read (void)
         }
 }
 
-void Dude::dev_clear (void)
+void Dude::do_clear_device (void)
 {
         // prepare command to be executed
         command.clear();
@@ -170,7 +170,7 @@ void Dude::execution_end (void)
         sig_exec_done.emit();
 }
 
-void Dude::eeprom_write (Glib::ustring file)
+void Dude::do_eeprom_write (Glib::ustring file)
 {
         cout << "eeprom write!" << endl;
         // prepare command to be executed
@@ -182,7 +182,7 @@ cout << command << endl;
         execution_begin ();
 }
 
-void Dude::eeprom_read (Glib::ustring file)
+void Dude::do_eeprom_read (Glib::ustring file)
 {
         cout << "eeprom read!" << endl;
         // prepare command to be executed
@@ -194,7 +194,7 @@ cout << command << endl;
         execution_begin ();
 }
 
-void Dude::eeprom_verify (Glib::ustring file)
+void Dude::do_eeprom_verify (Glib::ustring file)
 {
         cout << "eeprom verify!" << endl;
         // prepare command to be executed
@@ -206,7 +206,7 @@ cout << command << endl;
         execution_begin ();
 }
 
-void Dude::flash_write (Glib::ustring file)
+void Dude::do_flash_write (Glib::ustring file)
 {
         cout << "flash write!" << endl;
         // prepare command to be executed
@@ -218,7 +218,7 @@ cout << command << endl;
         execution_begin ();
 }
 
-void Dude::flash_read (Glib::ustring file)
+void Dude::do_flash_read (Glib::ustring file)
 {
         cout << "flash read!" << endl;
         // prepare command to be executed
@@ -230,7 +230,7 @@ cout << command << endl;
         execution_begin ();
 }
 
-void Dude::flash_verify (Glib::ustring file)
+void Dude::do_flash_verify (Glib::ustring file)
 {
         cout << "flash verify!" << endl;
         // prepare command to be executed
@@ -242,7 +242,7 @@ cout << command << endl;
         execution_begin ();
 }
 
-void Dude::fuse_write (Glib::ustring data)
+void Dude::do_fuse_write (Glib::ustring data)
 {
         cout << "fuse write!" << endl;
         // get number of fuse bytes
@@ -256,7 +256,7 @@ cout << command << endl;
         execution_begin ();
 }
 
-void Dude::fuse_read (void)
+void Dude::do_fuse_read (void)
 {
         cout << "fuse read!" << endl;
         // get number of fuse bytes
