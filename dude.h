@@ -74,17 +74,20 @@ class Dude
 
                 // signal for end-of-execution
                 typedef sigc::signal<void> type_sig_exec_done;
+                typedef sigc::signal<void> type_sig_exec_started;
                 type_sig_exec_done signal_exec_done();
+                type_sig_exec_started signal_exec_started();
 
         protected:
                 std::thread* avrdude_thread;
 
-                // execution has been completed!
+                // execution start/stop
                 // this signal is meant to be connected to a function of another object
                 // (the connection will be initialized by that other object)
                 type_sig_exec_done sig_exec_done;
+                type_sig_exec_started sig_exec_started;
 
-                // execution has been completed!
+                // execution completion
                 // this is meant to be used internally -- to notify a function of this object
                 // (dispatcher is like sigc<void>, but is suitable for inter-thread communication)
                 Glib::Dispatcher local_sig_exec_done;

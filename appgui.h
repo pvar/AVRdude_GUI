@@ -128,6 +128,7 @@ class gtkGUI
                 void lock_and_clear (void);
                 void unlock_and_update (void);
                 void execution_done (void);
+                void execution_started (void);
                 //void msg_popup (Glib::ustring title, Glib::ustring message);
 };
 

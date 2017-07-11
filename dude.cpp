@@ -17,6 +17,11 @@ Dude::type_sig_exec_done Dude::signal_exec_done()
         return sig_exec_done;
 }
 
+Dude::type_sig_exec_started Dude::signal_exec_started()
+{
+        return sig_exec_started;
+}
+
 void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_check, Glib::ustring programmer, Glib::ustring microcontroller )
 {
         exec_error = no_error;
@@ -132,16 +137,20 @@ void Dude::execute (void)
 
         // check if in thread...
         if (avrdude_thread)
-                // emit signal for execution completion -- notify function of this object
+                // emit signal for execution completion (notify *this* object)
                 local_sig_exec_done.emit();
 }
 
 void Dude::execution_begin (void)
 {
-        if (avrdude_thread)
+        if (avrdude_thread) {
                 cout << "An avrdude thread is already active... Cannot start an extra one!" << endl;
-        else
+        } else {
+                // create thread for avrdude execution
                 avrdude_thread = new thread( [this] { execute(); } );
+                // emit signal for execution start (notify caller object)
+                sig_exec_started.emit();
+        }
 }
 
 void Dude::execution_end (void)
@@ -157,7 +166,7 @@ void Dude::execution_end (void)
         // check output for errors
         check_for_errors();
 
-        // emit signal for execution completion -- notify function of caller object
+        // emit signal for execution completion (notify caller object)
         sig_exec_done.emit();
 }
 

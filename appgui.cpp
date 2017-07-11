@@ -24,8 +24,11 @@ gtkGUI::gtkGUI()
 
         avrdude = new Dude();
 
-        // connect exec_done signal -- add a "listener"
+        // connect signals to functions (add "listeners")
+        // execution completed
         avrdude->signal_exec_done().connect(sigc::mem_fun(this, &gtkGUI::execution_done) );
+        // execution started
+        avrdude->signal_exec_started().connect(sigc::mem_fun(this, &gtkGUI::execution_started) );
 
         // create object builder
         Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create();
@@ -879,7 +882,7 @@ void gtkGUI::fuse_read(void)
 
 void gtkGUI::execution_done ()
 {
-        //cout << "APPGUI: execution finished!" << endl;
+        //cout << "APPGUI: execution thread stopped!" << endl;
 
         // display execution output
         dude_output_buffer->set_text(avrdude->raw_exec_output);
@@ -890,4 +893,14 @@ void gtkGUI::execution_done ()
         }
 
         // proceed to post-execution processing...
+}
+
+void gtkGUI::execution_started ()
+{
+        //cout << "APPGUI: execution thread initialized!" << endl;
+
+        // disable controls
+
+        // display spinner
+
 }
