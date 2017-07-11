@@ -7,7 +7,7 @@
 #include <glibmm.h>
 
 // enum memory_type { flash, eeprom, fuse };
-enum error_codes {
+enum exec_status {
                         no_error,
                         invalid_signature,
                         unknown_device,
@@ -18,7 +18,7 @@ enum error_codes {
                  };
 
 // array af strings that indicate an error has occured
-const std::vector<Glib::ustring> er_strings = {
+const std::vector<Glib::ustring> error_strings = {
                                                 "error reading signature data",
                                                 "Double check chip, or use -F to override this check.",
                                                 "Valid parts are:",
@@ -29,7 +29,7 @@ const std::vector<Glib::ustring> er_strings = {
                                          };
 // array af the correspsonding error-codes
 // (these two arrays should always have the same length)
-const std::vector<error_codes> er_codes = {
+const std::vector<exec_status> error_codes = {
                                         cannot_read_signature,
                                         invalid_signature,
                                         unknown_device,
@@ -52,7 +52,7 @@ class Dude
                 // usefull part of output -- according to nature of executed command
                 Glib::ustring processed_output;
                 // error code that occured during last execution
-                error_codes exec_error;
+                exec_status execution_status;
 
                 void setup (gboolean auto_erase,
                             gboolean auto_verify,

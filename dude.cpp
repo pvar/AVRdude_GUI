@@ -24,7 +24,7 @@ Dude::type_sig_exec_started Dude::signal_exec_started()
 
 void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_check, Glib::ustring programmer, Glib::ustring microcontroller )
 {
-        exec_error = no_error;
+        execution_status = no_error;
         raw_exec_output.clear();
         processed_output.clear();
         device.clear();
@@ -95,7 +95,7 @@ void Dude::do_read_signature (void)
         // check output for errors
         check_for_errors();
         // only proceed if execution was successful
-        if (exec_error == no_error) {
+        if (execution_status == no_error) {
                 // find signature position
                 Glib::ustring::size_type sig_pos = raw_exec_output.find ("signature = 0x", 0);
                 // extract signature
@@ -272,15 +272,15 @@ cout << command << endl;
 
 void Dude::check_for_errors (void)
 {
-        guint index; // er_strings is a list and list-indices are unsigned!
-        guint max_index = er_strings.size();
+        guint index; // error_strings is a list and list-indices are unsigned!
+        guint max_index = error_strings.size();
         gint error_code_index = -1;
         Glib::ustring::size_type er_str_pos;
         Glib::ustring::size_type output_len = raw_exec_output.size();
 
         // iterate through available error-strings and check if found in execution output string
         for (index = 0; index < max_index; index++) {
-                er_str_pos = raw_exec_output.find (er_strings[index], 0);
+                er_str_pos = raw_exec_output.find (error_strings[index], 0);
                 if (er_str_pos < output_len) {
                         error_code_index = index;
                         break;
@@ -290,9 +290,9 @@ void Dude::check_for_errors (void)
 
         // check if no string found in output
         if (error_code_index == -1) {
-                exec_error = no_error;
+                execution_status = no_error;
                 return;
         }
 
-        exec_error = er_codes[error_code_index];
+        execution_status = error_codes[error_code_index];
 }

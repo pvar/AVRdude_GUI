@@ -902,15 +902,44 @@ void gtkGUI::execution_done ()
         // change window cursor back
         Glib::RefPtr<Gdk::Window> window = main_window->get_window();
         window->set_cursor();
-        // display console output
+        // display console-output
         dude_output_buffer->set_text(avrdude->raw_exec_output);
+        // check execution outcome and display proper message...
+        switch (avrdude->execution_status) {
 
-        // check for errors and display relevant messages
-        if (avrdude->exec_error != no_error) {
-                cout << "some error has occured!" << endl;
+                case (no_error): {
+                        cout << "Operation completed successfuly!" << endl;
+                        break;
+                }
+                case (invalid_signature): {
+                        cout << "invalid_signature" << endl;
+                        break;
+                }
+                case (unknown_device): {
+                        cout << "unknown_device" << endl;
+                        break;
+                }
+                case (cannot_read_signature): {
+                        cout << "cannot_read_signature" << endl;
+                        break;
+                }
+                case (command_not_found): {
+                        cout << "command_not_found" << endl;
+                        break;
+                }
+                case (insufficient_permissions): {
+                        cout << "insufficient_permissions" << endl;
+                        break;
+                }
+                case (programmer_not_found): {
+                        cout << "programmer_not_found" << endl;
+                        break;
+                }
+                default: {
+                        cout << "Unknown error!" << endl;
+                        break;
+                }
         }
-
-        // proceed to post-execution processing...
 }
 
 void gtkGUI::execution_started ()
@@ -925,4 +954,9 @@ void gtkGUI::execution_started ()
         Glib::RefPtr<Gdk::Display> display = main_window->get_display();
         Glib::RefPtr<Gdk::Cursor> cursor = Gdk::Cursor::create(display, "wait");
         window->set_cursor(cursor);
+}
+
+void gtkGUI::message_popup_popup (Glib::ustring title, Glib::ustring message)
+{
+
 }

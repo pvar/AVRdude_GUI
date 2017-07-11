@@ -2,11 +2,6 @@
 #define PROGGUI_H
 
 #include <sigc++/sigc++.h>
-
-//#include <gdkmm/cursor.h>
-//#include <gdkmm/display.h>
-//#include <gdkmm/window.h>
-
 #include <gtkmm.h>
 #include <iostream>
 #include <iomanip>
@@ -136,7 +131,7 @@ class gtkGUI
                 void update_settings (void);
                 void execution_done (void);
                 void execution_started (void);
-                //void msg_popup (Glib::ustring title, Glib::ustring message);
+                void message_popup_popup (Glib::ustring title, Glib::ustring message);
 };
 
 #endif
