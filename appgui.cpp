@@ -295,8 +295,9 @@ void gtkGUI::cb_new_family (void)
         check_button_erase.block(true);
         check_button_check.block(true);
         check_button_verify.block(true);
-        // reset settings and lock controls
-        lock_and_clear();
+        // lock controls and reset settings
+        lock_controls();
+        clear_settings();
         // clear device tree-view
         tm_device->clear();
         // insert family members
@@ -324,7 +325,6 @@ void gtkGUI::cb_new_family (void)
         check_button_verify.unblock();
 }
 
-
 void gtkGUI::cb_new_device (void)
 {
         // delete current instance of Micro and "mark" as empty
@@ -346,8 +346,9 @@ void gtkGUI::cb_new_device (void)
                 }
         }
 
-        // reset settings and lock controls
-        lock_and_clear();
+        // lock controls and reset settings
+        lock_controls();
+        clear_settings();
         // do not proceed if "None" device
         if (device.size() < 1)
                 return;
@@ -355,15 +356,13 @@ void gtkGUI::cb_new_device (void)
         microcontroller = new Micro(exec_path, device);
         // prepare data for selected device
         microcontroller->parse_data();
-        // update labels and unlock controls
-        unlock_and_update();
+        // unlock controls and update labels
+        unlock_controls();
+        update_settings();
 }
 
-void gtkGUI::lock_and_clear (void)
+void gtkGUI::lock_controls (void)
 {
-        // clear old labels and fuses
-        display_fuses(false);
-        display_specs(false);
         // disable avrdude operations
         btn_check_sig->set_sensitive(false);
         btn_erase_dev->set_sensitive(false);
@@ -371,18 +370,36 @@ void gtkGUI::lock_and_clear (void)
         btn_fuse_write->set_sensitive(false);
         box_flash_ops->set_sensitive(false);
         box_eeprom_ops->set_sensitive(false);
+}
+
+void gtkGUI::unlock_controls (void)
+{
+        // enable avrdude operations
+        btn_check_sig->set_sensitive(true);
+        btn_erase_dev->set_sensitive(true);
+        btn_fuse_read->set_sensitive(true);
+        btn_fuse_write->set_sensitive(true);
+        box_flash_ops->set_sensitive(true);
+        if (microcontroller->specifications->eeprom_exists)
+                box_eeprom_ops->set_sensitive(true);
+}
+
+void gtkGUI::clear_settings (void)
+{
+        // clear old labels and fuses
+        display_fuses(false);
+        display_specs(false);
         // reset avrdude settings
         auto_verify->set_active(true);
         auto_erase->set_active(true);
         auto_check->set_active(true);
-        // update object settings
-        cb_dude_settings ();
         // clear signature-test result
         lbl_sig_tst->set_label("Unverified device selection.");
-
+        // update object settings
+        cb_dude_settings ();
 }
 
-void gtkGUI::unlock_and_update (void)
+void gtkGUI::update_settings (void)
 {
         // enable avrdude operations
         btn_check_sig->set_sensitive(true);
@@ -798,7 +815,6 @@ void gtkGUI::cb_eeprom_write(void)
         Glib::ustring filename = ent_eeprom_file->get_text();
         // warn and exit if no file specified
         if (filename.empty() == true) {
-
                 return;
         }
         // write eeprom memory
@@ -812,7 +828,6 @@ void gtkGUI::cb_eeprom_verify(void)
         Glib::ustring filename = ent_eeprom_file->get_text();
         // warn and exit if no file specified
         if (filename.empty() == true) {
-
                 return;
         }
         // verify flash memory
@@ -839,7 +854,6 @@ void gtkGUI::cb_flash_write(void)
         Glib::ustring filename = ent_flash_file->get_text();
         // warn and exit if no file specified
         if (filename.empty() == true) {
-
                 return;
         }
         // write flash memory
@@ -852,7 +866,6 @@ void gtkGUI::cb_flash_verify(void)
         Glib::ustring filename = ent_flash_file->get_text();
         // warn and exit if no file specified
         if (filename.empty() == true) {
-
                 return;
         }
         // verify flash memory
@@ -863,7 +876,6 @@ void gtkGUI::cb_fuse_write(void)
 {
         Glib::ustring data = "0x00 0x00 0x00";
         // get number of fuse bytes available
-
 
         // write fuse bytes
         avrdude->do_fuse_write(data);
@@ -883,8 +895,14 @@ void gtkGUI::cb_fuse_read(void)
 void gtkGUI::execution_done ()
 {
         //cout << "APPGUI: execution thread stopped!" << endl;
-
-        // display execution output
+        // enable controls
+        unlock_controls();
+        cb_device->set_sensitive(true);
+        cb_family->set_sensitive(true);
+        // change window cursor back
+        Glib::RefPtr<Gdk::Window> window = main_window->get_window();
+        window->set_cursor();
+        // display console output
         dude_output_buffer->set_text(avrdude->raw_exec_output);
 
         // check for errors and display relevant messages
@@ -898,9 +916,13 @@ void gtkGUI::execution_done ()
 void gtkGUI::execution_started ()
 {
         //cout << "APPGUI: execution thread initialized!" << endl;
-
         // disable controls
-
-        // display spinner
-
+        cb_device->set_sensitive(false);
+        cb_family->set_sensitive(false);
+        lock_controls();
+        // change window cursor
+        Glib::RefPtr<Gdk::Window> window = main_window->get_window();
+        Glib::RefPtr<Gdk::Display> display = main_window->get_display();
+        Glib::RefPtr<Gdk::Cursor> cursor = Gdk::Cursor::create(display, "wait");
+        window->set_cursor(cursor);
 }

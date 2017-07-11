@@ -2,6 +2,11 @@
 #define PROGGUI_H
 
 #include <sigc++/sigc++.h>
+
+//#include <gdkmm/cursor.h>
+//#include <gdkmm/display.h>
+//#include <gdkmm/window.h>
+
 #include <gtkmm.h>
 #include <iostream>
 #include <iomanip>
@@ -125,8 +130,10 @@ class gtkGUI
                 void clear_fuse_widget(FuseWidget* settings_widget);
                 bool data_prep_start (void);
                 void update_console_view (void);
-                void lock_and_clear (void);
-                void unlock_and_update (void);
+                void lock_controls (void);
+                void unlock_controls (void);
+                void clear_settings (void);
+                void update_settings (void);
                 void execution_done (void);
                 void execution_started (void);
                 //void msg_popup (Glib::ustring title, Glib::ustring message);
