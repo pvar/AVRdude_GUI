@@ -130,6 +130,7 @@ class gtkGUI
                 void clear_settings (void);
                 void update_settings (void);
                 void execution_done (void);
+                void execution_outcome (gboolean show_success_message);
                 void execution_started (void);
                 void message_popup_popup (Glib::ustring title, Glib::ustring message);
 };

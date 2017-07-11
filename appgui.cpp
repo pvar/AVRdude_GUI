@@ -474,19 +474,17 @@ void gtkGUI::cb_check_signature (void)
 {
         // read signature from device
         avrdude->do_read_signature();
-
         // get actuall signature from processed output
         Glib::ustring actual_signature = avrdude->processed_output;
         // get expected signature from specifications
         Glib::ustring selected_signature = microcontroller->specifications->signature.substr(2,7);
         // check for signature match
-        if (actual_signature == selected_signature) {
-                //cout << "we have a match!" << endl;
+        if (actual_signature == selected_signature)
                 lbl_sig_tst->set_label("Matching device detected :)");
-        } else {
-                //cout << "!! mismatch !!" << endl;
+        else
                 lbl_sig_tst->set_label("Unexpected device signature!");
-        }
+        // check execution outcome and display proper message...
+        execution_outcome(false);
 }
 
 void gtkGUI::cb_erase_devive (void)
@@ -905,41 +903,7 @@ void gtkGUI::execution_done ()
         // display console-output
         dude_output_buffer->set_text(avrdude->raw_exec_output);
         // check execution outcome and display proper message...
-        switch (avrdude->execution_status) {
-
-                case (no_error): {
-                        cout << "Operation completed successfuly!" << endl;
-                        break;
-                }
-                case (invalid_signature): {
-                        cout << "invalid_signature" << endl;
-                        break;
-                }
-                case (unknown_device): {
-                        cout << "unknown_device" << endl;
-                        break;
-                }
-                case (cannot_read_signature): {
-                        cout << "cannot_read_signature" << endl;
-                        break;
-                }
-                case (command_not_found): {
-                        cout << "command_not_found" << endl;
-                        break;
-                }
-                case (insufficient_permissions): {
-                        cout << "insufficient_permissions" << endl;
-                        break;
-                }
-                case (programmer_not_found): {
-                        cout << "programmer_not_found" << endl;
-                        break;
-                }
-                default: {
-                        cout << "Unknown error!" << endl;
-                        break;
-                }
-        }
+        execution_outcome(true);
 }
 
 void gtkGUI::execution_started ()
@@ -956,7 +920,50 @@ void gtkGUI::execution_started ()
         window->set_cursor(cursor);
 }
 
+void gtkGUI::execution_outcome (gboolean show_success_message)
+{
+        switch (avrdude->execution_status) {
+
+                case (no_error): {
+                        if (show_success_message)
+                                message_popup_popup("Success!", "Operation completed successfully.");
+                        break;
+                }
+                case (invalid_signature): {
+                        message_popup_popup("Failure!", "Invalid device signature detected. Double check your device selection.");
+                        break;
+                }
+                case (unknown_device): {
+                        message_popup_popup("Failure!", "Unknown device name supplied. Avrdude does not seem to support the specified device (outdated version?).");
+                        break;
+                }
+                case (cannot_read_signature): {
+                        message_popup_popup("Failure!", "Cannot read device signature. Probable cause: Corrupted device memory.");
+                        break;
+                }
+                case (command_not_found): {
+                        message_popup_popup("Failure!", "Executable (avrdude) not found. Did you forget to install it?");
+                        break;
+                }
+                case (insufficient_permissions): {
+                        message_popup_popup("Failure!", "Cannot access programmer. Insufficient permissions.");
+                        break;
+                }
+                case (programmer_not_found): {
+                        message_popup_popup("Failure!", "Programmer not found. Check your cable connections.");
+                        break;
+                }
+                default: {
+                        message_popup_popup("Failure!", "Unprecedented error...");
+                        break;
+                }
+        }
+}
+
 void gtkGUI::message_popup_popup (Glib::ustring title, Glib::ustring message)
 {
+        cout << "\nTitle: " << title << endl;
+        cout << "Message: " << message << endl;
+
 
 }
