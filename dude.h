@@ -8,36 +8,41 @@
 
 // enum memory_type { flash, eeprom, fuse };
 enum exec_status {
-                        no_error,
-                        invalid_signature,
-                        unknown_device,
-                        cannot_read_signature,
-                        command_not_found,
-                        insufficient_permissions,
-                        programmer_not_found
-                 };
+        no_error,
+        invalid_signature,
+        unknown_device,
+        cannot_read_signature,
+        command_not_found,
+        insufficient_permissions,
+        programmer_not_found
+};
 
 // array af strings that indicate an error has occured
-const std::vector<Glib::ustring> error_strings = {
-                                                "error reading signature data",
-                                                "Double check chip, or use -F to override this check.",
-                                                "Valid parts are:",
-                                                "command not found",
-                                                "can't open device",
-                                                "could not find",
-                                                "did not find any USB device"
-                                         };
+const std::vector<Glib::ustring>
+error_strings = {
+        "error reading signature data",
+        "Double check chip, or use -F to override this check.",
+        "Valid parts are:",
+        "command not found",
+        "can't open device",
+        "could not find",
+        "did not find any USB device"
+};
+
 // array af the correspsonding error-codes
 // (these two arrays should always have the same length)
-const std::vector<exec_status> error_codes = {
-                                        cannot_read_signature,
-                                        invalid_signature,
-                                        unknown_device,
-                                        command_not_found,
-                                        programmer_not_found,
-                                        programmer_not_found,
-                                        programmer_not_found
-                                     };
+const std::vector<exec_status>
+error_codes = {
+        cannot_read_signature,
+        invalid_signature,
+        unknown_device,
+        command_not_found,
+        programmer_not_found,
+        programmer_not_found,
+        programmer_not_found
+};
+
+
 
 class Dude
 {

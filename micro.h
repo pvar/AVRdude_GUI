@@ -52,6 +52,8 @@ class DeviceFuseSettings {
                 guint fusebytes_count;
 };
 
+
+
 class Micro
 {
         public:
