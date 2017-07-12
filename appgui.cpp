@@ -962,8 +962,10 @@ void gtkGUI::execution_outcome (gboolean show_success_message)
 
 void gtkGUI::message_popup_popup (Glib::ustring title, Glib::ustring message)
 {
-        cout << "\nTitle: " << title << endl;
-        cout << "Message: " << message << endl;
+        //cout << "\nTitle: " << title << endl;
+        //cout << "Message: " << message << endl;
 
-
+        Gtk::MessageDialog msg_box(*main_window, title);
+        msg_box.set_secondary_text(message);
+        msg_box.run();
 }
