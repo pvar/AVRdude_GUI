@@ -872,21 +872,19 @@ void gtkGUI::cb_flash_verify(void)
 
 void gtkGUI::cb_fuse_write(void)
 {
-        Glib::ustring data = "0x00 0x00 0x00";
-        // get number of fuse bytes available
-
         // write fuse bytes
-        avrdude->do_fuse_write(data);
+        avrdude->do_fuse_write (microcontroller->settings->fusebytes_count,
+                                microcontroller->usr_fusebytes[0],
+                                microcontroller->usr_fusebytes[1],
+                                microcontroller->usr_fusebytes[2]);
 }
 
 void gtkGUI::cb_fuse_read(void)
 {
-        // get number of fuse bytes available
-
         // read fuse bytes
-        avrdude->do_fuse_read();
+        avrdude->do_fuse_read(microcontroller->settings->fusebytes_count);
 
-        // process values and apply fuse-widgets
+        // apply fuse-bytes' values on fuse-widgets
 
 }
 

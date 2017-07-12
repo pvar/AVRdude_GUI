@@ -30,7 +30,7 @@ error_strings = {
 };
 
 // array af the correspsonding error-codes
-// (these two arrays should always have the same length)
+// (these two arrays should always have the same number of elements)
 const std::vector<exec_status>
 error_codes = {
         cannot_read_signature,
@@ -50,7 +50,7 @@ class Dude
                 Dude();
                 virtual ~Dude();
 
-                // fuse-byte values as read from the device
+                // fuse-byte values read from device
                 guint dev_fusebytes[3] = {255, 255, 255};
                 // console output from command execution
                 Glib::ustring raw_exec_output;
@@ -74,8 +74,8 @@ class Dude
                 void do_flash_write (Glib::ustring file);
                 void do_flash_read (Glib::ustring file);
                 void do_flash_verify (Glib::ustring file);
-                void do_fuse_write (Glib::ustring data);
-                void do_fuse_read (void);
+                void do_fuse_write (guint fusebytes_count, gint low, gint high, gint ext);
+                void do_fuse_read (guint fusebytes_count);
 
                 // signal for end-of-execution
                 typedef sigc::signal<void> type_sig_exec_done;

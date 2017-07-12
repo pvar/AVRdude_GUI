@@ -172,107 +172,129 @@ void Dude::execution_end (void)
 
 void Dude::do_eeprom_write (Glib::ustring file)
 {
-        cout << "eeprom write!" << endl;
         // prepare command to be executed
         command.clear();
         command.append(oneliner);
         command.append("-U eeprom:w:\"" + file + "\":a"); // write file to eeprom
         // execute command
-cout << command << endl;
         execution_begin ();
 }
 
 void Dude::do_eeprom_read (Glib::ustring file)
 {
-        cout << "eeprom read!" << endl;
         // prepare command to be executed
         command.clear();
         command.append(oneliner);
         command.append("-U eeprom:r:\"" + file + "\":h"); // copy eeprom to file
         // execute command
-cout << command << endl;
         execution_begin ();
 }
 
 void Dude::do_eeprom_verify (Glib::ustring file)
 {
-        cout << "eeprom verify!" << endl;
         // prepare command to be executed
         command.clear();
         command.append(oneliner);
         command.append("-U eeprom:v:\"" + file + "\":a"); // verify eeprom against file
         // execute command
-cout << command << endl;
         execution_begin ();
 }
 
 void Dude::do_flash_write (Glib::ustring file)
 {
-        cout << "flash write!" << endl;
         // prepare command to be executed
         command.clear();
         command.append(oneliner);
         command.append("-U flash:w:\"" + file + "\":a"); // write file to flash
         // execute command
-cout << command << endl;
         execution_begin ();
 }
 
 void Dude::do_flash_read (Glib::ustring file)
 {
-        cout << "flash read!" << endl;
         // prepare command to be executed
         command.clear();
         command.append(oneliner);
         command.append("-U flash:r:\"" + file + "\":r"); // copy flash to file
         // execute command
-cout << command << endl;
         execution_begin ();
 }
 
 void Dude::do_flash_verify (Glib::ustring file)
 {
-        cout << "flash verify!" << endl;
         // prepare command to be executed
         command.clear();
         command.append(oneliner);
         command.append("-U flash:v:\"" + file + "\":a"); // verify flash against file
         // execute command
-cout << command << endl;
         execution_begin ();
 }
 
-void Dude::do_fuse_write (Glib::ustring data)
+void Dude::do_fuse_write (guint fusebytes_count, gint low, gint high, gint ext)
 {
-        cout << "fuse write!" << endl;
-        // get number of fuse bytes
-
         // prepare command to be executed
         command.clear();
         command.append(oneliner);
-        command.append("-U lfuse:w:value:m -U hfuse:w:value:m -U efuse:w:value:m"); // write fuse bytes
+        ostringstream steam_string;
+        switch (fusebytes_count) {
+                case (1): {
+                        // LOW fuse byte
+                        steam_string << "-U lfuse:w:" << low << ":m -U";
+                        break;
+                }
+                case (2): {
+                        // LOW and HIGH fuse bytes
+                        steam_string << "-U lfuse:w:" << low << ":m -U hfuse:w:" << high << ":m";
+                        break;
+                }
+                default: {
+                        // LOW, HIGH and EXTENDED fuse bytes
+                        steam_string << "-U lfuse:w:" << low << ":m -U hfuse:w:" << high << ":m -U efuse:w:" << ext << ":m";
+                        break;
+                }
+        }
+        command.append(steam_string.str());
         // execute command
-cout << command << endl;
         execution_begin ();
 }
 
-void Dude::do_fuse_read (void)
+void Dude::do_fuse_read (guint fusebytes_count)
 {
-        cout << "fuse read!" << endl;
-        // get number of fuse bytes
-
         // prepare command to be executed
         command.clear();
         command.append(oneliner);
-        command.append("-U lfuse:r:-:d -U hfuse:r:-:d -U efuse:r:-:d -q"); // read fuse bytes
+        switch (fusebytes_count) {
+                case (1): {
+                        // LOW fuse byte
+                        command.append("-U lfuse:r:-:d -q");
+                        break;
+                }
+                case (2): {
+                        // LOW and HIGH fuse bytes
+                        command.append("-U lfuse:r:-:d -U hfuse:r:-:d -q");
+                        break;
+                }
+                default: {
+                        // LOW, HIGH and EXTENDED fuse bytes
+                        command.append("-U lfuse:r:-:d -U hfuse:r:-:d -U efuse:r:-:d -q");
+                        break;
+                }
+        }
         // execute command
-cout << command << endl;
-        execution_begin ();
+        execute ();
+
+        // get fuse-bytes' values
+
+//        dev_fusebytes[0] = ...
+//        dev_fusebytes[1] = ...
+//        dev_fusebytes[2] = ...
+
+
 }
 
 void Dude::check_for_errors (void)
 {
-        guint index; // error_strings is a list and list-indices are unsigned!
+        guint index; // error_strings is a list... list-indices are unsigned!!
         guint max_index = error_strings.size();
         gint error_code_index = -1;
         Glib::ustring::size_type er_str_pos;
