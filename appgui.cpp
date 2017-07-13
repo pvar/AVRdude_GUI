@@ -152,6 +152,15 @@ void gtkGUI::populate_static_treemodels (void)
 {
         Gtk::TreeModel::Row row;
         // populate tree-model with device families
+        //row = *(tm_family->append());
+        //row[cbm_generic.col_name] = "AT Xmega";
+        //row[cbm_generic.col_data] = "ATxmega";
+        row = *(tm_family->append());
+        row[cbm_generic.col_name] = "AT mega";
+        row[cbm_generic.col_data] = "ATmega";
+        row = *(tm_family->append());
+        row[cbm_generic.col_name] = "AT tiny";
+        row[cbm_generic.col_data] = "ATtiny";
         row = *(tm_family->append());
         row[cbm_generic.col_name] = "AT 90S xxxx";
         row[cbm_generic.col_data] = "AT90S";
@@ -164,16 +173,7 @@ void gtkGUI::populate_static_treemodels (void)
         row = *(tm_family->append());
         row[cbm_generic.col_name] = "AT 90 PWM";
         row[cbm_generic.col_data] = "AT90PWM";
-        row = *(tm_family->append());
-        row[cbm_generic.col_name] = "AT mega";
-        row[cbm_generic.col_data] = "ATmega";
-        row = *(tm_family->append());
-        row[cbm_generic.col_name] = "AT tiny";
-        row[cbm_generic.col_data] = "ATtiny";
-        //row = *(tm_family->append());
-        //row[cbm_generic.col_name] = "AT Xmega";
-        //row[cbm_generic.col_data] = "ATxmega";
-        cb_family->set_active(5);
+        cb_family->set_active(0);
 
         // populate tree-model with supported protocols
         row = *(tm_protocol->append());
@@ -884,7 +884,21 @@ void gtkGUI::cb_fuse_read(void)
         // read fuse bytes
         avrdude->do_fuse_read(microcontroller->settings->fusebytes_count);
 
-        // apply fuse-bytes' values on fuse-widgets
+        // display message for operation outcome...
+        execution_outcome(true);
+
+        // exit if outcome NOT successful
+        if (avrdude->execution_status != no_error)
+                return;
+
+        // exit if fuse-byte values are invalid
+        for (gint i = 0; i < (microcontroller->settings->fusebytes_count - 1); i++) {
+                cout << "fuse byte value: " << avrdude->dev_fusebytes[i] << endl;
+                if (avrdude->dev_fusebytes[i] == -1)
+                        return;
+        }
+
+        // apply fuse-bytes read from device on fuse-widgets
 
 }
 

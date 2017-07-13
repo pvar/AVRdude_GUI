@@ -54,7 +54,7 @@ class Dude
                 virtual ~Dude();
 
                 // fuse-byte values read from device
-                guint dev_fusebytes[3] = {255, 255, 255};
+                gint dev_fusebytes[3] = {255, 255, 255};
                 // console output from command execution
                 Glib::ustring raw_exec_output;
                 // usefull part of output -- according to nature of executed command
@@ -77,8 +77,8 @@ class Dude
                 void do_flash_write (Glib::ustring file);
                 void do_flash_read (Glib::ustring file);
                 void do_flash_verify (Glib::ustring file);
-                void do_fuse_write (guint fusebytes_count, gint low, gint high, gint ext);
-                void do_fuse_read (guint fusebytes_count);
+                void do_fuse_write (gint fusebytes_count, gint low, gint high, gint ext);
+                void do_fuse_read (gint fusebytes_count);
 
                 // signal for end-of-execution
                 typedef sigc::signal<void> type_sig_exec_done;

@@ -133,7 +133,7 @@ void Dude::execute (void)
                 pclose(stream);
         }
         // add executed command at the beginning of output string
-        raw_exec_output = "> " + command + "\n" + raw_exec_output;
+        raw_exec_output = "$ " + command + "\n" + raw_exec_output;
 
         // check if in thread...
         if (avrdude_thread)
@@ -230,7 +230,7 @@ void Dude::do_flash_verify (Glib::ustring file)
         execution_begin ();
 }
 
-void Dude::do_fuse_write (guint fusebytes_count, gint low, gint high, gint ext)
+void Dude::do_fuse_write (gint fusebytes_count, gint low, gint high, gint ext)
 {
         // prepare command to be executed
         command.clear();
@@ -258,7 +258,7 @@ void Dude::do_fuse_write (guint fusebytes_count, gint low, gint high, gint ext)
         execution_begin ();
 }
 
-void Dude::do_fuse_read (guint fusebytes_count)
+void Dude::do_fuse_read (gint fusebytes_count)
 {
         // prepare command to be executed
         command.clear();
@@ -266,30 +266,53 @@ void Dude::do_fuse_read (guint fusebytes_count)
         switch (fusebytes_count) {
                 case (1): {
                         // LOW fuse byte
-                        command.append("-U lfuse:r:-:d -q");
+                        command.append("-q -U lfuse:r:-:d");
                         break;
                 }
                 case (2): {
                         // LOW and HIGH fuse bytes
-                        command.append("-U lfuse:r:-:d -U hfuse:r:-:d -q");
+                        command.append("-q -U lfuse:r:-:d -U hfuse:r:-:d");
                         break;
                 }
                 default: {
                         // LOW, HIGH and EXTENDED fuse bytes
-                        command.append("-U lfuse:r:-:d -U hfuse:r:-:d -U efuse:r:-:d -q");
+                        command.append("-q -U lfuse:r:-:d -U hfuse:r:-:d -U efuse:r:-:d");
                         break;
                 }
         }
         // execute command
         execute ();
 
-        // get fuse-bytes' values
+        // clear fuse-bytes' values
+        dev_fusebytes[0] = -1;
+        dev_fusebytes[1] = -1;
+        dev_fusebytes[2] = -1;
 
-//        dev_fusebytes[0] = ...
-//        dev_fusebytes[1] = ...
-//        dev_fusebytes[2] = ...
+        // check output for errors
+        check_for_errors();
+        if (execution_status != no_error)
+                return;
 
-
+        // extract fuse-byte values from execution output
+        gint char_counter = 0;
+        gint lines_extracted = 0;
+        Glib::ustring line;
+        // parse execution output line by line, starting from the end...
+        for (gint iter = raw_exec_output.size() - 2; iter > 0; iter--) {
+                char_counter++;
+                if (raw_exec_output[iter] == '\n') {
+                        // update extracted lines' count
+                        lines_extracted++;
+                        // extract line
+                        line = raw_exec_output.substr(iter + 1, char_counter - 1);
+                        char_counter = 0;
+                        // get value from extracted line
+                        stringstream(line) >> dev_fusebytes[3 - lines_extracted];
+                        // check if received all values
+                        if (lines_extracted == fusebytes_count)
+                                break;
+                }
+        }
 }
 
 void Dude::check_for_errors (void)
