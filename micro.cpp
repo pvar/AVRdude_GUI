@@ -216,17 +216,17 @@ int Micro::parse_settings (xmlpp::Node *root_node)
                 xml_node = tmp_node;
         }
 
-        guint fuse_byte_counter = 0;
+        gint fuse_byte_counter = 0;
         // loop through children (reg nodes)
         children = xml_node->get_children();
         for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
-                // increase fuse-byte counter
-                fuse_byte_counter++;
                 // get offset value for this reg node
                 Glib::ustring regoffset = this->get_att_value((*node_iterator), "offset");
                 // if no offset attribute was found, proceed to next iteration
                 if (regoffset.size() < 1)
                         continue;
+                // increase fuse-byte counter
+                fuse_byte_counter++;
                 guint offset = ::atoi((regoffset.substr(2, 2)).c_str());
                 // get name for this reg node
                 Glib::ustring regname = this->get_att_value((*node_iterator), "name");
@@ -246,6 +246,7 @@ int Micro::parse_settings (xmlpp::Node *root_node)
                 delete entry;
         }
         settings->fusebytes_count = fuse_byte_counter;
+        cout << "FUSE BYTES: " << fuse_byte_counter << endl;
 
         // print fuse setting list ---------------------------------------------------------------*/
         //cout << endl;

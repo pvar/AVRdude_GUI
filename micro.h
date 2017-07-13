@@ -49,7 +49,7 @@ class DeviceFuseSettings {
 
                 std::list<FuseSetting> *fuse_settings = nullptr;
                 std::map <Glib::ustring, std::list<OptionEntry>*> *option_lists = nullptr;
-                guint fusebytes_count;
+                gint fusebytes_count;
 };
 
 
