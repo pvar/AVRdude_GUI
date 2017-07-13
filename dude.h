@@ -9,6 +9,7 @@
 // enum memory_type { flash, eeprom, fuse };
 enum exec_status {
         no_error,
+        init_error,
         invalid_signature,
         unknown_device,
         cannot_read_signature,
@@ -26,7 +27,8 @@ error_strings = {
         "command not found",
         "can't open device",
         "could not find",
-        "did not find any USB device"
+        "did not find any USB device",
+        "target doesn't answer"
 };
 
 // array af the correspsonding error-codes
@@ -39,7 +41,8 @@ error_codes = {
         command_not_found,
         programmer_not_found,
         programmer_not_found,
-        programmer_not_found
+        programmer_not_found,
+        init_error
 };
 
 

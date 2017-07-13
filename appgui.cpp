@@ -927,6 +927,10 @@ void gtkGUI::execution_outcome (gboolean show_success_message)
                                 message_popup_popup("Success!", "Operation completed successfully.");
                         break;
                 }
+                case (init_error): {
+                        message_popup_popup("Failure!", "Programmer failed to initialize the device. Check your device connection, clock source and fuse settings.");
+                        break;
+                }
                 case (invalid_signature): {
                         message_popup_popup("Failure!", "Invalid device signature detected. Double check your device selection.");
                         break;
