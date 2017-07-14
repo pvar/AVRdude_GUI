@@ -2,6 +2,7 @@
 #define MICRO_H
 
 #include <libxml++/libxml++.h>
+#include <gtkmm.h>
 #include <iostream>
 #include <dirent.h>
 
@@ -82,8 +83,8 @@ class Micro
                 gint parse_settings (xmlpp::Node *root_node);
                 gint parse_warnings (xmlpp::Node *root_node);
 
-                std::list<OptionEntry>* get_lst_enum (xmlpp::Node* xml_node);
-                std::list<FuseSetting>* get_lst_fuse (xmlpp::Node* xml_node, guint offset);
+                std::list<OptionEntry>* get_enum_list (xmlpp::Node* xml_node);
+                std::list<FuseSetting>* get_fuse_list (xmlpp::Node* xml_node, guint offset);
                 Glib::ustring get_signature_bytes (xmlpp::Node* signature_node);
 
                 xmlpp::Node* get_child_with_attr (xmlpp::Node* starting_node, Glib::ustring att_name, Glib::ustring att_value);
@@ -92,6 +93,10 @@ class Micro
 
                 // utilities
                 Glib::ustring float_to_string (gfloat number);
+                void print_fuse_warnings (void);
+                void print_fuse_settings (void);
+                void print_option_lists (void);
+                //void print_fuse_warnings();
 };
 
 #endif

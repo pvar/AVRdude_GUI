@@ -118,13 +118,16 @@ void Micro::parse_data ()
         // prepare data structures
         if (specifications)
                 delete specifications;
-        if (warnings)
+        if (warnings) {
                 delete warnings;
+        }
         if (settings) {
-                if (settings->fuse_settings)
+                if (settings->fuse_settings) {
                         delete settings->fuse_settings;
-                if (settings->option_lists)
+                }
+                if (settings->option_lists) {
                         delete settings->option_lists;
+                }
                 delete settings;
         }
         specifications = new DeviceSpecifications;
@@ -149,11 +152,11 @@ void Micro::parse_data ()
                                 return;
                         }
 
-                        // should check return status!
+                        // --- should check return status! ----------------
                         parse_specifications(root_node);
                         parse_settings(root_node);
                         parse_warnings(root_node);
-                        // ---------------------------
+                        // ------------------------------------------------
                 }
         } catch(const exception& ex) {
                 cout << "Exception caught, trying to parse device description file: " << ex.what() << endl;
@@ -175,7 +178,7 @@ int Micro::parse_settings (xmlpp::Node *root_node)
 {
         //cout << "PARSING FUSES..." << endl;
 
-        DeviceFuseSettings* settings = new DeviceFuseSettings;
+        settings = new DeviceFuseSettings;
 
         xmlpp::Node::NodeList children;
         xmlpp::Node::NodeList::iterator node_iterator;
@@ -237,7 +240,7 @@ int Micro::parse_settings (xmlpp::Node *root_node)
                 entry->offset = 512; // special value that denotes a pseudo-entry
                 // prepare list of settings from this node
                 list<FuseSetting> *fuse_listing = new list<FuseSetting>;
-                fuse_listing = this->get_lst_fuse ((*node_iterator), offset);
+                fuse_listing = this->get_fuse_list ((*node_iterator), offset);
                 // add pseudo-setting in this list of settings
                 fuse_listing->push_front(*entry);
                 // add this settings list to the rest
@@ -245,20 +248,11 @@ int Micro::parse_settings (xmlpp::Node *root_node)
                 (settings->fuse_settings)->splice(pos, *fuse_listing);
                 delete entry;
         }
+        //cout << "FUSE BYTES: " << fuse_byte_counter << endl;
         settings->fusebytes_count = fuse_byte_counter;
-        cout << "FUSE BYTES: " << fuse_byte_counter << endl;
 
-        // print fuse setting list ---------------------------------------------------------------*/
-        //cout << endl;
-        //list<FuseSetting>::iterator iter0;
-        //for (iter0 = (settings->fuse_settings)->begin(); iter0 != (settings->fuse_settings)->end(); ++iter0) {
-        //                cout << (*iter0).fname << " ";
-        //                cout << "mask[" << (*iter0).fmask << "] ";
-        //                cout << "offset[" << (*iter0).offset << "] ";
-        //                cout << "enum[" << (*iter0).fenum << "] ";
-        //                cout << (*iter0).fdesc << endl;
-        //}
-        //----------------------------------------------------------------------------------------*/
+        // debug print-out...
+        print_fuse_settings();
 
         // go up to parent node
         xml_node = xml_node->get_parent();
@@ -270,24 +264,16 @@ int Micro::parse_settings (xmlpp::Node *root_node)
                         continue;
                 // prepare list with this enumerator's entries
                 list<OptionEntry> *enum_listing = new list<OptionEntry>;
-                enum_listing = this->get_lst_enum ((*node_iterator));
+                enum_listing = this->get_enum_list ((*node_iterator));
                 // get enumerator name
                 Glib::ustring enum_name = this->get_att_value ((*node_iterator), "name");
                 // add new entry in map
                 (*settings->option_lists)[enum_name] = enum_listing;
         }
 
-        // print option_lists map -----------------------------------------------------------------*/
-        //map<Glib::ustring, list<OptionEntry>*>::iterator iter1;
-        //for (iter1 = (settings->option_lists)->begin(); iter1 != (settings->option_lists)->end(); ++iter1) {
-        //        cout << iter1->first << " => " << endl;
-        //        list<OptionEntry>::iterator iter2;
-        //        for (iter2 = (*iter1->second).begin(); iter2 != (*iter1->second).end(); ++iter2)
-        //                        cout << (*iter2).ename << endl;
-        //}
-        //----------------------------------------------------------------------------------------*/
+        // debug print-out...
+        print_option_lists();
 
-        this->settings = settings;
         return 1;
 }
 
@@ -299,9 +285,51 @@ int Micro::parse_warnings (xmlpp::Node *root_node)
 {
         //cout << "PARSING WARNINGS..." << endl;
 
-        list<FuseWarning>* warnings = new list<FuseWarning>;
+        Glib::ustring raw_warning;
+        FuseWarning *warning_entry;
+        warnings = new list<FuseWarning>;
 
-        this->warnings = warnings;
+        xmlpp::Node* xml_node = root_node;
+        //xmlpp::Node* tmp_node = nullptr;
+
+        // go to PROGRAMMING node
+        xml_node = xml_node->get_first_child("PROGRAMMING");
+        // if no such node was found, it must be a device without fuses...
+        if (!xml_node)
+                return 0;
+
+        // go to ISPInterface node
+        xml_node = xml_node->get_first_child("ISPInterface");
+        // if no such node was found, it must be a device without fuses...
+        if (!xml_node)
+                return 0;
+
+        // loop through children and get warnings
+        xmlpp::Node::NodeList::iterator node_iterator;
+        xmlpp::Node::NodeList children = xml_node->get_children();
+        for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
+                // get name of current sibling...
+                const Glib::ustring node_name = (*node_iterator)->get_name();
+                // if not a FuseWarning, proceed to next sibling...
+                if (node_name.compare("FuseWarning") != 0)
+                        continue;
+                // get string (raw) representation of warning...
+                raw_warning = get_txt_value ((*node_iterator));
+                // assemble fuse warning structure
+                warning_entry = new FuseWarning;
+                stringstream(raw_warning.substr(0,1)) >> hex >> warning_entry->fbyte;
+                stringstream(raw_warning.substr(2,4)) >> hex >> warning_entry->fmask;
+                stringstream(raw_warning.substr(7,4)) >> hex >> warning_entry->fresult;
+                warning_entry->warning = raw_warning.substr(12,1000);
+                // inset warning in list
+                warnings->push_back(*warning_entry);
+                // delete temporary wanring entry
+                delete warning_entry;
+        }
+
+        // debug print-out...
+        print_fuse_warnings();
+
         return 1;
 }
 
@@ -495,7 +523,7 @@ Glib::ustring Micro::get_att_value (xmlpp::Node* xml_node, Glib::ustring att_nam
 // Get list of enumerator members
 // ******************************************************************************
 
-list<OptionEntry>* Micro::get_lst_enum (xmlpp::Node* xml_node)
+list<OptionEntry>* Micro::get_enum_list (xmlpp::Node* xml_node)
 {
         list<OptionEntry> *enum_listing = new list<OptionEntry>;
 
@@ -540,7 +568,7 @@ list<OptionEntry>* Micro::get_lst_enum (xmlpp::Node* xml_node)
 // Get list of settings
 // ******************************************************************************
 
-list<FuseSetting>* Micro::get_lst_fuse (xmlpp::Node* xml_node, guint offset)
+list<FuseSetting>* Micro::get_fuse_list (xmlpp::Node* xml_node, guint offset)
 {
         list<FuseSetting> *fuse_listing = new list<FuseSetting>;
 
@@ -606,7 +634,7 @@ Glib::ustring Micro::get_signature_bytes (xmlpp::Node* signature_node)
 }
 
 // ******************************************************************************
-// Crate the string representation of a float
+// Create the string representation of a float
 // ******************************************************************************
 
 Glib::ustring Micro::float_to_string (gfloat number)
@@ -616,4 +644,44 @@ Glib::ustring Micro::float_to_string (gfloat number)
         value.resize(chars_written);
 
         return (Glib::ustring)value;
+}
+
+// ******************************************************************************
+// List printing for debug purposes
+// ******************************************************************************
+
+void Micro::print_fuse_warnings (void)
+{
+        list<FuseWarning>::iterator iter;
+        for (iter = warnings->begin(); iter != warnings->end(); iter++) {
+                cout << endl;
+                cout << "    byte: " << iter->fbyte << endl;
+                cout << "    mask: " << iter->fmask << endl;
+                cout << "   value: " << iter->fresult << endl;
+                cout << "    text: " << iter->warning << endl;
+        }
+}
+
+void Micro::print_fuse_settings (void)
+{
+        list<FuseSetting>::iterator iter;
+        for (iter = (settings->fuse_settings)->begin(); iter != (settings->fuse_settings)->end(); ++iter) {
+                cout << endl;
+                cout << (*iter).fname << " ";
+                cout << "mask[" << (*iter).fmask << "] ";
+                cout << "offset[" << (*iter).offset << "] ";
+                cout << "enum[" << (*iter).fenum << "] ";
+                cout << (*iter).fdesc << endl;
+        }
+}
+
+void Micro::print_option_lists (void)
+{
+        map<Glib::ustring, list<OptionEntry>*>::iterator iter;
+        for (iter = (settings->option_lists)->begin(); iter != (settings->option_lists)->end(); ++iter) {
+                cout << iter->first << " => " << endl;
+                list<OptionEntry>::iterator iter2;
+                for (iter2 = (*iter->second).begin(); iter2 != (*iter->second).end(); ++iter2)
+                                cout << (*iter2).ename << endl;
+        }
 }
