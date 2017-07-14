@@ -252,7 +252,7 @@ int Micro::parse_settings (xmlpp::Node *root_node)
         settings->fusebytes_count = fuse_byte_counter;
 
         // debug print-out...
-        print_fuse_settings();
+        //print_fuse_settings();
 
         // go up to parent node
         xml_node = xml_node->get_parent();
@@ -272,7 +272,7 @@ int Micro::parse_settings (xmlpp::Node *root_node)
         }
 
         // debug print-out...
-        print_option_lists();
+        //print_option_lists();
 
         return 1;
 }
@@ -320,7 +320,7 @@ int Micro::parse_warnings (xmlpp::Node *root_node)
                 stringstream(raw_warning.substr(0,1)) >> hex >> warning_entry->fbyte;
                 stringstream(raw_warning.substr(2,4)) >> hex >> warning_entry->fmask;
                 stringstream(raw_warning.substr(7,4)) >> hex >> warning_entry->fresult;
-                warning_entry->warning = raw_warning.substr(12,1000);
+                warning_entry->warning = raw_warning.substr(21,1000);
                 // inset warning in list
                 warnings->push_back(*warning_entry);
                 // delete temporary wanring entry
@@ -328,7 +328,7 @@ int Micro::parse_warnings (xmlpp::Node *root_node)
         }
 
         // debug print-out...
-        print_fuse_warnings();
+        //print_fuse_warnings();
 
         return 1;
 }

@@ -401,22 +401,14 @@ void gtkGUI::clear_settings (void)
 
 void gtkGUI::update_settings (void)
 {
-        // enable avrdude operations
-        btn_check_sig->set_sensitive(true);
-        btn_erase_dev->set_sensitive(true);
-        btn_fuse_read->set_sensitive(true);
-        btn_fuse_write->set_sensitive(true);
-        box_flash_ops->set_sensitive(true);
-        if (microcontroller->specifications->eeprom_exists)
-                box_eeprom_ops->set_sensitive(true);
         // display specifications
         display_specs(true);
         // display fuse settings
         display_fuses(true);
         // clear fuse-byte values
-        microcontroller->usr_fusebytes[0] = 255;
-        microcontroller->usr_fusebytes[1] = 255;
-        microcontroller->usr_fusebytes[2] = 255;
+//        microcontroller->usr_fusebytes[0] = 255;
+//        microcontroller->usr_fusebytes[1] = 255;
+//        microcontroller->usr_fusebytes[2] = 255;
         // display fuse bytes
         display_fuse_bytes();
 }
@@ -592,12 +584,12 @@ void gtkGUI::display_fuses (gboolean have_fuses)
                                 // widget is a checkbutton (normal setting)
                                 // create pointer to checkbutton
                                 widget_entry->check = new Gtk::CheckButton((*iter).fdesc);
-                                // add callback for on_change event
-                                *(widget_entry->callback) = (widget_entry->check)->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuses));
                                 // put checkbutton in grid
                                 fuse_grid->attach(*(widget_entry->check), 0, grid_line++, 1, 1);
                                 // show widget
                                 (widget_entry->check)->show();
+                                // add callback for on_change event
+                                *(widget_entry->callback) = (widget_entry->check)->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuses));
                         }
                 } else {
                         // create pointer to treemodel
@@ -622,8 +614,6 @@ void gtkGUI::display_fuses (gboolean have_fuses)
                         (widget_entry->combo)->set_model(widget_entry->model);
                         // define visible columns
                         (widget_entry->combo)->pack_start(cbm_generic.col_name);
-                        // add callback for on_change event
-                        *(widget_entry->callback) = (widget_entry->combo)->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuses));
                         // set align, indent and width of the widgets
                         (widget_entry->combo_label)->set_halign(Gtk::Align::ALIGN_START);
                         (widget_entry->combo_label)->set_margin_start(24);
@@ -636,6 +626,8 @@ void gtkGUI::display_fuses (gboolean have_fuses)
                         // show widgets
                         (widget_entry->combo_label)->show();
                         (widget_entry->combo)->show();
+                        // add callback for on_change event
+                        *(widget_entry->callback) = (widget_entry->combo)->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuses));
                 }
                 // copy bit-mask and fuse-byte offset
                 widget_entry->bitmask = (*iter).fmask;
@@ -647,6 +639,20 @@ void gtkGUI::display_fuses (gboolean have_fuses)
 
 void gtkGUI::calculate_fuses ()
 {
+        /*
+        How to calculate fuse-bytes from settings...
+
+        If it's a multiple (combo box) setting:
+                combo setting: factor = bitmask / MAX(enum_value)
+                combo setting: adjusted_value = selected_enum_value * factor
+                combo setting: adjusted_value XOR bitmask
+
+        If it's a simple (check button) setting:
+                single setting: just keep the bitmask
+
+        fuse byte value: bitmasks are ORed and the result is negated
+        */
+
         // clear fuse-byte values
         microcontroller->usr_fusebytes[0] = 0;
         microcontroller->usr_fusebytes[1] = 0;
@@ -655,20 +661,10 @@ void gtkGUI::calculate_fuses ()
         Gtk::TreeModel::iterator selected;
         Gtk::TreeModel::Row selected_row;
 
-        /*
-                calculate fuse-bytes from settings...
-
-                combo setting: factor = bitmask / MAX(enum_value)
-                combo setting: adjusted_value = selected_enum_value * factor
-                combo setting: adjusted_value XOR bitmask
-
-                single setting: just keep the bitmask
-
-                fuse bytes: bitmasks are ORed and the result is negated
-        */
-
+        // loop through fuse widgets and get state
         list<FuseWidget>::iterator fwidget = fuse_tab_widgets->begin();
         for (fwidget++; fwidget != fuse_tab_widgets->end(); ++fwidget) {
+                // check if is a combo-box or a check button
                 if ((fwidget->bytenum >= 0) && (fwidget->bytenum <= 2)) {
                         if (fwidget->combo) {
                                 selected = (fwidget->combo)->get_active();
@@ -689,8 +685,32 @@ void gtkGUI::calculate_fuses ()
         microcontroller->usr_fusebytes[1] ^= 255;
         microcontroller->usr_fusebytes[2] ^= 255;
 
+        check_fuses();
+
         // display fuse bytes
         display_fuse_bytes();
+}
+
+void gtkGUI::check_fuses (void)
+{
+        gboolean found_warnings = false;
+        Glib::ustring warnings;
+
+        // loop through warnings list
+        list<FuseWarning>::iterator iter;
+        for (iter = microcontroller->warnings->begin(); iter != microcontroller->warnings->end(); iter++) {
+                // check if warning applies...
+                guint check_result = microcontroller->usr_fusebytes[iter->fbyte] & iter->fmask;
+                if (check_result == iter->fresult) {
+                        found_warnings = true;
+                        warnings += iter->warning;
+                        warnings += "\n";
+                }
+        }
+
+        if (found_warnings)
+                message_popup("Warning!", warnings);
+
 }
 
 void gtkGUI::display_fuse_bytes ()
@@ -938,45 +958,45 @@ void gtkGUI::execution_outcome (gboolean show_success_message)
 
                 case (no_error): {
                         if (show_success_message)
-                                message_popup_popup("Success!", "Operation completed successfully.");
+                                message_popup("Success!", "Operation completed successfully.");
                         break;
                 }
                 case (init_error): {
-                        message_popup_popup("Failure!", "Programmer failed to initialize the device. Check your device connection, clock source and fuse settings.");
+                        message_popup("Failure!", "Programmer failed to initialize the device. Check your device connection, clock source and fuse settings.");
                         break;
                 }
                 case (invalid_signature): {
-                        message_popup_popup("Failure!", "Invalid device signature detected. Double check your device selection.");
+                        message_popup("Failure!", "Invalid device signature detected. Double check your device selection.");
                         break;
                 }
                 case (unknown_device): {
-                        message_popup_popup("Failure!", "Unknown device name supplied. Avrdude does not seem to support the specified device (outdated version?).");
+                        message_popup("Failure!", "Unknown device name supplied. Avrdude does not seem to support the specified device (outdated version?).");
                         break;
                 }
                 case (cannot_read_signature): {
-                        message_popup_popup("Failure!", "Cannot read device signature. Probable cause: Corrupted device memory.");
+                        message_popup("Failure!", "Cannot read device signature. Probable cause: Corrupted device memory.");
                         break;
                 }
                 case (command_not_found): {
-                        message_popup_popup("Failure!", "Executable (avrdude) not found. Did you forget to install it?");
+                        message_popup("Failure!", "Executable (avrdude) not found. Did you forget to install it?");
                         break;
                 }
                 case (insufficient_permissions): {
-                        message_popup_popup("Failure!", "Cannot access programmer. Insufficient permissions.");
+                        message_popup("Failure!", "Cannot access programmer. Insufficient permissions.");
                         break;
                 }
                 case (programmer_not_found): {
-                        message_popup_popup("Failure!", "Programmer not found. Check your cable connections.");
+                        message_popup("Failure!", "Programmer not found. Check your cable connections.");
                         break;
                 }
                 default: {
-                        message_popup_popup("Failure!", "Unprecedented error...");
+                        message_popup("Failure!", "Unprecedented error...");
                         break;
                 }
         }
 }
 
-void gtkGUI::message_popup_popup (Glib::ustring title, Glib::ustring message)
+void gtkGUI::message_popup (Glib::ustring title, Glib::ustring message)
 {
         //cout << "\nTitle: " << title << endl;
         //cout << "Message: " << message << endl;

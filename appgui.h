@@ -132,7 +132,8 @@ class gtkGUI
                 void execution_done (void);
                 void execution_outcome (gboolean show_success_message);
                 void execution_started (void);
-                void message_popup_popup (Glib::ustring title, Glib::ustring message);
+                void message_popup (Glib::ustring title, Glib::ustring message);
+                void check_fuses (void);
 };
 
 #endif
