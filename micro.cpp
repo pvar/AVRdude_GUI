@@ -20,12 +20,9 @@ DeviceFuseSettings::~DeviceFuseSettings()
         delete fuse_settings;
 }
 
-Micro::Micro (Glib::ustring path, Glib::ustring xml)
+Micro::Micro (Glib::ustring path)
 {
-        //cout << "EXE PATH = [" << path << "]" << endl;
-        //cout << "XML FILE = [" << xml << "]" << endl;
         exec_path = path;
-        device_xml = xml;
 }
 
 Micro::~Micro()
@@ -45,6 +42,11 @@ Micro::~Micro()
 void Micro::get_device_list (void)
 {
         device_map = new map <Glib::ustring, Glib::ustring>;
+
+        // attempt to get mapping from configuration file
+        if (load_xml_map())
+                return;
+
         DIR *directory;
         struct dirent *entry;
 
@@ -58,7 +60,6 @@ void Micro::get_device_list (void)
 
         // parse xml files one by one
         if ((directory = opendir ((const gchar *)path_xml_files)) != NULL) {
-
                 // check every XML file in given directory
                 while ((entry = readdir(directory)) != NULL) {
                         const Glib::ustring filename = entry->d_name;
@@ -95,45 +96,94 @@ void Micro::get_device_list (void)
                         }
                 }
                 closedir (directory);
-        } else {
+        }
+
+        // check if device-to-xml map is still empty
+        if (device_map->size() == 0) {
+                delete device_map;
                 return;
         }
-        //cout << "device XML-files: " << device_map->size() << endl;
+
+        // save device-to-xml map in configuration file
+        save_xml_map();
 }
+
+void Micro::save_xml_map (void)
+{
+        ofstream map_file(this->exec_path + "dev2xml.lst");
+        string line;
+
+        map<Glib::ustring, Glib::ustring>::iterator iter;
+        for (iter = device_map->begin(); iter != device_map->end(); ++iter) {
+                line = iter->first + "::" + iter->second + '\n';
+                map_file << line;
+                //cout << iter->first << " => " << iter->second << endl;
+        }
+
+        map_file.close();
+}
+
+gboolean Micro::load_xml_map (void)
+{
+        ifstream map_file(this->exec_path + "dev2xml.lst");
+        string line, device, filename;
+        gint counter = 0;
+
+        while (getline(map_file, line)) {
+                // locate separator string
+                size_t dev_end = line.find("::");
+                // if separator not present, proceed to the next line
+                if (dev_end == string::npos)
+                        continue;
+                // get device and filename
+                device = line.substr(0, dev_end);
+                filename = line.substr(dev_end + 2, string::npos);
+                // add new entry in device-to-xml map
+                (*device_map)[device] = filename;
+                counter++;
+
+                //cout << line << endl;
+                //cout << device << endl;
+                //cout << filename << endl;
+        }
+
+        map_file.close();
+
+        if (counter == 0)
+                return false;
+        else
+                return true;
+}
+
+
 
 // ******************************************************************************
 // Parse data from specified file
 // ******************************************************************************
 
-void Micro::parse_data ()
+void Micro::parse_data (Glib::ustring xml_file)
 {
-        if (this->device_xml == "") {
+        // check if specified filename is empty
+        if (xml_file == "") {
                 cout << "\nXML device description file not specified!" << endl;
                 return;
         }
-
+        // save device description filename
+        this->device_xml = xml_file;
         // prepare data structures
         if (specifications)
                 delete specifications;
-        if (warnings) {
+        if (warnings)
                 delete warnings;
-        }
-        if (settings) {
-                if (settings->fuse_settings) {
-                        delete settings->fuse_settings;
-                }
-                if (settings->option_lists) {
-                        delete settings->option_lists;
-                }
+        if (settings)
                 delete settings;
-        }
         specifications = new DeviceSpecifications;
         settings = new DeviceFuseSettings;
         warnings = new list<FuseWarning>;
 
         // prepare path to specified XML file...
         Glib::ustring xml_dir = ("xml-files/");
-        Glib::ustring path_to_file = this->exec_path + xml_dir + this->device_xml;
+        Glib::ustring path_to_file = this->exec_path + xml_dir + device_xml;
 
         // process specific XML file
         try {

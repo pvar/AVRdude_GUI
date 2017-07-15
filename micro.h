@@ -59,10 +59,10 @@ class DeviceFuseSettings {
 class Micro
 {
         public:
-                Micro(Glib::ustring path, Glib::ustring xml);
+                Micro(Glib::ustring path);
                 virtual ~Micro();
 
-                void parse_data();
+                void parse_data(Glib::ustring xml_file);
                 void get_device_list ();
 
                 // user defined fuse-byte values
@@ -99,6 +99,8 @@ class Micro
                 void print_fuse_warnings ();
                 void print_fuse_settings ();
                 void print_option_lists ();
+                void save_xml_map (void);
+                gboolean load_xml_map (void);
 };
 
 #endif

@@ -20,7 +20,7 @@ gtkGUI::gtkGUI()
 {
         get_executable_path();
 
-        microcontroller = new Micro(exec_path, "");
+        microcontroller = new Micro(exec_path);
 
         avrdude = new Dude();
 
@@ -264,8 +264,15 @@ bool gtkGUI::data_prep_start (void)
 
         // get supported devices
         microcontroller->get_device_list();
-        // update device combo box
-        this->cb_new_family();
+        // check if device-to-xml map has been populated
+        if (microcontroller->device_map == nullptr) {
+                // war user if device-to-xml map is still empty
+                message_popup ("Failure!", "Program failed to locate directory with XML files "
+                                           "or configuration file with device to XML mapping." );
+        } else {
+                // update device combo box
+                this->cb_new_family();
+        }
         // do not repeat timer
         return FALSE;
 }
@@ -292,9 +299,6 @@ void gtkGUI::cb_new_family (void)
         // block on-change signals
         dev_combo_signal.block(true);
         dev_combo_programmer.block(true);
-        check_button_erase.block(true);
-        check_button_check.block(true);
-        check_button_verify.block(true);
         // lock controls and reset settings
         lock_controls();
         clear_settings();
@@ -304,8 +308,9 @@ void gtkGUI::cb_new_family (void)
         row = *(tm_device->append());
         row[cbm_generic.col_name] = "None";
         row[cbm_generic.col_data] = "";
-        for (map<Glib::ustring, Glib::ustring>::iterator iter = microcontroller->device_map->begin(); iter != microcontroller->device_map->end(); ++iter) {
-                // ignore devices family-irrelevant names
+        map<Glib::ustring, Glib::ustring>::iterator iter;
+        for (iter = microcontroller->device_map->begin(); iter != microcontroller->device_map->end(); ++iter) {
+                // ignore devices with irrelevant names
                 string name_part = iter->first.substr (0, family.size());
                 if (name_part != family)
                         continue;
@@ -313,28 +318,16 @@ void gtkGUI::cb_new_family (void)
                 row = *(tm_device->append());
                 row[cbm_generic.col_name] = iter->first;
                 row[cbm_generic.col_data] = iter->second;
-                //cout << iter->first << " => " << iter->second << endl;
         }
         // set default selected entry
         cb_device->set_active(0);
         // unblock on-change signals
         dev_combo_signal.unblock();
         dev_combo_programmer.unblock();
-        check_button_erase.unblock();
-        check_button_check.unblock();
-        check_button_verify.unblock();
 }
 
 void gtkGUI::cb_new_device (void)
 {
-        // delete current instance of Micro and "mark" as empty
-        //  !! this will also delete specifications, warnings and settings
-        //  !! these are references to structs created inside microcontroller
-        if (microcontroller) {
-                delete this->microcontroller;
-                this->microcontroller = nullptr;
-        }
-
         // get selected device
         Glib::ustring device;
         Gtk::TreeModel::iterator selected_device = cb_device->get_active();
@@ -352,10 +345,8 @@ void gtkGUI::cb_new_device (void)
         // do not proceed if "None" device
         if (device.size() < 1)
                 return;
-        // creatre new instance if Micro
-        microcontroller = new Micro(exec_path, device);
         // prepare data for selected device
-        microcontroller->parse_data();
+        microcontroller->parse_data(device);
         // unlock controls and update labels
         unlock_controls();
         update_settings();
