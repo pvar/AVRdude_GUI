@@ -2,9 +2,10 @@
 #define MICRO_H
 
 #include <libxml++/libxml++.h>
+#include <dirent.h>
 #include <gtkmm.h>
 #include <iostream>
-#include <dirent.h>
+#include <fstream>
 
 // description of a single fuse warning
 struct FuseWarning {
@@ -62,7 +63,7 @@ class Micro
                 virtual ~Micro();
 
                 void parse_data();
-                std::map <Glib::ustring, Glib::ustring>* get_device_list (void);
+                void get_device_list ();
 
                 // user defined fuse-byte values
                 guint usr_fusebytes[3] = {255, 255, 255};
@@ -72,6 +73,8 @@ class Micro
                 DeviceFuseSettings *settings = nullptr;
                 // list of fuse warnings, extracted from XML
                 std::list<FuseWarning> *warnings = nullptr;
+                // device to XML-file mapping
+                std::map <Glib::ustring, Glib::ustring> *device_map = nullptr;
 
         protected:
                 // data
@@ -93,10 +96,9 @@ class Micro
 
                 // utilities
                 Glib::ustring float_to_string (gfloat number);
-                void print_fuse_warnings (void);
-                void print_fuse_settings (void);
-                void print_option_lists (void);
-                //void print_fuse_warnings();
+                void print_fuse_warnings ();
+                void print_fuse_settings ();
+                void print_option_lists ();
 };
 
 #endif

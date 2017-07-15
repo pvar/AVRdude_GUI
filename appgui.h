@@ -45,8 +45,6 @@ class gtkGUI
         protected:
                 // path to executable
                 Glib::ustring exec_path;
-                // device to XML-file mapping
-                std::map <Glib::ustring, Glib::ustring> *device_map = nullptr;
                 // list of widgets used for fuse-settings
                 std::list<FuseWidget> *fuse_tab_widgets = nullptr;
                 // object for retrieving microcontroller data

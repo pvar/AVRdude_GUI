@@ -42,9 +42,9 @@ Micro::~Micro()
 // Create a map with device names and the corresponding files
 // ******************************************************************************
 
-map <Glib::ustring, Glib::ustring>* Micro::get_device_list (void)
+void Micro::get_device_list (void)
 {
-        map <Glib::ustring, Glib::ustring> *device_map = new map <Glib::ustring, Glib::ustring>;
+        device_map = new map <Glib::ustring, Glib::ustring>;
         DIR *directory;
         struct dirent *entry;
 
@@ -96,12 +96,9 @@ map <Glib::ustring, Glib::ustring>* Micro::get_device_list (void)
                 }
                 closedir (directory);
         } else {
-                return nullptr;
+                return;
         }
-
         //cout << "device XML-files: " << device_map->size() << endl;
-        return device_map;
-
 }
 
 // ******************************************************************************
@@ -284,6 +281,9 @@ int Micro::parse_settings (xmlpp::Node *root_node)
 int Micro::parse_warnings (xmlpp::Node *root_node)
 {
         //cout << "PARSING WARNINGS..." << endl;
+
+        // Fuse Warnings in XML file...
+        // <FuseWarning>[fuse-byte-no],[AND-mask],[result],[warning text]</FuseWarning>
 
         Glib::ustring raw_warning;
         FuseWarning *warning_entry;

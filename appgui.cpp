@@ -263,7 +263,7 @@ bool gtkGUI::data_prep_start (void)
         //cout << "DATA PREPARATION..." << endl;
 
         // get supported devices
-        device_map = microcontroller->get_device_list();
+        microcontroller->get_device_list();
         // update device combo box
         this->cb_new_family();
         // do not repeat timer
@@ -286,7 +286,7 @@ void gtkGUI::cb_new_family (void)
         }
 
         // exit if device_map is not yet populated
-        if (device_map == nullptr)
+        if (microcontroller->device_map == nullptr)
                 return;
 
         // block on-change signals
@@ -304,7 +304,7 @@ void gtkGUI::cb_new_family (void)
         row = *(tm_device->append());
         row[cbm_generic.col_name] = "None";
         row[cbm_generic.col_data] = "";
-        for (map<Glib::ustring, Glib::ustring>::iterator iter = device_map->begin(); iter != device_map->end(); ++iter) {
+        for (map<Glib::ustring, Glib::ustring>::iterator iter = microcontroller->device_map->begin(); iter != microcontroller->device_map->end(); ++iter) {
                 // ignore devices family-irrelevant names
                 string name_part = iter->first.substr (0, family.size());
                 if (name_part != family)

@@ -1,0 +1,135 @@
+<AVRPART>
+  <FUSE>
+    <LIST>[LOW:HIGH:EXTENDED]</LIST>
+
+    <LOW>
+
+      <NMB_FUSE_BITS>8</NMB_FUSE_BITS>
+
+      <FUSE7>
+        <NAME>CKDIV8</NAME>
+        <TEXT>Divide clock by 8</TEXT>
+        <DEFAULT>0</DEFAULT>
+      </FUSE7>
+      <FUSE6>
+        <NAME>CKOUT</NAME>
+        <TEXT>Clock output</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE6>
+      <FUSE5>
+        <NAME>SUT1</NAME>
+        <TEXT>Select start-up time</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE5>
+      <FUSE4>
+        <NAME>SUT0</NAME>
+        <TEXT>Select start-up time</TEXT>
+        <DEFAULT>0</DEFAULT>
+      </FUSE4>
+      <FUSE3>
+        <NAME>CKSEL3</NAME>
+        <TEXT>Select Clock Source</TEXT>
+        <DEFAULT>0</DEFAULT>
+      </FUSE3>
+      <FUSE2>
+        <NAME>CKSEL2</NAME>
+        <TEXT>Select Clock Source</TEXT>
+        <DEFAULT>0</DEFAULT>
+      </FUSE2>
+      <FUSE1>
+        <NAME>CKSEL1</NAME>
+        <TEXT>Select Clock Source</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE1>
+      <FUSE0>
+        <NAME>CKSEL0</NAME>
+        <TEXT>Select Clock Source</TEXT>
+        <DEFAULT>0</DEFAULT>
+      </FUSE0>
+
+      <NMB_TEXT>57</NMB_TEXT>
+      <TEXT1>
+      </TEXT1>
+        ...
+      <TEXT57>
+      </TEXT57>
+    </LOW>
+
+    <HIGH>
+      <NMB_FUSE_BITS>8</NMB_FUSE_BITS>
+      <FUSE7>
+        <NAME>RSTDISBL</NAME>
+        <TEXT>External reset disable</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE7>
+      <FUSE6>
+        <NAME>DWEN</NAME>
+        <TEXT>debugWIRE Enable</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE6>
+      <FUSE5>
+        <NAME>SPIEN</NAME>
+        <TEXT>Enable Serial programming and Data Downloading</TEXT>
+        <DEFAULT>0</DEFAULT>
+      </FUSE5>
+      <FUSE4>
+        <NAME>WDTON</NAME>
+        <TEXT>Watchdog Timer Always On</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE4>
+      <FUSE3>
+        <NAME>EESAVE</NAME>
+        <TEXT>EEPROM memory is preserved through chip erase</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE3>
+      <FUSE2>
+        <NAME>BOOTSZ1</NAME>
+        <TEXT>Select boot size</TEXT>
+        <DEFAULT>0</DEFAULT>
+      </FUSE2>
+      <FUSE1>
+        <NAME>BOOTSZ0</NAME>
+        <TEXT>Select boot size</TEXT>
+        <DEFAULT>0</DEFAULT>
+      </FUSE1>
+      <FUSE0>
+        <NAME>BOOTRST</NAME>
+        <TEXT>Select reset vector</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE0>
+
+      <NMB_TEXT>10</NMB_TEXT>
+      <TEXT1>
+      </TEXT1>
+        ...
+      <TEXT10>
+      </TEXT10>
+    </HIGH>
+
+    <EXTENDED>
+      <NMB_FUSE_BITS>3</NMB_FUSE_BITS>
+      <FUSE2>
+        <NAME>BODLEVEL2</NAME>
+        <TEXT>Brown-out Detector trigger level</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE2>
+      <FUSE1>
+        <NAME>BODLEVEL1</NAME>
+        <TEXT>Brown-out Detector trigger level</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE1>
+      <FUSE0>
+        <NAME>BODLEVEL0</NAME>
+        <TEXT>Brown-out Detector trigger level</TEXT>
+        <DEFAULT>1</DEFAULT>
+      </FUSE0>
+
+      <NMB_TEXT>4</NMB_TEXT>
+      <TEXT1>
+      </TEXT1>
+        ...
+      <TEXT4>
+      </TEXT4>
+    </EXTENDED>
+
+  </FUSE>
