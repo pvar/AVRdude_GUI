@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<AVRPART>
+  <V2>
+    <templates>
+      <module class="FUSE">
+        <registers name="FUSE" memspace="FUSE">
+          <reg size="1" name="EXTENDED" offset="0x02">
+            <bitfield name="BODLEVEL" mask="0x07" text="Brown-out Detector trigger level" icon="" enum="ENUM_BODLEVEL"/>
+          </reg>
+          <reg size="1" name="HIGH" offset="0x01">
+            <bitfield name="RSTDISBL" mask="0x80" text="Reset Disabled (Enable PC6 as i/o pin)" icon=""/>
+            <bitfield name="DWEN" mask="0x40" text="Debug Wire enable" icon=""/>
+            <bitfield name="SPIEN" mask="0x20" text="Serial program downloading (SPI) enabled" icon=""/>
+            <bitfield name="WDTON" mask="0x10" text="Watch-dog Timer always on" icon=""/>
+            <bitfield name="EESAVE" mask="0x08" text="Preserve EEPROM through the Chip Erase cycle" icon=""/>
+            <bitfield name="BOOTSZ" mask="0x06" text="Select boot size" icon="" enum="ENUM_BOOTSZ"/>
+            <bitfield name="BOOTRST" mask="0x01" text="Boot Reset vector Enabled" icon=""/>
+          </reg>
+          <reg size="1" name="LOW" offset="0x00">
+            <bitfield name="CKDIV8" mask="0x80" text="Divide clock by 8 internally" icon=""/>
+            <bitfield name="CKOUT" mask="0x40" text="Clock output on PORTB0" icon=""/>
+            <bitfield name="SUT_CKSEL" mask="0x3F" text="Select Clock Source" icon="" enum="ENUM_SUT_CKSEL"/>
+          </reg>
+        </registers>
+        <enumerator name="ENUM_SUT_CKSEL">
+          <enum val="0x00" text="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 0 ms" constname="EXTCLK_6CK_14CK_0MS"/>
+          <enum val="0x10" text="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 4.1 ms" constname="EXTCLK_6CK_14CK_4MS1"/>
+          <enum val="0x20" text="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 65 ms" constname="EXTCLK_6CK_14CK_65MS"/>
+          <enum val="0x02" text="Int. RC Osc. 8 MHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 0 ms" constname="INTRCOSC_8MHZ_6CK_14CK_0MS"/>
+          <enum val="0x12" text="Int. RC Osc. 8 MHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 4.1 ms" constname="INTRCOSC_8MHZ_6CK_14CK_4MS1"/>
+          <enum val="0x22" text="Int. RC Osc. 8 MHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 65 ms" constname="INTRCOSC_8MHZ_6CK_14CK_65MS"/>
+          <enum val="0x03" text="Int. RC Osc. 128kHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 0 ms" constname="INTRCOSC_128KHZ_6CK_14CK_0MS"/>
+          <enum val="0x13" text="Int. RC Osc. 128kHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 4.1 ms" constname="INTRCOSC_128KHZ_6CK_14CK_4MS1"/>
+          <enum val="0x23" text="Int. RC Osc. 128kHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 65 ms" constname="INTRCOSC_128KHZ_6CK_14CK_65MS"/>
+          <enum val="0x04" text="Ext. Low-Freq. Crystal; Start-up time PWRDWN/RESET: 1K CK/14 CK + 0 ms" constname="EXTLOFXTAL_1KCK_14CK_0MS"/>
+          <enum val="0x14" text="Ext. Low-Freq. Crystal; Start-up time PWRDWN/RESET: 1K CK/14 CK + 4.1 ms" constname="EXTLOFXTAL_1KCK_14CK_4MS1"/>
+          <enum val="0x24" text="Ext. Low-Freq. Crystal; Start-up time PWRDWN/RESET: 1K CK/14 CK + 65 ms" constname="EXTLOFXTAL_1KCK_14CK_65MS"/>
+          <enum val="0x05" text="Ext. Low-Freq. Crystal; Start-up time PWRDWN/RESET: 32K CK/14 CK + 0 ms" constname="EXTLOFXTAL_32KCK_14CK_0MS"/>
+          <enum val="0x15" text="Ext. Low-Freq. Crystal; Start-up time PWRDWN/RESET: 32K CK/14 CK + 4.1 ms" constname="EXTLOFXTAL_32KCK_14CK_4MS1"/>
+          <enum val="0x25" text="Ext. Low-Freq. Crystal; Start-up time PWRDWN/RESET: 32K CK/14 CK + 65 ms" constname="EXTLOFXTAL_32KCK_14CK_65MS"/>
+          <enum val="0x06" text="Ext. Full-swing Crystal; Start-up time PWRDWN/RESET: 258 CK/14 CK + 4.1 ms" constname="EXTFSXTAL_258CK_14CK_4MS1"/>
+          <enum val="0x16" text="Ext. Full-swing Crystal; Start-up time PWRDWN/RESET: 258 CK/14 CK + 65 ms" constname="EXTFSXTAL_258CK_14CK_65MS"/>
+          <enum val="0x26" text="Ext. Full-swing Crystal; Start-up time PWRDWN/RESET: 1K CK /14 CK + 0 ms" constname="EXTFSXTAL_1KCK_14CK_0MS"/>
+          <enum val="0x36" text="Ext. Full-swing Crystal; Start-up time PWRDWN/RESET: 1K CK /14 CK + 4.1 ms" constname="EXTFSXTAL_1KCK_14CK_4MS1"/>
+          <enum val="0x07" text="Ext. Full-swing Crystal; Start-up time PWRDWN/RESET: 1K CK /14 CK + 65 ms" constname="EXTFSXTAL_1KCK_14CK_65MS"/>
+          <enum val="0x17" text="Ext. Full-swing Crystal; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms" constname="EXTFSXTAL_16KCK_14CK_0MS"/>
+          <enum val="0x27" text="Ext. Full-swing Crystal; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms" constname="EXTFSXTAL_16KCK_14CK_4MS1"/>
+          <enum val="0x37" text="Ext. Full-swing Crystal; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms" constname="EXTFSXTAL_16KCK_14CK_65MS"/>
+          <enum val="0x08" text="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 4.1 ms" constname="EXTXOSC_0MHZ4_0MHZ9_258CK_14CK_4MS1"/>
+          <enum val="0x18" text="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 65 ms" constname="EXTXOSC_0MHZ4_0MHZ9_258CK_14CK_65MS"/>
+          <enum val="0x28" text="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 0 ms" constname="EXTXOSC_0MHZ4_0MHZ9_1KCK_14CK_0MS"/>
+          <enum val="0x38" text="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 4.1 ms" constname="EXTXOSC_0MHZ4_0MHZ9_1KCK_14CK_4MS1"/>
+          <enum val="0x09" text="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 65 ms" constname="EXTXOSC_0MHZ4_0MHZ9_1KCK_14CK_65MS"/>
+          <enum val="0x19" text="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms" constname="EXTXOSC_0MHZ4_0MHZ9_16KCK_14CK_0MS"/>
+          <enum val="0x29" text="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms" constname="EXTXOSC_0MHZ4_0MHZ9_16KCK_14CK_4MS1"/>
+          <enum val="0x39" text="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms" constname="EXTXOSC_0MHZ4_0MHZ9_16KCK_14CK_65MS"/>
+          <enum val="0x0A" text="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 4.1 ms" constname="EXTXOSC_0MHZ9_3MHZ_258CK_14CK_4MS1"/>
+          <enum val="0x1A" text="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 65 ms" constname="EXTXOSC_0MHZ9_3MHZ_258CK_14CK_65MS"/>
+          <enum val="0x2A" text="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 0 ms" constname="EXTXOSC_0MHZ9_3MHZ_1KCK_14CK_0MS"/>
+          <enum val="0x3A" text="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 4.1 ms" constname="EXTXOSC_0MHZ9_3MHZ_1KCK_14CK_4MS1"/>
+          <enum val="0x0B" text="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 65 ms" constname="EXTXOSC_0MHZ9_3MHZ_1KCK_14CK_65MS"/>
+          <enum val="0x1B" text="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms" constname="EXTXOSC_0MHZ9_3MHZ_16KCK_14CK_0MS"/>
+          <enum val="0x2B" text="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms" constname="EXTXOSC_0MHZ9_3MHZ_16KCK_14CK_4MS1"/>
+          <enum val="0x3B" text="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms" constname="EXTXOSC_0MHZ9_3MHZ_16KCK_14CK_65MS"/>
+          <enum val="0x0C" text="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 4.1 ms" constname="EXTXOSC_3MHZ_8MHZ_258CK_14CK_4MS1"/>
+          <enum val="0x1C" text="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 65 ms" constname="EXTXOSC_3MHZ_8MHZ_258CK_14CK_65MS"/>
+          <enum val="0x2C" text="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 0 ms" constname="EXTXOSC_3MHZ_8MHZ_1KCK_14CK_0MS"/>
+          <enum val="0x3C" text="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 4.1 ms" constname="EXTXOSC_3MHZ_8MHZ_1KCK_14CK_4MS1"/>
+          <enum val="0x0D" text="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 65 ms" constname="EXTXOSC_3MHZ_8MHZ_1KCK_14CK_65MS"/>
+          <enum val="0x1D" text="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms" constname="EXTXOSC_3MHZ_8MHZ_16KCK_14CK_0MS"/>
+          <enum val="0x2D" text="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms" constname="EXTXOSC_3MHZ_8MHZ_16KCK_14CK_4MS1"/>
+          <enum val="0x3D" text="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms" constname="EXTXOSC_3MHZ_8MHZ_16KCK_14CK_65MS"/>
+          <enum val="0x0E" text="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 4.1 ms" constname="EXTXOSC_8MHZ_XX_258CK_14CK_4MS1"/>
+          <enum val="0x1E" text="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 65 ms" constname="EXTXOSC_8MHZ_XX_258CK_14CK_65MS"/>
+          <enum val="0x2E" text="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 0 ms" constname="EXTXOSC_8MHZ_XX_1KCK_14CK_0MS"/>
+          <enum val="0x3E" text="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 4.1 ms" constname="EXTXOSC_8MHZ_XX_1KCK_14CK_4MS1"/>
+          <enum val="0x0F" text="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 65 ms" constname="EXTXOSC_8MHZ_XX_1KCK_14CK_65MS"/>
+          <enum val="0x1F" text="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms" constname="EXTXOSC_8MHZ_XX_16KCK_14CK_0MS"/>
+          <enum val="0x2F" text="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms" constname="EXTXOSC_8MHZ_XX_16KCK_14CK_4MS1"/>
+          <enum val="0x3F" text="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms" constname="EXTXOSC_8MHZ_XX_16KCK_14CK_65MS"/>
+        </enumerator>
+        <enumerator name="ENUM_BODLEVEL">
+          <enum val="0x04" text="Brown-out detection at VCC=4.3 V" constname="4V3"/>
+          <enum val="0x05" text="Brown-out detection at VCC=2.7 V" constname="2V7"/>
+          <enum val="0x06" text="Brown-out detection at VCC=1.8 V" constname="1V8"/>
+          <enum val="0x07" text="Brown-out detection disabled" constname="DISABLED"/>
+        </enumerator>
+        <enumerator name="ENUM_BOOTSZ">
+          <enum val="0x03" text="Boot Flash size=256 words start address=$3F00" constname="256W_3F00"/>
+          <enum val="0x02" text="Boot Flash size=512 words start address=$3E00" constname="512W_3E00"/>
+          <enum val="0x01" text="Boot Flash size=1024 words start address=$3C00" constname="1024W_3C00"/>
+          <enum val="0x00" text="Boot Flash size=2048 words start address=$3800" constname="2048W_3800"/>
+        </enumerator>
+      </module>
+    </templates>
+  </V2>
+</AVRPART>

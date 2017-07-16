@@ -65,8 +65,10 @@ class Micro
                 void parse_data(Glib::ustring xml_file);
                 void get_device_list ();
 
-                // user defined fuse-byte values
+                // user defined fuse settings
                 guint usr_fusebytes[3] = {255, 255, 255};
+                // default fuse settings
+                guint def_fusebytes[3] = {255, 255, 255};
                 // device specifications extracted from XML description
                 DeviceSpecifications *specifications = nullptr;
                 // description of all fuse settings, extracted from XML
@@ -85,6 +87,7 @@ class Micro
                 gint parse_specifications (xmlpp::Node *root_node);
                 gint parse_settings (xmlpp::Node *root_node);
                 gint parse_warnings (xmlpp::Node *root_node);
+                gint parse_default (xmlpp::Node *root_node);
 
                 std::list<OptionEntry>* get_enum_list (xmlpp::Node* xml_node);
                 std::list<FuseSetting>* get_fuse_list (xmlpp::Node* xml_node, guint offset);
@@ -97,6 +100,7 @@ class Micro
                 // utilities
                 Glib::ustring float_to_string (gfloat number);
                 void print_fuse_warnings ();
+                void print_fuse_defaults ();
                 void print_fuse_settings ();
                 void print_option_lists ();
                 void save_xml_map (void);

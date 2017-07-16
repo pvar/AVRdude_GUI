@@ -53,7 +53,7 @@ class Dude
                 Dude();
                 virtual ~Dude();
 
-                // fuse-byte values read from device
+                // device fuse settings (as read from memory)
                 gint dev_fusebytes[3] = {255, 255, 255};
                 // console output from command execution
                 Glib::ustring raw_exec_output;

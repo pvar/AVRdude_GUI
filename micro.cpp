@@ -132,7 +132,7 @@ gboolean Micro::load_xml_map (void)
         while (getline(map_file, line)) {
                 // locate separator string
                 size_t dev_end = line.find("::");
-                // if separator not present, proceed to the next line
+                // if not present, proceed to the next line
                 if (dev_end == string::npos)
                         continue;
                 // get device and filename
@@ -201,8 +201,9 @@ void Micro::parse_data (Glib::ustring xml_file)
 
                         // --- should check return status! ----------------
                         parse_specifications(root_node);
-                        parse_settings(root_node);
-                        parse_warnings(root_node);
+                        parse_settings (root_node);
+                        parse_warnings (root_node);
+                        parse_default (root_node);
                         // ------------------------------------------------
                 }
         } catch(const exception& ex) {
@@ -221,40 +222,38 @@ void Micro::parse_data (Glib::ustring xml_file)
 //   Parse fuse settings
 // ******************************************************************************
 
-int Micro::parse_settings (xmlpp::Node *root_node)
+gint Micro::parse_settings (xmlpp::Node *root_node)
 {
         //cout << "PARSING FUSES..." << endl;
 
         settings = new DeviceFuseSettings;
 
-        xmlpp::Node::NodeList children;
-        xmlpp::Node::NodeList::iterator node_iterator;
         xmlpp::Node* xml_node = root_node;
         xmlpp::Node* tmp_node = nullptr;
 
         // go to V2 node
         xml_node = xml_node->get_first_child("V2");
-        // if no such node was found, it must be a device without fuses...
+        // if no such node, it must be a device without fuses...
         if (!xml_node)
                 return 0;
         // go to templates node
         xml_node = xml_node->get_first_child("templates");
-        // if no such node was found, it must be a device without fuses...
+        // if no such node, it must be a device without fuses...
         if (!xml_node)
                 return 0;
         // go to node with attribute: class = "FUSE"
         tmp_node = this->get_child_with_attr(xml_node,  "class", "FUSE");
 
-        // if no such node was found, check if it's a device with NVM...
+        // if no such node, check if it's a device with NVM...
         if (!tmp_node) {
                 // go to node with attribute: class = "NVM"
                 tmp_node = this->get_child_with_attr(xml_node,  "class", "NVM");
-                // if no such node was found, it must be a device without fuses...
+                // if no such node, it must be a device without fuses...
                 if (!tmp_node)
                         return 0;
                 // go to node with attribute: name = "NVM_FUSES"
                 tmp_node = this->get_child_with_attr(tmp_node,  "name", "NVM_FUSES");
-                // if no such node was found, there must be a problem...
+                // if no such node, there must be a problem...
                 if (!tmp_node)
                         return -1;
                 // use default node pointer
@@ -268,7 +267,8 @@ int Micro::parse_settings (xmlpp::Node *root_node)
 
         gint fuse_byte_counter = 0;
         // loop through children (reg nodes)
-        children = xml_node->get_children();
+        xmlpp::Node::NodeList children = xml_node->get_children();
+        xmlpp::Node::NodeList::iterator node_iterator;
         for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
                 // get offset value for this reg node
                 Glib::ustring regoffset = this->get_att_value((*node_iterator), "offset");
@@ -328,7 +328,7 @@ int Micro::parse_settings (xmlpp::Node *root_node)
 // Parse fuse warnings
 // ******************************************************************************
 
-int Micro::parse_warnings (xmlpp::Node *root_node)
+gint Micro::parse_warnings (xmlpp::Node *root_node)
 {
         //cout << "PARSING WARNINGS..." << endl;
 
@@ -340,17 +340,16 @@ int Micro::parse_warnings (xmlpp::Node *root_node)
         warnings = new list<FuseWarning>;
 
         xmlpp::Node* xml_node = root_node;
-        //xmlpp::Node* tmp_node = nullptr;
 
         // go to PROGRAMMING node
         xml_node = xml_node->get_first_child("PROGRAMMING");
-        // if no such node was found, it must be a device without fuses...
+        // if no such node, it must be a device without fuses...
         if (!xml_node)
                 return 0;
 
         // go to ISPInterface node
         xml_node = xml_node->get_first_child("ISPInterface");
-        // if no such node was found, it must be a device without fuses...
+        // if no such node, it must be a device without fuses...
         if (!xml_node)
                 return 0;
 
@@ -384,10 +383,108 @@ int Micro::parse_warnings (xmlpp::Node *root_node)
 }
 
 // ******************************************************************************
+// Parse default fuse settings
+// ******************************************************************************
+
+gint Micro::parse_default (xmlpp::Node *root_node)
+{
+        // apply default-default values
+        def_fusebytes[0] = 255;
+        def_fusebytes[1] = 255;
+        def_fusebytes[2] = 255;
+
+        xmlpp::Node* xml_node = root_node;
+        xmlpp::Node* tmp_node = root_node;
+
+        // go to FUSE node
+        xml_node = xml_node->get_first_child("FUSE");
+        // if no such node, it must be a device without fuses...
+        if (!xml_node)
+                return 0;
+
+        // go to LIST node
+        xml_node = xml_node->get_first_child("LIST");
+        // if no such node, it must be a device without fuses...
+        if (!xml_node)
+                return 0;
+
+        // get list of fuse-byte names
+        string name_list = get_txt_value (xml_node);
+        name_list = name_list.substr(1, name_list.length() - 2);
+
+        // extract individual byte names
+        gint byte_count = 0;
+        string byte_names[3];
+        while (true) {
+                // locate separator string
+                size_t name_end = name_list.find(":");
+                // extract name
+                byte_names[byte_count] = name_list.substr(0, name_end);
+                // check if it was the last name in the list
+                if (name_end == string::npos)
+                        break;
+                // delete name and separator from list
+                name_list.erase(0, name_end + 1);
+
+                byte_count++;
+        }
+
+        xmlpp::Node::NodeList children;
+        xmlpp::Node::NodeList::iterator node_iterator;
+        string node_name, bit_val;
+        gint bit_order;
+
+        // get value for each fuse-byte
+        for (int i = 0; i < (byte_count + 1); i++) {
+                // go up to FUSE node
+                // (fuse-byte description nodes are children of FUSE node)
+                xml_node = xml_node->get_parent();
+                // go to <FUSE-BYTE-NAME> node
+                tmp_node = xml_node->get_first_child(byte_names[i]);
+                // if no such node, proceed to next fuse-byte...
+                if (!tmp_node)
+                        continue;
+                else
+                        xml_node = tmp_node;
+                // loop through all children with name "FUSEx", where x in [0..7]
+                children = xml_node->get_children();
+                for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
+                        // get name of current sibling...
+                        node_name = (*node_iterator)->get_name();
+                        // if does not contain "FUSE", proceed to next sibling...
+                        if (node_name.find("FUSE") == string::npos)
+                                continue;
+                        // if more than 5 letters in name, proceed to next sibling...
+                        if (node_name.length() > 5)
+                                continue;
+                        // erase constant part (FUSE)
+                        node_name.erase(0,4);
+                        // transform to integer
+                        bit_order = atoi(node_name.c_str());
+                        // get DEFAULT node
+                        tmp_node = (*node_iterator)->get_first_child("DEFAULT");
+                        // if not found, no default values mentioned in XML!
+                        if (tmp_node == nullptr)
+                                return 0;
+                        bit_val = get_txt_value (tmp_node);
+                        // apply bit value on fuse-byte
+                        if (bit_val.find("0") == string::npos)
+                                def_fusebytes[i] |= 1 << bit_order;
+                        else
+                                def_fusebytes[i] &= ~(1 << bit_order);
+                }
+        }
+
+        //print_fuse_defaults();
+
+        return 1;
+}
+
+// ******************************************************************************
 // Parse specifications
 // ******************************************************************************
 
-int Micro::parse_specifications (xmlpp::Node *root_node)
+gint Micro::parse_specifications (xmlpp::Node *root_node)
 {
         //cout << "PARSING SPECIFICATIONS..." << endl;
 
@@ -441,7 +538,7 @@ int Micro::parse_specifications (xmlpp::Node *root_node)
         xml_node = xml_node->get_parent();
         // go to EEPROM node
         tmp_node = xml_node->get_first_child("EEPROM");
-        // if no such node was found, it must be a device without EEPROM
+        // if no such node, it must be a device without EEPROM
         if (!tmp_node) {
                 specs->eeprom_exists = false;
                 txtvalue = "0 Bytes";
@@ -467,7 +564,7 @@ int Micro::parse_specifications (xmlpp::Node *root_node)
         }
         // go to INT_SRAM node
         tmp_node = xml_node->get_first_child("INT_SRAM");
-        // if no such node was found, it must be a device without SRAM!
+        // if no such node, it must be a device without SRAM!
         if (!tmp_node) {
                 txtvalue = "0 Bytes";
                 specs->sram_size = txtvalue;
@@ -710,6 +807,12 @@ void Micro::print_fuse_warnings (void)
                 cout << "   value: " << iter->fresult << endl;
                 cout << "    text: " << iter->warning << endl;
         }
+}
+
+void Micro::print_fuse_defaults (void)
+{
+        for (int i = 0; i < 3; i++)
+                cout << "fuse byte " << i + 1 << " : " << hex << def_fusebytes[i] << endl;
 }
 
 void Micro::print_fuse_settings (void)

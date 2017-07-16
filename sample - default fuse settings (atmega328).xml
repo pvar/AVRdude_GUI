@@ -1,11 +1,9 @@
+<?xml version="1.0"?>
 <AVRPART>
   <FUSE>
     <LIST>[LOW:HIGH:EXTENDED]</LIST>
-
     <LOW>
-
       <NMB_FUSE_BITS>8</NMB_FUSE_BITS>
-
       <FUSE7>
         <NAME>CKDIV8</NAME>
         <TEXT>Divide clock by 8</TEXT>
@@ -46,15 +44,7 @@
         <TEXT>Select Clock Source</TEXT>
         <DEFAULT>0</DEFAULT>
       </FUSE0>
-
-      <NMB_TEXT>57</NMB_TEXT>
-      <TEXT1>
-      </TEXT1>
-        ...
-      <TEXT57>
-      </TEXT57>
     </LOW>
-
     <HIGH>
       <NMB_FUSE_BITS>8</NMB_FUSE_BITS>
       <FUSE7>
@@ -97,15 +87,7 @@
         <TEXT>Select reset vector</TEXT>
         <DEFAULT>1</DEFAULT>
       </FUSE0>
-
-      <NMB_TEXT>10</NMB_TEXT>
-      <TEXT1>
-      </TEXT1>
-        ...
-      <TEXT10>
-      </TEXT10>
     </HIGH>
-
     <EXTENDED>
       <NMB_FUSE_BITS>3</NMB_FUSE_BITS>
       <FUSE2>
@@ -123,13 +105,6 @@
         <TEXT>Brown-out Detector trigger level</TEXT>
         <DEFAULT>1</DEFAULT>
       </FUSE0>
-
-      <NMB_TEXT>4</NMB_TEXT>
-      <TEXT1>
-      </TEXT1>
-        ...
-      <TEXT4>
-      </TEXT4>
     </EXTENDED>
-
   </FUSE>
+</AVRPART>
