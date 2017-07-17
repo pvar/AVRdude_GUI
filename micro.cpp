@@ -211,6 +211,11 @@ void Micro::parse_data (Glib::ustring xml_file)
                 return;
         }
 
+        // copy default fuse values over user fuse values
+        for (int i = 0; i < 3; i++)
+                usr_fusebytes[i] = def_fusebytes[i];
+
+
         return;
 }
 

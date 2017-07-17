@@ -25,7 +25,7 @@ struct FuseSetting {
         guint offset;           // fuse byte
 };
 
-// description of an one of many options in a single fuse setting
+// description of an one-of-many options in a single fuse setting
 struct OptionEntry {
         Glib::ustring ename;    // entry name
         guint value;            // entry value
@@ -66,9 +66,9 @@ class Micro
                 void get_device_list ();
 
                 // user defined fuse settings
-                guint usr_fusebytes[3] = {255, 255, 255};
+                gint usr_fusebytes[3] = {255, 255, 255};
                 // default fuse settings
-                guint def_fusebytes[3] = {255, 255, 255};
+                gint def_fusebytes[3] = {255, 255, 255};
                 // device specifications extracted from XML description
                 DeviceSpecifications *specifications = nullptr;
                 // description of all fuse settings, extracted from XML
