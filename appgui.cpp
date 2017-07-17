@@ -19,10 +19,10 @@ CBRecordModel::CBRecordModel()
 gtkGUI::gtkGUI()
 {
         get_executable_path();
-
         microcontroller = new Micro(exec_path);
-
         avrdude = new Dude();
+
+        display_warnings = true;
 
         // connect signals to functions (add "listeners")
         // execution completed
@@ -352,8 +352,10 @@ void gtkGUI::cb_new_device (void)
                 avrdude->dev_fusebytes[i] = microcontroller->def_fusebytes[i];
         // unlock controls and update labels
         controls_unlock();
+        display_warnings = false;
         device_data_show();
-process_fuse_values();
+        process_fuse_values();
+        display_warnings = true;
 }
 
 void gtkGUI::controls_lock (void)
@@ -680,7 +682,9 @@ void gtkGUI::calculate_fuse_values ()
         microcontroller->usr_fusebytes[1] ^= 255;
         microcontroller->usr_fusebytes[2] ^= 255;
 
-        display_fuse_warnings();
+        // check if warnings are enabled or not
+        if (display_warnings)
+                display_fuse_warnings();
 
         // display fuse bytes
         display_fuse_values();
@@ -690,12 +694,12 @@ void gtkGUI::process_fuse_values (void)
 {
         /*
         How to find fuse-settings from fuse-byte values:
-
-        1) negate fuse byte values
+        1) get fuse byte values
         2) loop through fuse-widgets...
                 a) If it's a simple (check button) setting:
                         get relative fuse-byte value
                         tmp_value = fuse-byte XOR bitmask
+                        tmp_value = fuse-byte AND bitmask
                         selected_value = (tmp_value * MAX(enum_value)) / bitmask
                         display option with selected_value
 
@@ -708,20 +712,23 @@ void gtkGUI::process_fuse_values (void)
                                 setting -> not active
         */
 
-        // get negated fuse values
+        // get fuse values from device
         gint tmp_fusebytes[3];
         for (int i = 0; i < 3; i++)
-                tmp_fusebytes[i] = avrdude->dev_fusebytes[i] ^ 255;
+                tmp_fusebytes[i] = avrdude->dev_fusebytes[i];
 
         // loop through fuse widgets and set state
+        guint temp_value = 0;
+        guint selected_value = 0;
         list<FuseWidget>::iterator fwidget = fuse_tab_widgets->begin();
         for (fwidget++; fwidget != fuse_tab_widgets->end(); ++fwidget) {
                 // make sure it is related to a valid fuse-byte
                 if ((fwidget->bytenum >= 0) && (fwidget->bytenum <= 2)) {
                         // check if combo-box or check button
                         if (fwidget->combo) {
-                                guint temp_value = tmp_fusebytes[fwidget->bytenum] ^ fwidget->bitmask;
-                                guint selected_value = (temp_value * fwidget->max_value) / fwidget->bitmask;
+                                temp_value = tmp_fusebytes[fwidget->bytenum] ^ fwidget->bitmask;
+                                temp_value = tmp_fusebytes[fwidget->bytenum] & fwidget->bitmask;
+                                selected_value = (temp_value * fwidget->max_value) / fwidget->bitmask;
                                 // iterate through treemodel entries, tofind the one with selected_value
                                 Glib::RefPtr<Gtk::TreeModel> refModel = (fwidget->combo)->get_model();
                                 Gtk::TreeModel::Children children = refModel->children();
@@ -739,11 +746,11 @@ void gtkGUI::process_fuse_values (void)
                         } else {
                                 guint temp_value = tmp_fusebytes[fwidget->bytenum] & fwidget->bitmask;
                                 if (temp_value) {
-                                        //cout << "ON" << endl;
-                                        (fwidget->check)->set_active(true);
-                                } else {
                                         //cout << "OFF" << endl;
-                                        (fwidget->check)->set_active(false);
+                                        (fwidget->check)->set_active(false); // fuse values are negated
+                                } else {
+                                        //cout << "ON" << endl;
+                                        (fwidget->check)->set_active(true); // fuse values are negated
                                 }
                         }
                 }
@@ -961,23 +968,15 @@ void gtkGUI::cb_fuse_read(void)
 {
         // read fuse bytes
         avrdude->do_fuse_read(microcontroller->settings->fusebytes_count);
-
         // display message for operation outcome...
         execution_outcome(true);
-
         // exit if outcome NOT successful
         if (avrdude->execution_status != no_error)
                 return;
-
-        // exit if fuse-byte values are invalid
-        for (gint i = 0; i < (microcontroller->settings->fusebytes_count - 1); i++) {
-                cout << "fuse byte value: " << avrdude->dev_fusebytes[i] << endl;
-                if (avrdude->dev_fusebytes[i] == -1)
-                        return;
-        }
-
-        // apply fuse-bytes read from device on fuse-widgets
-
+        // apply fuse values read from device on fuse-widgets
+        display_warnings = false;
+        process_fuse_values();
+        display_warnings = true;
 }
 
 void gtkGUI::execution_done ()

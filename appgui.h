@@ -53,6 +53,8 @@ class gtkGUI
                 Dude *avrdude;
                 // record-model for the tree-models used by combo boxes
                 CBRecordModel cbm_generic;
+                // wether warnigns should be displayed or not
+                gboolean display_warnings;
 
                 // signal connection handlers
                 sigc::connection dev_combo_signal;

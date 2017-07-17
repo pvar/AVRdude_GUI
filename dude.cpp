@@ -284,15 +284,13 @@ void Dude::do_fuse_read (gint fusebytes_count)
         execute ();
 
         // clear fuse-bytes' values
-        dev_fusebytes[0] = -1;
-        dev_fusebytes[1] = -1;
-        dev_fusebytes[2] = -1;
-
+        dev_fusebytes[0] = 255;
+        dev_fusebytes[1] = 255;
+        dev_fusebytes[2] = 255;
         // check output for errors
         check_for_errors();
         if (execution_status != no_error)
                 return;
-
         // extract fuse-byte values from execution output
         gint char_counter = 0;
         gint lines_extracted = 0;
