@@ -300,8 +300,8 @@ void gtkGUI::cb_new_family (void)
         dev_combo_signal.block(true);
         dev_combo_programmer.block(true);
         // lock controls and reset settings
-        lock_controls();
-        clear_settings();
+        controls_lock();
+        device_data_clear();
         // clear device tree-view
         tm_device->clear();
         // insert family members
@@ -340,19 +340,23 @@ void gtkGUI::cb_new_device (void)
         }
 
         // lock controls and reset settings
-        lock_controls();
-        clear_settings();
+        controls_lock();
+        device_data_clear();
         // do not proceed if "None" device
         if (device.size() < 1)
                 return;
         // prepare data for selected device
         microcontroller->parse_data(device);
+        // copy default fuse values over device current fuse values
+        for (int i = 0; i < 3; i++)
+                avrdude->dev_fusebytes[i] = microcontroller->def_fusebytes[i];
         // unlock controls and update labels
-        unlock_controls();
-        update_settings();
+        controls_unlock();
+        device_data_show();
+process_fuse_values();
 }
 
-void gtkGUI::lock_controls (void)
+void gtkGUI::controls_lock (void)
 {
         // disable avrdude operations
         btn_check_sig->set_sensitive(false);
@@ -363,7 +367,7 @@ void gtkGUI::lock_controls (void)
         box_eeprom_ops->set_sensitive(false);
 }
 
-void gtkGUI::unlock_controls (void)
+void gtkGUI::controls_unlock (void)
 {
         // enable avrdude operations
         btn_check_sig->set_sensitive(true);
@@ -375,11 +379,11 @@ void gtkGUI::unlock_controls (void)
                 box_eeprom_ops->set_sensitive(true);
 }
 
-void gtkGUI::clear_settings (void)
+void gtkGUI::device_data_clear (void)
 {
         // clear old labels and fuses
-        display_fuses(false);
-        display_specs(false);
+        display_fuse_settings(false);
+        display_specifiactions(false);
         // reset avrdude settings
         auto_verify->set_active(true);
         auto_erase->set_active(true);
@@ -390,18 +394,14 @@ void gtkGUI::clear_settings (void)
         cb_dude_settings ();
 }
 
-void gtkGUI::update_settings (void)
+void gtkGUI::device_data_show (void)
 {
         // display specifications
-        display_specs(true);
+        display_specifiactions(true);
         // display fuse settings
-        display_fuses(true);
-        // clear fuse-byte values
-//        microcontroller->usr_fusebytes[0] = 255;
-//        microcontroller->usr_fusebytes[1] = 255;
-//        microcontroller->usr_fusebytes[2] = 255;
+        display_fuse_settings(true);
         // display fuse bytes
-        display_fuse_bytes();
+        display_fuse_values();
 }
 
 void gtkGUI::cb_dude_settings (void)
@@ -477,7 +477,7 @@ void gtkGUI::cb_erase_devive (void)
 
 }
 
-void gtkGUI::display_specs (gboolean have_specs)
+void gtkGUI::display_specifiactions (gboolean have_specs)
 {
         if (have_specs) {
                 Glib::ustring xmlfile;
@@ -500,7 +500,7 @@ void gtkGUI::display_specs (gboolean have_specs)
                 lbl_signature->set_label("0x000000");
         }
 }
-void gtkGUI::clear_fuse_widget(FuseWidget* settings_widget)
+void gtkGUI::clear_fuse_widget (FuseWidget* settings_widget)
 {
         if (settings_widget->combo) {
                 (settings_widget->callback)->disconnect();
@@ -524,7 +524,7 @@ void gtkGUI::clear_fuse_widget(FuseWidget* settings_widget)
         }
 }
 
-void gtkGUI::display_fuses (gboolean have_fuses)
+void gtkGUI::display_fuse_settings (gboolean have_fuses)
 {
         if (!have_fuses) {
                 // return if widget-list is uninitialized
@@ -557,9 +557,9 @@ void gtkGUI::display_fuses (gboolean have_fuses)
                 widget_entry->callback = new sigc::connection;
                 // decide what kind of widget is needed
                 if ((*iter).single_option) {
-                        // check if name of register (not a normal setting)
+                        // check if "single setting" or "register name"
                         if ((*iter).offset == 512) {
-                                // widget is not a checkbutton (not a normal setting)
+                                // REGISTER NAME
                                 // create pointer to label
                                 widget_entry->reg_label = new Gtk::Label((*iter).fdesc);
                                 // set align, indent and width of the widgets
@@ -572,7 +572,7 @@ void gtkGUI::display_fuses (gboolean have_fuses)
                                 // show widget
                                 (widget_entry->reg_label)->show();
                         } else {
-                                // widget is a checkbutton (normal setting)
+                                // SINGLE OPTION
                                 // create pointer to checkbutton
                                 widget_entry->check = new Gtk::CheckButton((*iter).fdesc);
                                 // put checkbutton in grid
@@ -580,21 +580,25 @@ void gtkGUI::display_fuses (gboolean have_fuses)
                                 // show widget
                                 (widget_entry->check)->show();
                                 // add callback for on_change event
-                                *(widget_entry->callback) = (widget_entry->check)->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuses));
+                                *(widget_entry->callback) = (widget_entry->check)->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuse_values));
                         }
                 } else {
+                        // OPTION SELECTION
                         // create pointer to treemodel
                         widget_entry->model = Gtk::ListStore::create(cbm_generic);
                         // prepare to loop through the enumerator members
                         list<OptionEntry>* this_enum_list = (*(microcontroller->settings)->option_lists)[(*iter).fenum];
                         list<OptionEntry>::iterator enum_iter = this_enum_list->begin();
-                        // prepare adjusted bit-mask with value of enumerator pseudo entry
+                        // get value from first entry (this is a pseudo entry with the maximum value of all entries)
                         widget_entry->max_value = enum_iter->value;
+                        // proceed to next entry
                         enum_iter++;
-                        // loop through the rest of the entries
+                        // loop through the rest of the entries...
                         for (; enum_iter != this_enum_list->end(); ++enum_iter) {
                                 row = *(widget_entry->model->append());
+                                // add setting description
                                 row[cbm_generic.col_name] = enum_iter->ename;
+                                // add setting values
                                 row[cbm_generic.col_data] = to_string(enum_iter->value);
                         }
                         // create pointer to label
@@ -618,7 +622,7 @@ void gtkGUI::display_fuses (gboolean have_fuses)
                         (widget_entry->combo_label)->show();
                         (widget_entry->combo)->show();
                         // add callback for on_change event
-                        *(widget_entry->callback) = (widget_entry->combo)->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuses));
+                        *(widget_entry->callback) = (widget_entry->combo)->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuse_values));
                 }
                 // copy bit-mask and fuse-byte offset
                 widget_entry->bitmask = (*iter).fmask;
@@ -628,20 +632,20 @@ void gtkGUI::display_fuses (gboolean have_fuses)
         }
 }
 
-void gtkGUI::calculate_fuses ()
+void gtkGUI::calculate_fuse_values ()
 {
         /*
-        How to calculate fuse-bytes from settings...
+        How to calculate fuse-bytes from settings:
 
-        If it's a multiple (combo box) setting:
-                combo setting: factor = bitmask / MAX(enum_value)
-                combo setting: adjusted_value = selected_enum_value * factor
-                combo setting: adjusted_value XOR bitmask
+        1) loop through fuse-widgets...
+                a) if it's a multiple (combo box) setting:
+                        factor = bitmask / MAX(enum_value)
+                        final_value = selected_value * factor
+                        final_value = final_value XOR bitmask
+                b) if it's a simple (check button) setting:
+                        final_value = bitmask
 
-        If it's a simple (check button) setting:
-                single setting: just keep the bitmask
-
-        fuse byte value: bitmasks are ORed and the result is negated
+        2) fuse-byte value = get final_values of releated settings and OR them
         */
 
         // clear fuse-byte values
@@ -649,21 +653,21 @@ void gtkGUI::calculate_fuses ()
         microcontroller->usr_fusebytes[1] = 0;
         microcontroller->usr_fusebytes[2] = 0;
 
-        Gtk::TreeModel::iterator selected;
         Gtk::TreeModel::Row selected_row;
+        Gtk::TreeModel::iterator selected;
 
         // loop through fuse widgets and get state
         list<FuseWidget>::iterator fwidget = fuse_tab_widgets->begin();
         for (fwidget++; fwidget != fuse_tab_widgets->end(); ++fwidget) {
-                // check if is a combo-box or a check button
+                // make sure it is related to a valid fuse-byte
                 if ((fwidget->bytenum >= 0) && (fwidget->bytenum <= 2)) {
+                        // check if combo-box or check button
                         if (fwidget->combo) {
                                 selected = (fwidget->combo)->get_active();
                                 selected_row = *selected;
-                                guint this_value = atoi(string((selected_row[cbm_generic.col_data])).c_str());
-                                guint adjusted_value = (fwidget->bitmask * this_value) / fwidget->max_value;
-                                microcontroller->usr_fusebytes[fwidget->bytenum] |= (adjusted_value ^ fwidget->bitmask);
-                                //cout << "value: "<< this_value << "\t\tadj val: " << adjusted_value << "\t\tmask: " << (adjusted_value ^ fwidget->bitmask) << endl;
+                                guint selected_value = atoi(string((selected_row[cbm_generic.col_data])).c_str());
+                                guint final_value = (selected_value * fwidget->bitmask) / fwidget->max_value;
+                                microcontroller->usr_fusebytes[fwidget->bytenum] |= (final_value ^ fwidget->bitmask);
                         } else {
                                 if ((fwidget->check)->get_active())
                                         microcontroller->usr_fusebytes[fwidget->bytenum] |= fwidget->bitmask;
@@ -676,13 +680,77 @@ void gtkGUI::calculate_fuses ()
         microcontroller->usr_fusebytes[1] ^= 255;
         microcontroller->usr_fusebytes[2] ^= 255;
 
-        check_fuses();
+        display_fuse_warnings();
 
         // display fuse bytes
-        display_fuse_bytes();
+        display_fuse_values();
 }
 
-void gtkGUI::check_fuses (void)
+void gtkGUI::process_fuse_values (void)
+{
+        /*
+        How to find fuse-settings from fuse-byte values:
+
+        1) negate fuse byte values
+        2) loop through fuse-widgets...
+                a) If it's a simple (check button) setting:
+                        get relative fuse-byte value
+                        tmp_value = fuse-byte XOR bitmask
+                        selected_value = (tmp_value * MAX(enum_value)) / bitmask
+                        display option with selected_value
+
+                b) if it's a simple (check button) setting:
+                        get relative fuse-byte value
+                        tmp_result = fuse-byte AND bitmask
+                        if tmp_result NOT zero
+                                setting -> active
+                        else
+                                setting -> not active
+        */
+
+        // get negated fuse values
+        gint tmp_fusebytes[3];
+        for (int i = 0; i < 3; i++)
+                tmp_fusebytes[i] = avrdude->dev_fusebytes[i] ^ 255;
+
+        // loop through fuse widgets and set state
+        list<FuseWidget>::iterator fwidget = fuse_tab_widgets->begin();
+        for (fwidget++; fwidget != fuse_tab_widgets->end(); ++fwidget) {
+                // make sure it is related to a valid fuse-byte
+                if ((fwidget->bytenum >= 0) && (fwidget->bytenum <= 2)) {
+                        // check if combo-box or check button
+                        if (fwidget->combo) {
+                                guint temp_value = tmp_fusebytes[fwidget->bytenum] ^ fwidget->bitmask;
+                                guint selected_value = (temp_value * fwidget->max_value) / fwidget->bitmask;
+                                // iterate through treemodel entries, tofind the one with selected_value
+                                Glib::RefPtr<Gtk::TreeModel> refModel = (fwidget->combo)->get_model();
+                                Gtk::TreeModel::Children children = refModel->children();
+                                Gtk::TreeModel::Children::iterator iter;
+                                gint index = 0;
+                                for(iter = children.begin(); iter != children.end(); ++iter) {
+                                        index++;
+                                        Gtk::TreeModel::Row row = *iter;
+                                        guint this_value = atoi(string(row[cbm_generic.col_data]).c_str());
+                                        if (this_value == selected_value)
+                                                break;
+                                }
+                                //cout << "selected entry: " << index - 1 << endl;
+                                (fwidget->combo)->set_active(index - 1);
+                        } else {
+                                guint temp_value = tmp_fusebytes[fwidget->bytenum] & fwidget->bitmask;
+                                if (temp_value) {
+                                        //cout << "ON" << endl;
+                                        (fwidget->check)->set_active(true);
+                                } else {
+                                        //cout << "OFF" << endl;
+                                        (fwidget->check)->set_active(false);
+                                }
+                        }
+                }
+        }
+}
+
+void gtkGUI::display_fuse_warnings (void)
 {
         gboolean found_warnings = false;
         Glib::ustring warnings;
@@ -701,10 +769,9 @@ void gtkGUI::check_fuses (void)
 
         if (found_warnings)
                 message_popup("Warning!", warnings);
-
 }
 
-void gtkGUI::display_fuse_bytes ()
+void gtkGUI::display_fuse_values ()
 {
         string fuse_parameters;
         stringstream converter_stream;
@@ -917,7 +984,7 @@ void gtkGUI::execution_done ()
 {
         //cout << "APPGUI: execution thread stopped!" << endl;
         // enable controls
-        unlock_controls();
+        controls_unlock();
         cb_device->set_sensitive(true);
         cb_family->set_sensitive(true);
         // change window cursor back
@@ -935,7 +1002,7 @@ void gtkGUI::execution_started ()
         // disable controls
         cb_device->set_sensitive(false);
         cb_family->set_sensitive(false);
-        lock_controls();
+        controls_lock();
         // change window cursor
         Glib::RefPtr<Gdk::Window> window = main_window->get_window();
         Glib::RefPtr<Gdk::Display> display = main_window->get_display();

@@ -80,7 +80,6 @@ class gtkGUI
                 Gtk::Grid *fuse_grid           = nullptr;
                 Gtk::Box *box_flash_ops        = nullptr;
                 Gtk::Box *box_eeprom_ops       = nullptr;
-
                 Gtk::Button *btn_fuse_read     = nullptr;
                 Gtk::Button *btn_fuse_write    = nullptr;
                 Gtk::Button *btn_check_sig     = nullptr;
@@ -111,27 +110,33 @@ class gtkGUI
                 void cb_flash_verify (void);
                 void cb_fuse_write (void);
                 void cb_fuse_read (void);
-                void display_specs (gboolean have_specs);
-                void display_fuses (gboolean have_fuses);
-                void calculate_fuses (void);
                 void select_file (file_op action);
-                void display_fuse_bytes ();
+                void calculate_fuse_values (void);
 
                 // utilities
+                bool data_prep_start (void);
                 void populate_static_treemodels (void);
                 void get_executable_path (void);
-                void clear_fuse_widget(FuseWidget* settings_widget);
-                bool data_prep_start (void);
+
+                void controls_lock (void);
+                void controls_unlock (void);
+
+                void device_data_clear (void);
+                void device_data_show (void);
+
                 void update_console_view (void);
-                void lock_controls (void);
-                void unlock_controls (void);
-                void clear_settings (void);
-                void update_settings (void);
-                void execution_done (void);
-                void execution_outcome (gboolean show_success_message);
-                void execution_started (void);
                 void message_popup (Glib::ustring title, Glib::ustring message);
-                void check_fuses (void);
+
+                void display_specifiactions (gboolean have_specs);
+                void display_fuse_settings (gboolean have_fuses);
+                void display_fuse_warnings (void);
+                void display_fuse_values (void);
+                void clear_fuse_widget (FuseWidget* settings_widget);
+                void process_fuse_values (void);
+
+                void execution_done (void);
+                void execution_started (void);
+                void execution_outcome (gboolean show_success_message);
 };
 
 #endif
