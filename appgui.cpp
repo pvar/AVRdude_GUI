@@ -90,10 +90,11 @@ gtkGUI::gtkGUI()
         tv_dude_output->set_buffer(dude_output_buffer);
 
         // set custom style provider for application window
-        Glib::ustring data = ".console {font: Monospace 9; color: #008000;}";
+        Glib::ustring data = ".console {font: Monospace 9; color: #008000;}"
+                             ".fuse_name {font-weight: bold; color: #888A85;}";
         Glib::RefPtr<Gtk::CssProvider> css = Gtk::CssProvider::create();
         if (not css->load_from_data(data)) {
-                cerr << "Failed to load css\n";
+                cerr << "Failed to load css!\n";
                 std::exit(1);
         }
         Glib::RefPtr<Gdk::Screen> screen = Gdk::Screen::get_default();
@@ -571,9 +572,12 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
                                 widget_entry->reg_label = new Gtk::Label((*iter).fdesc);
                                 // set align, indent and width of the widgets
                                 (widget_entry->reg_label)->set_halign(Gtk::Align::ALIGN_START);
-                                (widget_entry->reg_label)->set_margin_start(24);
+                                (widget_entry->reg_label)->set_margin_start(5);
                                 (widget_entry->reg_label)->set_margin_top(16);
                                 (widget_entry->reg_label)->set_margin_bottom(4);
+                                // add style-class to label
+                                Glib::RefPtr<Gtk::StyleContext> context = (widget_entry->reg_label)->get_style_context();
+                                context->add_class("fuse_name");
                                 // put label in grid
                                 fuse_grid->attach(*(widget_entry->reg_label), 0, grid_line++, 1, 1);
                                 // show widget
@@ -1008,7 +1012,12 @@ void gtkGUI::execution_done ()
         Glib::RefPtr<Gdk::Window> window = main_window->get_window();
         window->set_cursor();
         // display console-output
-        dude_output_buffer->set_text(avrdude->raw_exec_output);
+        dude_output_buffer->insert(dude_output_buffer->end(), avrdude->raw_exec_output);
+        if (dude_output_buffer->get_line_count() > 512) {
+                Gtk::TextBuffer::iterator start = dude_output_buffer->begin();
+                Gtk::TextBuffer::iterator end = dude_output_buffer->get_iter_at_line(128);
+                dude_output_buffer->erase(start, end);
+        }
         // check execution outcome and display proper message...
         execution_outcome(true);
 }

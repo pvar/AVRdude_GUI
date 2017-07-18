@@ -28,13 +28,14 @@ Author: Varelas Panagiotis
   <!-- interface-description A GUI for AVRDUDE with embedded fuse calculator -->
   <!-- interface-authors Varelas Panagiotis -->
   <object class="GtkWindow" id="main_window">
-    <property name="width_request">640</property>
-    <property name="height_request">480</property>
+    <property name="width_request">560</property>
+    <property name="height_request">540</property>
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="resizable">False</property>
     <property name="window_position">center</property>
-    <property name="default_width">640</property>
-    <property name="default_height">480</property>
+    <property name="default_width">560</property>
+    <property name="default_height">540</property>
     <child>
       <object class="GtkNotebook" id="notebook1">
         <property name="visible">True</property>
@@ -310,6 +311,7 @@ Author: Varelas Panagiotis
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
+                        <property name="valign">end</property>
                         <property name="margin_left">16</property>
                         <style>
                           <class name="destructive-action"/>
@@ -386,7 +388,6 @@ Author: Varelas Panagiotis
                 <property name="can_focus">False</property>
                 <property name="valign">end</property>
                 <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
                 <property name="row_spacing">6</property>
                 <child>
                   <object class="GtkLabel" id="label6">
@@ -659,6 +660,7 @@ Author: Varelas Panagiotis
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="vexpand">True</property>
+                <property name="hscrollbar_policy">never</property>
                 <property name="shadow_type">in</property>
                 <child>
                   <object class="GtkViewport" id="fuse_viewport">
@@ -804,8 +806,10 @@ Author: Varelas Panagiotis
                 </child>
                 <child>
                   <object class="GtkGrid" id="grid3">
+                    <property name="width_request">544</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">16</property>
                     <property name="margin_bottom">5</property>
                     <child>
                       <object class="GtkEntry" id="flash_file">
@@ -828,7 +832,7 @@ Author: Varelas Panagiotis
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="margin_left">16</property>
+                        <property name="margin_left">34</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -845,8 +849,10 @@ Author: Varelas Panagiotis
                 </child>
                 <child>
                   <object class="GtkGrid" id="flash_actions">
+                    <property name="width_request">544</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">16</property>
                     <child>
                       <object class="GtkButton" id="read_flash">
                         <property name="label" translatable="yes">Read</property>
@@ -888,6 +894,8 @@ Author: Varelas Panagiotis
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="halign">center</property>
+                        <property name="margin_left">32</property>
+                        <property name="margin_right">32</property>
                         <property name="hexpand">True</property>
                       </object>
                       <packing>
@@ -945,8 +953,10 @@ Author: Varelas Panagiotis
                 </child>
                 <child>
                   <object class="GtkGrid" id="grid4">
+                    <property name="width_request">544</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">16</property>
                     <property name="margin_bottom">5</property>
                     <child>
                       <object class="GtkEntry" id="eeprom_file">
@@ -969,7 +979,7 @@ Author: Varelas Panagiotis
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="margin_left">16</property>
+                        <property name="margin_left">34</property>
                       </object>
                       <packing>
                         <property name="left_attach">3</property>
@@ -986,8 +996,10 @@ Author: Varelas Panagiotis
                 </child>
                 <child>
                   <object class="GtkGrid" id="eeprom_actions">
+                    <property name="width_request">544</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
+                    <property name="margin_left">16</property>
                     <child>
                       <object class="GtkButton" id="read_erom">
                         <property name="label" translatable="yes">Read</property>
@@ -1013,6 +1025,8 @@ Author: Varelas Panagiotis
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="halign">center</property>
+                        <property name="margin_left">32</property>
+                        <property name="margin_right">32</property>
                         <property name="hexpand">True</property>
                       </object>
                       <packing>
@@ -1055,6 +1069,7 @@ Author: Varelas Panagiotis
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="double_buffered">False</property>
+                <property name="margin_left">16</property>
                 <property name="margin_top">8</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
@@ -1069,7 +1084,7 @@ Author: Varelas Panagiotis
                     <property name="margin_right">5</property>
                     <property name="margin_top">3</property>
                     <property name="margin_bottom">3</property>
-                    <property name="hexpand">True</property>
+                    <property name="hexpand">False</property>
                     <property name="vexpand">True</property>
                     <property name="editable">False</property>
                     <property name="cursor_visible">False</property>
