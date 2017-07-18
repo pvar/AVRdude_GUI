@@ -84,6 +84,7 @@ class gtkGUI
                 Gtk::Box *box_eeprom_ops       = nullptr;
                 Gtk::Button *btn_fuse_read     = nullptr;
                 Gtk::Button *btn_fuse_write    = nullptr;
+                Gtk::Button *btn_fuse_def      = nullptr;
                 Gtk::Button *btn_check_sig     = nullptr;
                 Gtk::Button *btn_erase_dev     = nullptr;
                 Gtk::Label *lbl_spec_flash     = nullptr;
@@ -111,6 +112,7 @@ class gtkGUI
                 void cb_flash_verify (void);
                 void cb_fuse_write (void);
                 void cb_fuse_read (void);
+                void cb_fuse_default (void);
                 void select_file (file_op action);
                 void calculate_fuse_values (void);
 

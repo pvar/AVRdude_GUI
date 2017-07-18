@@ -82,6 +82,7 @@ gtkGUI::gtkGUI()
         builder->get_widget("eeprom_file", ent_eeprom_file);
         builder->get_widget("flash_file", ent_flash_file);
         builder->get_widget("write_fuses", btn_fuse_write);
+        builder->get_widget("default_fuses", btn_fuse_def);
         builder->get_widget("read_fuses", btn_fuse_read);
 
         // create empty text buffer and assign to text view
@@ -133,6 +134,7 @@ gtkGUI::gtkGUI()
         btn_firm_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_flash_verify));
         btn_fuse_write->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_fuse_write));
         btn_fuse_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_fuse_read));
+        btn_fuse_def->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_fuse_default));
         btn_check_sig->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_check_signature));
         btn_erase_dev->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_erase_devive));
         cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
@@ -364,6 +366,7 @@ void gtkGUI::controls_lock (void)
         btn_erase_dev->set_sensitive(false);
         btn_fuse_read->set_sensitive(false);
         btn_fuse_write->set_sensitive(false);
+        btn_fuse_def->set_sensitive(false);
         box_flash_ops->set_sensitive(false);
         box_eeprom_ops->set_sensitive(false);
 }
@@ -375,6 +378,7 @@ void gtkGUI::controls_unlock (void)
         btn_erase_dev->set_sensitive(true);
         btn_fuse_read->set_sensitive(true);
         btn_fuse_write->set_sensitive(true);
+        btn_fuse_def->set_sensitive(true);
         box_flash_ops->set_sensitive(true);
         if (microcontroller->specifications->eeprom_exists)
                 box_eeprom_ops->set_sensitive(true);
@@ -977,6 +981,19 @@ void gtkGUI::cb_fuse_read(void)
         // apply fuse values read from device on fuse-widgets
         display_warnings = false;
         process_fuse_values();
+        display_warnings = true;
+}
+
+void gtkGUI::cb_fuse_default (void)
+{
+        // disable fuse warnings
+        display_warnings = false;
+        // copy default fuse values over device current fuse values
+        for (int i = 0; i < 3; i++)
+                avrdude->dev_fusebytes[i] = microcontroller->def_fusebytes[i];
+        // display updated (default) fuse settings
+        process_fuse_values();
+        // enable fuse warnings
         display_warnings = true;
 }
 
