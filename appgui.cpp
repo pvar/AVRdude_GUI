@@ -60,7 +60,6 @@ gtkGUI::gtkGUI()
         builder->get_widget("combo_protocol", cb_protocol);
         builder->get_widget("signature_test", btn_check_sig);
         builder->get_widget("erase_device", btn_erase_dev);
-        builder->get_widget("signature_test_result", lbl_sig_tst);
         builder->get_widget("dev_xml_file", lbl_spec_xml);
         builder->get_widget("dev_mem_flash", lbl_spec_flash);
         builder->get_widget("dev_mem_sram", lbl_spec_sram);
@@ -390,8 +389,6 @@ void gtkGUI::device_data_clear (void)
         auto_verify->set_active(true);
         auto_erase->set_active(true);
         auto_check->set_active(true);
-        // clear signature-test result
-        lbl_sig_tst->set_label("Unverified device selection.");
         // update object settings
         cb_dude_settings ();
 }
@@ -463,13 +460,17 @@ void gtkGUI::cb_check_signature (void)
         Glib::ustring actual_signature = avrdude->processed_output;
         // get expected signature from specifications
         Glib::ustring selected_signature = microcontroller->specifications->signature.substr(2,7);
-        // check for signature match
-        if (actual_signature == selected_signature)
-                lbl_sig_tst->set_label("Matching device detected :)");
-        else
-                lbl_sig_tst->set_label("Unexpected device signature!");
-        // check execution outcome and display proper message...
-        execution_outcome(false);
+        // check execution outcome for errors
+        if (avrdude->execution_status == no_error) {
+                // check for signature match
+                if (actual_signature == selected_signature)
+                        message_popup ("Success!", "Matching device detected.");
+                else
+                        message_popup ("Failure!", "Unexpected device signature.");
+        } else {
+                // display appropriate error message
+                execution_outcome(false);
+        }
 }
 
 void gtkGUI::cb_erase_devive (void)

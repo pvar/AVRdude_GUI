@@ -86,7 +86,6 @@ class gtkGUI
                 Gtk::Button *btn_fuse_write    = nullptr;
                 Gtk::Button *btn_check_sig     = nullptr;
                 Gtk::Button *btn_erase_dev     = nullptr;
-                Gtk::Label *lbl_sig_tst        = nullptr;
                 Gtk::Label *lbl_spec_flash     = nullptr;
                 Gtk::Label *lbl_spec_sram      = nullptr;
                 Gtk::Label *lbl_spec_eeprom    = nullptr;
