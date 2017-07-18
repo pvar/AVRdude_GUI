@@ -120,6 +120,7 @@ class gtkGUI
                 bool data_prep_start (void);
                 void populate_static_treemodels (void);
                 void get_executable_path (void);
+                void prep_fuse_meta (void);
 
                 void controls_lock (void);
                 void controls_unlock (void);

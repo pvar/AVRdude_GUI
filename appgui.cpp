@@ -260,6 +260,31 @@ void gtkGUI::data_prep (void)
         Glib::signal_timeout().connect( sigc::mem_fun(*this, &gtkGUI::data_prep_start), 100 );
 }
 
+
+void gtkGUI::prep_fuse_meta (void)
+{
+        string warning;
+        gint count = 0;
+        // count fuse bytes with default values
+        for (int i = 0; i < 3; i++)
+                if (microcontroller->def_fusebytes[i] != 255)
+                        count++;
+        if (count == 0)
+                warning.append("The device description does not specify default fuse settings.\n\n");
+
+        // check if fuse warnings have been specified
+        if (microcontroller->warnings->size() == 0)
+                warning.append("The device description provides no warnings, regarding configuration of fuse settings.");
+
+        // display messages, if any...
+        if (!warning.empty())
+                message_popup ("Warning!", warning);
+
+        // copy default fuse values over device current fuse values
+        for (int i = 0; i < 3; i++)
+                avrdude->dev_fusebytes[i] = microcontroller->def_fusebytes[i];
+}
+
 bool gtkGUI::data_prep_start (void)
 {
         //cout << "DATA PREPARATION..." << endl;
@@ -349,6 +374,8 @@ void gtkGUI::cb_new_device (void)
                 return;
         // prepare data for selected device
         microcontroller->parse_data(device);
+        // prepare default settings and check if warnings were found
+        prep_fuse_meta();
         // copy default fuse values over device current fuse values
         for (int i = 0; i < 3; i++)
                 avrdude->dev_fusebytes[i] = microcontroller->def_fusebytes[i];
