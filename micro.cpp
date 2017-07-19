@@ -51,7 +51,7 @@ void Micro::get_device_list (void)
         struct dirent *entry;
 
         // prepare path to XML files...
-        Glib::ustring xml_dir = ("xml-files/");
+        Glib::ustring xml_dir = ("xmlfiles/");
         Glib::ustring whole_path = this->exec_path + xml_dir;
         gchar *path_xml_files = new char[whole_path.size() + 1];
         // !! Result is not safe, if path uses multi-byte characters (because of copy)
@@ -182,7 +182,7 @@ void Micro::parse_data (Glib::ustring xml_file)
         warnings = new list<FuseWarning>;
 
         // prepare path to specified XML file...
-        Glib::ustring xml_dir = ("xml-files/");
+        Glib::ustring xml_dir = ("xmlfiles/");
         Glib::ustring path_to_file = this->exec_path + xml_dir + device_xml;
 
         // process specific XML file

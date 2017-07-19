@@ -12,7 +12,7 @@ SOURCES = $(wildcard *.cpp)
 HEADERS = $(SOURCES:.cpp=.h)
 OBJECTS = $(SOURCES:.cpp=.o)
 
-OUTPUT = bin/avr_prog
+OUTPUT = bin/dudegui
 
 ### ---------------------------------------------------------------------------
 ### PARAMETERS

@@ -33,7 +33,7 @@ gtkGUI::gtkGUI()
         // create object builder
         Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create();
         try {
-                builder->add_from_file(exec_path + "avrprog.glade");
+                builder->add_from_file(exec_path + "dudegui.ui");
         } catch(const Glib::FileError& ex) {
                 cout << "FileError: " << ex.what() << endl;
                 return;

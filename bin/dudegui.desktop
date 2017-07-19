@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=DudeGUI
+GenericName=DudeGUI
+Comment=A GUI for the command line tool avrdude
+Exec=dudegui
+Icon=dudegui
+StartupNotify=true
+Categories=GNOME;GTK
+Keywords=avr;avrdude;programmer
