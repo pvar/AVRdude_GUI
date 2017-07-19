@@ -134,6 +134,8 @@ void Dude::execute (void)
         }
         // add executed command at the beginning of output string
         raw_exec_output = "$ " + command + "\n" + raw_exec_output;
+        // debug print-out
+        //cout << raw_exec_output << endl;
 
         // check if in thread...
         if (avrdude_thread)
@@ -305,12 +307,17 @@ void Dude::do_fuse_read (gint fusebytes_count)
                         line = raw_exec_output.substr(iter + 1, char_counter - 1);
                         char_counter = 0;
                         // get value from extracted line
-                        stringstream(line) >> dev_fusebytes[3 - lines_extracted];
+                        stringstream(line) >> dev_fusebytes[fusebytes_count - lines_extracted];
                         // check if received all values
                         if (lines_extracted == fusebytes_count)
                                 break;
                 }
         }
+
+        for (int i = 0; i < 3; i++) {
+                cout << " :" << dev_fusebytes[i];
+        }
+        cout << endl;
 }
 
 void Dude::check_for_errors (void)

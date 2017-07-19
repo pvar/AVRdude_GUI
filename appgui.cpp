@@ -488,6 +488,8 @@ void gtkGUI::cb_check_signature (void)
 {
         // read signature from device
         avrdude->do_read_signature();
+        // display console-output
+        update_console_view();
         // get actuall signature from processed output
         Glib::ustring actual_signature = avrdude->processed_output;
         // get expected signature from specifications
@@ -998,12 +1000,16 @@ void gtkGUI::cb_fuse_write(void)
                                 microcontroller->usr_fusebytes[0],
                                 microcontroller->usr_fusebytes[1],
                                 microcontroller->usr_fusebytes[2]);
+        // display console-output
+        update_console_view();
 }
 
 void gtkGUI::cb_fuse_read(void)
 {
         // read fuse bytes
         avrdude->do_fuse_read(microcontroller->settings->fusebytes_count);
+        // display console-output
+        update_console_view();
         // display message for operation outcome...
         execution_outcome(true);
         // exit if outcome NOT successful
@@ -1028,7 +1034,7 @@ void gtkGUI::cb_fuse_default (void)
         display_warnings = true;
 }
 
-void gtkGUI::execution_done ()
+void gtkGUI::execution_done (void)
 {
         //cout << "APPGUI: execution thread stopped!" << endl;
         // enable controls
@@ -1039,17 +1045,23 @@ void gtkGUI::execution_done ()
         Glib::RefPtr<Gdk::Window> window = main_window->get_window();
         window->set_cursor();
         // display console-output
+        update_console_view();
+        // check execution outcome and display proper message...
+        execution_outcome(true);
+}
+
+void gtkGUI::update_console_view (void)
+{
+        // display console-output
         dude_output_buffer->insert(dude_output_buffer->end(), avrdude->raw_exec_output);
         if (dude_output_buffer->get_line_count() > 512) {
                 Gtk::TextBuffer::iterator start = dude_output_buffer->begin();
                 Gtk::TextBuffer::iterator end = dude_output_buffer->get_iter_at_line(128);
                 dude_output_buffer->erase(start, end);
         }
-        // check execution outcome and display proper message...
-        execution_outcome(true);
 }
 
-void gtkGUI::execution_started ()
+void gtkGUI::execution_started (void)
 {
         //cout << "APPGUI: execution thread initialized!" << endl;
         // disable controls
