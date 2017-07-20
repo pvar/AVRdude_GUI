@@ -90,20 +90,25 @@ gtkGUI::gtkGUI()
         tv_dude_output->set_buffer(dude_output_buffer);
 
         // set custom style provider for application window
-        Glib::ustring data = ".console {font: Monospace 9; color: #008000;}"
+        Glib::ustring data = ".console {font: Monospace 9; color: #a88A85;}"
+                             ".fuse_value {font: Monospace 9; color: #888A85;}"
                              ".fuse_name {font-weight: bold; color: #888A85;}";
         Glib::RefPtr<Gtk::CssProvider> css = Gtk::CssProvider::create();
         if (not css->load_from_data(data)) {
                 cerr << "Failed to load css!\n";
-                std::exit(1);
+                exit(1);
         }
         Glib::RefPtr<Gdk::Screen> screen = Gdk::Screen::get_default();
         Glib::RefPtr<Gtk::StyleContext> win_context = main_window->get_style_context();
         win_context->add_provider_for_screen(screen, css, GTK_STYLE_PROVIDER_PRIORITY_USER);
 
         // add style-class to textview displaying execution output
-        Glib::RefPtr<Gtk::StyleContext> context = tv_dude_output->get_style_context();
+        Glib::RefPtr<Gtk::StyleContext> context;
+        context = tv_dude_output->get_style_context();
         context->add_class("console");
+        // add style-class to label displaying selected fuse values
+        context = lbl_fusebytes->get_style_context();
+        context->add_class("fuse_value");
 
         // create the tree-models
         tm_family = Gtk::ListStore::create(cbm_generic);
@@ -602,8 +607,8 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
                                 // set align, indent and width of the widgets
                                 (widget_entry->reg_label)->set_halign(Gtk::Align::ALIGN_START);
                                 (widget_entry->reg_label)->set_margin_start(5);
-                                (widget_entry->reg_label)->set_margin_top(16);
-                                (widget_entry->reg_label)->set_margin_bottom(4);
+                                (widget_entry->reg_label)->set_margin_top(20);
+                                (widget_entry->reg_label)->set_margin_bottom(12);
                                 // add style-class to label
                                 Glib::RefPtr<Gtk::StyleContext> context = (widget_entry->reg_label)->get_style_context();
                                 context->add_class("fuse_name");
@@ -818,24 +823,21 @@ void gtkGUI::display_fuse_warnings (void)
 
 void gtkGUI::display_fuse_values ()
 {
-        string fuse_parameters;
         stringstream converter_stream;
 
-        fuse_parameters = "LOW: 0x";
-        converter_stream << hex << setw(2) << setfill('0');
-        converter_stream << microcontroller->usr_fusebytes[0];
-        fuse_parameters += converter_stream.str();
-        converter_stream.str(string());
-        fuse_parameters += "   HIGH: 0x";
-        converter_stream << hex << setw(2) << setfill('0');
-        converter_stream << microcontroller->usr_fusebytes[1];
-        fuse_parameters += converter_stream.str();
-        converter_stream.str(string());
-        fuse_parameters += "   EXTENDED: 0x";
-        converter_stream << hex << setw(2) << setfill('0');
-        converter_stream << microcontroller->usr_fusebytes[2];
-        fuse_parameters += converter_stream.str();
-        lbl_fusebytes->set_label(fuse_parameters);
+        converter_stream << "LOW: 0x";
+        converter_stream << hex << setw(2) << setfill('0') << microcontroller->usr_fusebytes[0];
+        converter_stream << dec << " (" << microcontroller->usr_fusebytes[0] << ")";
+
+        converter_stream << "    HIGH: 0x";
+        converter_stream << hex << setw(2) << setfill('0') << microcontroller->usr_fusebytes[1];
+        converter_stream << dec << " (" << microcontroller->usr_fusebytes[1] << ")";
+
+        converter_stream << "    EXTENDED: 0x";
+        converter_stream << hex << setw(2) << setfill('0') << microcontroller->usr_fusebytes[2];
+        converter_stream << dec << " (" << microcontroller->usr_fusebytes[2] << ")";
+
+        lbl_fusebytes->set_label(converter_stream.str());
 }
 
 void gtkGUI::select_file(file_op action)
@@ -884,7 +886,7 @@ void gtkGUI::select_file(file_op action)
         browser->add_filter(filter_txt);
 
         // add buttons and responses
-        browser->add_button("_Cancel", Gtk::RESPONSE_CANCEL);
+        browser->add_button("Cancel", Gtk::RESPONSE_CANCEL);
         browser->add_button("Select", Gtk::RESPONSE_OK);
 
         // open browser and close when a response is received
