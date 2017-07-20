@@ -5,13 +5,13 @@ using namespace std;
 DeviceFuseSettings::DeviceFuseSettings()
 {
         this->fuse_settings = new list<FuseSetting>;
-        this->option_lists = new map <Glib::ustring, list<OptionEntry>*>;
+        this->option_lists = new map <string, list<OptionEntry>*>;
 }
 
 DeviceFuseSettings::~DeviceFuseSettings()
 {
         // iterate through map and delete embedded lists
-        map<Glib::ustring, list<OptionEntry>*>::iterator iter = option_lists->begin();
+        map<string, list<OptionEntry>*>::iterator iter = option_lists->begin();
         for (; iter!=option_lists->end(); ++iter)
                 delete iter->second;
 
@@ -20,7 +20,7 @@ DeviceFuseSettings::~DeviceFuseSettings()
         delete fuse_settings;
 }
 
-Micro::Micro (Glib::ustring path)
+Micro::Micro (string path)
 {
         exec_path = path;
 }
@@ -41,7 +41,7 @@ Micro::~Micro()
 
 void Micro::get_device_list (void)
 {
-        device_map = new map <Glib::ustring, Glib::ustring>;
+        device_map = new map <string, string>;
 
         // attempt to get mapping from configuration file
         if (load_xml_map())
@@ -51,8 +51,8 @@ void Micro::get_device_list (void)
         struct dirent *entry;
 
         // prepare path to XML files...
-        Glib::ustring xml_dir = ("xmlfiles/");
-        Glib::ustring whole_path = this->exec_path + xml_dir;
+        string xml_dir = ("xmlfiles/");
+        string whole_path = this->exec_path + xml_dir;
         gchar *path_xml_files = new char[whole_path.size() + 1];
         // !! Result is not safe, if path uses multi-byte characters (because of copy)
         copy(whole_path.begin(), whole_path.end(), path_xml_files);
@@ -62,7 +62,7 @@ void Micro::get_device_list (void)
         if ((directory = opendir ((const gchar *)path_xml_files)) != NULL) {
                 // check every XML file in given directory
                 while ((entry = readdir(directory)) != NULL) {
-                        const Glib::ustring filename = entry->d_name;
+                        const string filename = entry->d_name;
                         // check for appropriate filename-length
                         if (filename.size() < 4)
                                 continue;
@@ -76,7 +76,7 @@ void Micro::get_device_list (void)
                                 parser.parse_file((const gchar *)path_xml_files + filename);
                                 if (parser) {
                                         xmlpp::Node *xml_node = parser.get_document()->get_root_node();
-                                        const Glib::ustring node_name = xml_node->get_name();
+                                        const string node_name = xml_node->get_name();
                                         // check if valid part-description file
                                         if (node_name.compare("AVRPART") != 0)
                                                 continue;
@@ -85,7 +85,7 @@ void Micro::get_device_list (void)
                                         // go to PART_NAME node
                                         xml_node = xml_node->get_first_child("PART_NAME");
                                         // get node content
-                                        Glib::ustring device_name = this->get_txt_value(xml_node);
+                                        string device_name = this->get_txt_value(xml_node);
                                         // insert new entry in device map
                                         (*device_map)[device_name] = filename;
 
@@ -113,7 +113,7 @@ void Micro::save_xml_map (void)
         ofstream map_file(this->exec_path + "dev2xml.lst");
         string line;
 
-        map<Glib::ustring, Glib::ustring>::iterator iter;
+        map<string, string>::iterator iter;
         for (iter = device_map->begin(); iter != device_map->end(); ++iter) {
                 line = iter->first + "::" + iter->second + '\n';
                 map_file << line;
@@ -127,7 +127,7 @@ gboolean Micro::load_xml_map (void)
 {
         ifstream map_file(this->exec_path + "dev2xml.lst");
         string line, device, filename;
-        gint counter = 0;
+        int counter = 0;
 
         while (getline(map_file, line)) {
                 // locate separator string
@@ -161,7 +161,7 @@ gboolean Micro::load_xml_map (void)
 // Parse data from specified file
 // ******************************************************************************
 
-void Micro::parse_data (Glib::ustring xml_file)
+void Micro::parse_data (string xml_file)
 {
         // check if specified filename is empty
         if (xml_file == "") {
@@ -182,8 +182,8 @@ void Micro::parse_data (Glib::ustring xml_file)
         warnings = new list<FuseWarning>;
 
         // prepare path to specified XML file...
-        Glib::ustring xml_dir = ("xmlfiles/");
-        Glib::ustring path_to_file = this->exec_path + xml_dir + device_xml;
+        string xml_dir = ("xmlfiles/");
+        string path_to_file = this->exec_path + xml_dir + device_xml;
 
         // process specific XML file
         try {
@@ -193,7 +193,7 @@ void Micro::parse_data (Glib::ustring xml_file)
                         // go to root node
                         xmlpp::Node *root_node = parser.get_document()->get_root_node();
                         // check if a valid description file
-                        const Glib::ustring node_name = root_node->get_name();
+                        const string node_name = root_node->get_name();
                         if (node_name.compare("AVRPART") != 0) {
                                 cout << "Not a valid description file!" << endl;
                                 return;
@@ -227,7 +227,7 @@ void Micro::parse_data (Glib::ustring xml_file)
 //   Parse fuse settings
 // ******************************************************************************
 
-gint Micro::parse_settings (xmlpp::Node *root_node)
+int Micro::parse_settings (xmlpp::Node *root_node)
 {
         //cout << "PARSING FUSES..." << endl;
 
@@ -270,21 +270,21 @@ gint Micro::parse_settings (xmlpp::Node *root_node)
                 xml_node = tmp_node;
         }
 
-        gint fuse_byte_counter = 0;
+        int fuse_byte_counter = 0;
         // loop through children (reg nodes)
         xmlpp::Node::NodeList children = xml_node->get_children();
         xmlpp::Node::NodeList::iterator node_iterator;
         for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
                 // get offset value for this reg node
-                Glib::ustring regoffset = this->get_att_value((*node_iterator), "offset");
+                string regoffset = this->get_att_value((*node_iterator), "offset");
                 // if no offset attribute was found, proceed to next iteration
                 if (regoffset.size() < 1)
                         continue;
                 // increase fuse-byte counter
                 fuse_byte_counter++;
-                guint offset = ::atoi((regoffset.substr(2, 2)).c_str());
+                uint offset = ::atoi((regoffset.substr(2, 2)).c_str());
                 // get name for this reg node
-                Glib::ustring regname = this->get_att_value((*node_iterator), "name");
+                string regname = this->get_att_value((*node_iterator), "name");
                 // prepare pseudo-setting with fuse-byte name
                 FuseSetting* entry = new FuseSetting;
                 entry->single_option = true;
@@ -318,7 +318,7 @@ gint Micro::parse_settings (xmlpp::Node *root_node)
                 list<OptionEntry> *enum_listing = new list<OptionEntry>;
                 enum_listing = this->get_enum_list ((*node_iterator));
                 // get enumerator name
-                Glib::ustring enum_name = this->get_att_value ((*node_iterator), "name");
+                string enum_name = this->get_att_value ((*node_iterator), "name");
                 // add new entry in map
                 (*settings->option_lists)[enum_name] = enum_listing;
         }
@@ -333,14 +333,14 @@ gint Micro::parse_settings (xmlpp::Node *root_node)
 // Parse fuse warnings
 // ******************************************************************************
 
-gint Micro::parse_warnings (xmlpp::Node *root_node)
+int Micro::parse_warnings (xmlpp::Node *root_node)
 {
         //cout << "PARSING WARNINGS..." << endl;
 
         // Fuse Warnings in XML file...
         // <FuseWarning>[fuse-byte-no],[AND-mask],[result],[warning text]</FuseWarning>
 
-        Glib::ustring raw_warning;
+        string raw_warning;
         FuseWarning *warning_entry;
         warnings = new list<FuseWarning>;
 
@@ -363,7 +363,7 @@ gint Micro::parse_warnings (xmlpp::Node *root_node)
         xmlpp::Node::NodeList children = xml_node->get_children();
         for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
                 // get name of current sibling...
-                const Glib::ustring node_name = (*node_iterator)->get_name();
+                const string node_name = (*node_iterator)->get_name();
                 // if not a FuseWarning, proceed to next sibling...
                 if (node_name.compare("FuseWarning") != 0)
                         continue;
@@ -391,7 +391,7 @@ gint Micro::parse_warnings (xmlpp::Node *root_node)
 // Parse default fuse settings
 // ******************************************************************************
 
-gint Micro::parse_default (xmlpp::Node *root_node)
+int Micro::parse_default (xmlpp::Node *root_node)
 {
         // apply default-default values
         def_fusebytes[0] = 255;
@@ -418,7 +418,7 @@ gint Micro::parse_default (xmlpp::Node *root_node)
         name_list = name_list.substr(1, name_list.length() - 2);
 
         // extract individual byte names
-        gint byte_count = 0;
+        int byte_count = 0;
         string byte_names[3];
         while (true) {
                 // locate separator string
@@ -437,7 +437,7 @@ gint Micro::parse_default (xmlpp::Node *root_node)
         xmlpp::Node::NodeList children;
         xmlpp::Node::NodeList::iterator node_iterator;
         string node_name, bit_val;
-        gint bit_order;
+        int bit_order;
 
         // get value for each fuse-byte
         for (int i = 0; i < (byte_count + 1); i++) {
@@ -489,14 +489,14 @@ gint Micro::parse_default (xmlpp::Node *root_node)
 // Parse specifications
 // ******************************************************************************
 
-gint Micro::parse_specifications (xmlpp::Node *root_node)
+int Micro::parse_specifications (xmlpp::Node *root_node)
 {
         //cout << "PARSING SPECIFICATIONS..." << endl;
 
         DeviceSpecifications* specs = new DeviceSpecifications;
         xmlpp::Node* xml_node = root_node;
         xmlpp::Node* tmp_node = nullptr;
-        Glib::ustring txtvalue;
+        string txtvalue;
         gfloat numvalue;
 
         // put xml filename in specifications
@@ -596,7 +596,7 @@ gint Micro::parse_specifications (xmlpp::Node *root_node)
 // Go to the specified node (by attribute)
 // ******************************************************************************
 
-xmlpp::Node* Micro::get_child_with_attr (xmlpp::Node* starting_node, Glib::ustring att_name, Glib::ustring att_value)
+xmlpp::Node* Micro::get_child_with_attr (xmlpp::Node* starting_node, string att_name, string att_value)
 {
         xmlpp::Node *target = nullptr;
         xmlpp::Node::NodeList::iterator node_iterator;
@@ -629,7 +629,7 @@ xmlpp::Node* Micro::get_child_with_attr (xmlpp::Node* starting_node, Glib::ustri
 // Get text value in specified node
 // ******************************************************************************
 
-Glib::ustring Micro::get_txt_value (xmlpp::Node* starting_node)
+string Micro::get_txt_value (xmlpp::Node* starting_node)
 {
         const xmlpp::TextNode *text = NULL;
         xmlpp::Node::NodeList::iterator iter;
@@ -650,11 +650,11 @@ Glib::ustring Micro::get_txt_value (xmlpp::Node* starting_node)
 // Get the value of specified attribute
 // ******************************************************************************
 
-Glib::ustring Micro::get_att_value (xmlpp::Node* xml_node, Glib::ustring att_name)
+string Micro::get_att_value (xmlpp::Node* xml_node, string att_name)
 {
         xmlpp::Node::NodeList::iterator node_iterator;
         xmlpp::Element::AttributeList::const_iterator att_iterator;
-        Glib::ustring data_string;
+        string data_string;
 
         if (const xmlpp::Element* nodeElement = dynamic_cast<const xmlpp::Element*>(xml_node)) {
                 // loop through attribute-nodes
@@ -682,8 +682,8 @@ list<OptionEntry>* Micro::get_enum_list (xmlpp::Node* xml_node)
         xmlpp::Node::NodeList::iterator node_iterator;
         xmlpp::Element::AttributeList::const_iterator att_iterator;
         xmlpp::Node::NodeList children = xml_node->get_children();
-        Glib::ustring tmp_string;
-        guint max_value = 0;
+        string tmp_string;
+        uint max_value = 0;
 
         // loop through child-nodes (enum nodes)
         for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
@@ -720,7 +720,7 @@ list<OptionEntry>* Micro::get_enum_list (xmlpp::Node* xml_node)
 // Get list of settings
 // ******************************************************************************
 
-list<FuseSetting>* Micro::get_fuse_list (xmlpp::Node* xml_node, guint offset)
+list<FuseSetting>* Micro::get_fuse_list (xmlpp::Node* xml_node, uint offset)
 {
         list<FuseSetting> *fuse_listing = new list<FuseSetting>;
 
@@ -728,7 +728,7 @@ list<FuseSetting>* Micro::get_fuse_list (xmlpp::Node* xml_node, guint offset)
         xmlpp::Element::AttributeList::const_iterator att_iterator;
 
         xmlpp::Node::NodeList children = xml_node->get_children();
-        Glib::ustring tmp_string;
+        string tmp_string;
 
         // loop through child-nodes (bitfield nodes)
         for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
@@ -749,7 +749,7 @@ list<FuseSetting>* Micro::get_fuse_list (xmlpp::Node* xml_node, guint offset)
                                         entry->fenum = (*att_iterator)->get_value();
                                         //cout << entry->fenum << endl;
                                 } else if ((*att_iterator)->get_name().compare("mask") == 0) {
-                                        Glib::ustring strvalue = ((*att_iterator)->get_value()).substr(2, 2);
+                                        string strvalue = ((*att_iterator)->get_value()).substr(2, 2);
                                         entry->fmask = stol (strvalue, nullptr, 16);
                                         //cout << entry->fmask << endl;
                                 }
@@ -769,12 +769,12 @@ list<FuseSetting>* Micro::get_fuse_list (xmlpp::Node* xml_node, guint offset)
 // Get the device signature
 // ******************************************************************************
 
-Glib::ustring Micro::get_signature_bytes (xmlpp::Node* signature_node)
+string Micro::get_signature_bytes (xmlpp::Node* signature_node)
 {
         const xmlpp::TextNode *text = NULL;
         xmlpp::Node::NodeList::iterator iter;
         xmlpp::Node::NodeList children = signature_node->get_children();
-        Glib::ustring signatrure;
+        string signatrure;
 
         signatrure = "0x";
         for (iter = children.begin(); iter != children.end(); ++iter) {
@@ -789,13 +789,13 @@ Glib::ustring Micro::get_signature_bytes (xmlpp::Node* signature_node)
 // Create the string representation of a float
 // ******************************************************************************
 
-Glib::ustring Micro::float_to_string (gfloat number)
+string Micro::float_to_string (gfloat number)
 {
         string value(16, '\0');
         int chars_written = snprintf(&value[0], value.size(), "%.1f", number);
         value.resize(chars_written);
 
-        return (Glib::ustring)value;
+        return (string)value;
 }
 
 // ******************************************************************************
@@ -835,7 +835,7 @@ void Micro::print_fuse_settings (void)
 
 void Micro::print_option_lists (void)
 {
-        map<Glib::ustring, list<OptionEntry>*>::iterator iter;
+        map<string, list<OptionEntry>*>::iterator iter;
         for (iter = (settings->option_lists)->begin(); iter != (settings->option_lists)->end(); ++iter) {
                 cout << iter->first << " => " << endl;
                 list<OptionEntry>::iterator iter2;

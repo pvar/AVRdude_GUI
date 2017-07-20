@@ -335,7 +335,7 @@ void gtkGUI::cb_new_family (void)
         row = *(tm_device->append());
         row[cbm_generic.col_name] = "None";
         row[cbm_generic.col_data] = "";
-        map<Glib::ustring, Glib::ustring>::iterator iter;
+        map<string, string>::iterator iter;
         for (iter = microcontroller->device_map->begin(); iter != microcontroller->device_map->end(); ++iter) {
                 // ignore devices with irrelevant names
                 string name_part = iter->first.substr (0, family.size());
