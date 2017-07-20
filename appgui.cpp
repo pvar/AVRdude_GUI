@@ -497,7 +497,7 @@ void gtkGUI::cb_check_signature (void)
         // check execution outcome for errors
         if (avrdude->execution_status == no_error) {
                 // check for signature match
-                if (actual_signature == selected_signature)
+                if (actual_signature.uppercase() == selected_signature)
                         message_popup ("Success!", "Matching device detected.");
                 else
                         message_popup ("Failure!", "Unexpected device signature.");

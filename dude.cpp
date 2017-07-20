@@ -22,7 +22,7 @@ Dude::type_sig_exec_started Dude::signal_exec_started()
         return sig_exec_started;
 }
 
-void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_check, Glib::ustring programmer, Glib::ustring microcontroller )
+void Dude::setup ( bool auto_erase, bool auto_verify, bool auto_check, string programmer, string microcontroller )
 {
         execution_status = no_error;
         raw_exec_output.clear();
@@ -85,7 +85,6 @@ void Dude::setup ( gboolean auto_erase, gboolean auto_verify, gboolean auto_chec
 void Dude::do_read_signature (void)
 {
         // prepare command to be executed
-        Glib::ustring tmp_string;
         command.clear();
         command.append(oneliner);
         command.append("-F -u "); // disable signature and fuse checks
@@ -97,10 +96,9 @@ void Dude::do_read_signature (void)
         // only proceed if execution was successful
         if (execution_status == no_error) {
                 // find signature position
-                Glib::ustring::size_type sig_pos = raw_exec_output.find ("signature = 0x", 0);
+                string::size_type sig_pos = raw_exec_output.find ("signature = 0x", 0);
                 // extract signature
-                tmp_string = raw_exec_output.substr(sig_pos + 14, 6);
-                processed_output = tmp_string.uppercase();
+                processed_output = raw_exec_output.substr(sig_pos + 14, 6);
         }
 }
 
@@ -172,7 +170,7 @@ void Dude::execution_end (void)
         sig_exec_done.emit();
 }
 
-void Dude::do_eeprom_write (Glib::ustring file)
+void Dude::do_eeprom_write (string file)
 {
         // prepare command to be executed
         command.clear();
@@ -182,7 +180,7 @@ void Dude::do_eeprom_write (Glib::ustring file)
         execution_begin ();
 }
 
-void Dude::do_eeprom_read (Glib::ustring file)
+void Dude::do_eeprom_read (string file)
 {
         // prepare command to be executed
         command.clear();
@@ -192,7 +190,7 @@ void Dude::do_eeprom_read (Glib::ustring file)
         execution_begin ();
 }
 
-void Dude::do_eeprom_verify (Glib::ustring file)
+void Dude::do_eeprom_verify (string file)
 {
         // prepare command to be executed
         command.clear();
@@ -202,7 +200,7 @@ void Dude::do_eeprom_verify (Glib::ustring file)
         execution_begin ();
 }
 
-void Dude::do_flash_write (Glib::ustring file)
+void Dude::do_flash_write (string file)
 {
         // prepare command to be executed
         command.clear();
@@ -212,7 +210,7 @@ void Dude::do_flash_write (Glib::ustring file)
         execution_begin ();
 }
 
-void Dude::do_flash_read (Glib::ustring file)
+void Dude::do_flash_read (string file)
 {
         // prepare command to be executed
         command.clear();
@@ -222,7 +220,7 @@ void Dude::do_flash_read (Glib::ustring file)
         execution_begin ();
 }
 
-void Dude::do_flash_verify (Glib::ustring file)
+void Dude::do_flash_verify (string file)
 {
         // prepare command to be executed
         command.clear();
@@ -232,7 +230,7 @@ void Dude::do_flash_verify (Glib::ustring file)
         execution_begin ();
 }
 
-void Dude::do_fuse_write (gint fusebytes_count, gint low, gint high, gint ext)
+void Dude::do_fuse_write (int fusebytes_count, int low, int high, int ext)
 {
         // prepare command to be executed
         command.clear();
@@ -260,7 +258,7 @@ void Dude::do_fuse_write (gint fusebytes_count, gint low, gint high, gint ext)
         execution_begin ();
 }
 
-void Dude::do_fuse_read (gint fusebytes_count)
+void Dude::do_fuse_read (int fusebytes_count)
 {
         // prepare command to be executed
         command.clear();
@@ -294,11 +292,11 @@ void Dude::do_fuse_read (gint fusebytes_count)
         if (execution_status != no_error)
                 return;
         // extract fuse-byte values from execution output
-        gint char_counter = 0;
-        gint lines_extracted = 0;
-        Glib::ustring line;
+        int char_counter = 0;
+        int lines_extracted = 0;
+        string line;
         // parse execution output line by line, starting from the end...
-        for (gint iter = raw_exec_output.size() - 2; iter > 0; iter--) {
+        for (int iter = raw_exec_output.size() - 2; iter > 0; iter--) {
                 char_counter++;
                 if (raw_exec_output[iter] == '\n') {
                         // update extracted lines' count
@@ -313,20 +311,18 @@ void Dude::do_fuse_read (gint fusebytes_count)
                                 break;
                 }
         }
-
-        for (int i = 0; i < 3; i++) {
-                cout << " :" << dev_fusebytes[i];
-        }
-        cout << endl;
+        //for (int i = 0; i < 3; i++)
+        //        cout << " :" << dev_fusebytes[i];
+        //cout << endl;
 }
 
 void Dude::check_for_errors (void)
 {
-        guint index; // error_strings is a list... list-indices are unsigned!!
-        guint max_index = error_strings.size();
-        gint error_code_index = -1;
-        Glib::ustring::size_type er_str_pos;
-        Glib::ustring::size_type output_len = raw_exec_output.size();
+        uint index; // error_strings is a list... list-indices are unsigned!!
+        uint max_index = error_strings.size();
+        int error_code_index = -1;
+        string::size_type er_str_pos;
+        string::size_type output_len = raw_exec_output.size();
 
         // iterate through available error-strings and check if found in execution output string
         for (index = 0; index < max_index; index++) {

@@ -19,7 +19,7 @@ enum exec_status {
 };
 
 // array af strings that indicate an error has occured
-const std::vector<Glib::ustring>
+const std::vector<std::string>
 error_strings = {
         "error reading signature data",
         "Double check chip, or use -F to override this check.",
@@ -54,31 +54,31 @@ class Dude
                 virtual ~Dude();
 
                 // device fuse settings (as read from device memory)
-                gint dev_fusebytes[3] = {255, 255, 255};
+                int dev_fusebytes[3] = {255, 255, 255};
                 // console output from command execution
-                Glib::ustring raw_exec_output;
+                std::string raw_exec_output;
                 // usefull part of output -- according to nature of executed command
-                Glib::ustring processed_output;
+                std::string processed_output;
                 // error code that occured during last execution
                 exec_status execution_status;
 
-                void setup (gboolean auto_erase,
-                            gboolean auto_verify,
-                            gboolean auto_check,
-                            Glib::ustring programmer,
-                            Glib::ustring microcontroller);
+                void setup (bool auto_erase,
+                            bool auto_verify,
+                            bool auto_check,
+                            std::string programmer,
+                            std::string microcontroller);
 
                 // basic avrdude operations
                 void do_clear_device (void);
                 void do_read_signature (void);
-                void do_eeprom_write (Glib::ustring file);
-                void do_eeprom_read (Glib::ustring file);
-                void do_eeprom_verify (Glib::ustring file);
-                void do_flash_write (Glib::ustring file);
-                void do_flash_read (Glib::ustring file);
-                void do_flash_verify (Glib::ustring file);
-                void do_fuse_write (gint fusebytes_count, gint low, gint high, gint ext);
-                void do_fuse_read (gint fusebytes_count);
+                void do_eeprom_write (std::string file);
+                void do_eeprom_read (std::string file);
+                void do_eeprom_verify (std::string file);
+                void do_flash_write (std::string file);
+                void do_flash_read (std::string file);
+                void do_flash_verify (std::string file);
+                void do_fuse_write (int fusebytes_count, int low, int high, int ext);
+                void do_fuse_read (int fusebytes_count);
 
                 // signal for end-of-execution
                 typedef sigc::signal<void> type_sig_exec_done;
@@ -100,11 +100,11 @@ class Dude
                 // (dispatcher is like sigc<void>, but is suitable for inter-thread communication)
                 Glib::Dispatcher local_sig_exec_done;
 
-                Glib::ustring oneliner;
-                Glib::ustring protocol;
-                Glib::ustring options;
-                Glib::ustring device;
-                Glib::ustring command;
+                std::string oneliner;
+                std::string protocol;
+                std::string options;
+                std::string device;
+                std::string command;
 
                 void execute (void);
                 void execution_begin (void);
