@@ -110,25 +110,27 @@ void Micro::get_device_list (void)
 
 void Micro::save_xml_map (void)
 {
+        // open file for saving device to xml mapping
         ofstream map_file(this->exec_path + "dev2xml.lst");
+        // iterate map and save each couple (device_name -> file_name) in a separate line
         string line;
-
         map<string, string>::iterator iter;
         for (iter = device_map->begin(); iter != device_map->end(); ++iter) {
                 line = iter->first + "::" + iter->second + '\n';
                 map_file << line;
                 //cout << iter->first << " => " << iter->second << endl;
         }
-
+        // close file
         map_file.close();
 }
 
 gboolean Micro::load_xml_map (void)
 {
+        // open file
         ifstream map_file(this->exec_path + "dev2xml.lst");
-        string line, device, filename;
+        // comence parsing line by line...
         int counter = 0;
-
+        string line, device, filename;
         while (getline(map_file, line)) {
                 // locate separator string
                 size_t dev_end = line.find("::");
@@ -141,14 +143,13 @@ gboolean Micro::load_xml_map (void)
                 // add new entry in device-to-xml map
                 (*device_map)[device] = filename;
                 counter++;
-
                 //cout << line << endl;
                 //cout << device << endl;
                 //cout << filename << endl;
         }
-
+        // close file
         map_file.close();
-
+        // check if any devices were found...
         if (counter == 0)
                 return false;
         else
