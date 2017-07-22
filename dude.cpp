@@ -5,6 +5,7 @@ using namespace std;
 Dude::Dude() // : local_sig_exec_done()
 {
         avrdude_thread = nullptr;
+        working = false;
         local_sig_exec_done.connect(sigc::mem_fun(*this, &Dude::execution_end));
 }
 
@@ -146,6 +147,8 @@ void Dude::execution_begin (void)
         if (avrdude_thread) {
                 cout << "An avrdude thread is already active... Cannot start an extra one!" << endl;
         } else {
+                // avrdude is about to start
+                working = true;
                 // create thread for avrdude execution
                 avrdude_thread = new thread( [this] { execute(); } );
                 // emit signal for execution start (notify caller object)
@@ -162,6 +165,9 @@ void Dude::execution_end (void)
                 avrdude_thread->join();
         delete avrdude_thread;
         avrdude_thread = nullptr;
+
+        // avrdude has stopped
+        working = false;
 
         // check output for errors
         check_for_errors();

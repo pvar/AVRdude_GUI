@@ -115,6 +115,7 @@ class gtkGUI
                 void cb_fuse_default (void);
                 void select_file (file_op action);
                 void calculate_fuse_values (void);
+                bool exit_application(GdkEventAny* any_event);
 
                 // utilities
                 bool data_prep_start (void);

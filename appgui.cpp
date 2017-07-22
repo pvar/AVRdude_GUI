@@ -116,7 +116,7 @@ gtkGUI::gtkGUI()
         tm_port = Gtk::ListStore::create(cbm_generic);
         tm_protocol = Gtk::ListStore::create(cbm_generic);
 
-        // assign tree-models to combo-boxes*/
+        // assign tree-models to combo-boxes
         cb_family->set_model(tm_family);
         cb_device->set_model(tm_device);
         cb_protocol->set_model(tm_protocol);
@@ -130,6 +130,7 @@ gtkGUI::gtkGUI()
         populate_static_treemodels();
 
         // connect signal handlers
+        main_window->signal_delete_event().connect(sigc::mem_fun(*this, &gtkGUI::exit_application));
         btn_open_flash->signal_clicked().connect( sigc::bind<file_op>( sigc::mem_fun(*this, &gtkGUI::select_file), open_f) );
         btn_open_eeprom->signal_clicked().connect( sigc::bind<file_op>( sigc::mem_fun(*this, &gtkGUI::select_file), open_e) );
         btn_erom_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_eeprom_read));
@@ -153,6 +154,18 @@ gtkGUI::gtkGUI()
 
 gtkGUI::~gtkGUI()
 {
+}
+
+bool gtkGUI::exit_application (GdkEventAny* any_event)
+{
+        if (avrdude->working) {
+                //cout << "avrdude is still working...!" << endl;
+                message_popup ("Sorry...", "The programm cannot exit at this moment; Avrdude is currently performing an operation on your device...");
+                return true;
+        }
+
+        cout << "Bye bye!" << endl;
+        return false;
 }
 
 void gtkGUI::populate_static_treemodels (void)

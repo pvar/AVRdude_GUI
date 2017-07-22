@@ -61,6 +61,8 @@ class Dude
                 std::string processed_output;
                 // error code that occured during last execution
                 exec_status execution_status;
+                // wether a working thread is active or not
+                bool working;
 
                 void setup (bool auto_erase,
                             bool auto_verify,
