@@ -968,7 +968,6 @@ void gtkGUI::cb_eeprom_verify(void)
         }
         // verify flash memory
         avrdude->do_eeprom_verify(filename);
-
 }
 
 void gtkGUI::cb_flash_read(void)
@@ -1005,7 +1004,7 @@ void gtkGUI::cb_flash_verify(void)
                 return;
         }
         // verify flash memory
-        avrdude->do_flash_write(filename);
+        avrdude->do_flash_verify(filename);
 }
 
 void gtkGUI::cb_fuse_write(void)
@@ -1097,6 +1096,10 @@ void gtkGUI::execution_outcome (gboolean show_success_message)
                 case (no_error): {
                         if (show_success_message)
                                 message_popup("Success!", "Operation completed successfully.");
+                        break;
+                }
+                case (verification_error): {
+                        message_popup("Failure!", "Mismatch: The contents of the specified file and the device memory differ.");
                         break;
                 }
                 case (init_error): {

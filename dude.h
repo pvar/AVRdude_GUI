@@ -15,34 +15,40 @@ enum exec_status {
         cannot_read_signature,
         command_not_found,
         insufficient_permissions,
+        verification_error,
         programmer_not_found
 };
 
 // array af strings that indicate an error has occured
+// (the order of appearance in this array corresponds to the severity of the error)
 const std::vector<std::string>
 error_strings = {
-        "error reading signature data",
-        "Double check chip, or use -F to override this check.",
-        "Valid parts are:",
         "command not found",
+        "target doesn't answer",
+        "Valid parts are:",
         "can't open device",
         "could not find",
         "did not find any USB device",
-        "target doesn't answer"
+        "error reading signature data",
+        "Double check chip, or use -F to override this check.",
+        "content mismatch",
+        "verification error"
 };
 
 // array af the correspsonding error-codes
 // (these two arrays should always have the same number of elements)
 const std::vector<exec_status>
 error_codes = {
+        command_not_found,
+        init_error,
+        unknown_device,
+        programmer_not_found,
+        programmer_not_found,
+        programmer_not_found,
         cannot_read_signature,
         invalid_signature,
-        unknown_device,
-        command_not_found,
-        programmer_not_found,
-        programmer_not_found,
-        programmer_not_found,
-        init_error
+        verification_error,
+        verification_error
 };
 
 
