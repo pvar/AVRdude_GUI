@@ -1,7 +1,8 @@
+*~
 bin/*~
 bin/dudegui
-*.pdf
 *.o
-*~
+*.pdf
+*.zip
 *.txt
-gmon.out
+*.out
