@@ -1,5 +1,51 @@
 #!/bin/bash
 
+# ****************************************************************************
+# FUNCTION DEFINITIONS
+# ****************************************************************************
+
+# ----------------------------------------------------------------------------
+# function to get necessary user groups, for accessing serial devices
+# ----------------------------------------------------------------------------
+
+function which_groups ()
+{
+        [[ -r  /etc/os-release ]] && . /etc/os-release
+        case "$ID" in
+                debian|ubuntu)
+                        NEW_GROUPS="dialout tty"
+                        ;;
+                opensuse)
+                        NEW_GROUPS="dialout uucp lock"
+                        ;;
+                archlinux)
+                        NEW_GROUPS="uucp lock"
+                        ;;
+                *)
+                        # will have to guess necessary groups..."
+                        TTYS_GROUP=$([[ -e /dev/ttyS0 ]] && ls -lh /dev/ttyS0 | awk '{print $4}')
+                        case "${TTYS_GROUP}" in
+                                uucp)
+                                        # suppose it's an ARCH-based distribution
+                                        NEW_GROUPS="uucp lock"
+                                        ;;
+                                dialout)
+                                        # suppose it's a DEBIAN-based distribution
+                                        NEW_GROUPS="dialout tty"
+                                        ;;
+                                *)
+                                        # don't have a clue... :-)
+                                        NEW_GROUPS=${TTYS_GROUP}
+                                        ;;
+                        exit 1
+                        ;;
+        esac
+}
+
+# ****************************************************************************
+# MAIN SCRIPT BODY
+# ****************************************************************************
+
 # ----------------------------------------------------------------------------
 # setup working environment
 # ----------------------------------------------------------------------------
@@ -27,15 +73,6 @@ SUM2=8525
 # ----------------------------------------------------------------------------
 
 trap 'rm -fr ${WORKDIR}; exit 1' HUP INT QUIT TERM
-
-# ----------------------------------------------------------------------------
-# check dependencies
-# ----------------------------------------------------------------------------
-
-# check if libgtkmm 3.0 exists...
-#sudo ldconfig -p | grep libgtkmm-3.0 | wc -l
-# check if libxml 2.6  exists...
-#sudo ldconfig -p | grep libxml++-2.6 | wc -l
 
 # ----------------------------------------------------------------------------
 # prepare archive working space and archive
