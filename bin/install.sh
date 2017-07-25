@@ -5,7 +5,7 @@
 # ****************************************************************************
 
 # ----------------------------------------------------------------------------
-# function to get necessary user groups, for accessing serial devices
+# function that guesses necessary user groups, for accessing serial devices
 # ----------------------------------------------------------------------------
 
 function which_groups ()
@@ -41,6 +41,89 @@ function which_groups ()
                         ;;
         esac
 }
+
+# ----------------------------------------------------------------------------
+# function that checks if group (NEW_GROUP) exists
+# ----------------------------------------------------------------------------
+
+function is_group ()
+{
+        # check if group dialout exists
+        EXISTS=1
+        if [ `/usr/bin/grep -c ${NEW_GROUP} /etc/group` == "0"  ]; then
+                echo "This is weird! It seems that your system lacks dialout group.";
+                while true; do
+                        echo "Would you like this group to be created now? [Y/n]"
+                        read -s -n 1 USR_RESPONSE
+                        case ${USR_REPLY} in
+                                [Yy]|"" )
+                                        echo -n "Creating dialout group... "
+                                        if ! sudo groupadd ${NEW_GROUP} 2>/dev/null; then
+                                                echo "FAILED"
+                                                EXISTS=0
+                                        else
+                                                echo "DONE"
+                                                EXISTS=1
+                                        fi
+                                        break;;
+                                [Nn] )
+                                        EXISTS=0
+                                        break;;
+                                * )
+                                        echo "Please answer y or n."
+                                        break;;
+                        esac
+                done
+        fi
+        return ${EXISTS}
+}
+
+# ----------------------------------------------------------------------------
+# function that checks if user is member of group (NEW_GROUP)
+# ----------------------------------------------------------------------------
+
+function in_group ()
+{
+        IN_GROUP=0
+        # get groups the current user belongs to
+        USR_GROUPS="`groups $(whoami)`"
+        # check ${NEW_GROUP} is one of them
+        for USR_GROUP in ${USR_GROUPS}; do
+                if [ ${USR_GROUP} == ${NEW_GROUP} ]; then
+                        IN_GROUP=1;
+                fi
+        done
+        return ${IN_GROUP}
+}
+
+# ----------------------------------------------------------------------------
+# function that adds user in group (NEW_GROUP)
+# ----------------------------------------------------------------------------
+
+function add_user_in_group ()
+{
+        echo "Your account in not a member of ${NEW_GROUP} group.";
+        while true; do
+                echo "Would you like to be added in this group now? [Y/n]"
+                read -s -n 1 USR_RESPONSE
+                case ${USR_RESPONSE} in
+                        [Yy]|"" )
+                                echo -n "Adding user in ${NEW_GROUP}... "
+                                if ! sudo usermod $(whoami) -a -G ${NEW_GROUP}; then
+                                        echo "FAILED"
+                                else
+                                        echo "DONE"
+                                fi
+                                break;;
+                        [Nn] )
+                                break;;
+                        * )
+                                echo "Please answer y or n."
+                                break;;
+                esac
+        done
+}
+
 
 # ****************************************************************************
 # MAIN SCRIPT BODY
@@ -153,82 +236,37 @@ echo "DONE"
 # ----------------------------------------------------------------------------
 
 echo "\nSome hardware programmers communicate through serial port."
-echo "In order to be able use such a programmer, your account must"
-echo "be a member of the appropriate user groups. The script will"
-echo "make sure that your system is properly configured...\n"
+echo "Permissions on these devices are managed with the use of the"
+echo "system-specific user groups. The script will do it's best to"
+echo "guess what those groups are and will make sure that your"
+echo "account is properly configured...\n"
 
-# check if group dialout exists
-DIALOUT=1
-if [ `/usr/bin/grep -c "dialout" /etc/group` == "0"  ]; then
-        echo "This is weird! It seems that your system lacks dialout group.";
-        while true; do
-                echo "Would you like this group to be created now? [Y/n]"
-                read -s -n 1 USR_RESPONSE
-                case ${USR_RESPONSE} in
-                        [Yy]|"" )
-                                echo -n "Creating dialout group... "
-                                if ! sudo groupadd dialout 2>/dev/null; then
-                                        echo "FAILED"
-                                        DIALOUT=0
-                                else
-                                        echo "DONE"
-                                        DIALOUT=1
-                                fi
-                                break;;
-                        [Nn] )
-                                DIALOUT=0
-                                break;;
-                        * )
-                                echo "Please answer y or n."
-                                break;;
-                esac
-        done
-fi
+# get necessary groups (names will be stored in NEW_GROUPS)
+which_groups
 
-# only proceed if dialout group exists or was created
-if [ ${DIALOUT} == 1 ]; then
-        IN_DIALOUT=0
-        # get groups the current user belongs to
-        USR_GROUPS="`groups $(whoami)`"
-        # check dialout is one of them
-        for USR_GROUP in ${USR_GROUPS}; do
-                if [ ${USR_GROUP} == "dialout" ]; then
-                        IN_DIALOUT=1;
-                fi
-        done
-        # proceed if user is not a member of dialout
-        if [ ${IN_DIALOUT} == 0 ]; then
-                echo "It seems that your account in not a member of dialout group.";
-                while true; do
-                        echo "Would you like to be added in this group now? [Y/n]"
-                        read -s -n 1 USR_RESPONSE
-                        case ${USR_RESPONSE} in
-                                [Yy]|"" )
-                                        echo -n "Adding user in group dialout... "
-                                        if ! sudo usermod $(whoami) -a -G dialout; then
-                                                echo "FAILED"
-                                                DIALOUT=false
-                                        else
-                                                echo "DONE"
-                                                DIALOUT=true
-                                        fi
-                                        break;;
-                                [Nn] )
-                                        DIALOUT=false
-                                        break;;
-                                * )
-                                        echo "Please answer y or n."
-                                        break;;
-                        esac
-                done
-        fi
-fi
+for NEW_GROUP in ${NEW_GROUPS}; do
+        echo ${NEW_GROUP}
+        # check if groups exists
+        is_group
+        # get return value
+        RET_VAL=$?
+        # proceed to next loop iteration, if group not present
+        if [ RET_VAL != 1]
+                continue
+        # check if user is a member
+        in_group
+        # get return value
+        RET_VAL=$?
+        # proceed to next loop iteration, if already member of group
+        if [ RET_VAL == 1]
+                continue
+        # add user in group
+        add_user_in_group
+done
 
 # ----------------------------------------------------------------------------
 # make USB programmers accessible (add udev rules)
 # ----------------------------------------------------------------------------
-
-
 
 # ----------------------------------------------------------------------------
 # clean-up and exit
