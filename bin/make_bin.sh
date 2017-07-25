@@ -1,9 +1,12 @@
 #!/bin/bash
 
-SCRIPT1=script.tmp
-SCRIPT2=script.txt
-ARCHIVE=dudegui.zip
-INSTALLER=dudegui.bin
+SCRIPT1="script.tmp"
+SCRIPT2="script.txt"
+ARCHIVE="dudegui.zip"
+INSTALLER="dudegui.bin"
+WORKDIR=${0%`basename $0`}
+
+cd ${WORKDIR}
 
 # create archive with application files
 tar -cjf ${ARCHIVE} dudegui dudegui.ui dudegui.png dudegui.desktop dev2xml.lst xmlfiles
@@ -28,3 +31,5 @@ chmod +x ${INSTALLER}
 
 # clean-up
 rm ${SCRIPT1} ${SCRIPT2} ${ARCHIVE}
+
+cd -
