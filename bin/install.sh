@@ -5,6 +5,26 @@
 # ****************************************************************************
 
 # ----------------------------------------------------------------------------
+# function that creates file with udev rules
+# ----------------------------------------------------------------------------
+
+function udev_rules ()
+{
+        cat <<END_RULES
+# USBasp
+SUBSYSTEM=="usb", ATTRS{idVendor}=="16c0", ATTRS{idProduct}=="05dc", MODE="660", GROUP="${UDEV_GROUP}"
+# USBtiny
+SUBSYSTEM=="usb", ATTR{idVendor}=="1781", ATTR{idProduct}=="0c9f", MODE="660", GROUP="${UDEV_GROUP}"
+# Atmel JTAG ICE mkII
+ATTR{idVendor}==”03eb”, ATTR{idProduct}==”2103″, MODE=”660″, GROUP=”${UDEV_GROUP}”
+# Atmel AVRISP mkII
+ATTR{idVendor}==”03eb”, ATTR{idProduct}==”2104″, MODE=”660″, GROUP=”${UDEV_GROUP}”
+# Atmel Dragon
+ATTR{idVendor}==”03eb”, ATTR{idProduct}==”2107″, MODE=”660″, GROUP=”${UDEV_GROUP}”
+END_RULES
+}
+
+# ----------------------------------------------------------------------------
 # function that guesses necessary user groups, for accessing serial devices
 # ----------------------------------------------------------------------------
 
@@ -14,12 +34,23 @@ function which_groups ()
         case "$ID" in
                 debian|ubuntu)
                         NEW_GROUPS="dialout tty"
+                        UDEV_GROUP="dialout"
+                        ;;
+                gentoo)
+                        NEW_GROUPS="tty uucp"
+                        UDEV_GROUP="dialout"
+                        ;;
+                fedora)
+                        NEW_GROUPS="dialout uucp lock"
+                        UDEV_GROUP="dialout"
                         ;;
                 opensuse)
                         NEW_GROUPS="dialout uucp lock"
+                        UDEV_GROUP="dialout"
                         ;;
-                archlinux)
+                archlinux|arch)
                         NEW_GROUPS="uucp lock"
+                        UDEV_GROUP="uucp"
                         ;;
                 *)
                         # will have to guess necessary groups..."
@@ -28,16 +59,19 @@ function which_groups ()
                                 uucp)
                                         # suppose it's an ARCH-based distribution
                                         NEW_GROUPS="uucp lock"
+                                        UDEV_GROUP="uucp"
                                         ;;
                                 dialout)
                                         # suppose it's a DEBIAN-based distribution
                                         NEW_GROUPS="dialout tty"
+                                        UDEV_GROUP="dialout"
                                         ;;
                                 *)
                                         # don't have a clue... :-)
                                         NEW_GROUPS=${TTYS_GROUP}
+                                        UDEV_GROUP=${TTYS_GROUP}
                                         ;;
-                        exit 1
+                        esac
                         ;;
         esac
 }
@@ -137,19 +171,19 @@ PATH=/usr/bin:/bin
 # new files will be readable by everyone, but only writable by the owner
 umask 022
 # installation directories
-ICONLOCATION=~/.local/share/icons/hicolor/256x256/apps/
-LINKLOCATION=~/.local/share/applications/
-EXECLOCATION=~/bin/dudegui/
+ICONLOCATION="~/.local/share/icons/hicolor/256x256/apps/"
+LINKLOCATION="~/.local/share/applications/"
+EXECLOCATION="~/bin/dudegui/"
 # working directories
 RND=$(($RANDOM  + 128))
 DIR=${0%`basename $0`}
-WORKDIR=${DIR}/dudetmp${RND}
-BINZIP=binary.zip
+WORKDIR="${DIR}/dudetmp${RND}"
+BINZIP="binary.zip"
 # number of lines in this script file (plus 1)
-SCRIPT_LINES=129
+SCRIPT_LINES=X
 # run /bin/sum on your binary and put the two values here
-SUM1=09722
-SUM2=8525
+SUM1=X
+SUM2=X
 
 # ----------------------------------------------------------------------------
 # what to do in case of abnormal/unexpected termination
@@ -161,7 +195,7 @@ trap 'rm -fr ${WORKDIR}; exit 1' HUP INT QUIT TERM
 # prepare archive working space and archive
 # ----------------------------------------------------------------------------
 
-echo -n "Unpacking \"bin\" file in temporary directory... ";
+echo -e -n "\nUnpacking \"bin\" file in temporary directory... ";
 # create working directory
 mkdir -p ${WORKDIR}
 # unzip archive
@@ -172,7 +206,7 @@ echo "DONE"
 # validate zip file with specified checksums
 # ----------------------------------------------------------------------------
 
-echo -n "Checking archive integrity with checksums... ";
+echo -e -n "\nChecking archive integrity with checksums... ";
 SUM=`sum ${WORKDIR}/${BINZIP}`
 ASUM1=`echo "${SUM}" | awk '{print $1}'`
 ASUM2=`echo "${SUM}" | awk '{print $2}'`
@@ -189,7 +223,7 @@ echo "DONE (archive untainted!)"
 # uncompress zip file
 # ----------------------------------------------------------------------------
 
-unzip -qq ${WORKDIR}/${BINZIP} -d ${WORKDIR}
+tar -xjf ${WORKDIR}/${BINZIP} -C ${WORKDIR}
 
 # ----------------------------------------------------------------------------
 # place files in proper locations
@@ -201,7 +235,7 @@ if [ ! -d "${ICONLOCATION}" ]; then
 fi
 
 # copy icon file
-echo -n "Copying application icon... ";
+echo -e -n "\nCopying application icon... ";
 cp ${WORKDIR}/dudegui.png ${ICONLOCATION}
 echo "DONE"
 
@@ -211,7 +245,7 @@ if [ ! -d "${LINKLOCATION}" ]; then
 fi
 
 # copy "desktop" file
-echo -n "Copying application \"desktop\" file... ";
+echo -e -n "\nCopying application \"desktop\" file... ";
 cp ${WORKDIR}/dudegui.desktop ${LINKLOCATION}
 echo "DONE"
 
@@ -224,7 +258,7 @@ else
 fi
 
 # copy binary and other necessary files
-echo -n "Copying application binary and data... ";
+echo -e -n "\nCopying application binary and data... ";
 cp ${WORKDIR}/dudegui ${EXECLOCATION}
 cp ${WORKDIR}/dudegui.ui ${EXECLOCATION}
 cp ${WORKDIR}/dev2xml.lst ${EXECLOCATION}
@@ -235,38 +269,52 @@ echo "DONE"
 # make serial programmers accessible (add user in necessary groups)
 # ----------------------------------------------------------------------------
 
-echo "\nSome hardware programmers communicate through serial port."
-echo "Permissions on these devices are managed with the use of the"
-echo "system-specific user groups. The script will do it's best to"
-echo "guess what those groups are and will make sure that your"
-echo "account is properly configured...\n"
+echo -e "\nSome hardware programmers communicate through serial port."
+echo "Permissions on these devices are managed with the use of distribution"
+echo "specific user groups. The script will do it's best to guess what"
+echo -e "those groups are and to make sure that your account is properly configured...\n"
 
 # get necessary groups (names will be stored in NEW_GROUPS)
 which_groups
 
 for NEW_GROUP in ${NEW_GROUPS}; do
-        echo ${NEW_GROUP}
+        #echo ${NEW_GROUP}
         # check if groups exists
         is_group
         # get return value
         RET_VAL=$?
         # proceed to next loop iteration, if group not present
-        if [ RET_VAL != 1]
+        if [ RET_VAL != 1 ]; then
                 continue
+        fi
         # check if user is a member
         in_group
         # get return value
         RET_VAL=$?
         # proceed to next loop iteration, if already member of group
-        if [ RET_VAL == 1]
+        if [ RET_VAL == 1 ]; then
                 continue
+        fi
         # add user in group
         add_user_in_group
 done
 
+echo -e "\nIf you cannot access a programmer that is connected through a serial port,"
+echo -e "check the permissions of the relative device file (/dev/ttySx).\n"
+
 # ----------------------------------------------------------------------------
 # make USB programmers accessible (add udev rules)
 # ----------------------------------------------------------------------------
+
+
+echo -e "\nSome hardware programmers communicate through USB."
+echo "Access on such devices can be granted automatically"
+echo "with the help of the appropriate udev rules. The script"
+echo "will add a set of rules, that matches all the well known"
+echo -e "hardware programmers...\n"
+
+udev_rules > ${WORKDIR}/rules.txt
+sudo cp ${WORKDIR}/rules.txt "/etc/udev/rules.d/99-dudegui.rules"
 
 # ----------------------------------------------------------------------------
 # clean-up and exit
