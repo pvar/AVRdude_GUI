@@ -171,9 +171,10 @@ PATH=/usr/bin:/bin
 umask 022
 # installation directories
 USERNAME=$(whoami)
-ICONLOCATION="/home/${USERNAME}/.local/share/icons/hicolor/256x256/apps/"
-LINKLOCATION="/home/${USERNAME}/.local/share/applications/"
-EXECLOCATION="/home/${USERNAME}/bin/dudegui/"
+ICONLOCATION="/usr/share/icons/hicolor/256x256/apps/"
+MENULOCATION="/usr/share/applications/"
+LINKLOCATION="/usr/bin/"
+EXECLOCATION="/var/opt/dudegui/"
 # working directories
 RND=$(($RANDOM  + 128))
 DIR=${0%`basename $0`}
@@ -213,7 +214,7 @@ ASUM2=`echo "${SUM}" | awk '{print $2}'`
 if [ ${ASUM1} -ne ${SUM1} ] || [ ${ASUM2} -ne ${SUM2} ]; then
         echo "FAILED"
         echo "The binary archive appears to be corrupted. Please, download"
-        echo "the file again and re-try the installation..."
+        echo -e "the file again and re-try the installation...\n"
         rm -fr ${WORKDIR}
         exit 1
 fi
@@ -229,41 +230,61 @@ tar -xjf ${WORKDIR}/${BINZIP} -C ${WORKDIR}
 # place files in proper locations
 # ----------------------------------------------------------------------------
 
-# create icon directory if not present
-if [ ! -d "${ICONLOCATION}" ]; then
-        mkdir -p ${ICONLOCATION}
+# -------- install "desktop" file --------
+
+# exit if directory not present
+if [ ! -d "${MENULOCATION}" ]; then
+        echo -e "\nThere is something wrong with your DE. Installation will abort!"
+        rm -fr ${WORKDIR}
+        exit 1;
 fi
 
-# copy icon file
-echo -e -n "\nCopying application icon... ";
-cp ${WORKDIR}/dudegui.png ${ICONLOCATION}
-echo "DONE"
-
-# create application-link directory if not present
-if [ ! -d "${LINKLOCATION}" ]; then
-        mkdir -p ${LINKLOCATION}
-fi
-
-# copy "desktop" file
-echo -e -n "\nCopying application \"desktop\" file... ";
-cp ${WORKDIR}/dudegui.desktop ${LINKLOCATION}
-echo "DONE"
-
-# create folder in ~/bin if not present
-if [ ! -d "${EXECLOCATION}" ]; then
-        mkdir -p ${EXECLOCATION}
+# install file
+echo -e -n "\Installing application \"desktop\" file... ";
+sudo xdg-desktop-menu install ${WORKDIR}/dudegui.desktop --novendor --mode system
+if [ $? == 0 ]; then
+        echo "DONE"
 else
-        rm -fr ${EXECLOCATION}
-        mkdir -p ${EXECLOCATION}
+        echo "FAILED"
+        echo "The application will not be accessible through the DE's main menu!"
 fi
 
-# copy binary and other necessary files
-echo -e -n "\nCopying application binary and data... ";
-cp ${WORKDIR}/dudegui ${EXECLOCATION}
-cp ${WORKDIR}/dudegui.ui ${EXECLOCATION}
-cp ${WORKDIR}/dev2xml.lst ${EXECLOCATION}
-cp ${WORKDIR}/xmlfiles ${EXECLOCATION} -r
+# -------- install icon --------
+
+# create directory if not present
+if [ ! -d "${ICONLOCATION}" ]; then
+        sudo mkdir -p ${ICONLOCATION}
+fi
+
+# copy file
+echo -e -n "\nCopying application icon... ";
+sudo cp ${WORKDIR}/dudegui.png ${ICONLOCATION}
 echo "DONE"
+
+# -------- install aplication --------
+
+ # create directory
+if [ ! -d "${EXECLOCATION}" ]; then
+        sudo mkdir -p ${EXECLOCATION}
+fi
+
+# copy all necessary files
+echo -e -n "\nCopying application binary and data... ";
+sudo cp ${WORKDIR}/dudegui ${EXECLOCATION}
+sudo cp ${WORKDIR}/dudegui.ui ${EXECLOCATION}
+sudo cp ${WORKDIR}/dev2xml.lst ${EXECLOCATION}
+sudo cp ${WORKDIR}/xmlfiles ${EXECLOCATION} -r
+echo "DONE"
+
+# change permissions
+sudo chgrp -f users ${EXECLOCATION}/dev2xml.lst 2>/dev/null
+sudo chgrp -f users ${EXECLOCATION}/xmlfiles -R 2>/dev/null
+sudo chmod -f 666 ${EXECLOCATION}/dev2xml.lst
+sudo chmod -f 775 ${EXECLOCATION}/xmlfiles
+sudo chmod -f 666 ${EXECLOCATION}/xmlfiles/*
+
+# create symbolic link to executable
+sudo ln -s ${EXECLOCATION}/dudegui /usr/bin/dudegui
 
 # ----------------------------------------------------------------------------
 # make serial programmers accessible (add user in necessary groups)
