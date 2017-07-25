@@ -276,9 +276,9 @@ sudo cp ${WORKDIR}/dev2xml.lst ${EXECLOCATION}
 sudo cp ${WORKDIR}/xmlfiles ${EXECLOCATION} -r
 echo "DONE"
 
-# change permissions
-sudo chgrp -f users ${EXECLOCATION}/dev2xml.lst 2>/dev/null
-sudo chgrp -f users ${EXECLOCATION}/xmlfiles -R 2>/dev/null
+# loosen the permissions on certain files
+#sudo chgrp -f users ${EXECLOCATION}/dev2xml.lst 2>/dev/null
+#sudo chgrp -f users ${EXECLOCATION}/xmlfiles -R 2>/dev/null
 sudo chmod -f 666 ${EXECLOCATION}/dev2xml.lst
 sudo chmod -f 775 ${EXECLOCATION}/xmlfiles
 sudo chmod -f 666 ${EXECLOCATION}/xmlfiles/*
