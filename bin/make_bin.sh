@@ -1,35 +1,33 @@
 #!/bin/bash
 
-SCRIPT1="script.tmp"
-SCRIPT2="script.txt"
+SCRIPT="script.txt"
 ARCHIVE="dudegui.zip"
 INSTALLER="dudegui.bin"
 WORKDIR=${0%`basename $0`}
 
-cd ${WORKDIR}
-
 # create archive with application files
+echo "Creating archive with application files..."
+cd ${WORKDIR}
 tar -cjf ${ARCHIVE} dudegui dudegui.ui dudegui.png dudegui.desktop dev2xml.lst xmlfiles
+cd - 1>/dev/null
 
-# use sed to properly set SCRIPT_LINES in install.sh
-cp install.sh ${SCRIPT1}
-LINES=$(cat ${SCRIPT1} | wc -l)
-sed s/"SCRIPT_LINES=X"/"SCRIPT_LINES=$((LINES+1))"/ <${SCRIPT1} > ${SCRIPT2}
+# get value for SCRIPT_LINES
+LINES=$(cat ${WORKDIR}/install.sh | wc -l)
 
-# use sed to properly set SUM values in install.sh
-SUM=`sum ${ARCHIVE}`
+# get values for SUM1 and SUM2
+SUM=`sum ${WORKDIR}/${ARCHIVE}`
 SUM1=`echo "${SUM}" | awk '{print $1}'`
 SUM2=`echo "${SUM}" | awk '{print $2}'`
-cp ${SCRIPT2} ${SCRIPT1}
-sed s/"SUM1=X"/"SUM1=${SUM1}"/ <${SCRIPT1} > ${SCRIPT2}
-cp ${SCRIPT2} ${SCRIPT1}
-sed s/"SUM2=X"/"SUM2=${SUM2}"/ <${SCRIPT1} > ${SCRIPT2}
+
+# edit install.sh
+echo "Modifying installation script..."
+sed -e s/"SCRIPT_LINES=X"/"SCRIPT_LINES=$((LINES+1))"/ -e s/"SUM1=X"/"SUM1=${SUM1}"/ -e s/"SUM2=X"/"SUM2=${SUM2}"/ <${WORKDIR}/install.sh > ${WORKDIR}/${SCRIPT}
 
 # compound installer script and application archive
-cat ${SCRIPT2} ${ARCHIVE} > ${INSTALLER}
-chmod +x ${INSTALLER}
+echo "Creating standalone installatikon file..."
+cat ${WORKDIR}/${SCRIPT} ${WORKDIR}/${ARCHIVE} > ${WORKDIR}/${INSTALLER}
+chmod +x ${WORKDIR}/${INSTALLER}
 
 # clean-up
-rm ${SCRIPT1} ${SCRIPT2} ${ARCHIVE}
-
-cd -
+rm ${WORKDIR}/${SCRIPT} ${WORKDIR}/${ARCHIVE}
+echo "all done!"
