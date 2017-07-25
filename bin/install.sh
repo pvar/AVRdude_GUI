@@ -158,7 +158,6 @@ function add_user_in_group ()
         done
 }
 
-
 # ****************************************************************************
 # MAIN SCRIPT BODY
 # ****************************************************************************
@@ -300,13 +299,12 @@ for NEW_GROUP in ${NEW_GROUPS}; do
         add_user_in_group
 done
 
-echo -e "\nIf you cannot access a programmer that is connected through a serial port,"
-echo -e "check the permissions of the relative device file (/dev/ttySx).\n"
+echo -e "If you cannot access a programmer that is connected through a serial port,"
+echo -e "check the permissions of the relative device file (/dev/ttySx)."
 
 # ----------------------------------------------------------------------------
 # make USB programmers accessible (add udev rules)
 # ----------------------------------------------------------------------------
-
 
 echo -e "\nSome hardware programmers communicate through USB."
 echo "Access on such devices can be granted automatically"
