@@ -120,7 +120,7 @@ function in_group ()
 {
         IN_GROUP=0
         # get groups the current user belongs to
-        USR_GROUPS="`groups $(whoami)`"
+        USR_GROUPS="`groups ${USERNAME}`"
         # check ${NEW_GROUP} is one of them
         for USR_GROUP in ${USR_GROUPS}; do
                 if [ ${USR_GROUP} == ${NEW_GROUP} ]; then
@@ -143,7 +143,7 @@ function add_user_in_group ()
                 case ${USR_RESPONSE} in
                         [Yy]|"" )
                                 echo -n "Adding user in ${NEW_GROUP}... "
-                                if ! sudo usermod $(whoami) -a -G ${NEW_GROUP}; then
+                                if ! sudo usermod ${USERNAME} -a -G ${NEW_GROUP}; then
                                         echo "FAILED"
                                 else
                                         echo "DONE"
@@ -171,9 +171,10 @@ PATH=/usr/bin:/bin
 # new files will be readable by everyone, but only writable by the owner
 umask 022
 # installation directories
-ICONLOCATION="~/.local/share/icons/hicolor/256x256/apps/"
-LINKLOCATION="~/.local/share/applications/"
-EXECLOCATION="~/bin/dudegui/"
+USERNAME=$(whoami)
+ICONLOCATION="/home/${USERNAME}/.local/share/icons/hicolor/256x256/apps/"
+LINKLOCATION="/home/${USERNAME}/.local/share/applications/"
+EXECLOCATION="/home/${USERNAME}/bin/dudegui/"
 # working directories
 RND=$(($RANDOM  + 128))
 DIR=${0%`basename $0`}
