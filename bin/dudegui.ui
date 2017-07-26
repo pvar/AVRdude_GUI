@@ -95,7 +95,7 @@ Author: Varelas Panagiotis
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="dude_auto_erase">
-                        <property name="label" translatable="yes">Automatic erase before writing Flash.</property>
+                        <property name="label" translatable="yes">Automatic erase before writing Flash</property>
                         <property name="name">8</property>
                         <property name="height_request">24</property>
                         <property name="visible">True</property>
@@ -113,7 +113,7 @@ Author: Varelas Panagiotis
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="dude_auto_verify">
-                        <property name="label" translatable="yes">Automatic verification after uploading.</property>
+                        <property name="label" translatable="yes">Automatic verification after uploading</property>
                         <property name="height_request">24</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
@@ -130,7 +130,7 @@ Author: Varelas Panagiotis
                     </child>
                     <child>
                       <object class="GtkCheckButton" id="dude_auto_check">
-                        <property name="label" translatable="yes">Automatic signature checking.</property>
+                        <property name="label" translatable="yes">Automatic signature checking</property>
                         <property name="height_request">24</property>
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>

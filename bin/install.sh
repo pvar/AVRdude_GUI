@@ -82,10 +82,10 @@ function which_groups ()
 
 function is_group ()
 {
-        # check if group dialout exists
+        # check if group exists
         EXISTS=1
         if [ `/usr/bin/grep -c ${NEW_GROUP} /etc/group` == "0"  ]; then
-                echo "This is weird! It seems that your system lacks dialout group.";
+                echo "This is weird! It seems that your system lacks ${NEW_GROUP} group.";
                 while true; do
                         echo "Would you like this group to be created now? [Y/n]"
                         read -s -n 1 USR_RESPONSE
@@ -292,8 +292,8 @@ sudo ln -s ${EXECLOCATION}/dudegui /usr/bin/dudegui
 
 echo -e "\nSome hardware programmers communicate through serial port."
 echo "Permissions on these devices are managed with the use of distribution"
-echo "specific user groups. The script will do it's best to guess what"
-echo -e "those groups are and to make sure that your account is properly configured...\n"
+echo "specific user groups. The script will do its best to guess what those"
+echo -e "groups are and to make sure that your account is properly configured...\n"
 
 # get necessary groups (names will be stored in NEW_GROUPS)
 which_groups
