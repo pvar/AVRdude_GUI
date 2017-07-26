@@ -1,0 +1,33 @@
+
+--------------------------------------------------------------------------------
+        CLASS:  gtkGUI -- manipulation of widgets and callbacks
+--------------------------------------------------------------------------------
+
+        * display widgets and provide callbacks
+        * create Dude instance for usinbg avrdude
+        * create Micro instance for specified MCU
+        * perform basic calculations related to fuse settings and warnings
+
+--------------------------------------------------------------------------------
+        CLASS:  Micro -- microcontroller data parsing
+--------------------------------------------------------------------------------
+
+        * enumerate XML files with MCU descriptions
+        * parse XML file with MCU description
+        * store mcu specifications in structures
+        * store mcu fuses settings in structures
+        * store mcu fuses warnings in structures
+        * store default fuse values
+        * store user defined fuse values
+
+--------------------------------------------------------------------------------
+        CLASS:  Dude -- execution of avrdude with various parametrers
+--------------------------------------------------------------------------------
+
+        * manage a thread for execution avrdude
+        * signal caller object for execution completion
+        * compose avrdude command (add appropriate parameters)
+        * keep console output from execution
+        * scan execution output for various errors
+        * store fuse bytes as read from device
+

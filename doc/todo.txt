@@ -1,0 +1,6 @@
+
+# add warning for missing libraries in installation script
+        # check if libgtkmm 3.0 exists...
+        sudo ldconfig -p | grep libgtkmm-3.0 | wc -l
+        # check if libxml++ 2.6  exists...
+        sudo ldconfig -p | grep libxml++-2.6 | wc -l
