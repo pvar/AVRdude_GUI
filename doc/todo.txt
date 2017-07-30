@@ -1,4 +1,12 @@
 
+# member structures?
+
+# add support for both versions of XML
+
+# add support for lock bits
+
+
+
 # add warning for missing libraries in installation script
         # check if libgtkmm 3.0 exists...
         sudo ldconfig -p | grep libgtkmm-3.0 | wc -l

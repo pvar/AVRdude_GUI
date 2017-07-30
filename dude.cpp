@@ -26,6 +26,7 @@ Dude::type_sig_exec_started Dude::signal_exec_started()
 void Dude::setup ( bool auto_erase, bool auto_verify, bool auto_check, string programmer, string microcontroller )
 {
         execution_status = no_error;
+        last_command.clear();
         raw_exec_output.clear();
         processed_output.clear();
         device.clear();
@@ -131,10 +132,9 @@ void Dude::execute (void)
                                 raw_exec_output.append(line);
                 pclose(stream);
         }
-        // add executed command at the beginning of output string
+        // add executed command in the beginning of console output (also keep it separately)
         raw_exec_output = "$ " + command + "\n" + raw_exec_output;
-        // debug print-out
-        //cout << raw_exec_output << endl;
+        last_command = command.erase(command.length() - 5, 5);
 
         // check if in thread...
         if (avrdude_thread)

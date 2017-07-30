@@ -71,6 +71,7 @@ gtkGUI::gtkGUI()
         builder->get_widget("fw_flash_box", box_flash_ops);
         builder->get_widget("fw_eeprom_box", box_eeprom_ops);
         builder->get_widget("avrdude_output", tv_dude_output);
+        builder->get_widget("avrdude_command", lbl_dude_command);
         builder->get_widget("open_eeprom", btn_open_eeprom);
         builder->get_widget("open_flash", btn_open_flash);
         builder->get_widget("read_erom", btn_erom_read);
@@ -506,7 +507,7 @@ void gtkGUI::cb_check_signature (void)
 {
         // read signature from device
         avrdude->do_read_signature();
-        // display console-output
+        // display console-output and executed command
         update_console_view();
         // get actuall signature from processed output
         Glib::ustring actual_signature = avrdude->processed_output;
@@ -1014,17 +1015,15 @@ void gtkGUI::cb_fuse_write(void)
                                 microcontroller->usr_fusebytes[0],
                                 microcontroller->usr_fusebytes[1],
                                 microcontroller->usr_fusebytes[2]);
-        // display console-output
-        update_console_view();
 }
 
 void gtkGUI::cb_fuse_read(void)
 {
         // read fuse bytes
         avrdude->do_fuse_read(microcontroller->settings->fusebytes_count);
-        // display console-output
+        // display console-output and executed command
         update_console_view();
-        // display message for operation outcome...
+        // check execution outcome and display proper message
         execution_outcome(true);
         // exit if outcome NOT successful
         if (avrdude->execution_status != no_error)
@@ -1058,9 +1057,9 @@ void gtkGUI::execution_done (void)
         // change window cursor back
         Glib::RefPtr<Gdk::Window> window = main_window->get_window();
         window->set_cursor();
-        // display console-output
+        // display console-output and executed command
         update_console_view();
-        // check execution outcome and display proper message...
+        // check execution outcome and display proper message
         execution_outcome(true);
 }
 
@@ -1068,11 +1067,14 @@ void gtkGUI::update_console_view (void)
 {
         // display console-output
         dude_output_buffer->insert(dude_output_buffer->end(), avrdude->raw_exec_output);
-        if (dude_output_buffer->get_line_count() > 512) {
+        // remove first 128 lines, if more than 768
+        if (dude_output_buffer->get_line_count() > 768) {
                 Gtk::TextBuffer::iterator start = dude_output_buffer->begin();
                 Gtk::TextBuffer::iterator end = dude_output_buffer->get_iter_at_line(128);
                 dude_output_buffer->erase(start, end);
         }
+        // display last executed command
+        lbl_dude_command->set_label(avrdude->last_command);
 }
 
 void gtkGUI::execution_started (void)

@@ -62,6 +62,8 @@ class Dude
                 // device fuse settings (as read from device memory)
                 int dev_fusebytes[3] = {255, 255, 255};
                 // console output from command execution
+                std::string last_command;
+                // console output from command execution
                 std::string raw_exec_output;
                 // usefull part of output -- according to nature of executed command
                 std::string processed_output;

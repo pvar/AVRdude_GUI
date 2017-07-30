@@ -70,7 +70,7 @@ Author: Varelas Panagiotis
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Programmer:</property>
+                        <property name="label" translatable="yes">Programmer</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -85,7 +85,7 @@ Author: Varelas Panagiotis
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="margin_left">16</property>
+                        <property name="margin_left">8</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -101,7 +101,8 @@ Author: Varelas Panagiotis
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="margin_left">16</property>
+                        <property name="halign">start</property>
+                        <property name="margin_left">8</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
                       </object>
@@ -118,7 +119,8 @@ Author: Varelas Panagiotis
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="margin_left">16</property>
+                        <property name="halign">start</property>
+                        <property name="margin_left">8</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
                       </object>
@@ -135,7 +137,8 @@ Author: Varelas Panagiotis
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="margin_left">16</property>
+                        <property name="halign">start</property>
+                        <property name="margin_left">8</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
                       </object>
@@ -178,7 +181,7 @@ Author: Varelas Panagiotis
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
-                        <property name="label" translatable="yes">Options:</property>
+                        <property name="label" translatable="yes">Options</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -220,7 +223,7 @@ Author: Varelas Panagiotis
                         <property name="height_request">36</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="margin_left">16</property>
+                        <property name="margin_left">8</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -249,7 +252,7 @@ Author: Varelas Panagiotis
                         <property name="height_request">36</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="margin_left">16</property>
+                        <property name="margin_left">8</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -293,7 +296,7 @@ Author: Varelas Panagiotis
                         <property name="sensitive">False</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">True</property>
-                        <property name="margin_left">16</property>
+                        <property name="margin_left">8</property>
                         <style>
                           <class name="suggested-action"/>
                         </style>
@@ -313,7 +316,7 @@ Author: Varelas Panagiotis
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="valign">end</property>
-                        <property name="margin_left">16</property>
+                        <property name="margin_left">8</property>
                         <style>
                           <class name="destructive-action"/>
                         </style>
@@ -542,7 +545,7 @@ Author: Varelas Panagiotis
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="halign">start</property>
-                    <property name="label" translatable="yes">XML:</property>
+                    <property name="label" translatable="yes">File:</property>
                   </object>
                   <packing>
                     <property name="left_attach">0</property>
@@ -757,7 +760,7 @@ Author: Varelas Panagiotis
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="hexpand">False</property>
-            <property name="label" translatable="yes">Fuses</property>
+            <property name="label" translatable="yes">Fuse settings</property>
           </object>
           <packing>
             <property name="position">1</property>
@@ -777,6 +780,7 @@ Author: Varelas Panagiotis
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
+                <property name="margin_top">16</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">5</property>
                 <child>
@@ -807,11 +811,11 @@ Author: Varelas Panagiotis
                 </child>
                 <child>
                   <object class="GtkGrid" id="grid3">
-                    <property name="width_request">544</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">16</property>
+                    <property name="margin_left">8</property>
                     <property name="margin_bottom">5</property>
+                    <property name="row_spacing">16</property>
                     <child>
                       <object class="GtkEntry" id="flash_file">
                         <property name="height_request">36</property>
@@ -822,7 +826,7 @@ Author: Varelas Panagiotis
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">0</property>
-                        <property name="width">3</property>
+                        <property name="width">5</property>
                       </packing>
                     </child>
                     <child>
@@ -833,27 +837,13 @@ Author: Varelas Panagiotis
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="margin_left">34</property>
+                        <property name="halign">end</property>
                       </object>
                       <packing>
-                        <property name="left_attach">3</property>
+                        <property name="left_attach">5</property>
                         <property name="top_attach">0</property>
-                        <property name="width">2</property>
                       </packing>
                     </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkGrid" id="flash_actions">
-                    <property name="width_request">544</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_left">16</property>
                     <child>
                       <object class="GtkButton" id="read_flash">
                         <property name="label" translatable="yes">Read</property>
@@ -867,23 +857,8 @@ Author: Varelas Panagiotis
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="verify_flash">
-                        <property name="label" translatable="yes">Verify</property>
-                        <property name="width_request">150</property>
-                        <property name="height_request">36</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="halign">end</property>
-                        <property name="hexpand">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">2</property>
-                        <property name="top_attach">0</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -900,15 +875,33 @@ Author: Varelas Panagiotis
                         <property name="hexpand">True</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
+                        <property name="left_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="verify_flash">
+                        <property name="label" translatable="yes">Verify</property>
+                        <property name="width_request">150</property>
+                        <property name="height_request">36</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="halign">end</property>
+                        <property name="hexpand">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">4</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">3</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
@@ -923,7 +916,7 @@ Author: Varelas Panagiotis
                 <property name="visible">True</property>
                 <property name="sensitive">False</property>
                 <property name="can_focus">False</property>
-                <property name="margin_top">24</property>
+                <property name="margin_top">48</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">5</property>
                 <child>
@@ -954,11 +947,11 @@ Author: Varelas Panagiotis
                 </child>
                 <child>
                   <object class="GtkGrid" id="grid4">
-                    <property name="width_request">544</property>
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
-                    <property name="margin_left">16</property>
+                    <property name="margin_left">8</property>
                     <property name="margin_bottom">5</property>
+                    <property name="row_spacing">16</property>
                     <child>
                       <object class="GtkEntry" id="eeprom_file">
                         <property name="height_request">36</property>
@@ -969,7 +962,7 @@ Author: Varelas Panagiotis
                       <packing>
                         <property name="left_attach">0</property>
                         <property name="top_attach">0</property>
-                        <property name="width">3</property>
+                        <property name="width">5</property>
                       </packing>
                     </child>
                     <child>
@@ -980,27 +973,13 @@ Author: Varelas Panagiotis
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
-                        <property name="margin_left">34</property>
+                        <property name="halign">end</property>
                       </object>
                       <packing>
-                        <property name="left_attach">3</property>
+                        <property name="left_attach">5</property>
                         <property name="top_attach">0</property>
-                        <property name="width">2</property>
                       </packing>
                     </child>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkGrid" id="eeprom_actions">
-                    <property name="width_request">544</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="margin_left">16</property>
                     <child>
                       <object class="GtkButton" id="read_erom">
                         <property name="label" translatable="yes">Read</property>
@@ -1014,7 +993,8 @@ Author: Varelas Panagiotis
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
-                        <property name="top_attach">0</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1031,8 +1011,9 @@ Author: Varelas Panagiotis
                         <property name="hexpand">True</property>
                       </object>
                       <packing>
-                        <property name="left_attach">1</property>
-                        <property name="top_attach">0</property>
+                        <property name="left_attach">2</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                     <child>
@@ -1047,15 +1028,16 @@ Author: Varelas Panagiotis
                         <property name="hexpand">True</property>
                       </object>
                       <packing>
-                        <property name="left_attach">2</property>
-                        <property name="top_attach">0</property>
+                        <property name="left_attach">4</property>
+                        <property name="top_attach">1</property>
+                        <property name="width">2</property>
                       </packing>
                     </child>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
-                    <property name="position">3</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
@@ -1066,55 +1048,20 @@ Author: Varelas Panagiotis
               </packing>
             </child>
             <child>
-              <object class="GtkScrolledWindow" id="scrolled_window">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="double_buffered">False</property>
-                <property name="margin_left">16</property>
-                <property name="margin_top">8</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="vscrollbar_policy">always</property>
-                <property name="shadow_type">in</property>
-                <child>
-                  <object class="GtkTextView" id="avrdude_output">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="double_buffered">False</property>
-                    <property name="margin_left">5</property>
-                    <property name="margin_right">5</property>
-                    <property name="margin_top">3</property>
-                    <property name="margin_bottom">3</property>
-                    <property name="hexpand">False</property>
-                    <property name="vexpand">True</property>
-                    <property name="editable">False</property>
-                    <property name="cursor_visible">False</property>
-                    <property name="accepts_tab">False</property>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">3</property>
-                <property name="width">6</property>
-                <property name="height">5</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="label15">
-                <property name="width_request">80</property>
+              <object class="GtkAlignment">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="halign">start</property>
-                <property name="valign">end</property>
-                <property name="margin_top">16</property>
+                <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Console messages</property>
+                <child>
+                  <placeholder/>
+                </child>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
                 <property name="width">6</property>
+                <property name="height">6</property>
               </packing>
             </child>
           </object>
@@ -1131,6 +1078,122 @@ Author: Varelas Panagiotis
           </object>
           <packing>
             <property name="position">2</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="tab-grid-4">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <child>
+              <object class="GtkLabel">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">end</property>
+                <property name="margin_top">16</property>
+                <property name="vexpand">False</property>
+                <property name="label" translatable="yes">Last executed command</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label10">
+                <property name="width_request">80</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">start</property>
+                <property name="valign">end</property>
+                <property name="margin_top">24</property>
+                <property name="vexpand">False</property>
+                <property name="label" translatable="yes">Console messages</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="avrdude_command">
+                <property name="height_request">40</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="double_buffered">False</property>
+                <property name="halign">start</property>
+                <property name="margin_left">8</property>
+                <property name="hexpand">True</property>
+                <property name="selectable">True</property>
+                <property name="track_visited_links">False</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="scrolled_window">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="double_buffered">False</property>
+                <property name="margin_top">4</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="vscrollbar_policy">always</property>
+                <child>
+                  <object class="GtkTextView" id="avrdude_output">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="double_buffered">False</property>
+                    <property name="margin_left">8</property>
+                    <property name="margin_right">4</property>
+                    <property name="margin_top">4</property>
+                    <property name="margin_bottom">4</property>
+                    <property name="hexpand">False</property>
+                    <property name="vexpand">True</property>
+                    <property name="editable">False</property>
+                    <property name="cursor_visible">False</property>
+                    <property name="accepts_tab">False</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">4</property>
+                <property name="height">8</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">4</property>
+                <property name="margin_bottom">4</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel" id="tab-label-4">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Console</property>
+          </object>
+          <packing>
+            <property name="position">3</property>
             <property name="tab_fill">False</property>
           </packing>
         </child>
