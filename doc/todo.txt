@@ -1,6 +1,4 @@
 
-# member structures?
-
 # add support for both versions of XML
 
 # add support for lock bits

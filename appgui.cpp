@@ -514,7 +514,7 @@ void gtkGUI::cb_check_signature (void)
         // get expected signature from specifications
         Glib::ustring selected_signature = microcontroller->specifications->signature.substr(2,7);
         // check execution outcome for errors
-        if (avrdude->execution_status == no_error) {
+        if (avrdude->execution_status == Dude::exec_status::no_error) {
                 // check for signature match
                 if (actual_signature.uppercase() == selected_signature)
                         message_popup ("Success!", "Matching device detected.");
@@ -1026,7 +1026,7 @@ void gtkGUI::cb_fuse_read(void)
         // check execution outcome and display proper message
         execution_outcome(true);
         // exit if outcome NOT successful
-        if (avrdude->execution_status != no_error)
+        if (avrdude->execution_status != Dude::exec_status::no_error)
                 return;
         // apply fuse values read from device on fuse-widgets
         display_warnings = false;
@@ -1095,40 +1095,40 @@ void gtkGUI::execution_outcome (gboolean show_success_message)
 {
         switch (avrdude->execution_status) {
 
-                case (no_error): {
+                case (Dude::exec_status::no_error): {
                         if (show_success_message)
                                 message_popup("Success!", "Operation completed successfully.");
                         break;
                 }
-                case (verification_error): {
+                case (Dude::exec_status::verification_error): {
                         message_popup("Failure!", "Mismatch: The contents of the specified file and the device memory differ.");
                         break;
                 }
-                case (init_error): {
+                case (Dude::exec_status::init_error): {
                         message_popup("Failure!", "Programmer failed to initialize the device. Check your device connection, clock source and fuse settings.");
                         break;
                 }
-                case (invalid_signature): {
+                case (Dude::exec_status::invalid_signature): {
                         message_popup("Failure!", "Invalid device signature detected. Double check your device selection.");
                         break;
                 }
-                case (unknown_device): {
+                case (Dude::exec_status::unknown_device): {
                         message_popup("Failure!", "Unknown device name supplied. Avrdude does not seem to support the specified device (outdated version?).");
                         break;
                 }
-                case (cannot_read_signature): {
+                case (Dude::exec_status::cannot_read_signature): {
                         message_popup("Failure!", "Cannot read device signature. Probable cause: Corrupted device memory.");
                         break;
                 }
-                case (command_not_found): {
+                case (Dude::exec_status::command_not_found): {
                         message_popup("Failure!", "Executable (avrdude) not found. Did you forget to install it?");
                         break;
                 }
-                case (insufficient_permissions): {
+                case (Dude::exec_status::insufficient_permissions): {
                         message_popup("Failure!", "Cannot access programmer. Insufficient permissions.");
                         break;
                 }
-                case (programmer_not_found): {
+                case (Dude::exec_status::programmer_not_found): {
                         message_popup("Failure!", "Programmer not found. Check your cable connections.");
                         break;
                 }
