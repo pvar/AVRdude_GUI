@@ -91,9 +91,10 @@ gtkGUI::gtkGUI()
         tv_dude_output->set_buffer(dude_output_buffer);
 
         // set custom style provider for application window
-        Glib::ustring data = ".console {font: Monospace 9; color: #a88A85;}"
-                             ".fuse_value {font: Monospace 9; color: #888A85;}"
-                             ".fuse_name {font-weight: bold; color: #888A85;}";
+        Glib::ustring data = ".console {font: Monospace 10; color: #888A85;}"
+                             ".fuse_value {font: Monospace 10; color: #888A85;}"
+                             ".fuse_name {font-weight: bold; color: #888A85;}"
+                             ".command {font: Monospace 10; color: #888A85;}";
         Glib::RefPtr<Gtk::CssProvider> css = Gtk::CssProvider::create();
         if (not css->load_from_data(data)) {
                 cerr << "Failed to load css!\n";
@@ -110,6 +111,9 @@ gtkGUI::gtkGUI()
         // add style-class to label displaying selected fuse values
         context = lbl_fusebytes->get_style_context();
         context->add_class("fuse_value");
+        // add style-class to label displaying executed command
+        context = lbl_dude_command->get_style_context();
+        context->add_class("command");
 
         // create the tree-models
         tm_family = Gtk::ListStore::create(cbm_generic);
