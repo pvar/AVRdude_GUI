@@ -24,8 +24,8 @@ class Dude
                 void do_flash_write (std::string file);
                 void do_flash_read (std::string file);
                 void do_flash_verify (std::string file);
-                void do_fuse_write (int fusebytes_count, int low, int high, int ext);
-                void do_fuse_read (int fusebytes_count);
+                void do_fuse_write (int bytes_count, int low, int high, int ext);
+                void do_fuse_read (int bytes_count);
 
                 // possible states after execution
                 enum exec_status {
@@ -41,7 +41,7 @@ class Dude
                 };
 
                 // device fuse settings (as read from device memory)
-                int dev_fusebytes[3] = {255, 255, 255};
+                int fusebytes_ondevice[3] = {255, 255, 255};
                 // console output from command execution
                 std::string last_command;
                 // console output from command execution

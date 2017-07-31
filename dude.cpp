@@ -236,13 +236,13 @@ void Dude::do_flash_verify (string file)
         execution_begin ();
 }
 
-void Dude::do_fuse_write (int fusebytes_count, int low, int high, int ext)
+void Dude::do_fuse_write (int bytes_count, int low, int high, int ext)
 {
         // prepare command to be executed
         command.clear();
         command.append(oneliner);
         ostringstream steam_string;
-        switch (fusebytes_count) {
+        switch (bytes_count) {
                 case (1): {
                         // LOW fuse byte
                         steam_string << "-U lfuse:w:" << low << ":m -U";
@@ -264,12 +264,12 @@ void Dude::do_fuse_write (int fusebytes_count, int low, int high, int ext)
         execution_begin ();
 }
 
-void Dude::do_fuse_read (int fusebytes_count)
+void Dude::do_fuse_read (int bytes_count)
 {
         // prepare command to be executed
         command.clear();
         command.append(oneliner);
-        switch (fusebytes_count) {
+        switch (bytes_count) {
                 case (1): {
                         // LOW fuse byte
                         command.append("-q -U lfuse:r:-:d");
@@ -290,9 +290,9 @@ void Dude::do_fuse_read (int fusebytes_count)
         execute ();
 
         // clear fuse-bytes' values
-        dev_fusebytes[0] = 255;
-        dev_fusebytes[1] = 255;
-        dev_fusebytes[2] = 255;
+        fusebytes_ondevice[0] = 255;
+        fusebytes_ondevice[1] = 255;
+        fusebytes_ondevice[2] = 255;
         // check output for errors
         check_for_errors();
         if (execution_status != no_error)
@@ -311,14 +311,14 @@ void Dude::do_fuse_read (int fusebytes_count)
                         line = raw_exec_output.substr(iter + 1, char_counter - 1);
                         char_counter = 0;
                         // get value from extracted line
-                        stringstream(line) >> dev_fusebytes[fusebytes_count - lines_extracted];
+                        stringstream(line) >> fusebytes_ondevice[bytes_count - lines_extracted];
                         // check if received all values
-                        if (lines_extracted == fusebytes_count)
+                        if (lines_extracted == bytes_count)
                                 break;
                 }
         }
         //for (int i = 0; i < 3; i++)
-        //        cout << " :" << dev_fusebytes[i];
+        //        cout << " :" << fusebytes_ondevice[i];
         //cout << endl;
 }
 
