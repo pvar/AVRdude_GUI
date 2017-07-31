@@ -286,13 +286,13 @@ void gtkGUI::prep_fuse_meta (void)
         gint count = 0;
         // count fuse bytes with default values
         for (int i = 0; i < 3; i++)
-                if (microcontroller->def_fusebytes[i] != 255)
+                if (microcontroller->description->fusebytes_default[i] != 255)
                         count++;
         if (count == 0)
                 warning.append("The device description does not specify default fuse settings.\n\n");
 
         // check if fuse warnings have been specified
-        if (microcontroller->warnings->size() == 0)
+        if (microcontroller->description->warnings->size() == 0)
                 warning.append("The device description provides no warnings, regarding configuration of fuse settings.");
 
         // display messages, if any...
@@ -301,7 +301,7 @@ void gtkGUI::prep_fuse_meta (void)
 
         // copy default fuse values over device current fuse values
         for (int i = 0; i < 3; i++)
-                avrdude->dev_fusebytes[i] = microcontroller->def_fusebytes[i];
+                avrdude->fusebytes_ondevice[i] = microcontroller->description->fusebytes_default[i];
 }
 
 bool gtkGUI::data_prep_start (void)
@@ -397,7 +397,7 @@ void gtkGUI::cb_new_device (void)
         prep_fuse_meta();
         // copy default fuse values over device current fuse values
         for (int i = 0; i < 3; i++)
-                avrdude->dev_fusebytes[i] = microcontroller->def_fusebytes[i];
+                avrdude->fusebytes_ondevice[i] = microcontroller->description->fusebytes_default[i];
         // unlock controls and update labels
         controls_unlock();
         display_warnings = false;
@@ -427,7 +427,7 @@ void gtkGUI::controls_unlock (void)
         btn_fuse_write->set_sensitive(true);
         btn_fuse_def->set_sensitive(true);
         box_flash_ops->set_sensitive(true);
-        if (microcontroller->specifications->eeprom_exists)
+        if (microcontroller->description->eeprom_exists)
                 box_eeprom_ops->set_sensitive(true);
 }
 
@@ -512,7 +512,7 @@ void gtkGUI::cb_check_signature (void)
         // get actuall signature from processed output
         Glib::ustring actual_signature = avrdude->processed_output;
         // get expected signature from specifications
-        Glib::ustring selected_signature = microcontroller->specifications->signature.substr(2,7);
+        Glib::ustring selected_signature = microcontroller->description->signature.substr(2,7);
         // check execution outcome for errors
         if (avrdude->execution_status == Dude::exec_status::no_error) {
                 // check for signature match
@@ -537,15 +537,15 @@ void gtkGUI::display_specifiactions (gboolean have_specs)
 {
         if (have_specs) {
                 Glib::ustring xmlfile;
-                xmlfile = microcontroller->specifications->xml_filename;
+                xmlfile = microcontroller->description->xml_filename;
                 xmlfile.append(" (build ");
-                xmlfile.append(microcontroller->specifications->xml_version);
+                xmlfile.append(microcontroller->description->xml_version);
                 xmlfile.append(")");
-                lbl_spec_flash->set_label(microcontroller->specifications->flash_size);
-                lbl_spec_eeprom->set_label(microcontroller->specifications->eeprom_size);
-                lbl_spec_sram->set_label(microcontroller->specifications->sram_size);
-                lbl_spec_speed->set_label(microcontroller->specifications->max_speed);
-                lbl_signature->set_label(microcontroller->specifications->signature);
+                lbl_spec_flash->set_label(microcontroller->description->flash_size);
+                lbl_spec_eeprom->set_label(microcontroller->description->eeprom_size);
+                lbl_spec_sram->set_label(microcontroller->description->sram_size);
+                lbl_spec_speed->set_label(microcontroller->description->max_speed);
+                lbl_signature->set_label(microcontroller->description->signature);
                 lbl_spec_xml->set_label(xmlfile);
         } else {
                 lbl_spec_flash->set_label("NA");
@@ -605,8 +605,8 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
         // create list of fuse-widgets
         fuse_tab_widgets = new list<FuseWidget>;
         // loop through fuse-options: create and display corresponding widgets
-        list<FuseSetting>::iterator iter;
-        for (iter = ((microcontroller->settings)->fuse_settings)->begin(); iter != ((microcontroller->settings)->fuse_settings)->end(); ++iter) {
+        list<DeviceDescription::FuseSetting>::iterator iter;
+        for (iter = (microcontroller->description->fuse_settings)->begin(); iter != (microcontroller->description->fuse_settings)->end(); ++iter) {
                 // create a new instance of FuseWidget
                 FuseWidget *widget_entry = new FuseWidget;
                 // create new instance of signal connection
@@ -646,8 +646,8 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
                         // create pointer to treemodel
                         widget_entry->model = Gtk::ListStore::create(cbm_generic);
                         // prepare to loop through the enumerator members
-                        list<OptionEntry>* this_enum_list = (*(microcontroller->settings)->option_lists)[(*iter).fenum];
-                        list<OptionEntry>::iterator enum_iter = this_enum_list->begin();
+                        list<DeviceDescription::OptionEntry>* this_enum_list = (*(microcontroller->description)->option_lists)[(*iter).fenum];
+                        list<DeviceDescription::OptionEntry>::iterator enum_iter = this_enum_list->begin();
                         // get value from first entry (this is a pseudo entry with the maximum value of all entries)
                         widget_entry->max_value = enum_iter->value;
                         // proceed to next entry
@@ -708,9 +708,9 @@ void gtkGUI::calculate_fuse_values ()
         */
 
         // clear fuse-byte values
-        microcontroller->usr_fusebytes[0] = 0;
-        microcontroller->usr_fusebytes[1] = 0;
-        microcontroller->usr_fusebytes[2] = 0;
+        microcontroller->fusebytes_custom[0] = 0;
+        microcontroller->fusebytes_custom[1] = 0;
+        microcontroller->fusebytes_custom[2] = 0;
 
         Gtk::TreeModel::Row selected_row;
         Gtk::TreeModel::iterator selected;
@@ -726,18 +726,18 @@ void gtkGUI::calculate_fuse_values ()
                                 selected_row = *selected;
                                 guint selected_value = atoi(string((selected_row[cbm_generic.col_data])).c_str());
                                 guint final_value = (selected_value * fwidget->bitmask) / fwidget->max_value;
-                                microcontroller->usr_fusebytes[fwidget->bytenum] |= (final_value ^ fwidget->bitmask);
+                                microcontroller->fusebytes_custom[fwidget->bytenum] |= (final_value ^ fwidget->bitmask);
                         } else {
                                 if ((fwidget->check)->get_active())
-                                        microcontroller->usr_fusebytes[fwidget->bytenum] |= fwidget->bitmask;
+                                        microcontroller->fusebytes_custom[fwidget->bytenum] |= fwidget->bitmask;
                         }
                 }
         }
 
         // negate calculated values (they are expected this way)
-        microcontroller->usr_fusebytes[0] ^= 255;
-        microcontroller->usr_fusebytes[1] ^= 255;
-        microcontroller->usr_fusebytes[2] ^= 255;
+        microcontroller->fusebytes_custom[0] ^= 255;
+        microcontroller->fusebytes_custom[1] ^= 255;
+        microcontroller->fusebytes_custom[2] ^= 255;
 
         // check if warnings are enabled or not
         if (display_warnings)
@@ -772,7 +772,7 @@ void gtkGUI::process_fuse_values (void)
         // get fuse values from device
         gint tmp_fusebytes[3];
         for (int i = 0; i < 3; i++)
-                tmp_fusebytes[i] = avrdude->dev_fusebytes[i];
+                tmp_fusebytes[i] = avrdude->fusebytes_ondevice[i];
 
         // loop through fuse widgets and set state
         guint temp_value = 0;
@@ -816,23 +816,23 @@ void gtkGUI::process_fuse_values (void)
 
 void gtkGUI::display_fuse_warnings (void)
 {
-        gboolean found_warnings = false;
-        Glib::ustring warnings;
+        gboolean warnings_exist = false;
+        Glib::ustring warnings_text;
 
         // loop through warnings list
-        list<FuseWarning>::iterator iter;
-        for (iter = microcontroller->warnings->begin(); iter != microcontroller->warnings->end(); iter++) {
+        list<DeviceDescription::FuseWarning>::iterator iter;
+        for (iter = (microcontroller->description->warnings)->begin(); iter != (microcontroller->description->warnings)->end(); iter++) {
                 // check if warning applies...
-                guint check_result = microcontroller->usr_fusebytes[iter->fbyte] & iter->fmask;
+                guint check_result = microcontroller->fusebytes_custom[iter->fbyte] & iter->fmask;
                 if (check_result == iter->fresult) {
-                        found_warnings = true;
-                        warnings += iter->warning;
-                        warnings += "\n";
+                        warnings_exist = true;
+                        warnings_text += iter->warning;
+                        warnings_text += "\n";
                 }
         }
 
-        if (found_warnings)
-                message_popup("Warning!", warnings);
+        if (warnings_exist)
+                message_popup("Warning!", warnings_text);
 }
 
 void gtkGUI::display_fuse_values ()
@@ -840,16 +840,16 @@ void gtkGUI::display_fuse_values ()
         stringstream converter_stream;
 
         converter_stream << "LOW: 0x";
-        converter_stream << hex << setw(2) << setfill('0') << microcontroller->usr_fusebytes[0];
-        converter_stream << dec << " (" << microcontroller->usr_fusebytes[0] << ")";
+        converter_stream << hex << setw(2) << setfill('0') << microcontroller->fusebytes_custom[0];
+        converter_stream << dec << " (" << microcontroller->fusebytes_custom[0] << ")";
 
         converter_stream << "    HIGH: 0x";
-        converter_stream << hex << setw(2) << setfill('0') << microcontroller->usr_fusebytes[1];
-        converter_stream << dec << " (" << microcontroller->usr_fusebytes[1] << ")";
+        converter_stream << hex << setw(2) << setfill('0') << microcontroller->fusebytes_custom[1];
+        converter_stream << dec << " (" << microcontroller->fusebytes_custom[1] << ")";
 
         converter_stream << "    EXTENDED: 0x";
-        converter_stream << hex << setw(2) << setfill('0') << microcontroller->usr_fusebytes[2];
-        converter_stream << dec << " (" << microcontroller->usr_fusebytes[2] << ")";
+        converter_stream << hex << setw(2) << setfill('0') << microcontroller->fusebytes_custom[2];
+        converter_stream << dec << " (" << microcontroller->fusebytes_custom[2] << ")";
 
         lbl_fusebytes->set_label(converter_stream.str());
 }
@@ -1011,16 +1011,16 @@ void gtkGUI::cb_flash_verify(void)
 void gtkGUI::cb_fuse_write(void)
 {
         // write fuse bytes
-        avrdude->do_fuse_write (microcontroller->settings->fusebytes_count,
-                                microcontroller->usr_fusebytes[0],
-                                microcontroller->usr_fusebytes[1],
-                                microcontroller->usr_fusebytes[2]);
+        avrdude->do_fuse_write (microcontroller->description->fusebytes_count,
+                                microcontroller->fusebytes_custom[0],
+                                microcontroller->fusebytes_custom[1],
+                                microcontroller->fusebytes_custom[2]);
 }
 
 void gtkGUI::cb_fuse_read(void)
 {
         // read fuse bytes
-        avrdude->do_fuse_read(microcontroller->settings->fusebytes_count);
+        avrdude->do_fuse_read(microcontroller->description->fusebytes_count);
         // display console-output and executed command
         update_console_view();
         // check execution outcome and display proper message
@@ -1040,7 +1040,7 @@ void gtkGUI::cb_fuse_default (void)
         display_warnings = false;
         // copy default fuse values over device current fuse values
         for (int i = 0; i < 3; i++)
-                avrdude->dev_fusebytes[i] = microcontroller->def_fusebytes[i];
+                avrdude->fusebytes_ondevice[i] = microcontroller->description->fusebytes_default[i];
         // display updated (default) fuse settings
         process_fuse_values();
         // enable fuse warnings

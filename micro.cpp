@@ -2,23 +2,33 @@
 
 using namespace std;
 
-DeviceFuseSettings::DeviceFuseSettings()
+DeviceDescription::DeviceDescription ()
 {
+        this->warnings = new list<FuseWarning>;
         this->fuse_settings = new list<FuseSetting>;
         this->option_lists = new map <string, list<OptionEntry>*>;
+
+        // apply default default-values
+        this->fusebytes_default[0] = 255;
+        this->fusebytes_default[1] = 255;
+        this->fusebytes_default[2] = 255;
 }
 
-DeviceFuseSettings::~DeviceFuseSettings()
+DeviceDescription::~DeviceDescription ()
 {
-        // iterate through map and delete embedded lists
-        map<string, list<OptionEntry>*>::iterator iter = option_lists->begin();
-        for (; iter!=option_lists->end(); ++iter)
+        // delete warnings list
+        delete this->warnings;
+        // iterate through option_lists map and delete entries
+        map<string, list<DeviceDescription::OptionEntry>*>::iterator iter = this->option_lists->begin();
+        for (; iter!=this->option_lists->end(); ++iter)
                 delete iter->second;
-
-        // delete the whole map and the extra list
-        delete option_lists;
-        delete fuse_settings;
+        // delete the whole option_lists map
+        delete this->option_lists;
+        // delete settings list
+        delete this->fuse_settings;
 }
+
+
 
 Micro::Micro (string path)
 {
@@ -27,12 +37,8 @@ Micro::Micro (string path)
 
 Micro::~Micro()
 {
-        if (specifications)
-                delete specifications;
-        if (warnings)
-                delete warnings;
-        if (settings)
-                delete settings;
+        if (description)
+                delete description;
 }
 
 // ******************************************************************************
@@ -171,16 +177,11 @@ void Micro::parse_data (string xml_file)
         }
         // save device description filename
         this->device_xml = xml_file;
-        // prepare data structures
-        if (specifications)
-                delete specifications;
-        if (warnings)
-                delete warnings;
-        if (settings)
-                delete settings;
-        specifications = new DeviceSpecifications;
-        settings = new DeviceFuseSettings;
-        warnings = new list<FuseWarning>;
+
+        if (description)
+                delete description;
+
+        description = new DeviceDescription;
 
         // prepare path to specified XML file...
         string xml_dir = ("xmlfiles/");
@@ -214,7 +215,7 @@ void Micro::parse_data (string xml_file)
 
         // copy default fuse values over user fuse values
         for (int i = 0; i < 3; i++)
-                usr_fusebytes[i] = def_fusebytes[i];
+                fusebytes_custom[i] = description->fusebytes_default[i];
 
 
         return;
@@ -231,8 +232,6 @@ void Micro::parse_data (string xml_file)
 int Micro::parse_settings (xmlpp::Node *root_node)
 {
         //cout << "PARSING FUSES..." << endl;
-
-        settings = new DeviceFuseSettings;
 
         xmlpp::Node* xml_node = root_node;
         xmlpp::Node* tmp_node = nullptr;
@@ -287,22 +286,22 @@ int Micro::parse_settings (xmlpp::Node *root_node)
                 // get name for this reg node
                 string regname = this->get_att_value((*node_iterator), "name");
                 // prepare pseudo-setting with fuse-byte name
-                FuseSetting* entry = new FuseSetting;
+                DeviceDescription::FuseSetting *entry = new DeviceDescription::FuseSetting;
                 entry->single_option = true;
                 entry->fdesc = "FUSE REGISTER:  " + regname;
                 entry->offset = 512; // special value that denotes a pseudo-entry
                 // prepare list of settings from this node
-                list<FuseSetting> *fuse_listing = new list<FuseSetting>;
+                list<DeviceDescription::FuseSetting> *fuse_listing = new list<DeviceDescription::FuseSetting>;
                 fuse_listing = this->get_fuse_list ((*node_iterator), offset);
                 // add pseudo-setting in this list of settings
                 fuse_listing->push_front(*entry);
                 // add this settings list to the rest
-                list<FuseSetting>::iterator pos = (settings->fuse_settings)->begin();
-                (settings->fuse_settings)->splice(pos, *fuse_listing);
+                list<DeviceDescription::FuseSetting>::iterator pos = (description->fuse_settings)->begin();
+                (description->fuse_settings)->splice(pos, *fuse_listing);
                 delete entry;
         }
         //cout << "FUSE BYTES: " << fuse_byte_counter << endl;
-        settings->fusebytes_count = fuse_byte_counter;
+        description->fusebytes_count = fuse_byte_counter;
 
         // debug print-out...
         //print_fuse_settings();
@@ -316,12 +315,12 @@ int Micro::parse_settings (xmlpp::Node *root_node)
                 if (((*node_iterator)->get_name()).compare("enumerator") != 0)
                         continue;
                 // prepare list with this enumerator's entries
-                list<OptionEntry> *enum_listing = new list<OptionEntry>;
+                list<DeviceDescription::OptionEntry> *enum_listing = new list<DeviceDescription::OptionEntry>;
                 enum_listing = this->get_enum_list ((*node_iterator));
                 // get enumerator name
                 string enum_name = this->get_att_value ((*node_iterator), "name");
                 // add new entry in map
-                (*settings->option_lists)[enum_name] = enum_listing;
+                (*description->option_lists)[enum_name] = enum_listing;
         }
 
         // debug print-out...
@@ -342,8 +341,7 @@ int Micro::parse_warnings (xmlpp::Node *root_node)
         // <FuseWarning>[fuse-byte-no],[AND-mask],[result],[warning text]</FuseWarning>
 
         string raw_warning;
-        FuseWarning *warning_entry;
-        warnings = new list<FuseWarning>;
+        DeviceDescription::FuseWarning *warning_entry;
 
         xmlpp::Node* xml_node = root_node;
 
@@ -371,13 +369,13 @@ int Micro::parse_warnings (xmlpp::Node *root_node)
                 // get string (raw) representation of warning...
                 raw_warning = get_txt_value ((*node_iterator));
                 // assemble fuse warning structure
-                warning_entry = new FuseWarning;
+                warning_entry = new DeviceDescription::FuseWarning;
                 stringstream(raw_warning.substr(0,1)) >> hex >> warning_entry->fbyte;
                 stringstream(raw_warning.substr(2,4)) >> hex >> warning_entry->fmask;
                 stringstream(raw_warning.substr(7,4)) >> hex >> warning_entry->fresult;
                 warning_entry->warning = raw_warning.substr(21,1000);
                 // inset warning in list
-                warnings->push_back(*warning_entry);
+                description->warnings->push_back(*warning_entry);
                 // delete temporary wanring entry
                 delete warning_entry;
         }
@@ -394,11 +392,6 @@ int Micro::parse_warnings (xmlpp::Node *root_node)
 
 int Micro::parse_default (xmlpp::Node *root_node)
 {
-        // apply default-default values
-        def_fusebytes[0] = 255;
-        def_fusebytes[1] = 255;
-        def_fusebytes[2] = 255;
-
         xmlpp::Node* xml_node = root_node;
         xmlpp::Node* tmp_node = root_node;
 
@@ -475,9 +468,9 @@ int Micro::parse_default (xmlpp::Node *root_node)
                         bit_val = get_txt_value (tmp_node);
                         // apply bit value on fuse-byte
                         if (bit_val.find("0") == string::npos)
-                                def_fusebytes[i] |= 1 << bit_order;
+                                description->fusebytes_default[i] |= 1 << bit_order;
                         else
-                                def_fusebytes[i] &= ~(1 << bit_order);
+                                description->fusebytes_default[i] &= ~(1 << bit_order);
                 }
         }
 
@@ -494,14 +487,13 @@ int Micro::parse_specifications (xmlpp::Node *root_node)
 {
         //cout << "PARSING SPECIFICATIONS..." << endl;
 
-        DeviceSpecifications* specs = new DeviceSpecifications;
         xmlpp::Node* xml_node = root_node;
         xmlpp::Node* tmp_node = nullptr;
         string txtvalue;
         gfloat numvalue;
 
         // put xml filename in specifications
-        specs->xml_filename = this->device_xml;
+        description->xml_filename = this->device_xml;
 
         // go to ADMIN node
         xml_node = xml_node->get_first_child("ADMIN");
@@ -510,23 +502,23 @@ int Micro::parse_specifications (xmlpp::Node *root_node)
         // get node content
         txtvalue = this->get_txt_value(xml_node);
         txtvalue.resize(txtvalue.size() - 3);
-        specs->max_speed = txtvalue + " MHz";
-        //cout << "speed: " << specs->max_speed << endl;
+        description->max_speed = txtvalue + " MHz";
+        //cout << "speed: " << description->max_speed << endl;
         // go up to ADMIN node
         xml_node = xml_node->get_parent();
         // go to BUILD node
         xml_node = xml_node->get_first_child("BUILD");
         // get node content
         txtvalue = this->get_txt_value(xml_node);
-        specs->xml_version = txtvalue;
-        //cout << "build: " << specs->xml_version << endl;
+        description->xml_version = txtvalue;
+        //cout << "build: " << description->xml_version << endl;
         // go up to ADMIN node
         xml_node = xml_node->get_parent();
         // go to SIGNATURE node
         xml_node = xml_node->get_first_child("SIGNATURE");
         // get node content
-        specs->signature = this->get_signature_bytes(xml_node);
-        //cout << "signature: \"" << specs->signature << "\"" << endl;
+        description->signature = this->get_signature_bytes(xml_node);
+        //cout << "signature: \"" << description->signature << "\"" << endl;
         // go up to AVRPART node
         xml_node = xml_node->get_parent();
         xml_node = xml_node->get_parent();
@@ -538,33 +530,33 @@ int Micro::parse_specifications (xmlpp::Node *root_node)
         txtvalue = this->get_txt_value(xml_node);
         numvalue = ::atof(txtvalue.c_str()) / 1024;
         txtvalue = float_to_string(numvalue);
-        specs->flash_size = txtvalue + " KB";
-        //cout << "flash: " << specs->flash_size << endl;
+        description->flash_size = txtvalue + " KB";
+        //cout << "flash: " << description->flash_size << endl;
         // go up to MEMORY node
         xml_node = xml_node->get_parent();
         // go to EEPROM node
         tmp_node = xml_node->get_first_child("EEPROM");
         // if no such node, it must be a device without EEPROM
         if (!tmp_node) {
-                specs->eeprom_exists = false;
+                description->eeprom_exists = false;
                 txtvalue = "0 Bytes";
-                specs->sram_size = txtvalue;
+                description->sram_size = txtvalue;
         } else {
-                specs->eeprom_exists = true;
+                description->eeprom_exists = true;
                 xml_node = tmp_node;
                 // get node content
                 txtvalue = this->get_txt_value(xml_node);
                 numvalue = ::atof(txtvalue.c_str()) / 1024;
                 // check for zero eeprom size
                 if (numvalue == 0)
-                        specs->eeprom_exists = false;
+                        description->eeprom_exists = false;
                 // express size in KBytes
                 if (numvalue > 1)
                         txtvalue = float_to_string(numvalue) + " KB";
                 else
                         txtvalue += " Bytes";
-                specs->eeprom_size = txtvalue;
-                //cout << "eeprom: " << specs->eeprom_size << endl;
+                description->eeprom_size = txtvalue;
+                //cout << "eeprom: " << description->eeprom_size << endl;
                 // go up to MEMORY node
                 xml_node = xml_node->get_parent();
         }
@@ -573,7 +565,7 @@ int Micro::parse_specifications (xmlpp::Node *root_node)
         // if no such node, it must be a device without SRAM!
         if (!tmp_node) {
                 txtvalue = "0 Bytes";
-                specs->sram_size = txtvalue;
+                description->sram_size = txtvalue;
         } else {
                 xml_node = tmp_node;
                 // go to SIZE node
@@ -585,11 +577,10 @@ int Micro::parse_specifications (xmlpp::Node *root_node)
                         txtvalue = float_to_string(numvalue) + " KB";
                 else
                         txtvalue += " Bytes";
-                specs->sram_size = txtvalue;
-                //cout << "sram_size: " << specs->eeprom_size << endl;
+                description->sram_size = txtvalue;
+                //cout << "sram_size: " << description->eeprom_size << endl;
         }
 
-        this->specifications = specs;
         return 1;
 }
 
@@ -676,9 +667,9 @@ string Micro::get_att_value (xmlpp::Node* xml_node, string att_name)
 // Get list of enumerator members
 // ******************************************************************************
 
-list<OptionEntry>* Micro::get_enum_list (xmlpp::Node* xml_node)
+list<DeviceDescription::OptionEntry>* Micro::get_enum_list (xmlpp::Node* xml_node)
 {
-        list<OptionEntry> *enum_listing = new list<OptionEntry>;
+        list<DeviceDescription::OptionEntry> *enum_listing = new list<DeviceDescription::OptionEntry>;
 
         xmlpp::Node::NodeList::iterator node_iterator;
         xmlpp::Element::AttributeList::const_iterator att_iterator;
@@ -690,7 +681,7 @@ list<OptionEntry>* Micro::get_enum_list (xmlpp::Node* xml_node)
         for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
                 if (const xmlpp::Element* nodeElement = dynamic_cast<const xmlpp::Element*>(*node_iterator)) {
                         // loop through attribute-nodes
-                        OptionEntry* entry = new OptionEntry;
+                        DeviceDescription::OptionEntry *entry = new DeviceDescription::OptionEntry;
                         const xmlpp::Element::AttributeList& attributes = nodeElement->get_attributes();
                         for(att_iterator = attributes.begin(); att_iterator != attributes.end(); ++att_iterator) {
                                 if ((*att_iterator)->get_name().compare("text") == 0) {
@@ -709,7 +700,7 @@ list<OptionEntry>* Micro::get_enum_list (xmlpp::Node* xml_node)
                 }
         }
         // insert pseudo enumerator-entry with maximum value
-        OptionEntry* entry = new OptionEntry;
+        DeviceDescription::OptionEntry *entry = new DeviceDescription::OptionEntry;
         entry->ename = "PSEUDO_ENTRY";
         entry->value = max_value;
         enum_listing->push_front(*entry);
@@ -721,9 +712,9 @@ list<OptionEntry>* Micro::get_enum_list (xmlpp::Node* xml_node)
 // Get list of settings
 // ******************************************************************************
 
-list<FuseSetting>* Micro::get_fuse_list (xmlpp::Node* xml_node, uint offset)
+list<DeviceDescription::FuseSetting>* Micro::get_fuse_list (xmlpp::Node* xml_node, uint offset)
 {
-        list<FuseSetting> *fuse_listing = new list<FuseSetting>;
+        list<DeviceDescription::FuseSetting> *fuse_listing = new list<DeviceDescription::FuseSetting>;
 
         xmlpp::Node::NodeList::iterator node_iterator;
         xmlpp::Element::AttributeList::const_iterator att_iterator;
@@ -735,7 +726,7 @@ list<FuseSetting>* Micro::get_fuse_list (xmlpp::Node* xml_node, uint offset)
         for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
                 if (const xmlpp::Element* nodeElement = dynamic_cast<const xmlpp::Element*>(*node_iterator)) {
                         // loop through attribute-nodes
-                        FuseSetting* entry = new FuseSetting;
+                        DeviceDescription::FuseSetting *entry = new DeviceDescription::FuseSetting;
                         entry->fenum = ""; // must initialize to empty
                         entry->offset = offset;
                         const xmlpp::Element::AttributeList& attributes = nodeElement->get_attributes();
@@ -805,8 +796,8 @@ string Micro::float_to_string (gfloat number)
 
 void Micro::print_fuse_warnings (void)
 {
-        list<FuseWarning>::iterator iter;
-        for (iter = warnings->begin(); iter != warnings->end(); iter++) {
+        list<DeviceDescription::FuseWarning>::iterator iter;
+        for (iter = description->warnings->begin(); iter != description->warnings->end(); iter++) {
                 cout << endl;
                 cout << "    byte: " << iter->fbyte << endl;
                 cout << "    mask: " << iter->fmask << endl;
@@ -818,13 +809,13 @@ void Micro::print_fuse_warnings (void)
 void Micro::print_fuse_defaults (void)
 {
         for (int i = 0; i < 3; i++)
-                cout << "fuse byte " << i + 1 << " : " << hex << def_fusebytes[i] << endl;
+                cout << "fuse byte " << i + 1 << " : " << hex << description->fusebytes_default[i] << endl;
 }
 
 void Micro::print_fuse_settings (void)
 {
-        list<FuseSetting>::iterator iter;
-        for (iter = (settings->fuse_settings)->begin(); iter != (settings->fuse_settings)->end(); ++iter) {
+        list<DeviceDescription::FuseSetting>::iterator iter;
+        for (iter = (description->fuse_settings)->begin(); iter != (description->fuse_settings)->end(); ++iter) {
                 cout << endl;
                 cout << (*iter).fname << " ";
                 cout << "mask[" << (*iter).fmask << "] ";
@@ -836,10 +827,10 @@ void Micro::print_fuse_settings (void)
 
 void Micro::print_option_lists (void)
 {
-        map<string, list<OptionEntry>*>::iterator iter;
-        for (iter = (settings->option_lists)->begin(); iter != (settings->option_lists)->end(); ++iter) {
+        map<string, list<DeviceDescription::OptionEntry>*>::iterator iter;
+        for (iter = (description->option_lists)->begin(); iter != (description->option_lists)->end(); ++iter) {
                 cout << iter->first << " => " << endl;
-                list<OptionEntry>::iterator iter2;
+                list<DeviceDescription::OptionEntry>::iterator iter2;
                 for (iter2 = (*iter->second).begin(); iter2 != (*iter->second).end(); ++iter2)
                                 cout << (*iter2).ename << endl;
         }

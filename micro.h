@@ -6,54 +6,54 @@
 #include <iostream>
 #include <fstream>
 
-// description of a single fuse warning
-struct FuseWarning {
-        uint fbyte;
-        uint fmask;
-        uint fresult;
-        std::string warning;
-};
-
-// description of a single fuse setting
-struct FuseSetting {
-        gboolean single_option; // wether it's a boolean or an enumerator
-        std::string fname;      // setting name
-        std::string fdesc;      // setting description
-        std::string fenum;      // enumerator name or null
-        uint fmask;             // bit-mask
-        uint offset;            // fuse byte
-};
-
-// description of an one-of-many options in a single fuse setting
-struct OptionEntry {
-        std::string ename;      // entry name
-        uint value;             // entry value
-};
-
-// preliminary specifications of a micro
-struct DeviceSpecifications {
-        std::string max_speed;
-        std::string sram_size;
-        std::string flash_size;
-        std::string eeprom_size;
-        std::string signature;
-        std::string xml_filename;
-        std::string xml_version;
-        bool eeprom_exists;
-};
-
-// full description of all fuse settings of a micro
-class DeviceFuseSettings {
+class DeviceDescription {
         public:
-                DeviceFuseSettings();
-                virtual ~DeviceFuseSettings();
+                // description of a single fuse warning
+                struct FuseWarning {
+                        uint fbyte;
+                        uint fmask;
+                        uint fresult;
+                        std::string warning;
+                };
 
-                std::list<FuseSetting> *fuse_settings = nullptr;
-                std::map <std::string, std::list<OptionEntry>*> *option_lists = nullptr;
+                // description of a single fuse setting
+                struct FuseSetting {
+                        gboolean single_option; // wether it's a boolean or an enumerator
+                        std::string fname;      // setting name
+                        std::string fdesc;      // setting description
+                        std::string fenum;      // enumerator name or null
+                        uint fmask;             // bit-mask
+                        uint offset;            // fuse byte
+                };
+
+                // description of an one-of-many options in a single fuse setting
+                struct OptionEntry {
+                        std::string ename;      // entry name
+                        uint value;             // entry value
+                };
+
+
+                DeviceDescription();
+                virtual ~DeviceDescription();
+
+                // fundamental MCU properties
+                bool eeprom_exists;
+                std::string max_speed;
+                std::string sram_size;
+                std::string flash_size;
+                std::string eeprom_size;
+                std::string signature;
+                std::string xml_filename;
+                std::string xml_version;
+                // fuse settings
+                std::list<FuseSetting> *fuse_settings;
+                std::map <std::string, std::list<OptionEntry>*> *option_lists;
                 int fusebytes_count;
+                // default fuse values
+                int fusebytes_default[3];
+                // fuse warnings
+                std::list<FuseWarning> *warnings;
 };
-
-
 
 class Micro
 {
@@ -64,17 +64,13 @@ class Micro
                 void parse_data(std::string xml_file);
                 void get_device_list ();
 
+                // device description extracted from xml/atdf file
+                DeviceDescription *description = nullptr;
+
                 // user defined fuse settings
-                int usr_fusebytes[3] = {255, 255, 255};
-                // default fuse settings
-                int def_fusebytes[3] = {255, 255, 255};
-                // device specifications extracted from XML description
-                DeviceSpecifications *specifications = nullptr;
-                // description of all fuse settings, extracted from XML
-                DeviceFuseSettings *settings = nullptr;
-                // list of fuse warnings, extracted from XML
-                std::list<FuseWarning> *warnings = nullptr;
-                // device to XML-file mapping
+                int fusebytes_custom[3] = {255, 255, 255};
+
+                // device to description-file mapping
                 std::map <std::string, std::string> *device_map = nullptr;
 
         protected:
@@ -88,8 +84,8 @@ class Micro
                 int parse_warnings (xmlpp::Node *root_node);
                 int parse_default (xmlpp::Node *root_node);
 
-                std::list<OptionEntry>* get_enum_list (xmlpp::Node* xml_node);
-                std::list<FuseSetting>* get_fuse_list (xmlpp::Node* xml_node, uint offset);
+                std::list<DeviceDescription::OptionEntry>* get_enum_list (xmlpp::Node* xml_node);
+                std::list<DeviceDescription::FuseSetting>* get_fuse_list (xmlpp::Node* xml_node, uint offset);
                 std::string get_signature_bytes (xmlpp::Node* signature_node);
 
                 xmlpp::Node* get_child_with_attr (xmlpp::Node* starting_node, std::string att_name, std::string att_value);
