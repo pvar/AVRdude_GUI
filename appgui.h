@@ -5,8 +5,10 @@
 #include <gtkmm.h>
 #include <iostream>
 #include <iomanip>
+#include "devdesc.h"
 #include "micro.h"
 #include "dude.h"
+
 
 enum file_op { open_f, save_f, open_e, save_e };
 enum op_code { sig_check, dev_erase, eeprom_w, eeprom_r, eeprom_v, flash_w, flash_r, flash_v, fuse_w, fuse_r };
