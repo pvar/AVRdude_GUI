@@ -48,7 +48,6 @@ gtkGUI::gtkGUI()
         Gtk::Button *btn_firm_read, *btn_firm_write, *btn_firm_verify;
         Gtk::Button *btn_erom_read, *btn_erom_write, *btn_erom_verify;
         Gtk::Button *btn_open_eeprom, *btn_open_flash;
-        Gtk::TextView *tv_dude_output;
 
         // use builder to instantiate GTK widgets
         builder->get_widget("dude_auto_erase", auto_erase);
@@ -86,34 +85,33 @@ gtkGUI::gtkGUI()
         builder->get_widget("default_fuses", btn_fuse_def);
         builder->get_widget("read_fuses", btn_fuse_read);
 
-        // create empty text buffer and assign to text view
-        dude_output_buffer = Gtk::TextBuffer::create();
-        tv_dude_output->set_buffer(dude_output_buffer);
-
         // set custom style provider for application window
-        Glib::ustring data = ".console {font: Monospace 10; color: #888A85;}"
-                             ".fuse_value {font: Monospace 10; color: #888A85;}"
-                             ".fuse_name {font-weight: bold; color: #888A85;}"
-                             ".command {font: Monospace 10; color: #888A85;}";
-        Glib::RefPtr<Gtk::CssProvider> css = Gtk::CssProvider::create();
-        if (not css->load_from_data(data)) {
+        Glib::ustring css_data = ".console {font: Monospace 9; color: #888A85;} "
+                                 ".command {font: Monospace 10; color: #888A85;} "
+                                 ".fuse_value {font: Monospace 10; color: #888A85;} "
+                                 ".fuse_name {font-weight: bold; color: #888A85;} ";
+        Glib::RefPtr<Gtk::CssProvider> window_css = Gtk::CssProvider::create();
+        if (not window_css->load_from_data(css_data)) {
                 cerr << "Failed to load css!\n";
                 exit(1);
         }
         Glib::RefPtr<Gdk::Screen> screen = Gdk::Screen::get_default();
         Glib::RefPtr<Gtk::StyleContext> win_context = main_window->get_style_context();
-        win_context->add_provider_for_screen(screen, css, GTK_STYLE_PROVIDER_PRIORITY_USER);
-
+        win_context->add_provider_for_screen(screen, window_css, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
         // add style-class to textview displaying execution output
         Glib::RefPtr<Gtk::StyleContext> context;
         context = tv_dude_output->get_style_context();
         context->add_class("console");
-        // add style-class to label displaying selected fuse values
-        context = lbl_fusebytes->get_style_context();
-        context->add_class("fuse_value");
         // add style-class to label displaying executed command
         context = lbl_dude_command->get_style_context();
         context->add_class("command");
+        // add style-class to label displaying fuse values
+        context = lbl_fusebytes->get_style_context();
+        context->add_class("fuse_value");
+
+        // create empty text buffer and assign to text view
+        dude_output_buffer = Gtk::TextBuffer::create();
+        tv_dude_output->set_buffer(dude_output_buffer);
 
         // create the tree-models
         tm_family = Gtk::ListStore::create(cbm_generic);
@@ -1077,6 +1075,13 @@ void gtkGUI::update_console_view (void)
                 Gtk::TextBuffer::iterator end = dude_output_buffer->get_iter_at_line(128);
                 dude_output_buffer->erase(start, end);
         }
+        // get iter at last line
+        Gtk::TextBuffer::iterator lastline = dude_output_buffer->end();
+        // create mark at last line
+        Glib::RefPtr<Gtk::TextBuffer::Mark> lastline_mark = dude_output_buffer->create_mark( lastline, false );
+        // move to mark (could move to iter, but line calculation delays and scrolling is not always correct)
+        tv_dude_output->scroll_to(lastline_mark, 0.25);
+
         // display last executed command
         lbl_dude_command->set_label(avrdude->last_command);
 }

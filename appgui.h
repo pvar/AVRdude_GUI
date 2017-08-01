@@ -95,6 +95,7 @@ class gtkGUI
                 Gtk::Label *lbl_signature      = nullptr;
                 Gtk::Label *lbl_fusebytes      = nullptr;
                 Gtk::Label *lbl_dude_command   = nullptr;
+                Gtk::TextView *tv_dude_output  = nullptr;
                 Gtk::Entry *ent_flash_file     = nullptr;
                 Gtk::Entry *ent_eeprom_file    = nullptr;
                 Gtk::FileChooserDialog *browser= nullptr;
