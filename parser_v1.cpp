@@ -2,17 +2,37 @@
 
 using namespace std;
 
+bool Parser_v1::is_description (string filename, std::string &device_name)
+{
+        bool desc_file = false;
+
+        xmlpp::DomParser parser;
+        if (Parser::status::success == get_content (filename, parser))
+                desc_file = true;
+        else
+                desc_file = false;
+
+        if (desc_file) {
+                xmlpp::Node *xml_node = parser.get_document()->get_root_node();
+                xml_node = xml_node->get_first_child("ADMIN");
+                xml_node = xml_node->get_first_child("PART_NAME");
+                device_name = this->get_txt_value(xml_node);
+        } else
+                device_name = "NONE";
+
+        return desc_file;
+}
+
+
 bool Parser_v1::is_valid (xmlpp::Node *root_node)
 {
         // check if a valid description file
         const string node_name = root_node->get_name();
         if (node_name.compare("AVRPART") != 0) {
-                cout << "Not a valid description file!" << endl;
                 return false;
         } else
                 return true;
 }
-
 
 Parser::status Parser_v1::get_settings (xmlpp::Node *root_node, DeviceDescription &description)
 {

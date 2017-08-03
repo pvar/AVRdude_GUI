@@ -11,9 +11,9 @@ Parser::status Parser::process_file (string filename, DeviceDescription &descrip
 
         xmlpp::DomParser parser;
 
-        status prep_status = get_content (filename, parser);
-        if (prep_status != status::success)
-                return prep_status;
+        status read_file = get_content (filename, parser);
+        if (read_file != status::success)
+                return read_file;
 
         xmlpp::Node *root_node = parser.get_document()->get_root_node();
 
@@ -23,13 +23,6 @@ Parser::status Parser::process_file (string filename, DeviceDescription &descrip
         get_default (root_node, description);
 
         return status::success;
-}
-
-
-Parser::status Parser::check_file (string filename)
-{
-        xmlpp::DomParser parser;
-        return get_content (filename, parser);
 }
 
 

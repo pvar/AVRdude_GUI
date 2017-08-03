@@ -5,6 +5,10 @@
 
 class Parser_v1 : public Parser
 {
+        public:
+                // check if device-description file
+                bool is_description (std::string filename, std::string &device_name);
+
         protected:
                 bool is_valid (xmlpp::Node *root_node);
                 status get_specs (xmlpp::Node *root_node, DeviceDescription &description);

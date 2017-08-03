@@ -28,7 +28,7 @@ void Micro::get_device_list (void)
         // prepare path to XML files...
         string xml_dir = ("xmlfiles/");
         string whole_path = this->exec_path + xml_dir;
-        string path_to_file;
+        string path_to_file, device_name;
 
         gchar *path_xml_files = new char[whole_path.size() + 1];
         // !! Result is not safe, if path uses multi-byte characters (because of copy)
@@ -55,11 +55,9 @@ void Micro::get_device_list (void)
                         //Parser *parser = &atdf;
 
                         path_to_file = whole_path + filename;
-                        if (Parser::status::success == parser->check_file (path_to_file))
-                                cout << "valid description file" << endl;
-                                // get device name...
-                                //(*device_map)[device_name] = filename;
-                        else
+                        if (parser->is_description (path_to_file, device_name)) {
+                                (*device_map)[device_name] = filename;
+                        } else
                                 continue;
                 }
                 closedir (directory);

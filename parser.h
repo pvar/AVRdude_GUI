@@ -12,8 +12,9 @@ class Parser
                 // parser status
                 enum status { success, io_error, doc_error, no_content };
 
-                // device-description file parser
-                status check_file (std::string filename);
+                // check if device-description file
+                virtual bool is_description (std::string filename, std::string &device_name) = 0;
+
                 // device-description file parser
                 status process_file (std::string filename, DeviceDescription &description);
 
@@ -25,6 +26,7 @@ class Parser
                 virtual status get_default (xmlpp::Node *root_node, DeviceDescription &description) = 0;
 
                 status get_content (std::string filename, xmlpp::DomParser &parser);
+
                 void print_warnings (DeviceDescription &description);
                 void print_defaults (DeviceDescription &description);
                 void print_settings (DeviceDescription &description);
