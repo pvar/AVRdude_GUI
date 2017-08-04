@@ -32,7 +32,7 @@ class Parser
                 xmlpp::Node* get_child_with_attr (xmlpp::Node* starting_node, std::string att_name, std::string att_value);
 
                 std::list<DeviceDescription::OptionEntry>* get_enum_list (xmlpp::Node* xml_node);
-                std::list<DeviceDescription::FuseSetting>* get_fuse_list (xmlpp::Node* xml_node, uint offset);
+                std::list<DeviceDescription::FuseSetting>* get_fuse_list (xmlpp::Node* xml_node, unsigned int offset);
 
                 std::string get_txt_value (xmlpp::Node* starting_node);
                 std::string get_att_value (xmlpp::Node* xml_node, std::string att_name);

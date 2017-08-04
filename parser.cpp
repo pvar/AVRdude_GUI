@@ -161,7 +161,7 @@ list<DeviceDescription::OptionEntry>* Parser::get_enum_list (xmlpp::Node* xml_no
 }
 
 
-list<DeviceDescription::FuseSetting>* Parser::get_fuse_list (xmlpp::Node* xml_node, uint offset)
+list<DeviceDescription::FuseSetting>* Parser::get_fuse_list (xmlpp::Node* xml_node, unsigned int offset)
 {
         list<DeviceDescription::FuseSetting> *fuse_listing = new list<DeviceDescription::FuseSetting>;
 

@@ -88,7 +88,7 @@ Parser::status Parser_v1::get_settings (xmlpp::Node *root_node, DeviceDescriptio
                         continue;
                 // increase fuse-byte counter
                 fuse_byte_counter++;
-                uint offset = ::atoi((regoffset.substr(2, 2)).c_str());
+                unsigned int offset = ::atoi((regoffset.substr(2, 2)).c_str());
                 // get name for this reg node
                 string regname = get_att_value((*node_iterator), "name");
                 // prepare pseudo-setting with fuse-byte name
