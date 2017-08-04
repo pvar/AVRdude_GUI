@@ -20,12 +20,13 @@ OUTPUT = bin/dudegui
 
 STANDARD = -std=c++11
 WARNINGS = -Wall
-ERRORS = -Werror
+# NOOLDCAST = -Wold-style-cast
+# EFFICIENCY = -Weffc++
 TUNNING = -O3 -fshort-enums
 DEBUGING = -g -fno-omit-frame-pointer
 
-FLAGS = $(STANDARD) $(WARNINGS) $(ERRORS) $(TUNNING)
-#FLAGS = $(STANDARD) $(WARNINGS) $(ERRORS) $(DEBUGGING)
+FLAGS = $(STANDARD) $(WARNINGS) $(EFFICIENCY) $(NOOLDCAST) $(TUNNING)
+#FLAGS = $(STANDARD) $(WARNINGS) $(EFFICIENCY) $(NOOLDCAST) $(DEBUGGING)
 
 LIBS=`pkg-config --cflags --libs gtkmm-3.0 libxml++-2.6`
 
