@@ -174,7 +174,7 @@ USERNAME=$(whoami)
 ICONLOCATION="/usr/share/icons/hicolor/256x256/apps/"
 MENULOCATION="/usr/share/applications/"
 LINKLOCATION="/usr/bin/"
-EXECLOCATION="/var/opt/dudegui/"
+EXECLOCATION="/opt/dudegui/"
 # working directories
 RND=$(($RANDOM  + 128))
 DIR=${0%`basename $0`}
