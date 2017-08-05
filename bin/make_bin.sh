@@ -30,4 +30,4 @@ chmod +x ${WORKDIR}/${INSTALLER}
 
 # clean-up
 rm ${WORKDIR}/${SCRIPT} ${WORKDIR}/${ARCHIVE}
-echo "all done!"
+echo "All done!"

@@ -7,7 +7,10 @@ MENULOCATION="/usr/share/applications/"
 LINKLOCATION="/usr/bin/"
 EXECLOCATION="/opt/dudegui/"
 
-echo -e "\nRemoving application files...\n";
+
+sudo -v # just to get credentials
+
+echo -n -e "\nRemoving application files... ";
 
 # -------- uninstall "desktop" file --------
 sudo xdg-desktop-menu uninstall dudegui.desktop --novendor --mode system
@@ -25,4 +28,4 @@ if [ ! -d "${EXECLOCATION}" ]; then
         sudo rm -fr ${EXECLOCATION}
 fi
 
-echo -e "All clear. Hope to see you again!";
+echo "DONE";

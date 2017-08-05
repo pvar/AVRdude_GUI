@@ -239,6 +239,8 @@ if [ ! -d "${MENULOCATION}" ]; then
         exit 1;
 fi
 
+sudo -v # just to get credentials
+
 # install file
 echo -e -n "\Installing application \"desktop\" file... ";
 sudo xdg-desktop-menu install ${WORKDIR}/dudegui.desktop --novendor --mode system
@@ -271,6 +273,7 @@ fi
 # copy all necessary files
 echo -e -n "\nCopying application binary and data... ";
 sudo cp ${WORKDIR}/dudegui ${EXECLOCATION}
+sudo cp ${WORKDIR}/uninstall.sh ${EXECLOCATION}
 sudo cp ${WORKDIR}/dudegui.ui ${EXECLOCATION}
 sudo cp ${WORKDIR}/dev2xml.lst ${EXECLOCATION}
 sudo cp ${WORKDIR}/xmlfiles ${EXECLOCATION} -r
@@ -283,8 +286,9 @@ sudo chmod -f 666 ${EXECLOCATION}/dev2xml.lst
 sudo chmod -f 775 ${EXECLOCATION}/xmlfiles
 sudo chmod -f 666 ${EXECLOCATION}/xmlfiles/*
 
-# create symbolic link to executable
+# create necessary symbolic links
 sudo ln -s ${EXECLOCATION}/dudegui /usr/bin/dudegui
+sudo ln -s ${EXECLOCATION}/uninstall.sh /usr/bin/dudegui-uninstall
 
 # ----------------------------------------------------------------------------
 # make serial programmers accessible (add user in necessary groups)
