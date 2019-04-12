@@ -149,10 +149,8 @@ void Micro::parse_data (string xml_file)
         string path_to_file = this->exec_path + xml_dir + xml_file;
 
         Parser_v1 xml;
-        //Parser_v2 atdf;
 
         Parser *parser = &xml;
-        //Parser *parser = &atdf;
 
         parser->process_file (path_to_file, *description);
 }

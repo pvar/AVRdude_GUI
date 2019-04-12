@@ -17,11 +17,11 @@ class DeviceDescription {
                 // description of a single fuse setting
                 struct FuseSetting {
                         bool single_option; // wether it's a boolean or an enumerator
-                        std::string fname;      // setting name
-                        std::string fdesc;      // setting description
-                        std::string fenum;      // enumerator name or null
-                        uint fmask;             // bit-mask
-                        uint offset;            // fuse byte
+                        std::string fname;  // setting name
+                        std::string fdesc;  // setting description
+                        std::string fenum;  // enumerator name or null
+                        uint fmask;         // bit-mask
+                        uint offset;        // fuse byte
                 };
 
                 // description of an one-of-many options in a single fuse setting

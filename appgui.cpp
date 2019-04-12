@@ -85,7 +85,9 @@ gtkGUI::gtkGUI()
         builder->get_widget("default_fuses", btn_fuse_def);
         builder->get_widget("read_fuses", btn_fuse_read);
 
+
         // set custom style provider for application window
+        /*
         Glib::ustring css_data = ".console {font: Monospace 9; color: #888A85;} "
                                  ".command {font: Monospace 10; color: #888A85;} "
                                  ".fuse_value {font: Monospace 10; color: #888A85;} "
@@ -95,9 +97,11 @@ gtkGUI::gtkGUI()
                 cerr << "Failed to load css!\n";
                 exit(1);
         }
+
         Glib::RefPtr<Gdk::Screen> screen = Gdk::Screen::get_default();
         Glib::RefPtr<Gtk::StyleContext> win_context = main_window->get_style_context();
         win_context->add_provider_for_screen(screen, window_css, GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+
         // add style-class to textview displaying execution output
         Glib::RefPtr<Gtk::StyleContext> context;
         context = tv_dude_output->get_style_context();
@@ -108,6 +112,7 @@ gtkGUI::gtkGUI()
         // add style-class to label displaying fuse values
         context = lbl_fusebytes->get_style_context();
         context->add_class("fuse_value");
+        */
 
         // create empty text buffer and assign to text view
         dude_output_buffer = Gtk::TextBuffer::create();
@@ -132,8 +137,7 @@ gtkGUI::gtkGUI()
         // add microcontroller families and programmer names to tree-models
         populate_static_treemodels();
 
-        // connect signal handlers
-        main_window->signal_delete_event().connect(sigc::mem_fun(*this, &gtkGUI::exit_application));
+        // connect click-signal handlers
         btn_open_flash->signal_clicked().connect( sigc::bind<file_op>( sigc::mem_fun(*this, &gtkGUI::select_file), open_f) );
         btn_open_eeprom->signal_clicked().connect( sigc::bind<file_op>( sigc::mem_fun(*this, &gtkGUI::select_file), open_e) );
         btn_erom_read->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_eeprom_read));
@@ -147,12 +151,15 @@ gtkGUI::gtkGUI()
         btn_fuse_def->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_fuse_default));
         btn_check_sig->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_check_signature));
         btn_erase_dev->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_erase_devive));
-        cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
-        dev_combo_signal = cb_device->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_device));
-        dev_combo_programmer = cb_protocol->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
         check_button_erase = auto_erase->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
         check_button_check = auto_check->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
         check_button_verify = auto_verify->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        // connect change-signal handlers
+        cb_family->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_family));
+        dev_combo_signal = cb_device->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_new_device));
+        dev_combo_hwprog = cb_protocol->signal_changed().connect(sigc::mem_fun(*this, &gtkGUI::cb_dude_settings));
+        // connect exit-signal handler
+        main_window->signal_delete_event().connect(sigc::mem_fun(*this, &gtkGUI::exit_application));
 }
 
 gtkGUI::~gtkGUI()
@@ -163,7 +170,7 @@ bool gtkGUI::exit_application (GdkEventAny* any_event)
 {
         if (avrdude->working) {
                 //cout << "avrdude is still working...!" << endl;
-                message_popup ("Sorry...", "The programm cannot exit at this moment; Avrdude is currently performing an operation on your device...");
+                message_popup ("Sorry...", "The programm cannot exit at this moment; Avrdude is currently performing an operation...");
                 return true;
         }
 
@@ -185,7 +192,7 @@ void gtkGUI::populate_static_treemodels (void)
         row[cbm_generic.col_name] = "AT tiny";
         row[cbm_generic.col_data] = "ATtiny";
         row = *(tm_family->append());
-        row[cbm_generic.col_name] = "AT 90S xxxx";
+        row[cbm_generic.col_name] = "AT 90 S";
         row[cbm_generic.col_data] = "AT90S";
         row = *(tm_family->append());
         row[cbm_generic.col_name] = "AT 90 USB";
@@ -198,7 +205,7 @@ void gtkGUI::populate_static_treemodels (void)
         row[cbm_generic.col_data] = "AT90PWM";
         cb_family->set_active(0);
 
-        // populate tree-model with supported protocols
+        // populate tree-model with supported HW programmers/protocols
         row = *(tm_protocol->append());
         row[cbm_generic.col_name] = "USBasp programmer";
         row[cbm_generic.col_data] = "usbasp";
@@ -308,8 +315,6 @@ void gtkGUI::prep_fuse_meta (void)
 
 bool gtkGUI::data_prep_start (void)
 {
-        //cout << "DATA PREPARATION..." << endl;
-
         // get supported devices
         microcontroller->get_device_list();
         // check if device-to-xml map has been populated
@@ -346,8 +351,8 @@ void gtkGUI::cb_new_family (void)
 
         // block on-change signals
         dev_combo_signal.block(true);
-        dev_combo_programmer.block(true);
-        // lock controls and reset settings
+        dev_combo_hwprog.block(true);
+        // lock controls and clear settings/meta
         controls_lock();
         device_data_clear();
         // clear device tree-view
@@ -371,7 +376,7 @@ void gtkGUI::cb_new_family (void)
         cb_device->set_active(0);
         // unblock on-change signals
         dev_combo_signal.unblock();
-        dev_combo_programmer.unblock();
+        dev_combo_hwprog.unblock();
 }
 
 void gtkGUI::cb_new_device (void)
@@ -387,7 +392,7 @@ void gtkGUI::cb_new_device (void)
                 }
         }
 
-        // lock controls and reset settings
+        // lock controls and clear settings/meta
         controls_lock();
         device_data_clear();
         // do not proceed if "None" device
@@ -400,7 +405,7 @@ void gtkGUI::cb_new_device (void)
         // copy default fuse values over device current fuse values
         for (int i = 0; i < 3; i++)
                 avrdude->fusebytes_ondevice[i] = microcontroller->description->fusebytes_default[i];
-        // unlock controls and update labels
+        // unlock controls and display settings/meta
         controls_unlock();
         display_warnings = false;
         device_data_show();

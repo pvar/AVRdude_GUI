@@ -60,7 +60,7 @@ class gtkGUI
 
                 // signal connection handlers
                 sigc::connection dev_combo_signal;
-                sigc::connection dev_combo_programmer;
+                sigc::connection dev_combo_hwprog;
                 sigc::connection check_button_erase;
                 sigc::connection check_button_check;
                 sigc::connection check_button_verify;

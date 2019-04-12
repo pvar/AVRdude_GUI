@@ -12,7 +12,7 @@ class Parser
                 // parser status
                 enum status { success, io_error, doc_error, no_content };
 
-                // check if device-description file
+                // check if it's really a device-description file
                 virtual bool is_description (std::string filename, std::string &device_name) = 0;
 
                 // device-description file parser
