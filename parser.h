@@ -13,19 +13,19 @@ class Parser
                 enum status { success, io_error, doc_error, no_content };
 
                 // check if it's really a device-description file
-                virtual bool is_description (std::string filename, std::string &device_name) = 0;
+                bool is_description (std::string filename, std::string &device_name);
 
                 // device-description file parser
                 status process_file (std::string filename, DeviceDescription &description);
 
         protected:
-                virtual bool is_valid (xmlpp::Node *root_node) = 0;
-                virtual std::string get_signature_bytes (xmlpp::Node* signature_node) = 0;
+                bool is_valid (xmlpp::Node *root_node);
+                std::string get_signature_bytes (xmlpp::Node* signature_node);
 
-                virtual status get_specs (xmlpp::Node *root_node, DeviceDescription &description) = 0;
-                virtual status get_settings (xmlpp::Node *root_node, DeviceDescription &description) = 0;
-                virtual status get_warnings (xmlpp::Node *root_node, DeviceDescription &description) = 0;
-                virtual status get_default (xmlpp::Node *root_node, DeviceDescription &description) = 0;
+                status get_specs (xmlpp::Node *root_node, DeviceDescription &description);
+                status get_settings (xmlpp::Node *root_node, DeviceDescription &description);
+                status get_warnings (xmlpp::Node *root_node, DeviceDescription &description);
+                status get_default (xmlpp::Node *root_node, DeviceDescription &description);
 
                 status get_content (std::string filename, xmlpp::DomParser &parser);
 

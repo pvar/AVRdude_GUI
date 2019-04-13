@@ -49,10 +49,8 @@ void Micro::get_device_list (void)
                             (filename.compare(filename.size() - 3, 3, "XML") != 0))
                                 continue;
 
-                        Parser_v1 xml;
-                        //Parser_v2 atdf;
+                        Parser xml;
                         Parser *parser = &xml;
-                        //Parser *parser = &atdf;
 
                         path_to_file = whole_path + filename;
                         if (parser->is_description (path_to_file, device_name)) {
@@ -148,7 +146,7 @@ void Micro::parse_data (string xml_file)
         string xml_dir = ("xmlfiles/");
         string path_to_file = this->exec_path + xml_dir + xml_file;
 
-        Parser_v1 xml;
+        Parser xml;
 
         Parser *parser = &xml;
 

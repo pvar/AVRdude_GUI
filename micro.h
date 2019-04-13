@@ -7,8 +7,6 @@
 #include <fstream>
 #include "devdesc.h"
 #include "parser.h"
-#include "parser_v1.h"
-//#include "parser_v2.h"
 
 class Micro
 {
