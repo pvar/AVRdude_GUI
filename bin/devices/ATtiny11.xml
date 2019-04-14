@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATtiny11" speed="6 MHz" flash="1.0 KB" sram="0 Bytes" eeprom="0 Bytes" xml_name="ATtiny11.xml" xml_ver="214" has_eeprom="no"/>
+  <defaults lfuse="255" hfuse="255" efuse="255"/>
+  <settings>
+    <fusebytes count="1"/>
+    <option1 bitmask="4673" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="16" offset="0" name="FSTRT" desc="Short start-up time selected" enum=""/>
+    <option3 bitmask="8" offset="0" name="RSTDISBL" desc="External reset function of PB5 disabled" enum=""/>
+    <option4 bitmask="7" offset="0" name="CKSEL" desc="Clock Select" enum="list">
+      <entry val="7" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="6" txt="External Low-frequency Crystal"/>
+      <entry val="5" txt="External RC Oscillator"/>
+      <entry val="4" txt="Internal RC Oscillator"/>
+      <entry val="0" txt="External Clock"/>
+    </option4>
+  </settings>
+  <warnings/>
+</Device>

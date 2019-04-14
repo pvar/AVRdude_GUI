@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATtiny26" speed="16 MHz" flash="2.0 KB" sram="128 Bytes" eeprom="128 Bytes" xml_name="ATtiny26.xml" xml_ver="257" has_eeprom="yes"/>
+  <defaults lfuse="249" hfuse="247" efuse="255"/>
+  <settings>
+    <fusebytes count="2"/>
+    <option1 bitmask="1149111120" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="64" offset="0" name="CKOPT" desc="CKOPT fuse (operation dependent of CKSEL fuses)" enum=""/>
+    <option3 bitmask="191" offset="0" name="PLLCK_SUT_CKSEL" desc="Select Clock Source" enum="list">
+      <entry val="1" txt="PLL Clock; Start-up time: 1K CK + 0 ms"/>
+      <entry val="17" txt="PLL Clock; Start-up time: 1K CK + 4 ms"/>
+      <entry val="33" txt="PLL Clock; Start-up time: 1K CK + 64 ms"/>
+      <entry val="49" txt="PLL Clock; Start-up time: 16K CK + 64 ms"/>
+      <entry val="64" txt="Ext. Clock; Start-up time: 6 CK + 0 ms"/>
+      <entry val="80" txt="Ext. Clock; Start-up time: 6 CK + 4 ms"/>
+      <entry val="96" txt="Ext. Clock; Start-up time: 6 CK + 64 ms"/>
+      <entry val="65" txt="Int. RC Osc. 1 MHz; Start-up time: 6 CK + 0 ms"/>
+      <entry val="81" txt="Int. RC Osc. 1 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="97" txt="Int. RC Osc. 1 MHz; Start-up time: 6 CK + 64 ms"/>
+      <entry val="66" txt="Int. RC Osc. 2 MHz; Start-up time: 6 CK + 0 ms"/>
+      <entry val="82" txt="Int. RC Osc. 2 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="98" txt="Int. RC Osc. 2 MHz; Start-up time: 6 CK + 64 ms"/>
+      <entry val="131" txt="Int. RC Osc. 4 MHz; Start-up time: 6 CK + 0 ms"/>
+      <entry val="83" txt="Int. RC Osc. 4 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="99" txt="Int. RC Osc. 4 MHz; Start-up time: 6 CK + 64 ms"/>
+      <entry val="68" txt="Int. RC Osc. 8 MHz; Start-up time: 6 CK + 0 ms"/>
+      <entry val="84" txt="Int. RC Osc. 8 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="100" txt="Int. RC Osc. 8 MHz; Start-up time: 6 CK + 64 ms"/>
+      <entry val="69" txt="Ext. RC Osc.         -  0.9 MHz; Start-up time: 18 CK + 0 ms"/>
+      <entry val="85" txt="Ext. RC Osc.         -  0.9 MHz; Start-up time: 18 CK + 4 ms"/>
+      <entry val="101" txt="Ext. RC Osc.         -  0.9 MHz; Start-up time: 18 CK + 64 ms"/>
+      <entry val="117" txt="Ext. RC Osc.         -  0.9 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="70" txt="Ext. RC Osc. 0.9 MHz -  3.0 MHz; Start-up time: 18 CK + 0 ms"/>
+      <entry val="86" txt="Ext. RC Osc. 0.9 MHz -  3.0 MHz; Start-up time: 18 CK + 4 ms"/>
+      <entry val="102" txt="Ext. RC Osc. 0.9 MHz -  3.0 MHz; Start-up time: 18 CK + 64 ms"/>
+      <entry val="118" txt="Ext. RC Osc. 0.9 MHz -  3.0 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="135" txt="Ext. RC Osc. 3.0 MHz -  8.0 MHz; Start-up time: 18 CK + 0 ms"/>
+      <entry val="87" txt="Ext. RC Osc. 3.0 MHz -  8.0 MHz; Start-up time: 18 CK + 4 ms"/>
+      <entry val="103" txt="Ext. RC Osc. 3.0 MHz -  8.0 MHz; Start-up time: 18 CK + 64 ms"/>
+      <entry val="119" txt="Ext. RC Osc. 3.0 MHz -  8.0 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="88" txt="Ext. RC Osc. 8.0 MHz - 12.0 MHz; Start-up time: 18 CK + 0 ms"/>
+      <entry val="88" txt="Ext. RC Osc. 8.0 MHz - 12.0 MHz; Start-up time: 18 CK + 4 ms"/>
+      <entry val="104" txt="Ext. RC Osc. 8.0 MHz - 12.0 MHz; Start-up time: 18 CK + 64 ms"/>
+      <entry val="120" txt="Ext. RC Osc. 8.0 MHz - 12.0 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="73" txt="Ext. Low-Freq. Crystal; Start-up time: 1K CK + 4 ms"/>
+      <entry val="89" txt="Ext. Low-Freq. Crystal; Start-up time: 1K CK + 64 ms"/>
+      <entry val="105" txt="Ext. Low-Freq. Crystal; Start-up time: 32K CK + 64 ms"/>
+      <entry val="138" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 258 CK + 4 ms"/>
+      <entry val="90" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 258 CK + 64 ms"/>
+      <entry val="106" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 1K CK + 0 ms"/>
+      <entry val="122" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 1K CK + 4 ms"/>
+      <entry val="75" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 1K CK + 64 ms"/>
+      <entry val="91" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 16K CK + 0 ms"/>
+      <entry val="107" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 16K CK + 4 ms"/>
+      <entry val="123" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 16K CK + 64 ms"/>
+      <entry val="76" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 258 CK + 4 ms"/>
+      <entry val="92" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 258 CK + 64 ms"/>
+      <entry val="108" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 1K CK + 0 ms"/>
+      <entry val="124" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 1K CK + 4 ms"/>
+      <entry val="77" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 1K CK + 64 ms"/>
+      <entry val="93" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 16K CK + 0 ms"/>
+      <entry val="109" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 16K CK + 4 ms"/>
+      <entry val="125" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 16K CK + 64 ms"/>
+      <entry val="78" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 258 CK + 4 ms"/>
+      <entry val="94" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 258 CK + 64 ms"/>
+      <entry val="110" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 1K CK + 0 ms"/>
+      <entry val="126" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 1K CK + 4 ms"/>
+      <entry val="79" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 1K CK + 64 ms"/>
+      <entry val="95" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 0 ms"/>
+      <entry val="111" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 4 ms"/>
+      <entry val="127" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 64 ms"/>
+    </option3>
+    <option4 bitmask="1149111120" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="16" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PB7 as i/o pin)" enum=""/>
+    <option6 bitmask="8" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option7 bitmask="4" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option8 bitmask="2" offset="1" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
+      <entry val="0" txt="Brown-out detection at VCC=4.0 V"/>
+      <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
+    </option8>
+    <option9 bitmask="1" offset="1" name="BODEN" desc="Brown-out detection enabled" enum=""/>
+  </settings>
+  <warnings>
+    <case1 byte="1" mask="8" result="8" message="These fuse settings will disable the ISP interface!"/>
+    <case2 byte="1" mask="16" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
+  </warnings>
+</Device>

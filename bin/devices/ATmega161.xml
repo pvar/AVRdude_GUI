@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATmega161" speed="8 MHz" flash="16.0 KB" sram="1024 Bytes" eeprom="512 Bytes" xml_name="ATmega161.xml" xml_ver="233" has_eeprom="yes"/>
+  <defaults lfuse="234" hfuse="255" efuse="255"/>
+  <settings>
+    <fusebytes count="1"/>
+    <option1 bitmask="1147627656" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="32" offset="0" name="BOOTRST" desc="Boot Reset Vector Enabled" enum=""/>
+    <option3 bitmask="16" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option4 bitmask="8" offset="0" name="SUT" desc="Start-up time" enum=""/>
+    <option5 bitmask="7" offset="0" name="CKSEL" desc="Select Clock Source" enum="list">
+      <entry val="0" txt="Ext Clock; fast rising power"/>
+      <entry val="1" txt="Ext Clock; BOD Enabled or power-on reset"/>
+      <entry val="2" txt="Crystal Osc; slowly rising power ; default value"/>
+      <entry val="3" txt="Crystal Osc; fast rising power"/>
+      <entry val="4" txt="Crystal Osc; BOD Enabled or power-on reset"/>
+      <entry val="5" txt="Ceramic Resonator / External Clock; Slowly rising power"/>
+      <entry val="6" txt="Ceramic Resonator; fast rising power"/>
+      <entry val="7" txt="Ceramic Resonator; BOD Enabled or power-on reset"/>
+    </option5>
+  </settings>
+  <warnings>
+    <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+  </warnings>
+</Device>

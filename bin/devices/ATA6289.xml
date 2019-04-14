@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATA6289" speed="4 MHz" flash="8.0 KB" sram="512 Bytes" eeprom="320 Bytes" xml_name="ATA6289.xml" xml_ver="1" has_eeprom="yes"/>
+  <defaults lfuse="101" hfuse="217" efuse="255"/>
+  <settings>
+    <fusebytes count="2"/>
+    <option1 bitmask="1146450984" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
+    <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTC1" enum=""/>
+    <option4 bitmask="48" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+      <entry val="0" txt="Start-up time PWRDWN/RESET: 6 CK/14 CK + 0 ms;   [SUT=00]"/>
+      <entry val="1" txt="Start-up time PWRDWN/RESET: 6 CK/14 CK + 5.7 ms; [SUT=01]"/>
+      <entry val="2" txt="Start-up time PWRDWN/RESET: 6 CK/14 CK + 90 ms;  [SUT=10]"/>
+    </option4>
+    <option5 bitmask="8" offset="0" name="WDRCON" desc="Enable Watchdog RC-Oscillator" enum=""/>
+    <option6 bitmask="4" offset="0" name="FRCFS" desc="Fast RC-Oscillator Frequency select" enum=""/>
+    <option7 bitmask="2" offset="0" name="BODEN" desc="Enable Brown-out detection" enum=""/>
+    <option8 bitmask="1" offset="0" name="TSRDI" desc="Disable Temperatur shutdown Reset " enum=""/>
+    <option9 bitmask="1146450984" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option10 bitmask="128" offset="1" name="EELOCK" desc="Upper EEPROM Locked (disabled)" enum=""/>
+    <option11 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
+    <option12 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option13 bitmask="16" offset="1" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
+    <option14 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option15 bitmask="6" offset="1" name="BOOTSZ" desc="Boot size select" enum="list">
+      <entry val="3" txt="Boot size = 128 words"/>
+      <entry val="2" txt="Boot size = 256 words"/>
+      <entry val="1" txt="Boot size = 512 words"/>
+      <entry val="0" txt="Boot size = 1024 words"/>
+    </option15>
+    <option16 bitmask="1" offset="1" name="BOOTRST" desc="Select reset vector" enum=""/>
+  </settings>
+  <warnings>
+    <case1 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case2 byte="1" mask="128" result="0" message="Upper EEPROM area (callibration area) will be locked!"/>
+    <case3 byte="1" mask="64" result="0" message="Enabling DebugWIRE will make the ISP interface inaccessible!"/>
+    <case4 byte="0" mask="128" result="0" message="Using this clock option together with the CKDIV8 fuse will disable further ISP programming!"/>
+  </warnings>
+</Device>

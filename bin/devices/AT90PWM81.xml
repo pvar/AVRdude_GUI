@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="AT90PWM81" speed="8 MHz" flash="8.0 KB" sram="256 Bytes" eeprom="512 Bytes" xml_name="AT90PWM81.xml" xml_ver="1" has_eeprom="yes"/>
+  <defaults lfuse="98" hfuse="217" efuse="255"/>
+  <settings>
+    <fusebytes count="3"/>
+    <option1 bitmask="1148206584" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
+    <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTD1" enum=""/>
+    <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+      <entry val="0" txt="Ext. CK; PLLin: RC8; SUT: 6CK/14CK+0ms; [CKSEL=0000 SUT=00]"/>
+      <entry val="16" txt="Ext. CK; PLLin: RC8 MHz; SUT:6 CK/14CK+4.1 ms; [CKSEL=0000 SUT=01]"/>
+      <entry val="32" txt="Ext. CK; PLLin: RC8 MHz; SUT:6 CK/14CK+65 ms; [CKSEL=0000 SUT=10]"/>
+      <entry val="2" txt="RC8 MHz; PLLin: RC8; SUT: 6CK/14CK+0ms; [CKSEL=0010 SUT=00]"/>
+      <entry val="18" txt="RC8 MHz; PLLin: RC8; SUT: 6CK/14CK+4.1 ms; [CKSEL=0010 SUT=01]"/>
+      <entry val="34" txt="RC8 MHz; PLLin: RC8; SUT: 6CK/14CK+65 ms;  [CKSEL=0010 SUT=10]"/>
+      <entry val="8" txt="XOSC.9-3MHz; PLLin: RC8; SUT: 258CK/14CK+4.1 ms; [CKSEL=1000 SUT=00]"/>
+      <entry val="24" txt="XOSC.9-3MHz; PLLin: RC8; SUT: 258CK/14CK+65 ms; [CKSEL=1000 SUT=01]"/>
+      <entry val="40" txt="XOSC.9-3MHz; PLLin: RC8; SUT: 1KCK/14CK+0 ms; [CKSEL=1000 SUT=10]"/>
+      <entry val="56" txt="XOSC.9-3MHz; PLLin: RC8; SUT: 1KCK/14CK+4.1 ms; [CKSEL=1000 SUT=11]"/>
+      <entry val="9" txt="XOSC.9-3MHz; PLLin: RC8; SUT: 1KCK/14CK+65 ms; [CKSEL=1001 SUT=00]"/>
+      <entry val="25" txt="XOSC.9-3MHz; PLLin: RC8; SUT: 16KCK/14CK+0 ms; [CKSEL=1001 SUT=01]"/>
+      <entry val="41" txt="XOSC.9-3MHz; PLLin: RC8; SUT: 16KCK/14CK+4.1 ms; [CKSEL=1001 SUT=10]"/>
+      <entry val="57" txt="XOSC.9-3MHz; PLLin: RC8; SUT: 16KCK/14CK+65 ms;  [CKSEL=1001 SUT=11]"/>
+      <entry val="10" txt="XOSC3-8MHz; PLLin: RC8; SUT: 258CK/14CK+4.1 ms; [CKSEL=1010 SUT=00]"/>
+      <entry val="26" txt="XOSC3-8MHz; PLLin: RC8; SUT: 258CK/14CK+65 ms; [CKSEL=1010 SUT=01]"/>
+      <entry val="42" txt="XOSC3-8MHz; PLLin: RC8; SUT: 1KCK/14CK+0 ms; [CKSEL=1010 SUT=10]"/>
+      <entry val="58" txt="XOSC3-8MHz; PLLin: RC8; SUT: 1KCK/14CK+4.1 ms; [CKSEL=1010 SUT=11]"/>
+      <entry val="11" txt="XOSC3-8MHz; PLLin: RC8; SUT: 1KCK/14CK+65 ms;  [CKSEL=1011 SUT=00]"/>
+      <entry val="27" txt="XOSC3-8MHz; PLLin: RC8; SUT: 16KCK/14CK+0 ms; [CKSEL=1011 SUT=01]"/>
+      <entry val="43" txt="XOSC3-8MHz; PLLin: RC8; SUT: 16KCK/14CK+4.1 ms; [CKSEL=1011 SUT=10]"/>
+      <entry val="59" txt="XOSC3-8MHz; PLLin: RC8; SUT: 16KCK/14CK+65 ms;  [CKSEL=1011 SUT=11]"/>
+      <entry val="12" txt="XOSC3-8MHz; PLLin: XOSC; SUT: 258CK/14CK+4.1 ms; [CKSEL=1100 SUT=00]"/>
+      <entry val="28" txt="XOSC3-8MHz; PLLin: XOSC; SUT: 258CK/14CK+65 ms;  [CKSEL=1100 SUT=01]"/>
+      <entry val="44" txt="XOSC3-8MHz; PLLin: XOSC; SUT: 1KCK/14CK+0 ms; [CKSEL=1100 SUT=10]"/>
+      <entry val="60" txt="XOSC3-8MHz; PLLin: XOSC; SUT: 1KCK/14CK+4.1 ms; [CKSEL=1100 SUT=11]"/>
+      <entry val="13" txt="XOSC3-8MHz; PLLin: XOSC; SUT: 1KCK/14CK+65 ms;  [CKSEL=1101 SUT=00"/>
+      <entry val="29" txt="XOSC3-8MHz; PLLin: XOSC; SUT: 16KCK/14CK+0 ms; [CKSEL=1101 SUT=01]"/>
+      <entry val="45" txt="XOSC3-8MHz; PLLin: XOSC; SUT: 16KCK/14CK+4.1 ms; [CKSEL=1101 SUT=10]"/>
+      <entry val="61" txt="XOSC3-8MHz; PLLin: XOSC; SUT: 16KCK/14CK+65 ms;  [CKSEL=1101 SUT=11]"/>
+      <entry val="14" txt="XOSC8-16MHz; PLLin: RC8; SUT: 258CK/14CK+4.1 ms; [CKSEL=1110 SUT=00]"/>
+      <entry val="30" txt="XOSC8-16MHz; PLLin: RC8; SUT: 258CK/14CK+65 ms;  [CKSEL=1110 SUT=01]"/>
+      <entry val="46" txt="XOSC8-16MHz; PLLin: RC8; SUT: 1KCK/14CK+0 ms; [CKSEL=1110 SUT=10]"/>
+      <entry val="62" txt="XOSC8-16MHz; PLLin: RC8; SUT: 1KCK/14CK+4.1 ms; [CKSEL=1110 SUT=11]"/>
+      <entry val="15" txt="XOSC8-16MHz; PLLin: RC8; SUT: 1KCK/14CK+65 ms; [CKSEL=1111 SUT=00]"/>
+      <entry val="31" txt="XOSC8-16MHz; PLLin: RC8; SUT: 16KCK/14CK+0 ms; [CKSEL=1111 SUT=01]"/>
+      <entry val="47" txt="XOSC8-16MHz; PLLin: RC8; SUT: 16KCK/14CK+4.1 ms; [CKSEL=1111 SUT=10]"/>
+      <entry val="63" txt="XOSC8-16MHz; PLLin: RC8; SUT: 16KCK/14CK+65 ms;  [CKSEL=1111 SUT=11]"/>
+      <entry val="3" txt="WD128 KHz; SUT: 1KCK/14CK+0 ms; [CKSEL=0011 SUT=00]"/>
+      <entry val="19" txt="WD128 KHz; SUT: 1KCK/14CK+4.1 ms; [CKSEL=0011 SUT=01]"/>
+      <entry val="35" txt="WD128 KHz; SUT: 1KCK/14CK+65 ms; [CKSEL=0011 SUT=10]"/>
+      <entry val="51" txt="WD128 KHz; SUT: 16KCK/14CK+0 ms; [CKSEL=0011 SUT=11]"/>
+      <entry val="1" txt="PLL/4; PLLin: RC8; SUT: 1KCK/14CK+0 ms; [CKSEL=0001 SUT=00]"/>
+      <entry val="17" txt="PLL/4; PLLin: RC8; SUT: 1KCK/14CK+4 ms;   [CKSEL=0001 SUT=01]"/>
+      <entry val="33" txt="PLL/4; PLLin: RC8; SUT: 1KCK/14CK+64 ms;   [CKSEL=0001 SUT=10]"/>
+      <entry val="5" txt="PLL/4; PLLin: Ext. CK; SUT: 16KCK/14CK+0 ms; [CKSEL=0101 SUT=00]"/>
+      <entry val="21" txt="PLL/4; PLLin: Ext. CK; SUT: 16KCK/14CK+4 ms; [CKSEL=0101 SUT=01]"/>
+      <entry val="37" txt="PLL/4; PLLin: Ext. CK; SUT: 16KCK/14CK+4 ms; [CKSEL=0101 SUT=10]"/>
+      <entry val="53" txt="PLL/4; PLLin: Ext. CK; SUT: 16KCK/14CK+64 ms; [CKSEL=0101 SUT=11]"/>
+      <entry val="4" txt="PLL/4; PLLin: XOSC; SUT: 1KCK/14CK+0 ms; [CKSEL=0100 SUT=00]"/>
+      <entry val="20" txt="PLL/4; PLLin: XOSC; SUT: 1KCK/14CK+4 ms; [CKSEL=0100 SUT=01]"/>
+      <entry val="36" txt="PLL/4; PLLin: XOSC; SUT: 1KCK/14CK+64 ms; [CKSEL=0100 SUT=10]"/>
+      <entry val="52" txt="PLL/4; PLLin: XOSC; SUT: 16KCK/14CK+0 ms; [CKSEL=0100 SUT=11]"/>
+      <entry val="6" txt="RC 1 MHz; SUT: 1KCK/14CK+0 ms; [CKSEL=0110 SUT=00]"/>
+      <entry val="22" txt="RC 1 MHz; SUT: 1KCK/14CK+4.1 ms; [CKSEL=0110 SUT=01]"/>
+      <entry val="38" txt="RC 1 MHz; SUT: 1KCK/14CK+65 ms;  [CKSEL=0110 SUT=10]"/>
+    </option4>
+    <option5 bitmask="1148206584" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PE0 as I/O pin)" enum=""/>
+    <option7 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
+    <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option9 bitmask="16" offset="1" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
+    <option10 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option11 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
+      <entry val="3" txt="Boot Flash size=128 words Boot address=$0F80"/>
+      <entry val="2" txt="Boot Flash size=256 words Boot address=$0F00"/>
+      <entry val="1" txt="Boot Flash size=512 words Boot address=$0E00"/>
+      <entry val="0" txt="Boot Flash size=1024 words Boot address=$0C00"/>
+    </option11>
+    <option12 bitmask="1" offset="1" name="BOOTRST" desc="Select Reset Vector" enum=""/>
+    <option13 bitmask="1148206584" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option14 bitmask="128" offset="2" name="PSC2RB" desc="PSC2 Reset Behavior" enum=""/>
+    <option15 bitmask="64" offset="2" name="PSC2RBA" desc="PSC2 Reset Behavior for 22 and 23" enum=""/>
+    <option16 bitmask="32" offset="2" name="PSC0RB" desc="PSC0 Reset Behavior" enum=""/>
+    <option17 bitmask="16" offset="2" name="PSCRV" desc="PSC Reset Value" enum=""/>
+    <option18 bitmask="8" offset="2" name="PSCINRB" desc="PSC2 and PSC0 input Reset Behavior" enum=""/>
+    <option19 bitmask="7" offset="2" name="BODLEVEL" desc="Brown-out Detector Trigger Level" enum="list">
+      <entry val="7" txt="Brown-out detection disabled"/>
+      <entry val="6" txt="Brown-out detection at VCC=4.5 V"/>
+      <entry val="5" txt="Brown-out detection at VCC=2.7 V"/>
+      <entry val="4" txt="Brown-out detection at VCC=4.3 V"/>
+      <entry val="3" txt="Brown-out detection at VCC=4.4 V"/>
+      <entry val="2" txt="Brown-out detection at VCC=4.2 V"/>
+      <entry val="1" txt="Brown-out detection at VCC=2.8 V"/>
+      <entry val="0" txt="Brown-out detection at VCC=2.6 V"/>
+    </option19>
+  </settings>
+  <warnings>
+    <case1 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case2 byte="1" mask="128" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
+    <case3 byte="1" mask="64" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
+  </warnings>
+</Device>

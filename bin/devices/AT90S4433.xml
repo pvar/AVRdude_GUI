@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="AT90S4433" speed="8 MHz" flash="4.0 KB" sram="128 Bytes" eeprom="256 Bytes" xml_name="AT90S4433.xml" xml_ver="217" has_eeprom="yes"/>
+  <defaults lfuse="255" hfuse="255" efuse="255"/>
+  <settings>
+    <fusebytes count="1"/>
+    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option3 bitmask="8" offset="0" name="BODEN" desc="Brown-out Detection Enabled" enum=""/>
+    <option4 bitmask="16" offset="0" name="BODLEVEL" desc="Brown-out Detection Level" enum="list">
+      <entry val="1" txt="Brown-out at VCC=2.7V"/>
+      <entry val="0" txt="Brown-out at VCC=4.0V"/>
+    </option4>
+    <option5 bitmask="7" offset="0" name="CKSEL:SUT" desc="Clock Select : Start-up time" enum="list">
+      <entry val="0" txt="Ext Clock; slowly rising power"/>
+      <entry val="1" txt="Ext Clock; BOD Enabled or power-on reset"/>
+      <entry val="2" txt="Crystal Osc"/>
+      <entry val="3" txt="Crystal Osc; fast rising power"/>
+      <entry val="4" txt="Crystal Osc; BOD Enabled or power-on reset"/>
+      <entry val="5" txt="Ceramic Resonator"/>
+      <entry val="6" txt="Ceramic Resonator; fast rising power"/>
+      <entry val="7" txt="Ceramic Resonator; BOD Enabled or power-on reset"/>
+    </option5>
+  </settings>
+  <warnings>
+    <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case2 byte="0" mask="8" result="0" message="Unless target power is controlled by STK500, power will have to cycled manually for BODEN programming to take effect!"/>
+  </warnings>
+</Device>

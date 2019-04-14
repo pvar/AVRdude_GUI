@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATtiny13A" speed="16 MHz" flash="1.0 KB" sram="64 Bytes" eeprom="64 Bytes" xml_name="ATtiny13A.xml" xml_ver="1" has_eeprom="yes"/>
+  <defaults lfuse="106" hfuse="255" efuse="255"/>
+  <settings>
+    <fusebytes count="2"/>
+    <option1 bitmask="1147721352" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="128" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option3 bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option4 bitmask="32" offset="0" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
+    <option5 bitmask="16" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
+    <option6 bitmask="15" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+      <entry val="0" txt="Ext. Clock; Start-up time: 14 CK + 0 ms"/>
+      <entry val="4" txt="Ext. Clock; Start-up time: 14 CK + 4 ms"/>
+      <entry val="8" txt="Ext. Clock; Start-up time: 14 CK + 64 ms"/>
+      <entry val="1" txt="Int. RC Osc. 4.8 MHz; Start-up time: 14 CK + 0 ms"/>
+      <entry val="5" txt="Int. RC Osc. 4.8 MHz; Start-up time: 14 CK + 4 ms"/>
+      <entry val="9" txt="Int. RC Osc. 4.8 MHz; Start-up time: 14 CK + 64 ms"/>
+      <entry val="2" txt="Int. RC Osc. 9.6 MHz; Start-up time: 14 CK + 0 ms"/>
+      <entry val="6" txt="Int. RC Osc. 9.6 MHz; Start-up time: 14 CK + 4 ms"/>
+      <entry val="10" txt="Int. RC Osc. 9.6 MHz; Start-up time: 14 CK + 64 ms"/>
+      <entry val="3" txt="Int. RC Osc. 128 kHz; Start-up time: 14 CK + 0 ms"/>
+      <entry val="7" txt="Int. RC Osc. 128 kHz; Start-up time: 14 CK + 4 ms"/>
+      <entry val="11" txt="Int. RC Osc. 128 kHz; Start-up time: 14 CK + 64 ms"/>
+    </option6>
+    <option7 bitmask="1147721352" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option8 bitmask="16" offset="1" name="SELFPRGEN" desc="Self Programming enable" enum=""/>
+    <option9 bitmask="8" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
+    <option10 bitmask="6" offset="1" name="BODLEVEL" desc="Enable BOD and select level" enum="list">
+      <entry val="0" txt="Brown-out detection at VCC=4.3 V"/>
+      <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
+      <entry val="2" txt="Brown-out detection at VCC=1.8 V"/>
+      <entry val="3" txt="Brown-out detection disabled"/>
+    </option10>
+    <option11 bitmask="1" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PB5 as i/o pin)" enum=""/>
+  </settings>
+  <warnings>
+    <case1 byte="0" mask="128" result="128" message="These fuse settings will disable the ISP interface!"/>
+    <case2 byte="0" mask="3" result="3" message=" When selecting Int RC Osc 128kHz, be sure to not divide the clock using the CLKPR register with more than 16 times. Dividing the clock with 32 times or more when using the Int RC Osc 128kHz willl make the ISP interface inaccessible on STK500/AVRISP!"/>
+    <case3 byte="1" mask="1" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
+    <case4 byte="1" mask="8" result="0" message="These fuse settings will disable the ISP interface!"/>
+  </warnings>
+</Device>

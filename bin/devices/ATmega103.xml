@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATmega103" speed="6 MHz" flash="128.0 KB" sram="3.9 KB" eeprom="4.0 KB" xml_name="ATmega103.xml" xml_ver="236" has_eeprom="yes"/>
+  <defaults lfuse="193" hfuse="255" efuse="255"/>
+  <settings>
+    <fusebytes count="1"/>
+    <option1 bitmask="1144917192" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="32" offset="0" name="SUT1" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option3 bitmask="8" offset="0" name="CKSEL3" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option4 bitmask="3" offset="0" name="CKSEL" desc="Select Clock Source" enum="list">
+      <entry val="0" txt="Start-up time=5 CPU cycles"/>
+      <entry val="1" txt="Start-up time=0.5 ms"/>
+      <entry val="2" txt="Start-up time=4.0 ms"/>
+      <entry val="3" txt="Start-up time=16.0 ms"/>
+    </option4>
+  </settings>
+  <warnings>
+    <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+  </warnings>
+</Device>

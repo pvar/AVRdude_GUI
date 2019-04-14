@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATmega6490A" speed="16 MHz" flash="64.0 KB" sram="4.0 KB" eeprom="2.0 KB" xml_name="ATmega6490A.xml" xml_ver="1" has_eeprom="yes"/>
+  <defaults lfuse="98" hfuse="153" efuse="255"/>
+  <settings>
+    <fusebytes count="3"/>
+    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
+    <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTE7" enum=""/>
+    <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+      <entry val="0" txt="Ext. Clock; Start-up time: 6 CK + 0 ms"/>
+      <entry val="16" txt="Ext. Clock; Start-up time: 6 CK + 4.1 ms"/>
+      <entry val="32" txt="Ext. Clock; Start-up time: 6 CK + 65 ms"/>
+      <entry val="2" txt="Int. RC Osc.; Start-up time: 6 CK + 0 ms"/>
+      <entry val="18" txt="Int. RC Osc.; Start-up time: 6 CK + 4.1 ms"/>
+      <entry val="34" txt="Int. RC Osc.; Start-up time: 6 CK + 65 ms"/>
+      <entry val="7" txt="Ext. Low-Freq. Crystal; Start-up time: 32K CK + 0 ms"/>
+      <entry val="23" txt="Ext. Low-Freq. Crystal; Start-up time: 32K CK + 4.1 ms"/>
+      <entry val="39" txt="Ext. Low-Freq. Crystal; Start-up time: 32K CK + 65 ms"/>
+      <entry val="6" txt="Ext. Low-Freq. Crystal; Start-up time: 1K CK + 0 ms"/>
+      <entry val="22" txt="Ext. Low-Freq. Crystal; Start-up time: 1K CK + 4.1 ms"/>
+      <entry val="38" txt="Ext. Low-Freq. Crystal; Start-up time: 1K CK + 65 ms"/>
+      <entry val="8" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time: 258 CK + 4.1 ms"/>
+      <entry val="24" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time: 258 CK + 65 ms"/>
+      <entry val="40" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time: 1K CK + 0 ms"/>
+      <entry val="56" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time: 1K CK + 4.1 ms"/>
+      <entry val="9" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time: 1K CK + 65 ms"/>
+      <entry val="25" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time: 16K CK + 0 ms"/>
+      <entry val="41" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time: 16K CK + 4.1 ms"/>
+      <entry val="57" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time: 16K CK + 65 ms"/>
+      <entry val="10" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time: 258 CK + 4.1 ms"/>
+      <entry val="26" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time: 258 CK + 65 ms"/>
+      <entry val="42" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time: 1K CK + 0 ms"/>
+      <entry val="58" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time: 1K CK + 4.1 ms"/>
+      <entry val="11" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time: 1K CK + 65 ms"/>
+      <entry val="27" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time: 16K CK + 0 ms"/>
+      <entry val="43" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time: 16K CK + 4.1 ms"/>
+      <entry val="59" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time: 16K CK + 65 ms"/>
+      <entry val="12" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time: 258 CK + 4.1 ms"/>
+      <entry val="28" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time: 258 CK + 65 ms"/>
+      <entry val="44" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time: 1K CK + 0 ms"/>
+      <entry val="60" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time: 1K CK + 4.1 ms"/>
+      <entry val="13" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time: 1K CK + 65 ms"/>
+      <entry val="29" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time: 16K CK + 0 ms"/>
+      <entry val="45" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time: 16K CK + 4.1 ms"/>
+      <entry val="61" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time: 16K CK + 65 ms"/>
+      <entry val="14" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 258 CK + 4.1 ms"/>
+      <entry val="30" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 258 CK + 65 ms"/>
+      <entry val="46" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 1K CK + 0 ms"/>
+      <entry val="62" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 1K CK + 4.1 ms"/>
+      <entry val="15" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 1K CK + 65 ms"/>
+      <entry val="31" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 16K CK + 0 ms"/>
+      <entry val="47" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 16K CK + 4.1 ms"/>
+      <entry val="63" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 16K CK + 65 ms"/>
+    </option4>
+    <option5 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option6 bitmask="128" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
+    <option7 bitmask="64" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
+    <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enable" enum=""/>
+    <option9 bitmask="16" offset="1" name="WDTON" desc="Watchdog timer always on" enum=""/>
+    <option10 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option11 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
+      <entry val="3" txt="Boot Flash size=512 words Boot address=$7E00"/>
+      <entry val="2" txt="Boot Flash size=1024 words Boot address=$7C00"/>
+      <entry val="1" txt="Boot Flash size=2048 words Boot address=$7800"/>
+      <entry val="0" txt="Boot Flash size=4096 words Boot address=$7000"/>
+    </option11>
+    <option12 bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
+    <option13 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option14 bitmask="6" offset="2" name="BODLEVEL" desc="Brown-out Detector trigger level" enum="list">
+      <entry val="3" txt="Brown-out detection disabled"/>
+      <entry val="2" txt="Brown-out detection at VCC=1.8 V"/>
+      <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
+      <entry val="0" txt="Brown-out detection at VCC=4.3 V"/>
+    </option14>
+    <option15 bitmask="1" offset="2" name="RSTDISBL" desc="External Reset Disable" enum=""/>
+  </settings>
+  <warnings>
+    <case1 byte="1" mask="64" result="64" message="These fuse settings will disable the JTAG interface!"/>
+    <case2 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case3 byte="2" mask="1" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
+  </warnings>
+</Device>

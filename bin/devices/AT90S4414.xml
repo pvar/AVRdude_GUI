@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="AT90S4414" speed="8 MHz" flash="4.0 KB" sram="256 Bytes" eeprom="256 Bytes" xml_name="AT90S4414.xml" xml_ver="205" has_eeprom="yes"/>
+  <defaults lfuse="255" hfuse="255" efuse="255"/>
+  <settings>
+    <fusebytes count="1"/>
+    <option1 bitmask="1147252888" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option3 bitmask="1" offset="0" name="FSTRT" desc="Short start-up time selected" enum=""/>
+  </settings>
+  <warnings>
+    <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+  </warnings>
+</Device>

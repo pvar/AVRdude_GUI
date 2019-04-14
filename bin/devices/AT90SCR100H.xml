@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="AT90SCR100H" speed="20 MHz" flash="64.0 KB" sram="4.0 KB" eeprom="4.0 KB" xml_name="AT90SCR100H.xml" xml_ver="1" has_eeprom="yes"/>
+  <defaults lfuse="239" hfuse="153" efuse="255"/>
+  <settings>
+    <fusebytes count="3"/>
+    <option1 bitmask="33" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTB1" enum=""/>
+    <option3 bitmask="57" offset="0" name="SUTCKSEL" desc="Select Startup Time and Clock Source" enum="list">
+      <entry val="2" txt="[CKSEL=10 SUT=00] Ceramic res., fast rising power, 14 CK + 4.1 ms"/>
+      <entry val="6" txt="[CKSEL=10 SUT=01] Ceramic res., slowly rising power, 14 CK + 65 ms"/>
+      <entry val="10" txt="[CKSEL=10 SUT=10] Ceramic res., BOD enabled, 14 CK"/>
+      <entry val="14" txt="[CKSEL=10 SUT=11] Ceramic res., fast rising power, 14 CK + 4.1 ms"/>
+      <entry val="3" txt="[CKSEL=11 SUT=00] Ceramic res., slowly rising power, 14 CK + 65 ms"/>
+      <entry val="7" txt="[CKSEL=11 SUT=01] Crystal Osc., BOD enabled, 14 CK"/>
+      <entry val="11" txt="[CKSEL=11 SUT=10] Crystal Osc., fast rising power, 14 CK + 4.1 ms"/>
+      <entry val="15" txt="[CKSEL=11 SUT=11] Crystal Osc., slowly rising power, 14 CK + 65 ms"/>
+      <entry val="0" txt="[CKSEL=00 SUT=00] Ext. Clock, BOD enabled, 14 CK"/>
+      <entry val="4" txt="[CKSEL=00 SUT=01] Ext. Clock, fast rising power, 14 CK + 4.1 ms"/>
+      <entry val="8" txt="[CKSEL=00 SUT=10] Ext. Clock, slowly rising power, 14 CK + 65 ms"/>
+      <entry val="1" txt="[CKSEL=01 SUT=00] Ext. Clock, BOD enabled, 14 CK"/>
+      <entry val="5" txt="[CKSEL=01 SUT=01] Ext. Clock, fast rising power, 14 CK + 4.1 ms"/>
+      <entry val="9" txt="[CKSEL=01 SUT=10] Ext. Clock, slowly rising power, 14 CK + 65 ms"/>
+    </option3>
+    <option4 bitmask="33" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="128" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
+    <option6 bitmask="64" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
+    <option7 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option8 bitmask="16" offset="1" name="WDTON" desc="Watchdog timer always on" enum=""/>
+    <option9 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option10 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
+      <entry val="3" txt="Boot Flash size=512 words Boot start address=$7E00"/>
+      <entry val="2" txt="Boot Flash size=1024 words Boot address=$7C00"/>
+      <entry val="1" txt="Boot Flash size=2048 words Boot address=$7800"/>
+      <entry val="0" txt="Boot Flash size=4096 words Boot address=$7000"/>
+    </option10>
+    <option11 bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
+    <option12 bitmask="33" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option13 bitmask="1" offset="2" name="BODENABLE" desc="Brown-out Detector Enable Control" enum="list">
+      <entry val="1" txt="Brown-out detection enabled"/>
+      <entry val="0" txt="Brown-out detection disabled"/>
+    </option13>
+  </settings>
+  <warnings>
+    <case1 byte="1" mask="64" result="64" message="These fuse settings will disable the JTAG interface!"/>
+    <case2 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+  </warnings>
+</Device>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATtiny15" speed="1.6 MHz" flash="1.0 KB" sram="0 Bytes" eeprom="64 Bytes" xml_name="ATtiny15.xml" xml_ver="216" has_eeprom="yes"/>
+  <defaults lfuse="255" hfuse="255" efuse="255"/>
+  <settings>
+    <fusebytes count="1"/>
+    <option1 bitmask="1149121488" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown-out Detection Level" enum="list">
+      <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
+      <entry val="0" txt="Brown-out detection at VCC=4.0 V"/>
+    </option2>
+    <option3 bitmask="64" offset="0" name="BODEN" desc="Brown-out Detection Enabled" enum=""/>
+    <option4 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option5 bitmask="16" offset="0" name="RSTDISBL" desc="External reset function of PB5 disabled" enum=""/>
+    <option6 bitmask="3" offset="0" name="CKSEL" desc="Clock Select" enum="list">
+      <entry val="3" txt="Very quickly rising power"/>
+      <entry val="2" txt="Quickly rising power"/>
+      <entry val="1" txt="Slowly rising power"/>
+      <entry val="0" txt="Slowly rising power"/>
+    </option6>
+  </settings>
+  <warnings>
+    <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case2 byte="0" mask="16" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
+  </warnings>
+</Device>

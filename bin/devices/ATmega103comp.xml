@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATmega103comp" speed="6 MHz" flash="128.0 KB" sram="3.9 KB" eeprom="4.0 KB" xml_name="ATmega103comp.xml" xml_ver="190" has_eeprom="yes"/>
+  <defaults lfuse="193" hfuse="153" efuse="253"/>
+  <settings>
+    <fusebytes count="3"/>
+    <option1 bitmask="1145459224" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
+      <entry val="0" txt="Brown-out detection level at VCC=4.0 V"/>
+      <entry val="1" txt="Brown-out detection level at VCC=2.7 V"/>
+    </option2>
+    <option3 bitmask="64" offset="0" name="BODEN" desc="Brown-out detection enabled" enum=""/>
+    <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+      <entry val="0" txt="Ext. Clock; Start-up time: 6 CK + 0 ms"/>
+      <entry val="16" txt="Ext. Clock; Start-up time: 6 CK + 4 ms"/>
+      <entry val="32" txt="Ext. Clock; Start-up time: 6 CK + 64 ms"/>
+      <entry val="1" txt="Int. RC Osc. 1 MHz; Start-up time: 6 CK + 0 ms"/>
+      <entry val="17" txt="Int. RC Osc. 1 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="33" txt="Int. RC Osc. 1 MHz; Start-up time: 6 CK + 64 ms"/>
+      <entry val="2" txt="Int. RC Osc. 2 MHz; Start-up time: 6 CK + 0 ms"/>
+      <entry val="18" txt="Int. RC Osc. 2 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="34" txt="Int. RC Osc. 2 MHz; Start-up time: 6 CK + 64 ms"/>
+      <entry val="3" txt="Int. RC Osc. 4 MHz; Start-up time: 6 CK + 0 ms"/>
+      <entry val="19" txt="Int. RC Osc. 4 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="35" txt="Int. RC Osc. 4 MHz; Start-up time: 6 CK + 64 ms"/>
+      <entry val="4" txt="Int. RC Osc. 8 MHz; Start-up time: 6 CK + 0 ms"/>
+      <entry val="20" txt="Int. RC Osc. 8 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="36" txt="Int. RC Osc. 8 MHz; Start-up time: 6 CK + 64 ms"/>
+      <entry val="5" txt="Ext. RC Osc.         -  0.9 MHz; Start-up time: 18 CK + 0 ms"/>
+      <entry val="21" txt="Ext. RC Osc.         -  0.9 MHz; Start-up time: 18 CK + 4 ms"/>
+      <entry val="37" txt="Ext. RC Osc.         -  0.9 MHz; Start-up time: 18 CK + 64 ms"/>
+      <entry val="53" txt="Ext. RC Osc.         -  0.9 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="6" txt="Ext. RC Osc. 0.9 MHz -  3.0 MHz; Start-up time: 18 CK + 0 ms"/>
+      <entry val="22" txt="Ext. RC Osc. 0.9 MHz -  3.0 MHz; Start-up time: 18 CK + 4 ms"/>
+      <entry val="38" txt="Ext. RC Osc. 0.9 MHz -  3.0 MHz; Start-up time: 18 CK + 64 ms"/>
+      <entry val="54" txt="Ext. RC Osc. 0.9 MHz -  3.0 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="7" txt="Ext. RC Osc. 3.0 MHz -  8.0 MHz; Start-up time: 18 CK + 0 ms"/>
+      <entry val="23" txt="Ext. RC Osc. 3.0 MHz -  8.0 MHz; Start-up time: 18 CK + 4 ms"/>
+      <entry val="39" txt="Ext. RC Osc. 3.0 MHz -  8.0 MHz; Start-up time: 18 CK + 64 ms"/>
+      <entry val="55" txt="Ext. RC Osc. 3.0 MHz -  8.0 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="8" txt="Ext. RC Osc. 8.0 MHz - 12.0 MHz; Start-up time: 18 CK + 0 ms"/>
+      <entry val="24" txt="Ext. RC Osc. 8.0 MHz - 12.0 MHz; Start-up time: 18 CK + 4 ms"/>
+      <entry val="40" txt="Ext. RC Osc. 8.0 MHz - 12.0 MHz; Start-up time: 18 CK + 64 ms"/>
+      <entry val="56" txt="Ext. RC Osc. 8.0 MHz - 12.0 MHz; Start-up time: 6 CK + 4 ms"/>
+      <entry val="9" txt="Ext. Low-Freq. Crystal; Start-up time: 1K CK + 4 ms"/>
+      <entry val="25" txt="Ext. Low-Freq. Crystal; Start-up time: 1K CK + 64 ms"/>
+      <entry val="41" txt="Ext. Low-Freq. Crystal; Start-up time: 32K CK + 64 ms"/>
+      <entry val="10" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 258 CK + 4 ms"/>
+      <entry val="26" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 258 CK + 64 ms"/>
+      <entry val="42" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 1K CK + 0 ms"/>
+      <entry val="58" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 1K CK + 4 ms"/>
+      <entry val="11" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 1K CK + 64 ms"/>
+      <entry val="27" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 16K CK + 0 ms"/>
+      <entry val="43" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 16K CK + 4 ms"/>
+      <entry val="59" txt="Ext. Crystal/Resonator Low Freq.; Start-up time: 16K CK + 64 ms"/>
+      <entry val="12" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 258 CK + 4 ms"/>
+      <entry val="28" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 258 CK + 64 ms"/>
+      <entry val="44" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 1K CK + 0 ms"/>
+      <entry val="60" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 1K CK + 4 ms"/>
+      <entry val="13" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 1K CK + 64 ms"/>
+      <entry val="29" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 16K CK + 0 ms"/>
+      <entry val="45" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 16K CK + 4 ms"/>
+      <entry val="61" txt="Ext. Crystal/Resonator Medium Freq.; Start-up time: 16K CK + 64 ms"/>
+      <entry val="14" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 258 CK + 4 ms"/>
+      <entry val="30" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 258 CK + 64 ms"/>
+      <entry val="46" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 1K CK + 0 ms"/>
+      <entry val="62" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 1K CK + 4 ms"/>
+      <entry val="15" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 1K CK + 64 ms"/>
+      <entry val="31" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 0 ms"/>
+      <entry val="47" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 4 ms"/>
+      <entry val="63" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 64 ms"/>
+    </option4>
+    <option5 bitmask="1145459224" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option6 bitmask="128" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
+    <option7 bitmask="64" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
+    <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option9 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option10 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
+      <entry val="3" txt="Boot Flash size=512 words start address=$FE00"/>
+      <entry val="2" txt="Boot Flash size=1024 words start address=$FC00"/>
+      <entry val="1" txt="Boot Flashsize=2048 words start address=$F800"/>
+      <entry val="0" txt="Boot Flash size=4096 words start address=$F000"/>
+    </option10>
+    <option11 bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
+    <option12 bitmask="16" offset="1" name="CKOPT" desc="CKOPT fuse (operation dependent of CKSEL fuses)" enum=""/>
+    <option13 bitmask="1145459224" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option14 bitmask="2" offset="2" name="M103C" desc="ATmega103 Compatibility Mode" enum=""/>
+    <option15 bitmask="1" offset="2" name="WDTON" desc="Watchdog Timer always on" enum=""/>
+  </settings>
+  <warnings/>
+</Device>

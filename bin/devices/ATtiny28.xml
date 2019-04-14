@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATtiny28" speed="4 MHz" flash="2.0 KB" sram="0 Bytes" eeprom="0 Bytes" xml_name="ATtiny28.xml" xml_ver="1" has_eeprom="no"/>
+  <defaults lfuse="255" hfuse="255" efuse="255"/>
+  <settings>
+    <fusebytes count="1"/>
+    <option1 bitmask="1147176624" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="16" offset="0" name="INTCAP" desc="Internal load capacitors between XTAL1/XTAL2 and GND" enum=""/>
+    <option3 bitmask="15" offset="0" name="CKSEL" desc="Clock Select" enum="list">
+      <entry val="15" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="14" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="13" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="12" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="11" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="10" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="9" txt="External Low-Frequency Crystal"/>
+      <entry val="8" txt="External Low-Frequency Crystal"/>
+      <entry val="7" txt="External RC Ocsillator"/>
+      <entry val="6" txt="External RC Ocsillator"/>
+      <entry val="5" txt="External RC Ocsillator"/>
+      <entry val="4" txt="Internal RC Ocsillator"/>
+      <entry val="3" txt="Internal RC Ocsillator"/>
+      <entry val="2" txt="Internal RC Ocsillator"/>
+      <entry val="1" txt="External Clock"/>
+      <entry val="0" txt="External Clock"/>
+    </option3>
+  </settings>
+  <warnings/>
+</Device>

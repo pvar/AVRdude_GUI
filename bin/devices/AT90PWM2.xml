@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="AT90PWM2" speed="8 MHz" flash="8.0 KB" sram="512 Bytes" eeprom="512 Bytes" xml_name="AT90PWM2.xml" xml_ver="168" has_eeprom="yes"/>
+  <defaults lfuse="65" hfuse="223" efuse="249"/>
+  <settings>
+    <fusebytes count="3"/>
+    <option1 bitmask="1144573224" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
+    <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTB0" enum=""/>
+    <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+      <entry val="0" txt="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 0 ms"/>
+      <entry val="16" txt="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 4.1 ms"/>
+      <entry val="32" txt="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 65 ms"/>
+      <entry val="2" txt="Int. RC Osc. 8 MHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 0 ms"/>
+      <entry val="18" txt="Int. RC Osc. 8 MHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 4.1 ms"/>
+      <entry val="34" txt="Int. RC Osc. 8 MHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 65 ms"/>
+      <entry val="8" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 4.1 ms"/>
+      <entry val="24" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 65 ms"/>
+      <entry val="40" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 0 ms"/>
+      <entry val="56" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 4.1 ms"/>
+      <entry val="9" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 65 ms"/>
+      <entry val="25" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms"/>
+      <entry val="41" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms"/>
+      <entry val="57" txt="Ext. Crystal Osc. 0.4-0.9 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms"/>
+      <entry val="10" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 4.1 ms"/>
+      <entry val="26" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 65 ms"/>
+      <entry val="42" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 0 ms"/>
+      <entry val="58" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 4.1 ms"/>
+      <entry val="11" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 65 ms"/>
+      <entry val="27" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms"/>
+      <entry val="43" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms"/>
+      <entry val="59" txt="Ext. Crystal Osc. 0.9-3.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms"/>
+      <entry val="12" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 4.1 ms"/>
+      <entry val="28" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 65 ms"/>
+      <entry val="44" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 0 ms"/>
+      <entry val="60" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 4.1 ms"/>
+      <entry val="13" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 65 ms"/>
+      <entry val="29" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms"/>
+      <entry val="45" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms"/>
+      <entry val="61" txt="Ext. Crystal Osc. 3.0-8.0 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms"/>
+      <entry val="14" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 4.1 ms"/>
+      <entry val="30" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 258 CK/14 CK + 65 ms"/>
+      <entry val="46" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 0 ms"/>
+      <entry val="62" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 4.1 ms"/>
+      <entry val="15" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 1K CK /14 CK + 65 ms"/>
+      <entry val="31" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms"/>
+      <entry val="47" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms"/>
+      <entry val="63" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms"/>
+      <entry val="3" txt="PLL clock 16 MHz; Start-up time PWRDWN/RESET: 1K CK/14 CK + 0 ms"/>
+      <entry val="19" txt="PLL clock 16 MHz; Start-up time PWRDWN/RESET: 1K CK/14 CK + 4.1 ms"/>
+      <entry val="35" txt="PLL clock 16 MHz; Start-up time PWRDWN/RESET: 1K CK/14 CK + 65 ms"/>
+      <entry val="51" txt="PLL clock 16 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms"/>
+    </option4>
+    <option5 bitmask="1144573224" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC6 as i/o pin)" enum=""/>
+    <option7 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
+    <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option9 bitmask="16" offset="1" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
+    <option10 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option11 bitmask="7" offset="1" name="BODLEVEL" desc="Brown-out Detector Trigger Level" enum="list">
+      <entry val="7" txt="Brown-out detection disabled"/>
+      <entry val="6" txt="Brown-out detection at VCC=4.5 V"/>
+      <entry val="5" txt="Brown-out detection at VCC=2.7 V"/>
+      <entry val="4" txt="Brown-out detection at VCC=4.3 V"/>
+      <entry val="3" txt="Brown-out detection at VCC=4.4 V"/>
+      <entry val="2" txt="Brown-out detection at VCC=4.2 V"/>
+      <entry val="1" txt="Brown-out detection at VCC=2.8 V"/>
+      <entry val="0" txt="Brown-out detection at VCC=2.6 V"/>
+    </option11>
+    <option12 bitmask="1144573224" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option13 bitmask="128" offset="2" name="PSC2RB" desc="PSC2 Reset Behavior" enum=""/>
+    <option14 bitmask="64" offset="2" name="PSC1RB" desc="PSC1 Reset Behavior" enum=""/>
+    <option15 bitmask="32" offset="2" name="PSC0RB" desc="PSC0 Reset Behavior" enum=""/>
+    <option16 bitmask="16" offset="2" name="PSCRV" desc="PSCOUT Reset Value" enum=""/>
+    <option17 bitmask="6" offset="2" name="BOOTSZ" desc="Select Boot Size" enum="list">
+      <entry val="3" txt="Boot Flash size=128 words Boot address=$0F80"/>
+      <entry val="2" txt="Boot Flash size=256 words Boot address=$0F00"/>
+      <entry val="1" txt="Boot Flash size=512 words Boot address=$0E00"/>
+      <entry val="0" txt="Boot Flash size=1024 words Boot address=$0C00"/>
+    </option17>
+    <option18 bitmask="1" offset="2" name="BOOTRST" desc="Select Reset Vector" enum=""/>
+  </settings>
+  <warnings>
+    <case1 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case2 byte="1" mask="128" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
+    <case3 byte="1" mask="64" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
+    <case4 byte="2" mask="144" result="0" message="These fuse settings will make the Parallel interface inaccessible!"/>
+  </warnings>
+</Device>

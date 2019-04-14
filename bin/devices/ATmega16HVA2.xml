@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATmega16HVA2" speed="4 MHz" flash="16.0 KB" sram="1024 Bytes" eeprom="256 Bytes" xml_name="ATmega16HVA2.xml" xml_ver="1" has_eeprom="yes"/>
+  <defaults lfuse="223" hfuse="249" efuse="255"/>
+  <settings>
+    <fusebytes count="2"/>
+    <option1 bitmask="1146903880" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="128" offset="0" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
+    <option3 bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option4 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option5 bitmask="16" offset="0" name="DWEN" desc="Debug Wire enable" enum=""/>
+    <option6 bitmask="8" offset="0" name="SELFPRGEN" desc="Self Programming enable" enum=""/>
+    <option7 bitmask="7" offset="0" name="SUT" desc="Select start-up time" enum="list">
+      <entry val="0" txt="Start-up time 6 CK/14 CK + 4 ms"/>
+      <entry val="1" txt="Start-up time 6 CK/14 CK + 8 ms"/>
+      <entry val="2" txt="Start-up time 6 CK/14 CK + 16 ms"/>
+      <entry val="3" txt="Start-up time 6 CK/14 CK + 32 ms"/>
+      <entry val="4" txt="Start-up time 6 CK/14 CK + 64 ms"/>
+      <entry val="5" txt="Start-up time 6 CK/14 CK + 128 ms"/>
+      <entry val="6" txt="Start-up time 6 CK/14 CK + 256 ms"/>
+      <entry val="7" txt="Start-up time 6 CK/14 CK + 512 ms"/>
+    </option7>
+    <option8 bitmask="1146903880" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option9 bitmask="4" offset="1" name="COMPMODE" desc="Compatibility mode" enum=""/>
+    <option10 bitmask="3" offset="1" name="OSCSEL" desc="Select oscillator" enum="list">
+      <entry val="1" txt="Slow RC oscillator"/>
+      <entry val="2" txt="ULP RC oscillator"/>
+    </option10>
+  </settings>
+  <warnings>
+    <case1 byte="0" mask="32" result="0" message="These fuse settings will disable the ISP interface!"/>
+    <case2 byte="0" mask="16" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
+  </warnings>
+</Device>

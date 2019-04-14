@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Device xmlns="dudegui">
+  <metadata name="ATtiny12" speed="8 MHz" flash="1.0 KB" sram="0 Bytes" eeprom="64 Bytes" xml_name="ATtiny12.xml" xml_ver="213" has_eeprom="yes"/>
+  <defaults lfuse="255" hfuse="255" efuse="255"/>
+  <settings>
+    <fusebytes count="1"/>
+    <option1 bitmask="1148242688" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown-out Detection Level" enum="list">
+      <entry val="1" txt="Brown-out detection at VCC=1.8 V"/>
+      <entry val="0" txt="Brown-out detection at VCC=2.7 V"/>
+    </option2>
+    <option3 bitmask="64" offset="0" name="BODEN" desc="Brown-out Detection Enabled" enum=""/>
+    <option4 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option5 bitmask="16" offset="0" name="RSTDISBL" desc="External reset function of PB5 disabled" enum=""/>
+    <option6 bitmask="15" offset="0" name="CKSEL" desc="Clock Select" enum="list">
+      <entry val="15" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="14" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="13" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="12" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="11" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="10" txt="External Crystal / Ceramic Resonator"/>
+      <entry val="9" txt="External Low-Frequency Crystal"/>
+      <entry val="8" txt="External Low-Frequency Crystal"/>
+      <entry val="7" txt="External RC Ocsillator"/>
+      <entry val="6" txt="External RC Ocsillator"/>
+      <entry val="5" txt="External RC Ocsillator"/>
+      <entry val="4" txt="Internal RC Ocsillator"/>
+      <entry val="3" txt="Internal RC Ocsillator"/>
+      <entry val="2" txt="Internal RC Ocsillator"/>
+      <entry val="1" txt="External Clock"/>
+      <entry val="0" txt="External Clock"/>
+    </option6>
+  </settings>
+  <warnings>
+    <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case2 byte="0" mask="16" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
+  </warnings>
+</Device>
