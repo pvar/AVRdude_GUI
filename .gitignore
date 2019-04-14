@@ -1,4 +1,6 @@
 bin/dudegui
+bin/xml
+bin/atdf
 *~
 *.o
 *.pdf
