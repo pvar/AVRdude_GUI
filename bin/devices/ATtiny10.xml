@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATtiny10" speed="16 MHz" flash="1.0 KB" sram="32 Bytes" eeprom="0 Bytes" xml_name="ATtiny10.xml" xml_ver="1" has_eeprom="no"/>
+  <signature value="0x1E9003"/>
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  BYTE0" enum=""/>
+    <option1 bitmask="2019893351" offset="512" name="" desc="FUSE REGISTER:  BYTE0" enum=""/>
     <option2 bitmask="4" offset="0" name="CKOUT" desc="Output external clock" enum=""/>
     <option3 bitmask="2" offset="0" name="WDTON" desc="Watch dog timer always on" enum=""/>
     <option4 bitmask="1" offset="0" name="RSTDISBL" desc="Disable external reset" enum=""/>

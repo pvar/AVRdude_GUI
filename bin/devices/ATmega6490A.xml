@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATmega6490A" speed="16 MHz" flash="64.0 KB" sram="4.0 KB" eeprom="2.0 KB" xml_name="ATmega6490A.xml" xml_ver="1" has_eeprom="yes"/>
+  <signature value="0x1E9604"/>
   <defaults lfuse="98" hfuse="153" efuse="255"/>
   <settings>
     <fusebytes count="3"/>

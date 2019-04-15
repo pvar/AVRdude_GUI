@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATmega406" speed="1 MHz" flash="40.0 KB" sram="2.0 KB" eeprom="512 Bytes" xml_name="ATmega406.xml" xml_ver="202" has_eeprom="yes"/>
+  <signature value="0x1E9507"/>
   <defaults lfuse="205" hfuse="254" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="1146431768" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="172878792" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="WDTON" desc="Watchdog timer always on" enum=""/>
     <option3 bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
     <option4 bitmask="48" offset="0" name="BOOTSZ" desc="Select boot size" enum="list">
@@ -22,7 +23,7 @@
       <entry val="3" txt="Start-up time: 14 CK + 3.9 ms"/>
       <entry val="5" txt="Start-up time: 14 CK + 62.5 ms"/>
     </option6>
-    <option7 bitmask="1146431768" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option7 bitmask="172878792" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option8 bitmask="2" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
     <option9 bitmask="1" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
   </settings>

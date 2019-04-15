@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATtiny40" speed="12 MHz" flash="4.0 KB" sram="256 Bytes" eeprom="0 Bytes" xml_name="ATtiny40.xml" xml_ver="1" has_eeprom="no"/>
+  <signature value="0x1E920E"/>
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="5297" offset="512" name="" desc="FUSE REGISTER:  BYTE0" enum=""/>
+    <option1 bitmask="169781992" offset="512" name="" desc="FUSE REGISTER:  BYTE0" enum=""/>
     <option2 bitmask="112" offset="0" name="BODLEVEL" desc="Brown-out Detector trigger level" enum="list">
       <entry val="7" txt="Brown-out detection disabled; [BODLEVEL=111]"/>
       <entry val="6" txt="Brown-out detection at VCC=1.8 V"/>

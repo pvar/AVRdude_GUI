@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATtiny13" speed="16 MHz" flash="1.0 KB" sram="64 Bytes" eeprom="64 Bytes" xml_name="ATtiny13.xml" xml_ver="251" has_eeprom="yes"/>
+  <signature value="0x1E9007"/>
   <defaults lfuse="106" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="3" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="172579952" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
     <option3 bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
     <option4 bitmask="32" offset="0" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
@@ -23,7 +24,7 @@
       <entry val="7" txt="Int. RC Osc. 128 kHz; Start-up time: 14 CK + 4 ms"/>
       <entry val="11" txt="Int. RC Osc. 128 kHz; Start-up time: 14 CK + 64 ms"/>
     </option6>
-    <option7 bitmask="3" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option7 bitmask="172579952" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option8 bitmask="16" offset="1" name="SELFPRGEN" desc="Self Programming enable" enum=""/>
     <option9 bitmask="8" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
     <option10 bitmask="6" offset="1" name="BODLEVEL" desc="Enable BOD and select level" enum="list">

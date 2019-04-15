@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="AT90S4433" speed="8 MHz" flash="4.0 KB" sram="128 Bytes" eeprom="256 Bytes" xml_name="AT90S4433.xml" xml_ver="217" has_eeprom="yes"/>
+  <signature value="0x1E9203"/>
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>

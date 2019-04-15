@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATmega88PA" speed="20 MHz" flash="8.0 KB" sram="1024 Bytes" eeprom="512 Bytes" xml_name="ATmega88PA.xml" xml_ver="1" has_eeprom="yes"/>
+  <signature value="0x1E930F"/>
   <defaults lfuse="98" hfuse="223" efuse="249"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="1146222408" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
     <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTB0" enum=""/>
     <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
@@ -64,7 +65,7 @@
       <entry val="47" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms"/>
       <entry val="63" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms"/>
     </option4>
-    <option5 bitmask="1146222408" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC6 as i/o pin)]" enum=""/>
     <option7 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -76,7 +77,7 @@
       <entry val="6" txt="Brown-out detection at VCC=1.8 V"/>
       <entry val="7" txt="Brown-out detection disabled"/>
     </option11>
-    <option12 bitmask="1146222408" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option12 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
     <option13 bitmask="6" offset="2" name="BOOTSZ" desc="Select boot size" enum="list">
       <entry val="3" txt="Boot Flash size=128 words Boot address=$0F80"/>
       <entry val="2" txt="Boot Flash size=256 words Boot address=$0F00"/>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATmega8A" speed="16 MHz" flash="8.0 KB" sram="1024 Bytes" eeprom="512 Bytes" xml_name="ATmega8A.xml" xml_ver="1" has_eeprom="yes"/>
+  <signature value="0x1E9307"/>
   <defaults lfuse="193" hfuse="153" efuse="255"/>
   <settings>
     <fusebytes count="2"/>

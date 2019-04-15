@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="AT90USB1286" speed="16 MHz" flash="128.0 KB" sram="8.0 KB" eeprom="4.0 KB" xml_name="AT90USB1286.xml" xml_ver="41" has_eeprom="yes"/>
+  <signature value="0x1E9782"/>
   <defaults lfuse="65" hfuse="153" efuse="255"/>
   <settings>
     <fusebytes count="3"/>

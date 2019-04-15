@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATmega163" speed="8 MHz" flash="16.0 KB" sram="1024 Bytes" eeprom="512 Bytes" xml_name="ATmega163.xml" xml_ver="207" has_eeprom="yes"/>
+  <signature value="0x1E9402"/>
   <defaults lfuse="242" hfuse="249" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="1148513928" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="172196520" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
       <entry val="0" txt="Brown-out detection at VCC=4.0 V"/>
       <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
@@ -29,7 +30,7 @@
       <entry val="14" txt="Ceramic Resonator fast rising power"/>
       <entry val="15" txt="Ceramic Resonator BOD enabled"/>
     </option5>
-    <option6 bitmask="1148513928" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option6 bitmask="172196520" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option7 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
       <entry val="3" txt="Boot Flash size=128 words start address=$1F80"/>
       <entry val="2" txt="Boot Flash size=256 words start address=$1F00"/>

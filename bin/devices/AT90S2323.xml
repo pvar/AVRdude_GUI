@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="AT90S2323" speed="10 MHz" flash="2.0 KB" sram="128 Bytes" eeprom="128 Bytes" xml_name="AT90S2323.xml" xml_ver="209" has_eeprom="yes"/>
+  <signature value="0x1E9102"/>
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="1936942435" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="172649456" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
     <option3 bitmask="1" offset="0" name="FSTRT" desc="Short start-up time enabled" enum=""/>
   </settings>

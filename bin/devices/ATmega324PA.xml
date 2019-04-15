@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATmega324PA" speed="20 MHz" flash="32.0 KB" sram="2.0 KB" eeprom="1024 Bytes" xml_name="ATmega324PA.xml" xml_ver="1" has_eeprom="yes"/>
+  <signature value="0x1E9511"/>
   <defaults lfuse="66" hfuse="153" efuse="255"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="1147454912" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="173212352" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
     <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTB1" enum=""/>
     <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
@@ -64,7 +65,7 @@
       <entry val="47" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 16K CK + 4.1 ms"/>
       <entry val="63" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 16K CK + 65 ms"/>
     </option4>
-    <option5 bitmask="1147454912" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="173212352" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
     <option7 bitmask="64" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -77,7 +78,7 @@
       <entry val="0" txt="Boot Flash size=2048 words start address=$3800"/>
     </option11>
     <option12 bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
-    <option13 bitmask="1147454912" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option13 bitmask="173212352" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
     <option14 bitmask="7" offset="2" name="BODLEVEL" desc="Brown-out Detector trigger level" enum="list">
       <entry val="7" txt="Brown-out detection disabled"/>
       <entry val="6" txt="Brown-out detection at VCC=1.8 V"/>

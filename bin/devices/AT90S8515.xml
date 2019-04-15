@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="AT90S8515" speed="8 MHz" flash="8.0 KB" sram="512 Bytes" eeprom="512 Bytes" xml_name="AT90S8515.xml" xml_ver="222" has_eeprom="yes"/>
+  <signature value="0x1E9301"/>
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>

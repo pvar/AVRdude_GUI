@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATmega64C1" speed="8 MHz" flash="64.0 KB" sram="4.0 KB" eeprom="2.0 KB" xml_name="ATmega64C1.xml" xml_ver="1" has_eeprom="yes"/>
+  <signature value="0x1E9686"/>
   <defaults lfuse="65" hfuse="217" efuse="249"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="1148091544" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="173056856" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
     <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTD1" enum=""/>
     <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
@@ -62,7 +63,7 @@
       <entry val="36" txt="Ext. Crystal Osc.; PLL input: Ext. Crystal Osc.; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4 ms"/>
       <entry val="52" txt="Ext. Crystal Osc.; PLL input: Ext. Crystal Osc.; Start-up time PWRDWN/RESET: 16K CK/14 CK + 64 ms"/>
     </option4>
-    <option5 bitmask="1148091544" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="173056856" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC6 as i/o pin)" enum=""/>
     <option7 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -75,7 +76,7 @@
       <entry val="0" txt="Boot Flash size=4096 words Boot address=$7000"/>
     </option11>
     <option12 bitmask="1" offset="1" name="BOOTRST" desc="Select Reset Vector" enum=""/>
-    <option13 bitmask="1148091544" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option13 bitmask="173056856" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
     <option14 bitmask="32" offset="2" name="PSCRB" desc="PSC Reset Behavior" enum=""/>
     <option15 bitmask="16" offset="2" name="PSCRVA" desc="PSCOUTnA Reset Value" enum=""/>
     <option16 bitmask="8" offset="2" name="PSCRVB" desc="PSC0UTnB Reset Value" enum=""/>

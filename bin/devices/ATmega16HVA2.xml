@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATmega16HVA2" speed="4 MHz" flash="16.0 KB" sram="1024 Bytes" eeprom="256 Bytes" xml_name="ATmega16HVA2.xml" xml_ver="1" has_eeprom="yes"/>
+  <signature value="0x1E940E"/>
   <defaults lfuse="223" hfuse="249" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="1146903880" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="170798104" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
     <option3 bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
     <option4 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -20,7 +21,7 @@
       <entry val="6" txt="Start-up time 6 CK/14 CK + 256 ms"/>
       <entry val="7" txt="Start-up time 6 CK/14 CK + 512 ms"/>
     </option7>
-    <option8 bitmask="1146903880" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option8 bitmask="170798104" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option9 bitmask="4" offset="1" name="COMPMODE" desc="Compatibility mode" enum=""/>
     <option10 bitmask="3" offset="1" name="OSCSEL" desc="Select oscillator" enum="list">
       <entry val="1" txt="Slow RC oscillator"/>

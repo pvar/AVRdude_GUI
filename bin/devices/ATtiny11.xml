@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATtiny11" speed="6 MHz" flash="1.0 KB" sram="0 Bytes" eeprom="0 Bytes" xml_name="ATtiny11.xml" xml_ver="214" has_eeprom="no"/>
+  <signature value="0x1E9004"/>
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="4673" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="172124360" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="16" offset="0" name="FSTRT" desc="Short start-up time selected" enum=""/>
     <option3 bitmask="8" offset="0" name="RSTDISBL" desc="External reset function of PB5 disabled" enum=""/>
     <option4 bitmask="7" offset="0" name="CKSEL" desc="Clock Select" enum="list">

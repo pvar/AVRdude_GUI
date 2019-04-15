@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATtiny1634" speed="12 MHz" flash="16.0 KB" sram="1024 Bytes" eeprom="256 Bytes" xml_name="ATtiny1634.xml" xml_ver="1" has_eeprom="yes"/>
+  <signature value="0x1E9412"/>
   <defaults lfuse="110" hfuse="223" efuse="255"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="1146425544" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="171274152" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
     <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTC2" enum=""/>
     <option4 bitmask="31" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
@@ -24,7 +25,7 @@
       <entry val="30" txt="Ext. Ceramic Res. 8.0- MHz; Start-up time PWRDWN/RESET: 1K CK/16 CK + 16 ms"/>
       <entry val="15" txt="Ext. Crystal Osc. 8.0- MHz; Start-up time PWRDWN/RESET: 16 K CK/16 CK + 16 ms"/>
     </option4>
-    <option5 bitmask="1146425544" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="171274152" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC2 as i/o pin)" enum=""/>
     <option7 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -35,7 +36,7 @@
       <entry val="5" txt="Brown-out detection at VCC=2.7 V"/>
       <entry val="6" txt="Brown-out detection at VCC=1.8 V"/>
     </option11>
-    <option12 bitmask="1146425544" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option12 bitmask="171274152" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
     <option13 bitmask="24" offset="2" name="BODPD" desc="BOD mode of operation when the device is in sleep mode" enum="list">
       <entry val="1" txt="Sampled"/>
       <entry val="2" txt="Enabled"/>

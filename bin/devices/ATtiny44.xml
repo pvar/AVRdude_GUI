@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATtiny44" speed="20 MHz" flash="4.0 KB" sram="256 Bytes" eeprom="256 Bytes" xml_name="ATtiny44.xml" xml_ver="100" has_eeprom="yes"/>
+  <signature value="0x1E9207"/>
   <defaults lfuse="106" hfuse="223" efuse="255"/>
   <settings>
     <fusebytes count="3"/>

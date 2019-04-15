@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATmega16HVB" speed="8 MHz" flash="16.0 KB" sram="1024 Bytes" eeprom="512 Bytes" xml_name="ATmega16HVB.xml" xml_ver="1" has_eeprom="yes"/>
+  <signature value="0x1E940D"/>
   <defaults lfuse="222" hfuse="233" efuse="255"/>
   <settings>
     <fusebytes count="2"/>

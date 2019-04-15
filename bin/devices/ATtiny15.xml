@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="ATtiny15" speed="1.6 MHz" flash="1.0 KB" sram="0 Bytes" eeprom="64 Bytes" xml_name="ATtiny15.xml" xml_ver="216" has_eeprom="yes"/>
+  <signature value="0x1E9006"/>
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="1149121488" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown-out Detection Level" enum="list">
       <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
       <entry val="0" txt="Brown-out detection at VCC=4.0 V"/>

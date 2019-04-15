@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="AT90S8535comp" speed="8 MHz" flash="8.0 KB" sram="512 Bytes" eeprom="512 Bytes" xml_name="AT90S8535comp.xml" xml_ver="188" has_eeprom="yes"/>
+  <signature value="0x1E9303"/>
   <defaults lfuse="193" hfuse="217" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="1149394688" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="2497" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
       <entry val="0" txt="Brown-out detection at VCC=4.0 V"/>
       <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
@@ -70,7 +71,7 @@
       <entry val="47" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 4 ms"/>
       <entry val="63" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 64 ms"/>
     </option4>
-    <option5 bitmask="1149394688" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="2497" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="S8535C" desc="AT90S4434/8535 compatibility mode" enum=""/>
     <option7 bitmask="64" offset="1" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>

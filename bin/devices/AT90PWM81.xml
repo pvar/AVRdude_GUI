@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Device xmlns="dudegui">
   <metadata name="AT90PWM81" speed="8 MHz" flash="8.0 KB" sram="256 Bytes" eeprom="512 Bytes" xml_name="AT90PWM81.xml" xml_ver="1" has_eeprom="yes"/>
+  <signature value="0x1E9388"/>
   <defaults lfuse="98" hfuse="217" efuse="255"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="1148206584" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="173221784" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
     <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTD1" enum=""/>
     <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
@@ -65,7 +66,7 @@
       <entry val="22" txt="RC 1 MHz; SUT: 1KCK/14CK+4.1 ms; [CKSEL=0110 SUT=01]"/>
       <entry val="38" txt="RC 1 MHz; SUT: 1KCK/14CK+65 ms;  [CKSEL=0110 SUT=10]"/>
     </option4>
-    <option5 bitmask="1148206584" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="173221784" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PE0 as I/O pin)" enum=""/>
     <option7 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -78,7 +79,7 @@
       <entry val="0" txt="Boot Flash size=1024 words Boot address=$0C00"/>
     </option11>
     <option12 bitmask="1" offset="1" name="BOOTRST" desc="Select Reset Vector" enum=""/>
-    <option13 bitmask="1148206584" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option13 bitmask="173221784" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
     <option14 bitmask="128" offset="2" name="PSC2RB" desc="PSC2 Reset Behavior" enum=""/>
     <option15 bitmask="64" offset="2" name="PSC2RBA" desc="PSC2 Reset Behavior for 22 and 23" enum=""/>
     <option16 bitmask="32" offset="2" name="PSC0RB" desc="PSC0 Reset Behavior" enum=""/>
