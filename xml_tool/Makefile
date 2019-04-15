@@ -15,9 +15,9 @@ OUTPUT = atxml_conv
 STANDARD = -std=c++11
 WARNINGS = -Wall
 TUNNING = -O3 -fshort-enums
-DEBUGING = -g -fno-omit-frame-pointer
+DEBUGING = -ggdb -fno-omit-frame-pointer
 
-FLAGS = $(STANDARD) $(WARNINGS) $(EFFICIENCY) $(NOOLDCAST) $(TUNNING)
+FLAGS = $(STANDARD) $(WARNINGS) $(DEBUGING) $(TUNNING)
 
 LIBS=`pkg-config --cflags --libs gtkmm-3.0 libxml++-2.6`
 

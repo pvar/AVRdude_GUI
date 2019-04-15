@@ -706,6 +706,10 @@ bool Translator::create_xml (void)
         else
                 new_element->set_attribute("has_eeprom", "no", "");
 
+        // add child node for signature
+        new_element = new_node->add_child ("signature", "");
+        new_element->set_attribute("value", signature, "");
+
         // add child node for default settings
         new_element = new_node->add_child ("defaults", "");
         new_element->set_attribute("lfuse", to_string(fusebytes_default[0]), "");

@@ -63,8 +63,6 @@ class Translator
                 // fuse warnings
                 std::list<FuseWarning> *warnings;
 
-
-
                 std::string exec_path;
 
                 bool create_xml (void);
