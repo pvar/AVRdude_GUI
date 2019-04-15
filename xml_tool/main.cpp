@@ -688,7 +688,7 @@ bool Translator::create_xml (void)
         xmlpp::Element *tmp_element_ex;
 
         // create root node
-        new_node = newXML.create_root_node ("Device", "dudegui", "");
+        new_node = newXML.create_root_node ("AVRdevice", "dudegui:device.description.file", "");
         //((xmlpp::Element *)(new_node))->set_attribute("name", device_name, "");
 
         // add child node for metadata
