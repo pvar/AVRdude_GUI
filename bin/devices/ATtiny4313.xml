@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Device xmlns="dudegui">
+<AVRdevice xmlns="dudegui:device.description.file">
   <metadata name="ATtiny4313" speed="20 MHz" flash="4.0 KB" sram="256 Bytes" eeprom="256 Bytes" xml_name="ATtiny4313.xml" xml_ver="1" has_eeprom="yes"/>
   <signature value="0x1E920D"/>
   <defaults lfuse="98" hfuse="223" efuse="255"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="786008224" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
     <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTD2" enum=""/>
     <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
@@ -54,7 +54,7 @@
       <entry val="47" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 14 CK + 4.1 ms"/>
       <entry val="63" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 14 CK + 65 ms"/>
     </option4>
-    <option5 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="786008224" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
     <option7 bitmask="64" offset="1" name="EESAVE" desc="Preserve EEPROM memory through the Chip Erase cycle" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enable" enum=""/>
@@ -66,7 +66,7 @@
       <entry val="7" txt="Brown-out detection disabled"/>
     </option10>
     <option11 bitmask="1" offset="1" name="RSTDISBL" desc="External reset disable" enum=""/>
-    <option12 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option12 bitmask="786008224" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
     <option13 bitmask="1" offset="2" name="SELFPRGEN" desc="Self programming enable" enum=""/>
   </settings>
   <warnings>
@@ -77,4 +77,4 @@
     <case5 byte="0" mask="63" result="22" message="Using this clock option together with the CKDIV8 fuse will disable further programming!"/>
     <case6 byte="0" mask="63" result="38" message="Using this clock option together with the CKDIV8 fuse will disable further programming!"/>
   </warnings>
-</Device>
+</AVRdevice>

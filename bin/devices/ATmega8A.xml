@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Device xmlns="dudegui">
+<AVRdevice xmlns="dudegui:device.description.file">
   <metadata name="ATmega8A" speed="16 MHz" flash="8.0 KB" sram="1024 Bytes" eeprom="512 Bytes" xml_name="ATmega8A.xml" xml_ver="1" has_eeprom="yes"/>
   <signature value="0x1E9307"/>
   <defaults lfuse="193" hfuse="153" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="145" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
       <entry val="0" txt="Brown-out detection at VCC=4.0 V"/>
       <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
@@ -71,7 +71,7 @@
       <entry val="47" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 4 ms"/>
       <entry val="63" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 64 ms"/>
     </option4>
-    <option5 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="145" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC6 as i/o pin)" enum=""/>
     <option7 bitmask="64" offset="1" name="WTDON" desc="Watch-dog Timer always on" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -89,4 +89,4 @@
     <case1 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
     <case2 byte="1" mask="128" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
   </warnings>
-</Device>
+</AVRdevice>

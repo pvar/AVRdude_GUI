@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Device xmlns="dudegui">
+<AVRdevice xmlns="dudegui:device.description.file">
   <metadata name="ATmega103" speed="6 MHz" flash="128.0 KB" sram="3.9 KB" eeprom="4.0 KB" xml_name="ATmega103.xml" xml_ver="236" has_eeprom="yes"/>
   <signature value="0x1E9701"/>
   <defaults lfuse="193" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="172045512" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="786020184" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="32" offset="0" name="SUT1" desc="Serial program downloading (SPI) enabled" enum=""/>
     <option3 bitmask="8" offset="0" name="CKSEL3" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
     <option4 bitmask="3" offset="0" name="CKSEL" desc="Select Clock Source" enum="list">
@@ -18,4 +18,4 @@
   <warnings>
     <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
   </warnings>
-</Device>
+</AVRdevice>

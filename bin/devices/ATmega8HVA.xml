@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Device xmlns="dudegui">
+<AVRdevice xmlns="dudegui:device.description.file">
   <metadata name="ATmega8HVA" speed="4 MHz" flash="8.0 KB" sram="512 Bytes" eeprom="256 Bytes" xml_name="ATmega8HVA.xml" xml_ver="1" has_eeprom="yes"/>
   <signature value="0x1E9310"/>
   <defaults lfuse="223" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="170039592" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="784482392" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
     <option3 bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
     <option4 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -26,4 +26,4 @@
     <case1 byte="0" mask="32" result="0" message="These fuse settings will disable the ISP interface!"/>
     <case2 byte="0" mask="16" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
   </warnings>
-</Device>
+</AVRdevice>

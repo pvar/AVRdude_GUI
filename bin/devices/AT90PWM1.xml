@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Device xmlns="dudegui">
+<AVRdevice xmlns="dudegui:device.description.file">
   <metadata name="AT90PWM1" speed="8 MHz" flash="8.0 KB" sram="512 Bytes" eeprom="512 Bytes" xml_name="AT90PWM1.xml" xml_ver="1" has_eeprom="yes"/>
   <signature value="0x1E9383"/>
   <defaults lfuse="65" hfuse="223" efuse="249"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="170941800" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="786269528" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
     <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTB0" enum=""/>
     <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
@@ -52,7 +52,7 @@
       <entry val="35" txt="PLL clock 16 MHz; Start-up time PWRDWN/RESET: 1K CK/14 CK + 65 ms"/>
       <entry val="51" txt="PLL clock 16 MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms"/>
     </option4>
-    <option5 bitmask="170941800" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="786269528" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC6 as i/o pin)" enum=""/>
     <option7 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -68,7 +68,7 @@
       <entry val="1" txt="Brown-out detection at VCC=2.8 V"/>
       <entry val="0" txt="Brown-out detection at VCC=2.6 V"/>
     </option11>
-    <option12 bitmask="170941800" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option12 bitmask="786269528" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
     <option13 bitmask="128" offset="2" name="PSC2RB" desc="PSC2 Reset Behavior" enum=""/>
     <option14 bitmask="32" offset="2" name="PSC0RB" desc="PSC0 Reset Behavior" enum=""/>
     <option15 bitmask="16" offset="2" name="PSCRV" desc="PSCOUT Reset Value" enum=""/>
@@ -86,4 +86,4 @@
     <case3 byte="1" mask="64" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
     <case4 byte="2" mask="144" result="0" message="These fuse settings will make the Parallel interface inaccessible!"/>
   </warnings>
-</Device>
+</AVRdevice>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Device xmlns="dudegui">
+<AVRdevice xmlns="dudegui:device.description.file">
   <metadata name="AT90CAN64" speed="16 MHz" flash="64.0 KB" sram="4.0 KB" eeprom="2.0 KB" xml_name="AT90CAN64.xml" xml_ver="56" has_eeprom="yes"/>
   <signature value="0x1E9681"/>
   <defaults lfuse="98" hfuse="153" efuse="255"/>
@@ -90,4 +90,4 @@
     <case1 byte="1" mask="64" result="64" message="These fuse settings will disable the JTAG interface!"/>
     <case2 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
   </warnings>
-</Device>
+</AVRdevice>

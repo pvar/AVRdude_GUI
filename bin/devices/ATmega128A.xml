@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Device xmlns="dudegui">
+<AVRdevice xmlns="dudegui:device.description.file">
   <metadata name="ATmega128A" speed="16 MHz" flash="128.0 KB" sram="4.0 KB" eeprom="4.0 KB" xml_name="ATmega128A.xml" xml_ver="1" has_eeprom="yes"/>
   <signature value="0x1E9702"/>
   <defaults lfuse="193" hfuse="153" efuse="253"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="170492512" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
       <entry val="0" txt="Brown-out detection level at VCC=4.0 V"/>
       <entry val="1" txt="Brown-out detection level at VCC=2.7 V"/>
@@ -71,7 +71,7 @@
       <entry val="47" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 4 ms"/>
       <entry val="63" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 64 ms"/>
     </option4>
-    <option5 bitmask="170492512" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
     <option7 bitmask="64" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -84,7 +84,7 @@
     </option10>
     <option11 bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
     <option12 bitmask="16" offset="1" name="CKOPT" desc="CKOPT fuse (operation dependent of CKSEL fuses)" enum=""/>
-    <option13 bitmask="170492512" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option13 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
     <option14 bitmask="2" offset="2" name="M103C" desc="ATmega103 Compatibility Mode" enum=""/>
     <option15 bitmask="1" offset="2" name="WDTON" desc="Watchdog Timer always on" enum=""/>
   </settings>
@@ -92,4 +92,4 @@
     <case1 byte="1" mask="64" result="64" message="These fuse settings will disable the JTAG interface!"/>
     <case2 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
   </warnings>
-</Device>
+</AVRdevice>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Device xmlns="dudegui">
+<AVRdevice xmlns="dudegui:device.description.file">
   <metadata name="ATmega64HVE" speed="15 MHz" flash="64.0 KB" sram="4.0 KB" eeprom="1024 Bytes" xml_name="ATmega64HVE.xml" xml_ver="1" has_eeprom="yes"/>
   <signature value="0x1E9610"/>
   <defaults lfuse="214" hfuse="249" efuse="255"/>
@@ -32,4 +32,4 @@
     <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
     <case2 byte="1" mask="8" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
   </warnings>
-</Device>
+</AVRdevice>

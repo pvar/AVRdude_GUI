@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Device xmlns="dudegui">
+<AVRdevice xmlns="dudegui:device.description.file">
   <metadata name="AT90S1200" speed="12 MHz" flash="1.0 KB" sram="0 Bytes" eeprom="64 Bytes" xml_name="AT90S1200.xml" xml_ver="200" has_eeprom="yes"/>
   <signature value="0x1E9001"/>
   <defaults lfuse="255" hfuse="255" efuse="255"/>
@@ -15,4 +15,4 @@
   <warnings>
     <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
   </warnings>
-</Device>
+</AVRdevice>

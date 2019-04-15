@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Device xmlns="dudegui">
+<AVRdevice xmlns="dudegui:device.description.file">
   <metadata name="ATtiny88" speed="20 MHz" flash="8.0 KB" sram="512 Bytes" eeprom="64 Bytes" xml_name="ATtiny88.xml" xml_ver="1" has_eeprom="yes"/>
   <signature value="0x1E9311"/>
   <defaults lfuse="110" hfuse="223" efuse="255"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="173254952" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option1 bitmask="784734424" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
     <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
     <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTB0" enum=""/>
     <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
@@ -19,7 +19,7 @@
       <entry val="31" txt="Int. RC Osc. 128kHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 4.1 ms"/>
       <entry val="47" txt="Int. RC Osc. 128kHz; Start-up time PWRDWN/RESET: 6 CK/14 CK + 65 ms"/>
     </option4>
-    <option5 bitmask="173254952" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option5 bitmask="784734424" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
     <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC6 as i/o pin)" enum=""/>
     <option7 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
     <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
@@ -31,7 +31,7 @@
       <entry val="6" txt="Brown-out detection at VCC=1.8 V"/>
       <entry val="7" txt="Brown-out detection disabled"/>
     </option11>
-    <option12 bitmask="173254952" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option12 bitmask="784734424" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
     <option13 bitmask="1" offset="2" name="SELFPRGEN" desc="Self Programming enable" enum=""/>
   </settings>
   <warnings>
@@ -42,4 +42,4 @@
     <case5 byte="0" mask="63" result="19" message="Using this clock option together with the CKDIV8 fuse bit will require a slow ISP speed ~2kHz."/>
     <case6 byte="0" mask="63" result="35" message="Using this clock option together with the CKDIV8 fuse bit will require a slow ISP speed ~2kHz."/>
   </warnings>
-</Device>
+</AVRdevice>
