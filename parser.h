@@ -38,7 +38,6 @@ class Parser
                 std::string float_to_string (float number);
 
                 void print_warnings (DeviceDescription &description);
-                void print_defaults (DeviceDescription &description);
                 void print_settings (DeviceDescription &description);
                 void print_options (DeviceDescription &description);
 };

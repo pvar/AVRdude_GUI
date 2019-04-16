@@ -225,11 +225,6 @@ void Parser::print_warnings (DeviceDescription &description)
         }
 }
 
-void Parser::print_defaults (DeviceDescription &description)
-{
-        for (int i = 0; i < 3; i++)
-                cout << "fuse byte " << i + 1 << " : " << hex << description.fusebytes_default[i] << endl;
-}
 
 void Parser::print_settings (DeviceDescription &description)
 {
@@ -437,89 +432,23 @@ Parser::status Parser::get_warnings (xmlpp::Node *root_node, DeviceDescription &
 
 Parser::status Parser::get_default (xmlpp::Node *root_node, DeviceDescription &description)
 {
-        xmlpp::Node* xml_node = root_node;
-        xmlpp::Node* tmp_node = root_node;
+        xmlpp::Node* xml_node;
+        xmlpp::Element* tmp_element;
 
-        // go to FUSE node
-        xml_node = xml_node->get_first_child("FUSE");
-        // if no such node, it must be a device without fuses...
-        if (!xml_node)
-                return Parser::status::no_content;
+        // get XML element with default settings
+        xml_node = root_node->get_first_child("defaults");
+        tmp_element = dynamic_cast<xmlpp::Element*>(xml_node);
 
-        // go to LIST node
-        xml_node = xml_node->get_first_child("LIST");
-        // if no such node, it must be a device without fuses...
-        if (!xml_node)
-                return Parser::status::no_content;
+        // get default settings' values
+        description.fusebytes_default[0] = stoi(tmp_element->get_attribute_value("lfuse", ""));
+        description.fusebytes_default[1] = stoi(tmp_element->get_attribute_value("hfuse", ""));
+        description.fusebytes_default[2] = stoi(tmp_element->get_attribute_value("efuse", ""));
 
-        // get list of fuse-byte names
-        string name_list = get_txt_value (xml_node);
-        name_list = name_list.substr(1, name_list.length() - 2);
-
-        // extract individual byte names
-        int byte_count = 0;
-        string byte_names[3];
-        while (true) {
-                // locate separator string
-                size_t name_end = name_list.find(":");
-                // extract name
-                byte_names[byte_count] = name_list.substr(0, name_end);
-                // check if it was the last name in the list
-                if (name_end == string::npos)
-                        break;
-                // delete name and separator from list
-                name_list.erase(0, name_end + 1);
-
-                byte_count++;
-        }
-
-        xmlpp::Node::NodeList children;
-        xmlpp::Node::NodeList::iterator node_iterator;
-        string node_name, bit_val;
-        int bit_order;
-
-        // get value for each fuse-byte
-        for (int i = 0; i < (byte_count + 1); i++) {
-                // go up to FUSE node
-                // (fuse-byte description nodes are children of FUSE node)
-                xml_node = xml_node->get_parent();
-                // go to <FUSE-BYTE-NAME> node
-                tmp_node = xml_node->get_first_child(byte_names[i]);
-                // if no such node, proceed to next fuse-byte...
-                if (!tmp_node)
-                        continue;
-                else
-                        xml_node = tmp_node;
-                // loop through all children with name "FUSEx", where x in [0..7]
-                children = xml_node->get_children();
-                for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
-                        // get name of current sibling...
-                        node_name = (*node_iterator)->get_name();
-                        // if does not contain "FUSE", proceed to next sibling...
-                        if (node_name.find("FUSE") == string::npos)
-                                continue;
-                        // if more than 5 letters in name, proceed to next sibling...
-                        if (node_name.length() > 5)
-                                continue;
-                        // erase constant part (FUSE)
-                        node_name.erase(0,4);
-                        // transform to integer
-                        bit_order = atoi(node_name.c_str());
-                        // get DEFAULT node
-                        tmp_node = (*node_iterator)->get_first_child("DEFAULT");
-                        // if not found, no default values mentioned in XML!
-                        if (tmp_node == nullptr)
-                                return Parser::status::no_content;
-                        bit_val = get_txt_value (tmp_node);
-                        // apply bit value on fuse-byte
-                        if (bit_val.find("0") == string::npos)
-                                description.fusebytes_default[i] |= 1 << bit_order;
-                        else
-                                description.fusebytes_default[i] &= ~(1 << bit_order);
-                }
-        }
-
-        //print_defaults(description);
+        /*
+        // debug print-out
+        for (int i = 0; i < 3; i++)
+                cout << "fuse byte " << i + 1 << " : " << hex << description.fusebytes_default[i] << endl;
+        */
 
         return Parser::status::success;
 }
@@ -537,11 +466,11 @@ Parser::status Parser::get_metadata (xmlpp::Node *root_node, DeviceDescription &
         tmp_element = dynamic_cast<xmlpp::Element*>(xml_node);
 
         // get metadata values
-        description.max_speed = tmp_element->get_attribute_value("speed","");
-        description.xml_version = tmp_element->get_attribute_value("xml_ver","");
-        description.flash_size = tmp_element->get_attribute_value("flash","");
-        description.sram_size = tmp_element->get_attribute_value("sram","");
-        description.eeprom_size = tmp_element->get_attribute_value("eeprom","");
+        description.max_speed = tmp_element->get_attribute_value("speed", "");
+        description.xml_version = tmp_element->get_attribute_value("xml_ver", "");
+        description.flash_size = tmp_element->get_attribute_value("flash", "");
+        description.sram_size = tmp_element->get_attribute_value("sram", "");
+        description.eeprom_size = tmp_element->get_attribute_value("eeprom", "");
 
         // check if eeprom exists or not
         if (tmp_element->get_attribute_value("eeprom","") == "yes")
@@ -554,9 +483,10 @@ Parser::status Parser::get_metadata (xmlpp::Node *root_node, DeviceDescription &
         tmp_element = dynamic_cast<xmlpp::Element*>(xml_node);
 
         // get signature string
-        description.signature = tmp_element->get_attribute_value("value","");
+        description.signature = tmp_element->get_attribute_value("value", "");
 
         /*
+        // debug print-out
         cout << "speed     : " << description.max_speed << endl;
         cout << "flash     : " << description.flash_size << endl;
         cout << "sram      : " << description.sram_size << endl;
