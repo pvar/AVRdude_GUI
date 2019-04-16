@@ -241,7 +241,7 @@ fi
 sudo -v # just to get credentials
 
 # install file
-echo -e -n "\Installing application \"desktop\" file... ";
+echo -e -n "Installing application \"desktop\" file... ";
 sudo xdg-desktop-menu install ${WORKDIR}/dudegui.desktop --novendor --mode system
 if [ $? == 0 ]; then
         echo "DONE"
@@ -281,13 +281,13 @@ echo "DONE"
 # loosen the permissions on certain files
 #sudo chgrp -f users ${EXECLOCATION}/dev2xml.lst 2>/dev/null
 #sudo chgrp -f users ${EXECLOCATION}/xmlfiles -R 2>/dev/null
-sudo chmod -f 666 ${EXECLOCATION}/dev2xml.lst
-sudo chmod -f 775 ${EXECLOCATION}/devices
-sudo chmod -f 666 ${EXECLOCATION}/devices/*
+sudo chmod -f 666 ${EXECLOCATION}dev2xml.lst
+sudo chmod -f 775 ${EXECLOCATION}devices
+sudo chmod -f 666 ${EXECLOCATION}devices/*
 
 # create necessary symbolic links
-sudo ln -s ${EXECLOCATION}/dudegui /usr/bin/dudegui
-sudo ln -s ${EXECLOCATION}/uninstall.sh /usr/bin/dudegui-uninstall
+sudo ln -s ${EXECLOCATION}dudegui /usr/bin/dudegui
+sudo ln -s ${EXECLOCATION}uninstall.sh /usr/bin/dudegui-uninstall
 
 # ----------------------------------------------------------------------------
 # make serial programmers accessible (add user in necessary groups)
