@@ -22,7 +22,7 @@ DEBUGING = -ggdb -fno-omit-frame-pointer
 #FLAGS = $(STANDARD) $(WARNINGS) $(EFFICIENCY) $(NOOLDCAST) $(TUNNING)
 FLAGS = $(STANDARD) $(WARNINGS) $(DEBUGGING)
 
-LIBS=`pkg-config --cflags --libs gtkmm-3.0 libxml++-2.6`
+LIBS=`pkg-config --cflags --libs gtkmm-3.0 libxml++-3.0`
 
 # Targets -----------------------------------------------------
 
