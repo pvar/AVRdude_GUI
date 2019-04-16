@@ -722,10 +722,8 @@ bool Translator::create_xml (void)
         tmp_element = ((xmlpp::Node *)(new_element))->add_child ("fusebytes", "");
         tmp_element->set_attribute("count", to_string(fusebytes_count), "");
         // add a descendant for each option
-        int i = 0;
         for (FuseSetting setting : *fuse_settings) {
-                i++;
-                tmp_element = ((xmlpp::Node *)(new_element))->add_child ("option" + to_string(i), "");
+                tmp_element = ((xmlpp::Node *)(new_element))->add_child ("option", "");
                 tmp_element->set_attribute("bitmask", to_string(setting.fmask), "");
                 tmp_element->set_attribute("offset", to_string(setting.offset), "");
                 tmp_element->set_attribute("name", setting.fname, "");
@@ -745,11 +743,9 @@ bool Translator::create_xml (void)
         }
         // add child node for warnings description
         new_element = new_node->add_child ("warnings", "");
-        i = 0;
         // add a descendant for each warning
         for (FuseWarning warn : *warnings) {
-                i++;
-                tmp_element = ((xmlpp::Node *)(new_element))->add_child ("case" + to_string(i), "");
+                tmp_element = ((xmlpp::Node *)(new_element))->add_child ("case", "");
                 tmp_element->set_attribute("byte", to_string(warn.fbyte), "");
                 tmp_element->set_attribute("mask", to_string(warn.fmask), "");
                 tmp_element->set_attribute("result", to_string(warn.fresult), "");
