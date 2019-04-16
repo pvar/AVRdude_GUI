@@ -5,10 +5,10 @@
   <defaults lfuse="65" hfuse="217" efuse="249"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="786296360" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
-    <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTD1" enum=""/>
-    <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+    <option bitmask="2984855832" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
+    <option bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTD1" enum=""/>
+    <option bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
       <entry val="0" txt="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 0 ms"/>
       <entry val="16" txt="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 4.1 ms"/>
       <entry val="32" txt="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 65 ms"/>
@@ -62,25 +62,25 @@
       <entry val="20" txt="Ext. Crystal Osc.; PLL input: Ext. Crystal Osc.; Start-up time PWRDWN/RESET: 1K CK/14 CK + 4 ms"/>
       <entry val="36" txt="Ext. Crystal Osc.; PLL input: Ext. Crystal Osc.; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4 ms"/>
       <entry val="52" txt="Ext. Crystal Osc.; PLL input: Ext. Crystal Osc.; Start-up time PWRDWN/RESET: 16K CK/14 CK + 64 ms"/>
-    </option4>
-    <option5 bitmask="786296360" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
-    <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC6 as i/o pin)" enum=""/>
-    <option7 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
-    <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
-    <option9 bitmask="16" offset="1" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
-    <option10 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
-    <option11 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
+    </option>
+    <option bitmask="2984855832" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC6 as i/o pin)" enum=""/>
+    <option bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
+    <option bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option bitmask="16" offset="1" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
+    <option bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
       <entry val="3" txt="Boot Flash size=256 words Boot address=$3F00"/>
       <entry val="2" txt="Boot Flash size=512 words Boot address=$3E00"/>
       <entry val="1" txt="Boot Flash size=1024 words Boot address=$3C00"/>
       <entry val="0" txt="Boot Flash size=2048 words Boot address=$3800"/>
-    </option11>
-    <option12 bitmask="1" offset="1" name="BOOTRST" desc="Select Reset Vector" enum=""/>
-    <option13 bitmask="786296360" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
-    <option14 bitmask="32" offset="2" name="PSCRB" desc="PSC Reset Behavior" enum=""/>
-    <option15 bitmask="16" offset="2" name="PSCRVA" desc="PSCOUTnA Reset Value" enum=""/>
-    <option16 bitmask="8" offset="2" name="PSCRVB" desc="PSC0UTnB Reset Value" enum=""/>
-    <option17 bitmask="7" offset="2" name="BODLEVEL" desc="Brown-out Detector Trigger Level" enum="list">
+    </option>
+    <option bitmask="1" offset="1" name="BOOTRST" desc="Select Reset Vector" enum=""/>
+    <option bitmask="2984855832" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option bitmask="32" offset="2" name="PSCRB" desc="PSC Reset Behavior" enum=""/>
+    <option bitmask="16" offset="2" name="PSCRVA" desc="PSCOUTnA Reset Value" enum=""/>
+    <option bitmask="8" offset="2" name="PSCRVB" desc="PSC0UTnB Reset Value" enum=""/>
+    <option bitmask="7" offset="2" name="BODLEVEL" desc="Brown-out Detector Trigger Level" enum="list">
       <entry val="7" txt="Brown-out detection disabled"/>
       <entry val="6" txt="Brown-out detection at VCC=4.5 V"/>
       <entry val="5" txt="Brown-out detection at VCC=2.7 V"/>
@@ -89,11 +89,11 @@
       <entry val="2" txt="Brown-out detection at VCC=4.2 V"/>
       <entry val="1" txt="Brown-out detection at VCC=2.8 V"/>
       <entry val="0" txt="Brown-out detection at VCC=2.6 V"/>
-    </option17>
+    </option>
   </settings>
   <warnings>
-    <case1 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
-    <case2 byte="1" mask="128" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
-    <case3 byte="1" mask="64" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
+    <case byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case byte="1" mask="128" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
+    <case byte="1" mask="64" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
   </warnings>
 </AVRdevice>

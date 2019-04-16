@@ -5,14 +5,14 @@
   <defaults lfuse="242" hfuse="249" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="787178088" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
+    <option bitmask="2987370232" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
       <entry val="0" txt="Brown-out detection at VCC=4.0 V"/>
       <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
-    </option2>
-    <option3 bitmask="64" offset="0" name="BODEN" desc="Brown-out detection enabled" enum=""/>
-    <option4 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
-    <option5 bitmask="15" offset="0" name="CKSEL" desc="Select Clock Source" enum="list">
+    </option>
+    <option bitmask="64" offset="0" name="BODEN" desc="Brown-out detection enabled" enum=""/>
+    <option bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option bitmask="15" offset="0" name="CKSEL" desc="Select Clock Source" enum="list">
       <entry val="0" txt="External Clock fast rising power"/>
       <entry val="1" txt="External Clock BOD enabled"/>
       <entry val="2" txt="Internal RC Ocsillator slowly rising power ; default value"/>
@@ -29,17 +29,17 @@
       <entry val="13" txt="Ceramic Resonator/External Clock slowly rising power"/>
       <entry val="14" txt="Ceramic Resonator fast rising power"/>
       <entry val="15" txt="Ceramic Resonator BOD enabled"/>
-    </option5>
-    <option6 bitmask="787178088" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
-    <option7 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
+    </option>
+    <option bitmask="2987370232" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
       <entry val="3" txt="Boot Flash size=128 words start address=$1F80"/>
       <entry val="2" txt="Boot Flash size=256 words start address=$1F00"/>
       <entry val="1" txt="Boot Flash size=512 words start address=$1E00"/>
       <entry val="0" txt="Boot Flash size=1024 words start address=$1C00"/>
-    </option7>
-    <option8 bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
+    </option>
+    <option bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
   </settings>
   <warnings>
-    <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
   </warnings>
 </AVRdevice>

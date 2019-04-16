@@ -5,10 +5,10 @@
   <defaults lfuse="65" hfuse="153" efuse="255"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
-    <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTB0" enum=""/>
-    <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+    <option bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
+    <option bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTB0" enum=""/>
+    <option bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
       <entry val="0" txt="Ext. Clock; Start-up time: 6 CK + 0 ms"/>
       <entry val="16" txt="Ext. Clock; Start-up time: 6 CK + 4.1 ms"/>
       <entry val="32" txt="Ext. Clock; Start-up time: 6 CK + 65 ms"/>
@@ -59,29 +59,29 @@
       <entry val="31" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 16K CK + 0 ms"/>
       <entry val="47" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 16K CK + 4.1 ms"/>
       <entry val="63" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time: 16K CK + 65 ms"/>
-    </option4>
-    <option5 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
-    <option6 bitmask="128" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
-    <option7 bitmask="64" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
-    <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
-    <option9 bitmask="16" offset="1" name="WDTON" desc="Watchdog timer always on" enum=""/>
-    <option10 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROMthrough the Chip Erase cycle" enum=""/>
-    <option11 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
+    </option>
+    <option bitmask="0" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option bitmask="128" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
+    <option bitmask="64" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
+    <option bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option bitmask="16" offset="1" name="WDTON" desc="Watchdog timer always on" enum=""/>
+    <option bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROMthrough the Chip Erase cycle" enum=""/>
+    <option bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
       <entry val="3" txt="Boot Flash size=128 words start address=$1F80"/>
       <entry val="2" txt="Boot Flash size=256 words start address=$1F00"/>
       <entry val="1" txt="Boot Flash size=512 words start address=$1E00"/>
       <entry val="0" txt="Boot Flash size=1024 words start address=$1C00"/>
-    </option11>
-    <option12 bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
-    <option13 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
-    <option14 bitmask="16" offset="2" name="M161C" desc="ATmega161 compability mode" enum=""/>
-    <option15 bitmask="14" offset="2" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
+    </option>
+    <option bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
+    <option bitmask="0" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option bitmask="16" offset="2" name="M161C" desc="ATmega161 compability mode" enum=""/>
+    <option bitmask="14" offset="2" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
       <entry val="7" txt="Brown-out detection disabled"/>
       <entry val="6" txt="Brown-out detection at VCC=1.8 V"/>
       <entry val="3" txt="Brown-out detection at VCC=2.3 V"/>
       <entry val="5" txt="Brown-out detection at VCC=2.7 V"/>
       <entry val="4" txt="Brown-out detection at VCC=4.3 V"/>
-    </option15>
+    </option>
   </settings>
   <warnings/>
 </AVRdevice>

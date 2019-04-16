@@ -5,27 +5,27 @@
   <defaults lfuse="205" hfuse="254" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="784457352" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="128" offset="0" name="WDTON" desc="Watchdog timer always on" enum=""/>
-    <option3 bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
-    <option4 bitmask="48" offset="0" name="BOOTSZ" desc="Select boot size" enum="list">
+    <option bitmask="2986284920" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="128" offset="0" name="WDTON" desc="Watchdog timer always on" enum=""/>
+    <option bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option bitmask="48" offset="0" name="BOOTSZ" desc="Select boot size" enum="list">
       <entry val="3" txt="Boot Flash size=256 words Boot address=$4F00"/>
       <entry val="2" txt="Boot Flash size=512 words Boot address=$4E00"/>
       <entry val="1" txt="Boot Flash size=1024 words Boot address=$4C00"/>
       <entry val="0" txt="Boot Flash size=2048 words Boot address=$4800"/>
-    </option4>
-    <option5 bitmask="8" offset="0" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
-    <option6 bitmask="7" offset="0" name="SUT_CKSEL" desc="Clock Selection" enum="list">
+    </option>
+    <option bitmask="8" offset="0" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
+    <option bitmask="7" offset="0" name="SUT_CKSEL" desc="Clock Selection" enum="list">
       <entry val="0" txt="Start-up time: 14 CK + 0 ms"/>
       <entry val="2" txt="Start-up time: 14 CK + 3.9 ms"/>
       <entry val="4" txt="Start-up time: 14 CK + 62.5 ms"/>
       <entry val="1" txt="Start-up time: 14 CK + 0 ms"/>
       <entry val="3" txt="Start-up time: 14 CK + 3.9 ms"/>
       <entry val="5" txt="Start-up time: 14 CK + 62.5 ms"/>
-    </option6>
-    <option7 bitmask="784457352" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
-    <option8 bitmask="2" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
-    <option9 bitmask="1" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
+    </option>
+    <option bitmask="2986284920" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option bitmask="2" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
+    <option bitmask="1" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
   </settings>
   <warnings/>
 </AVRdevice>

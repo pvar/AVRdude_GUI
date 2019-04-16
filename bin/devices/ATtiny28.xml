@@ -5,9 +5,9 @@
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="2529" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="16" offset="0" name="INTCAP" desc="Internal load capacitors between XTAL1/XTAL2 and GND" enum=""/>
-    <option3 bitmask="15" offset="0" name="CKSEL" desc="Clock Select" enum="list">
+    <option bitmask="1255877376" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="16" offset="0" name="INTCAP" desc="Internal load capacitors between XTAL1/XTAL2 and GND" enum=""/>
+    <option bitmask="15" offset="0" name="CKSEL" desc="Clock Select" enum="list">
       <entry val="15" txt="External Crystal / Ceramic Resonator"/>
       <entry val="14" txt="External Crystal / Ceramic Resonator"/>
       <entry val="13" txt="External Crystal / Ceramic Resonator"/>
@@ -24,7 +24,7 @@
       <entry val="2" txt="Internal RC Ocsillator"/>
       <entry val="1" txt="External Clock"/>
       <entry val="0" txt="External Clock"/>
-    </option3>
+    </option>
   </settings>
   <warnings/>
 </AVRdevice>

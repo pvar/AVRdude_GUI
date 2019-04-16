@@ -5,11 +5,11 @@
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="785259824" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
-    <option3 bitmask="1" offset="0" name="FSTRT" desc="Short start-up time enabled" enum=""/>
+    <option bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option bitmask="1" offset="0" name="FSTRT" desc="Short start-up time enabled" enum=""/>
   </settings>
   <warnings>
-    <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
   </warnings>
 </AVRdevice>

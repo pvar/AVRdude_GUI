@@ -5,10 +5,10 @@
   <defaults lfuse="98" hfuse="223" efuse="249"/>
   <settings>
     <fusebytes count="3"/>
-    <option1 bitmask="786604632" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
-    <option3 bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTB0" enum=""/>
-    <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+    <option bitmask="7121" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="128" offset="0" name="CKDIV8" desc="Divide clock by 8 internally" enum=""/>
+    <option bitmask="64" offset="0" name="CKOUT" desc="Clock output on PORTB0" enum=""/>
+    <option bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
       <entry val="0" txt="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 0 ms"/>
       <entry val="16" txt="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 4.1 ms"/>
       <entry val="32" txt="Ext. Clock; Start-up time PWRDWN/RESET: 6 CK/14 CK + 65 ms"/>
@@ -64,34 +64,34 @@
       <entry val="31" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 0 ms"/>
       <entry val="47" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 4.1 ms"/>
       <entry val="63" txt="Ext. Crystal Osc. 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms"/>
-    </option4>
-    <option5 bitmask="786604632" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
-    <option6 bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC6 as i/o pin)" enum=""/>
-    <option7 bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
-    <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
-    <option9 bitmask="16" offset="1" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
-    <option10 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
-    <option11 bitmask="7" offset="1" name="BODLEVEL" desc="Brown-out Detector trigger level" enum="list">
+    </option>
+    <option bitmask="7121" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option bitmask="128" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PC6 as i/o pin)" enum=""/>
+    <option bitmask="64" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
+    <option bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option bitmask="16" offset="1" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
+    <option bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option bitmask="7" offset="1" name="BODLEVEL" desc="Brown-out Detector trigger level" enum="list">
       <entry val="4" txt="Brown-out detection at VCC=4.3 V"/>
       <entry val="5" txt="Brown-out detection at VCC=2.7 V"/>
       <entry val="6" txt="Brown-out detection at VCC=1.8 V"/>
       <entry val="7" txt="Brown-out detection disabled"/>
-    </option11>
-    <option12 bitmask="786604632" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
-    <option13 bitmask="6" offset="2" name="BOOTSZ" desc="Select boot size" enum="list">
+    </option>
+    <option bitmask="7121" offset="512" name="" desc="FUSE REGISTER:  EXTENDED" enum=""/>
+    <option bitmask="6" offset="2" name="BOOTSZ" desc="Select boot size" enum="list">
       <entry val="3" txt="Boot Flash size=128 words start address=$1F80"/>
       <entry val="2" txt="Boot Flash size=256 words start address=$1F00"/>
       <entry val="1" txt="Boot Flash size=512 words start address=$1E00"/>
       <entry val="0" txt="Boot Flash size=1024 words start address=$1C00"/>
-    </option13>
-    <option14 bitmask="1" offset="2" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
+    </option>
+    <option bitmask="1" offset="2" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
   </settings>
   <warnings>
-    <case1 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
-    <case2 byte="1" mask="128" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
-    <case3 byte="1" mask="64" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
-    <case4 byte="0" mask="63" result="3" message="Using this clock option together with the CKDIV8 fuse bit will require a slow ISP speed ~2kHz."/>
-    <case5 byte="0" mask="63" result="19" message="Using this clock option together with the CKDIV8 fuse bit will require a slow ISP speed ~2kHz."/>
-    <case6 byte="0" mask="63" result="35" message="Using this clock option together with the CKDIV8 fuse bit will require a slow ISP speed ~2kHz."/>
+    <case byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case byte="1" mask="128" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
+    <case byte="1" mask="64" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
+    <case byte="0" mask="63" result="3" message="Using this clock option together with the CKDIV8 fuse bit will require a slow ISP speed ~2kHz."/>
+    <case byte="0" mask="63" result="19" message="Using this clock option together with the CKDIV8 fuse bit will require a slow ISP speed ~2kHz."/>
+    <case byte="0" mask="63" result="35" message="Using this clock option together with the CKDIV8 fuse bit will require a slow ISP speed ~2kHz."/>
   </warnings>
 </AVRdevice>

@@ -5,13 +5,13 @@
   <defaults lfuse="223" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="786649256" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="128" offset="0" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
-    <option3 bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
-    <option4 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
-    <option5 bitmask="16" offset="0" name="DWEN" desc="Debug Wire enable" enum=""/>
-    <option6 bitmask="8" offset="0" name="SELFPRGEN" desc="Self Programming enable" enum=""/>
-    <option7 bitmask="7" offset="0" name="SUT" desc="Select start-up time" enum="list">
+    <option bitmask="2985493568" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="128" offset="0" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
+    <option bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option bitmask="16" offset="0" name="DWEN" desc="Debug Wire enable" enum=""/>
+    <option bitmask="8" offset="0" name="SELFPRGEN" desc="Self Programming enable" enum=""/>
+    <option bitmask="7" offset="0" name="SUT" desc="Select start-up time" enum="list">
       <entry val="0" txt="Start-up time 6 CK/14 CK + 4 ms"/>
       <entry val="1" txt="Start-up time 6 CK/14 CK + 8 ms"/>
       <entry val="2" txt="Start-up time 6 CK/14 CK + 16 ms"/>
@@ -20,10 +20,10 @@
       <entry val="5" txt="Start-up time 6 CK/14 CK + 128 ms"/>
       <entry val="6" txt="Start-up time 6 CK/14 CK + 256 ms"/>
       <entry val="7" txt="Start-up time 6 CK/14 CK + 512 ms"/>
-    </option7>
+    </option>
   </settings>
   <warnings>
-    <case1 byte="0" mask="32" result="0" message="These fuse settings will disable the ISP interface!"/>
-    <case2 byte="0" mask="16" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
+    <case byte="0" mask="32" result="0" message="These fuse settings will disable the ISP interface!"/>
+    <case byte="0" mask="16" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
   </warnings>
 </AVRdevice>

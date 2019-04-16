@@ -5,10 +5,10 @@
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="785889792" offset="512" name="" desc="FUSE REGISTER:  BYTE0" enum=""/>
-    <option2 bitmask="4" offset="0" name="CKOUT" desc="Output external clock" enum=""/>
-    <option3 bitmask="2" offset="0" name="WDTON" desc="Watch dog timer always on" enum=""/>
-    <option4 bitmask="1" offset="0" name="RSTDISBL" desc="Disable external reset" enum=""/>
+    <option bitmask="0" offset="512" name="" desc="FUSE REGISTER:  BYTE0" enum=""/>
+    <option bitmask="4" offset="0" name="CKOUT" desc="Output external clock" enum=""/>
+    <option bitmask="2" offset="0" name="WDTON" desc="Watch dog timer always on" enum=""/>
+    <option bitmask="1" offset="0" name="RSTDISBL" desc="Disable external reset" enum=""/>
   </settings>
   <warnings/>
 </AVRdevice>

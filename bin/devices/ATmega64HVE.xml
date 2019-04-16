@@ -5,31 +5,31 @@
   <defaults lfuse="214" hfuse="249" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
-    <option2 bitmask="8" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
-    <option3 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
+    <option bitmask="2985449064" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option bitmask="8" offset="1" name="DWEN" desc="Debug Wire enable" enum=""/>
+    <option bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
       <entry val="3" txt="Boot Flash size=512 words Boot address=$7E00"/>
       <entry val="2" txt="Boot Flash size=1024 words Boot address=$7C00"/>
       <entry val="1" txt="Boot Flash size=2048 words Boot address=$7800"/>
       <entry val="0" txt="Boot Flash size=4096 words Boot address=$7000"/>
-    </option3>
-    <option4 bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
-    <option5 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option6 bitmask="128" offset="0" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
-    <option7 bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
-    <option8 bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
-    <option9 bitmask="16" offset="0" name="BODEN" desc="Enable BOD" enum=""/>
-    <option10 bitmask="8" offset="0" name="CKDIV8" desc="Divide clock by 8" enum=""/>
-    <option11 bitmask="6" offset="0" name="SUT" desc="Select start-up time" enum="list">
+    </option>
+    <option bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
+    <option bitmask="2985449064" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="128" offset="0" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
+    <option bitmask="64" offset="0" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option bitmask="32" offset="0" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option bitmask="16" offset="0" name="BODEN" desc="Enable BOD" enum=""/>
+    <option bitmask="8" offset="0" name="CKDIV8" desc="Divide clock by 8" enum=""/>
+    <option bitmask="6" offset="0" name="SUT" desc="Select start-up time" enum="list">
       <entry val="0" txt="Start-up time 14 CK + 0 ms"/>
       <entry val="1" txt="Start-up time 14 CK + 16 ms"/>
       <entry val="2" txt="Start-up time 14 CK + 32 ms"/>
       <entry val="3" txt="Start-up time 14 CK + 64 ms"/>
-    </option11>
-    <option12 bitmask="1" offset="0" name="OSCSEL0" desc="Oscillator select" enum=""/>
+    </option>
+    <option bitmask="1" offset="0" name="OSCSEL0" desc="Oscillator select" enum=""/>
   </settings>
   <warnings>
-    <case1 byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
-    <case2 byte="1" mask="8" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
+    <case byte="0" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case byte="1" mask="8" result="0" message="Enabling DEBUGWIRE will make the ISP interface inaccessible!"/>
   </warnings>
 </AVRdevice>

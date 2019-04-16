@@ -5,16 +5,16 @@
   <defaults lfuse="255" hfuse="255" efuse="255"/>
   <settings>
     <fusebytes count="1"/>
-    <option1 bitmask="0" offset="512" name="" desc="FUSE REGISTER:  BYTE0" enum=""/>
-    <option2 bitmask="112" offset="0" name="BODLEVEL" desc="Brown-out Detector trigger level" enum="list">
+    <option bitmask="0" offset="512" name="" desc="FUSE REGISTER:  BYTE0" enum=""/>
+    <option bitmask="112" offset="0" name="BODLEVEL" desc="Brown-out Detector trigger level" enum="list">
       <entry val="7" txt="Brown-out detection disabled; [BODLEVEL=111]"/>
       <entry val="6" txt="Brown-out detection at VCC=1.8 V"/>
       <entry val="5" txt="Brown-out detection at VCC=2.7 V"/>
       <entry val="4" txt="Brown-out detection at VCC=4.3 V"/>
-    </option2>
-    <option3 bitmask="4" offset="0" name="CKOUT" desc="Output external clock" enum=""/>
-    <option4 bitmask="2" offset="0" name="WDTON" desc="Watch dog timer always on" enum=""/>
-    <option5 bitmask="1" offset="0" name="RSTDISBL" desc="Disable external reset" enum=""/>
+    </option>
+    <option bitmask="4" offset="0" name="CKOUT" desc="Output external clock" enum=""/>
+    <option bitmask="2" offset="0" name="WDTON" desc="Watch dog timer always on" enum=""/>
+    <option bitmask="1" offset="0" name="RSTDISBL" desc="Disable external reset" enum=""/>
   </settings>
   <warnings/>
 </AVRdevice>

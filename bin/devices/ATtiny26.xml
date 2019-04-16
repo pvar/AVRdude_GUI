@@ -5,9 +5,9 @@
   <defaults lfuse="249" hfuse="247" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="784989936" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="64" offset="0" name="CKOPT" desc="CKOPT fuse (operation dependent of CKSEL fuses)" enum=""/>
-    <option3 bitmask="191" offset="0" name="PLLCK_SUT_CKSEL" desc="Select Clock Source" enum="list">
+    <option bitmask="2986403688" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="64" offset="0" name="CKOPT" desc="CKOPT fuse (operation dependent of CKSEL fuses)" enum=""/>
+    <option bitmask="191" offset="0" name="PLLCK_SUT_CKSEL" desc="Select Clock Source" enum="list">
       <entry val="1" txt="PLL Clock; Start-up time: 1K CK + 0 ms"/>
       <entry val="17" txt="PLL Clock; Start-up time: 1K CK + 4 ms"/>
       <entry val="33" txt="PLL Clock; Start-up time: 1K CK + 64 ms"/>
@@ -70,19 +70,19 @@
       <entry val="95" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 0 ms"/>
       <entry val="111" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 4 ms"/>
       <entry val="127" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 64 ms"/>
-    </option3>
-    <option4 bitmask="784989936" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
-    <option5 bitmask="16" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PB7 as i/o pin)" enum=""/>
-    <option6 bitmask="8" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
-    <option7 bitmask="4" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
-    <option8 bitmask="2" offset="1" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
+    </option>
+    <option bitmask="2986403688" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option bitmask="16" offset="1" name="RSTDISBL" desc="Reset Disabled (Enable PB7 as i/o pin)" enum=""/>
+    <option bitmask="8" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option bitmask="4" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option bitmask="2" offset="1" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
       <entry val="0" txt="Brown-out detection at VCC=4.0 V"/>
       <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
-    </option8>
-    <option9 bitmask="1" offset="1" name="BODEN" desc="Brown-out detection enabled" enum=""/>
+    </option>
+    <option bitmask="1" offset="1" name="BODEN" desc="Brown-out detection enabled" enum=""/>
   </settings>
   <warnings>
-    <case1 byte="1" mask="8" result="8" message="These fuse settings will disable the ISP interface!"/>
-    <case2 byte="1" mask="16" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
+    <case byte="1" mask="8" result="8" message="These fuse settings will disable the ISP interface!"/>
+    <case byte="1" mask="16" result="0" message="Disabling external reset will make the ISP interface inaccessible!"/>
   </warnings>
 </AVRdevice>

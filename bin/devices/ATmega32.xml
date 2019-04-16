@@ -5,13 +5,13 @@
   <defaults lfuse="241" hfuse="153" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="3" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
+    <option bitmask="2985550616" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
       <entry val="0" txt="Brown-out detection at VCC=4.0 V"/>
       <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
-    </option2>
-    <option3 bitmask="64" offset="0" name="BODEN" desc="Brown-out detection enabled" enum=""/>
-    <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+    </option>
+    <option bitmask="64" offset="0" name="BODEN" desc="Brown-out detection enabled" enum=""/>
+    <option bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
       <entry val="0" txt="Ext. Clock; Start-up time: 6 CK + 0 ms"/>
       <entry val="16" txt="Ext. Clock; Start-up time: 6 CK + 4 ms"/>
       <entry val="32" txt="Ext. Clock; Start-up time: 6 CK + 64 ms"/>
@@ -70,23 +70,23 @@
       <entry val="31" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 0 ms"/>
       <entry val="47" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 4 ms"/>
       <entry val="63" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 64 ms"/>
-    </option4>
-    <option5 bitmask="3" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
-    <option6 bitmask="128" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
-    <option7 bitmask="64" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
-    <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
-    <option9 bitmask="16" offset="1" name="CKOPT" desc="Oscillator options" enum=""/>
-    <option10 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
-    <option11 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
+    </option>
+    <option bitmask="2985550616" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option bitmask="128" offset="1" name="OCDEN" desc="On-Chip Debug Enabled" enum=""/>
+    <option bitmask="64" offset="1" name="JTAGEN" desc="JTAG Interface Enabled" enum=""/>
+    <option bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option bitmask="16" offset="1" name="CKOPT" desc="Oscillator options" enum=""/>
+    <option bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
       <entry val="3" txt="Boot Flash size=256 words start address=$3F00"/>
       <entry val="2" txt="Boot Flash size=512 words start address=$3E00"/>
       <entry val="1" txt="Boot Flash size=1024 words start address=$3C00"/>
       <entry val="0" txt="Boot Flash size=2048 words start address=$3800"/>
-    </option11>
-    <option12 bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
+    </option>
+    <option bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
   </settings>
   <warnings>
-    <case1 byte="1" mask="64" result="64" message="These fuse settings will disable the JTAG interface!"/>
-    <case2 byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
+    <case byte="1" mask="64" result="64" message="These fuse settings will disable the JTAG interface!"/>
+    <case byte="1" mask="32" result="32" message="These fuse settings will disable the ISP interface!"/>
   </warnings>
 </AVRdevice>

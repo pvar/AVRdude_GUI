@@ -5,13 +5,13 @@
   <defaults lfuse="193" hfuse="217" efuse="255"/>
   <settings>
     <fusebytes count="2"/>
-    <option1 bitmask="784530272" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
-    <option2 bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
+    <option bitmask="1255877376" offset="512" name="" desc="FUSE REGISTER:  LOW" enum=""/>
+    <option bitmask="128" offset="0" name="BODLEVEL" desc="Brown out detector trigger level" enum="list">
       <entry val="0" txt="Brown-out detection at VCC=4.0 V"/>
       <entry val="1" txt="Brown-out detection at VCC=2.7 V"/>
-    </option2>
-    <option3 bitmask="64" offset="0" name="BODEN" desc="Brown-out detection enabled" enum=""/>
-    <option4 bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
+    </option>
+    <option bitmask="64" offset="0" name="BODEN" desc="Brown-out detection enabled" enum=""/>
+    <option bitmask="63" offset="0" name="SUT_CKSEL" desc="Select Clock Source" enum="list">
       <entry val="0" txt="Ext. Clock; Start-up time: 6 CK + 0 ms"/>
       <entry val="16" txt="Ext. Clock; Start-up time: 6 CK + 4 ms"/>
       <entry val="32" txt="Ext. Clock; Start-up time: 6 CK + 64 ms"/>
@@ -70,20 +70,20 @@
       <entry val="31" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 0 ms"/>
       <entry val="47" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 4 ms"/>
       <entry val="63" txt="Ext. Crystal/Resonator High Freq.; Start-up time: 16K CK + 64 ms"/>
-    </option4>
-    <option5 bitmask="784530272" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
-    <option6 bitmask="128" offset="1" name="S8535C" desc="AT90S4434/8535 compatibility mode" enum=""/>
-    <option7 bitmask="64" offset="1" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
-    <option8 bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
-    <option9 bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
-    <option10 bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
+    </option>
+    <option bitmask="1255877376" offset="512" name="" desc="FUSE REGISTER:  HIGH" enum=""/>
+    <option bitmask="128" offset="1" name="S8535C" desc="AT90S4434/8535 compatibility mode" enum=""/>
+    <option bitmask="64" offset="1" name="WDTON" desc="Watch-dog Timer always on" enum=""/>
+    <option bitmask="32" offset="1" name="SPIEN" desc="Serial program downloading (SPI) enabled" enum=""/>
+    <option bitmask="8" offset="1" name="EESAVE" desc="Preserve EEPROM through the Chip Erase cycle" enum=""/>
+    <option bitmask="6" offset="1" name="BOOTSZ" desc="Select Boot Size" enum="list">
       <entry val="3" txt="Boot Flash size=128 words Boot address=$0F80"/>
       <entry val="2" txt="Boot Flash size=256 words Boot address=$0F00"/>
       <entry val="1" txt="Boot Flash size=512 words Boot address=$0E00"/>
       <entry val="0" txt="Boot Flash size=1024 words Boot address=$0C00"/>
-    </option10>
-    <option11 bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
-    <option12 bitmask="16" offset="1" name="CKOPT" desc="CKOPT fuse (operation dependent of CKSEL fuses)" enum=""/>
+    </option>
+    <option bitmask="1" offset="1" name="BOOTRST" desc="Boot Reset vector Enabled" enum=""/>
+    <option bitmask="16" offset="1" name="CKOPT" desc="CKOPT fuse (operation dependent of CKSEL fuses)" enum=""/>
   </settings>
   <warnings/>
 </AVRdevice>
