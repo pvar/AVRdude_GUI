@@ -6,6 +6,9 @@
 
 class DeviceDescription {
         public:
+                DeviceDescription();
+                virtual ~DeviceDescription();
+
                 // description of a single fuse warning
                 struct FuseWarning {
                         uint fbyte;
@@ -29,9 +32,6 @@ class DeviceDescription {
                         std::string ename;      // entry name
                         uint value;             // entry value
                 };
-
-                DeviceDescription();
-                virtual ~DeviceDescription();
 
                 // fundamental MCU properties
                 bool eeprom_exists;

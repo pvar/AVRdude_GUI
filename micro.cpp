@@ -13,10 +13,9 @@ Micro::~Micro()
                 delete description;
 }
 
-
 void Micro::get_device_list (void)
 {
-        // initialize map (device to xmlfile)
+        // initialize device to xmlfile mapping
         device_map = new map <string, string>;
 
         // attempt to get mapping from file
@@ -37,26 +36,22 @@ void Micro::get_device_list (void)
                 Parser xml;
                 string file_uri, device, file;
                 while ((entry = readdir(directory)) != NULL) {
-
                         // get a filename
                         file = entry->d_name;
-
                         // check for appropriate length
                         if (file.size() < 4)
                                 continue;
-
                         // look for expected extension
                         if ((file.compare(file.size() - 3, 3, "xml") != 0) &&
                             (file.compare(file.size() - 3, 3, "XML") != 0))
                                 continue;
-
-                        cout << "Checking: " << file;
+                        //cout << "Checking: " << file;
                         file_uri = path + file;
                         if (xml.is_description (file_uri, device)) {
-                                cout << ": It is!" << endl;
+                                //cout << ": It is!" << endl;
                                 (*device_map)[device] = file;
                         } else {
-                                cout << ": NOT!" << endl;
+                                //cout << ": NOT!" << endl;
                                 continue;
                         }
                 }
@@ -74,7 +69,6 @@ void Micro::get_device_list (void)
         save_xml_map();
 }
 
-
 void Micro::save_xml_map (void)
 {
         // open file for saving device to xml mapping
@@ -90,7 +84,6 @@ void Micro::save_xml_map (void)
         // close file
         map_file.close();
 }
-
 
 bool Micro::load_xml_map (void)
 {
@@ -111,23 +104,15 @@ bool Micro::load_xml_map (void)
                 // add new entry in device-to-xml map
                 (*device_map)[device] = filename;
                 counter++;
-                //cout << line << endl;
-                //cout << device << endl;
-                //cout << filename << endl;
         }
         // close file
         map_file.close();
-        // check if any devices were found...
+        // check if any devices were found
         if (counter == 0)
                 return false;
         else
                 return true;
 }
-
-
-// ******************************************************************************
-// Parse data from specified file
-// ******************************************************************************
 
 void Micro::parse_data (string xml_file)
 {
@@ -137,15 +122,17 @@ void Micro::parse_data (string xml_file)
                 return;
         }
 
+        // delete any previous instance of device description
         if (description)
                 delete description;
 
+        // cerate new instance of device description
         description = new DeviceDescription;
 
-        // put name of description-file in specifications
+        // keep filename of XML in device description
         description->xml_filename = xml_file;
 
-        // prepare path to specified description-file
+        // prepare path to specified file
         string xml_dir = ("devices/");
         string path_to_file = this->exec_path + xml_dir + xml_file;
 
