@@ -607,10 +607,13 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
 
         // used to populate tree-models
         Gtk::TreeModel::Row row;
+
         // index to next grid-line
         guint grid_line = 1;
+
         // create list of fuse-widgets
         fuse_tab_widgets = new list<FuseWidget>;
+
         // loop through fuse-options: create and display corresponding widgets
         list<DeviceDescription::FuseSetting>::iterator iter;
         for (iter = (microcontroller->description->fuse_settings)->begin(); iter != (microcontroller->description->fuse_settings)->end(); ++iter) {
@@ -618,6 +621,7 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
                 FuseWidget *widget_entry = new FuseWidget;
                 // create new instance of signal connection
                 widget_entry->callback = new sigc::connection;
+
                 // decide what kind of widget is needed
                 if ((*iter).single_option) {
                         // check if "single setting" or "register name"
@@ -653,7 +657,7 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
                         // create pointer to treemodel
                         widget_entry->model = Gtk::ListStore::create(cbm_generic);
                         // prepare to loop through the enumerator members
-                        list<DeviceDescription::OptionEntry>* this_enum_list = (*(microcontroller->description)->option_lists)[(*iter).fenum];
+                        list<DeviceDescription::OptionEntry>* this_enum_list = (*(microcontroller->description)->option_lists)[(*iter).fname];
                         list<DeviceDescription::OptionEntry>::iterator enum_iter = this_enum_list->begin();
                         // get value from first entry (this is a pseudo entry with the maximum value of all entries)
                         widget_entry->max_value = enum_iter->value;

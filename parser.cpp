@@ -43,177 +43,6 @@ Parser::status Parser::get_content (std::string filename, xmlpp::DomParser &pars
         return status::success;
 }
 
-
-xmlpp::Node* Parser::get_child_with_attr (xmlpp::Node* starting_node, string att_name, string att_value)
-{
-        xmlpp::Node *target = nullptr;
-        xmlpp::Node::NodeList::iterator node_iterator;
-        xmlpp::Element::AttributeList::const_iterator att_iterator;
-        xmlpp::Node::NodeList children = starting_node->get_children();
-
-        // loop through child-nodes
-        for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
-                if (const xmlpp::Element* nodeElement = dynamic_cast<const xmlpp::Element*>(*node_iterator)) {
-                        // loop through attribute-nodes
-                        const xmlpp::Element::AttributeList& attributes = nodeElement->get_attributes();
-                        for(att_iterator = attributes.begin(); att_iterator != attributes.end(); ++att_iterator) {
-                                // break inner loop if target has been pinpointed
-                                if ((*att_iterator)->get_name().compare(att_name) == 0)
-                                        if ((*att_iterator)->get_value().compare(att_value) == 0) {
-                                                //cout << (*att_iterator)->get_name() << " = " << (*att_iterator)->get_value() << endl;
-                                                target = *node_iterator;
-                                                break;
-                                        }
-                        }
-                        // break outer loop if target has been defined
-                        if (target != nullptr)
-                                break;
-                }
-        }
-        return target;
-}
-
-
-string Parser::get_txt_value (xmlpp::Node* starting_node)
-{
-        const xmlpp::TextNode *text = NULL;
-        xmlpp::Node::NodeList::iterator iter;
-        xmlpp::Node::NodeList children = starting_node->get_children();
-
-        // loop through child-nodes
-        for (iter = children.begin(); iter != children.end(); ++iter) {
-                text = dynamic_cast<const xmlpp::TextNode*>(*iter);
-                if (text)
-                        break;
-                else
-                        continue;
-        }
-        return text->get_content();
-}
-
-
-string Parser::get_att_value (xmlpp::Node* xml_node, string att_name)
-{
-        xmlpp::Node::NodeList::iterator node_iterator;
-        xmlpp::Element::AttributeList::const_iterator att_iterator;
-        string data_string;
-
-//xmlpp::Element* this_element = dynamic_cast<const xmlpp::Element*>(xml_node);
-//cout << this_element->get_attribute_value("", "dudegui");
-
-        if (const xmlpp::Element* nodeElement = dynamic_cast<const xmlpp::Element*>(xml_node)) {
-                // loop through attribute-nodes
-                const xmlpp::Element::AttributeList& attributes = nodeElement->get_attributes();
-                for(att_iterator = attributes.begin(); att_iterator != attributes.end(); ++att_iterator) {
-                        // break inner loop if target has been pinpointed
-                        if ((*att_iterator)->get_name().compare(att_name) == 0) {
-                                //cout << (*att_iterator)->get_name() << " = " << (*att_iterator)->get_value() << endl;
-                                data_string = (*att_iterator)->get_value();
-                                break;
-                        }
-                }
-        }
-        return data_string;
-}
-
-
-list<DeviceDescription::OptionEntry>* Parser::get_enum_list (xmlpp::Node* xml_node)
-{
-        list<DeviceDescription::OptionEntry> *enum_listing = new list<DeviceDescription::OptionEntry>;
-
-        xmlpp::Node::NodeList::iterator node_iterator;
-        xmlpp::Element::AttributeList::const_iterator att_iterator;
-        xmlpp::Node::NodeList children = xml_node->get_children();
-        string tmp_string;
-        uint max_value = 0;
-
-        // loop through child-nodes (enum nodes)
-        for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
-                if (const xmlpp::Element* nodeElement = dynamic_cast<const xmlpp::Element*>(*node_iterator)) {
-                        // loop through attribute-nodes
-                        DeviceDescription::OptionEntry *entry = new DeviceDescription::OptionEntry;
-                        const xmlpp::Element::AttributeList& attributes = nodeElement->get_attributes();
-                        for(att_iterator = attributes.begin(); att_iterator != attributes.end(); ++att_iterator) {
-                                if ((*att_iterator)->get_name().compare("text") == 0) {
-                                        entry->ename = (*att_iterator)->get_value();
-                                        //cout << entry->ename << endl;
-                                } else if ((*att_iterator)->get_name().compare("val") == 0) {
-                                        string strvalue = ((*att_iterator)->get_value()).substr(2, 2);
-                                        entry->value = stol (strvalue, nullptr, 16);
-                                        if (max_value < entry->value)
-                                                max_value = entry->value;
-                                        //cout << entry->value << endl;
-                                }
-                        }
-                        enum_listing->push_back(*entry);
-                        delete entry;
-                }
-        }
-        // insert pseudo enumerator-entry with maximum value
-        DeviceDescription::OptionEntry *entry = new DeviceDescription::OptionEntry;
-        entry->ename = "PSEUDO_ENTRY";
-        entry->value = max_value;
-        enum_listing->push_front(*entry);
-        delete entry;
-        return enum_listing;
-}
-
-
-list<DeviceDescription::FuseSetting>* Parser::get_fuse_list (xmlpp::Node* xml_node, unsigned int offset)
-{
-        list<DeviceDescription::FuseSetting> *fuse_listing = new list<DeviceDescription::FuseSetting>;
-
-        xmlpp::Node::NodeList::iterator node_iterator;
-        xmlpp::Element::AttributeList::const_iterator att_iterator;
-
-        xmlpp::Node::NodeList children = xml_node->get_children();
-        string tmp_string;
-
-        // loop through child-nodes (bitfield nodes)
-        for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
-                if (const xmlpp::Element* nodeElement = dynamic_cast<const xmlpp::Element*>(*node_iterator)) {
-                        // loop through attribute-nodes
-                        DeviceDescription::FuseSetting *entry = new DeviceDescription::FuseSetting;
-                        entry->fenum = ""; // must initialize to empty
-                        entry->offset = offset;
-                        const xmlpp::Element::AttributeList& attributes = nodeElement->get_attributes();
-                        for(att_iterator = attributes.begin(); att_iterator != attributes.end(); ++att_iterator) {
-                                if ((*att_iterator)->get_name().compare("name") == 0) {
-                                        entry->fname = (*att_iterator)->get_value();
-                                        //cout << entry->fname << endl;
-                                } else if ((*att_iterator)->get_name().compare("text") == 0) {
-                                        entry->fdesc = (*att_iterator)->get_value();
-                                        //cout << entry->fdesc << endl;
-                                } else if ((*att_iterator)->get_name().compare("enum") == 0) {
-                                        entry->fenum = (*att_iterator)->get_value();
-                                        //cout << entry->fenum << endl;
-                                } else if ((*att_iterator)->get_name().compare("mask") == 0) {
-                                        string strvalue = ((*att_iterator)->get_value()).substr(2, 2);
-                                        entry->fmask = stol (strvalue, nullptr, 16);
-                                        //cout << entry->fmask << endl;
-                                }
-                        }
-                        if ((entry->fenum).size() == 0)
-                                entry->single_option = true;
-                        else
-                                entry->single_option = false;
-                        fuse_listing->push_back(*entry);
-                        delete entry;
-                }
-        }
-        return fuse_listing;
-}
-
-string Parser::float_to_string (float number)
-{
-        string value(16, '\0');
-        int chars_written = snprintf(&value[0], value.size(), "%.1f", number);
-        value.resize(chars_written);
-
-        return (string)value;
-}
-
-
 bool Parser::is_description (string filename, std::string &device_name)
 {
         bool desc_file = false;
@@ -236,103 +65,92 @@ bool Parser::is_description (string filename, std::string &device_name)
         return desc_file;
 }
 
-
 Parser::status Parser::get_settings (xmlpp::Node *root_node, DeviceDescription &description)
 {
-        //cout << "PARSING FUSES..." << endl;
+        xmlpp::Node* xml_node;
+        xmlpp::Element* tmp_element;
+        xmlpp::Node::NodeList options;
+        xmlpp::Node::NodeList entries;
+        xmlpp::Node::NodeList::iterator option;
+        xmlpp::Node::NodeList::iterator entry;
 
-        xmlpp::Node* xml_node = root_node;
-        xmlpp::Node* tmp_node = nullptr;
+        DeviceDescription::FuseSetting *fuse_option;
+        DeviceDescription::OptionEntry *enum_entry;
+        list<DeviceDescription::OptionEntry> *enum_list;
 
-        // go to V2 node
-        xml_node = xml_node->get_first_child("V2");
-        // if no such node, it must be a device without fuses...
-        if (!xml_node)
-                return Parser::status::no_content;
-        // go to templates node
-        xml_node = xml_node->get_first_child("templates");
-        // if no such node, it must be a device without fuses...
-        if (!xml_node)
-                return Parser::status::no_content;
-        // go to node with attribute: class = "FUSE"
-        tmp_node = get_child_with_attr(xml_node,  "class", "FUSE");
+        string value_str;
 
-        // if no such node, check if it's a device with NVM...
-        if (!tmp_node) {
-                // go to node with attribute: class = "NVM"
-                tmp_node = get_child_with_attr(xml_node,  "class", "NVM");
-                // if no such node, it must be a device without fuses...
-                if (!tmp_node)
-                        return Parser::status::no_content;
-                // go to node with attribute: name = "NVM_FUSES"
-                tmp_node = get_child_with_attr(tmp_node,  "name", "NVM_FUSES");
-                // if no such node, there must be a problem...
-                if (!tmp_node)
-                        return Parser::status::doc_error;
-                // use default node pointer
-                xml_node = tmp_node;
-        } else {
-                // go to registers node
-                tmp_node = tmp_node->get_first_child("registers");
-                // use default node pointer
-                xml_node = tmp_node;
+        // get number of fusebytes
+        xml_node = root_node->get_first_child("settings");
+        xml_node = xml_node->get_first_child("fusebytes");
+        tmp_element = dynamic_cast<xmlpp::Element*>(xml_node);
+        value_str = tmp_element->get_attribute_value("count", "");
+        description.fusebytes_count = atoi(value_str.c_str());
+
+        // get list of XML nodes with options
+        xml_node = root_node->get_first_child("settings");
+        options = xml_node->get_children("option");
+
+        // loop through available options
+        int enum_entry_counter;
+        for (option = options.begin(); option != options.end(); ++option) {
+                // get XML element with option
+                tmp_element = dynamic_cast<xmlpp::Element*>(*option);
+                // create option entry
+                fuse_option = new DeviceDescription::FuseSetting;
+                // define this entry
+                fuse_option->fname = tmp_element->get_attribute_value("name", "");
+                fuse_option->fenum = tmp_element->get_attribute_value("enum", "");
+                fuse_option->fdesc = tmp_element->get_attribute_value("desc", "");
+                value_str = tmp_element->get_attribute_value("offset", "");
+                fuse_option->offset = atoi(value_str.c_str());
+                if (fuse_option->offset == 512) {
+                        fuse_option->fmask = 512;
+                } else {
+                        value_str = tmp_element->get_attribute_value("bitmask", "");
+                        fuse_option->fmask = atoi(value_str.c_str());
+                }
+
+                // check if there is an enumerator
+                if (fuse_option->fenum != "list") {
+                        fuse_option->single_option = true;
+                } else {
+                        fuse_option->single_option = false;
+                        // prepare list for this enum entries
+                        enum_list = new list<DeviceDescription::OptionEntry>;
+                        // get list of XML nodes with enum entries
+                        entries = (*option)->get_children("entry");
+                        // loop through available enum entries
+                        enum_entry_counter = 0;
+                        for (entry = entries.begin(); entry != entries.end(); ++entry) {
+                                // get XML element with option
+                                tmp_element = dynamic_cast<xmlpp::Element*>(*entry);
+                                // create enum entry
+                                enum_entry = new DeviceDescription::OptionEntry;
+                                enum_entry->ename = tmp_element->get_attribute_value("txt", "");
+                                value_str = tmp_element->get_attribute_value("val", "");
+                                enum_entry->value = atoi(value_str.c_str());
+                                // add this entry in enumerator list
+                                enum_list->push_back(*enum_entry);
+                                // delete this enum entry
+                                delete enum_entry;
+                                enum_entry_counter++;
+                        }
+                        // insert pseudo enum entry that mentions number of real entries
+                        enum_entry = new DeviceDescription::OptionEntry;
+                        enum_entry->ename = "";
+                        enum_entry->value = enum_entry_counter;
+                        enum_list->push_front(*enum_entry);
+                        delete enum_entry;
+                        // add this enumerator in name to enum mapping
+                        (*description.option_lists)[fuse_option->fname] = enum_list;
+                }
+
+                // add this entry in list of settings
+                description.fuse_settings->push_back(*fuse_option);
+                // delete this entry
+                delete fuse_option;
         }
-
-        int fuse_byte_counter = 0;
-        // loop through children (reg nodes)
-        xmlpp::Node::NodeList children = xml_node->get_children();
-        xmlpp::Node::NodeList::iterator node_iterator;
-        for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
-                // get offset value for this reg node
-                string regoffset = get_att_value((*node_iterator), "offset");
-                // if no offset attribute was found, proceed to next iteration
-                if (regoffset.size() < 1)
-                        continue;
-                // increase fuse-byte counter
-                fuse_byte_counter++;
-                unsigned int offset = ::atoi((regoffset.substr(2, 2)).c_str());
-                // get name for this reg node
-                string regname = get_att_value((*node_iterator), "name");
-                // prepare pseudo-setting with fuse-byte name
-                DeviceDescription::FuseSetting *entry = new DeviceDescription::FuseSetting;
-                entry->single_option = true;
-                entry->fdesc = "FUSE REGISTER:  " + regname;
-                entry->offset = 512; // special value that denotes a pseudo-entry
-                // prepare list of settings from this node
-                list<DeviceDescription::FuseSetting> *fuse_listing = new list<DeviceDescription::FuseSetting>;
-                fuse_listing = get_fuse_list ((*node_iterator), offset);
-                // add pseudo-setting in this list of settings
-                fuse_listing->push_front(*entry);
-                // add this settings list to the rest
-                list<DeviceDescription::FuseSetting>::iterator pos = (description.fuse_settings)->begin();
-                (description.fuse_settings)->splice(pos, *fuse_listing);
-                delete entry;
-        }
-        //cout << "FUSE BYTES: " << fuse_byte_counter << endl;
-        description.fusebytes_count = fuse_byte_counter;
-
-        // debug print-out...
-        //print_settings(description);
-
-        // go up to parent node
-        xml_node = xml_node->get_parent();
-        // loop through children (registers and enumerator nodes)
-        children = xml_node->get_children();
-        for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
-                // skip irrelevant nodes (namely registers)
-                if (((*node_iterator)->get_name()).compare("enumerator") != 0)
-                        continue;
-                // prepare list with this enumerator's entries
-                list<DeviceDescription::OptionEntry> *enum_listing = new list<DeviceDescription::OptionEntry>;
-                enum_listing = get_enum_list ((*node_iterator));
-                // get enumerator name
-                string enum_name = get_att_value ((*node_iterator), "name");
-                // add new entry in map
-                (*description.option_lists)[enum_name] = enum_listing;
-        }
-
-        // debug print-out...
-        //print_options(description);
 
         return Parser::status::success;
 }
@@ -347,15 +165,13 @@ Parser::status Parser::get_warnings (xmlpp::Node *root_node, DeviceDescription &
         DeviceDescription::FuseWarning *warning_entry;
         string value_str;
 
-        // get XML element with warnings
+        // get list of XML nodes with warnings
         xml_node = root_node->get_first_child("warnings");
-        warnings = xml_node->get_children();
+        warnings = xml_node->get_children("case");
 
+        // loop through available warnings
         for (wcase = warnings.begin(); wcase != warnings.end(); ++wcase) {
-                // skip irrelevant children
-                if ((*wcase)->get_name() == "text")
-                        continue;
-                // get element with current warning
+                // get XML element with warning
                 tmp_element = dynamic_cast<xmlpp::Element*>(*wcase);
                 // create warning entry
                 warning_entry = new DeviceDescription::FuseWarning;
@@ -453,20 +269,4 @@ Parser::status Parser::get_metadata (xmlpp::Node *root_node, DeviceDescription &
         */
 
         return Parser::status::success;
-}
-
-string Parser::get_signature_bytes (xmlpp::Node* signature_node)
-{
-        const xmlpp::TextNode *text = NULL;
-        xmlpp::Node::NodeList::iterator iter;
-        xmlpp::Node::NodeList children = signature_node->get_children();
-        string signatrure;
-
-        signatrure = "0x";
-        for (iter = children.begin(); iter != children.end(); ++iter) {
-                text = dynamic_cast<const xmlpp::TextNode*>(*iter);
-                if (!text)
-                        signatrure += (get_txt_value((*iter))).substr(1, 2);
-        }
-        return signatrure;
 }
