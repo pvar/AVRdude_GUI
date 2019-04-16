@@ -36,10 +36,6 @@ class Parser
                 std::string get_txt_value (xmlpp::Node* starting_node);
                 std::string get_att_value (xmlpp::Node* xml_node, std::string att_name);
                 std::string float_to_string (float number);
-
-                void print_warnings (DeviceDescription &description);
-                void print_settings (DeviceDescription &description);
-                void print_options (DeviceDescription &description);
 };
 
 #endif

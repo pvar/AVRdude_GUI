@@ -213,43 +213,6 @@ string Parser::float_to_string (float number)
         return (string)value;
 }
 
-void Parser::print_warnings (DeviceDescription &description)
-{
-        list<DeviceDescription::FuseWarning>::iterator iter;
-        for (iter = description.warnings->begin(); iter != description.warnings->end(); iter++) {
-                cout << endl;
-                cout << "    byte: " << iter->fbyte << endl;
-                cout << "    mask: " << iter->fmask << endl;
-                cout << "   value: " << iter->fresult << endl;
-                cout << "    text: " << iter->warning << endl;
-        }
-}
-
-
-void Parser::print_settings (DeviceDescription &description)
-{
-        list<DeviceDescription::FuseSetting>::iterator iter;
-        for (iter = (description.fuse_settings)->begin(); iter != (description.fuse_settings)->end(); ++iter) {
-                cout << endl;
-                cout << (*iter).fname << " ";
-                cout << "mask[" << (*iter).fmask << "] ";
-                cout << "offset[" << (*iter).offset << "] ";
-                cout << "enum[" << (*iter).fenum << "] ";
-                cout << (*iter).fdesc << endl;
-        }
-}
-
-
-void Parser::print_options (DeviceDescription &description)
-{
-        map<string, list<DeviceDescription::OptionEntry>*>::iterator iter;
-        for (iter = (description.option_lists)->begin(); iter != (description.option_lists)->end(); ++iter) {
-                cout << iter->first << " => " << endl;
-                list<DeviceDescription::OptionEntry>::iterator iter2;
-                for (iter2 = (*iter->second).begin(); iter2 != (*iter->second).end(); ++iter2)
-                                cout << (*iter2).ename << endl;
-        }
-}
 
 bool Parser::is_description (string filename, std::string &device_name)
 {
@@ -259,8 +222,7 @@ bool Parser::is_description (string filename, std::string &device_name)
 
         if (Parser::status::success == get_content (filename, parser)) {
                 xmlpp::Node *xmlnode = parser.get_document()->get_root_node();
-                string root_name = xmlnode->get_name();
-                if (root_name.compare("AVRdevice") == 0) {
+                if (xmlnode->get_name() == "AVRdevice") {
                         desc_file = true;
 
                 xmlnode = xmlnode->get_first_child("metadata");
@@ -378,53 +340,50 @@ Parser::status Parser::get_settings (xmlpp::Node *root_node, DeviceDescription &
 
 Parser::status Parser::get_warnings (xmlpp::Node *root_node, DeviceDescription &description)
 {
-        //cout << "PARSING WARNINGS..." << endl;
-
-        // Fuse Warnings in XML file...
-        // <FuseWarning>[fuse-byte-no],[AND-mask],[result],[warning text]</FuseWarning>
-
-        string raw_warning;
+        xmlpp::Node* xml_node;
+        xmlpp::Element* tmp_element;
+        xmlpp::Node::NodeList warnings;
+        xmlpp::Node::NodeList::iterator wcase;
         DeviceDescription::FuseWarning *warning_entry;
+        string value_str;
 
-        xmlpp::Node* xml_node = root_node;
+        // get XML element with warnings
+        xml_node = root_node->get_first_child("warnings");
+        warnings = xml_node->get_children();
 
-        // go to PROGRAMMING node
-        xml_node = xml_node->get_first_child("PROGRAMMING");
-        // if no such node, it must be a device without fuses...
-        if (!xml_node)
-                return Parser::status::no_content;
-
-        // go to ISPInterface node
-        xml_node = xml_node->get_first_child("ISPInterface");
-        // if no such node, it must be a device without fuses...
-        if (!xml_node)
-                return Parser::status::no_content;
-
-        // loop through children and get warnings
-        xmlpp::Node::NodeList::iterator node_iterator;
-        xmlpp::Node::NodeList children = xml_node->get_children();
-        for (node_iterator = children.begin(); node_iterator != children.end(); ++node_iterator) {
-                // get name of current sibling...
-                const string node_name = (*node_iterator)->get_name();
-                // if not a FuseWarning, proceed to next sibling...
-                if (node_name.compare("FuseWarning") != 0)
+        for (wcase = warnings.begin(); wcase != warnings.end(); ++wcase) {
+                // skip irrelevant children
+                if ((*wcase)->get_name() == "text")
                         continue;
-                // get string (raw) representation of warning...
-                raw_warning = get_txt_value ((*node_iterator));
-                // assemble fuse warning structure
+                // get element with current warning
+                tmp_element = dynamic_cast<xmlpp::Element*>(*wcase);
+                // create warning entry
                 warning_entry = new DeviceDescription::FuseWarning;
-                stringstream(raw_warning.substr(0,1)) >> hex >> warning_entry->fbyte;
-                stringstream(raw_warning.substr(2,4)) >> hex >> warning_entry->fmask;
-                stringstream(raw_warning.substr(7,4)) >> hex >> warning_entry->fresult;
-                warning_entry->warning = raw_warning.substr(21,1000);
-                // inset warning in list
+                // get values for warning entry
+                value_str = tmp_element->get_attribute_value("byte","");
+                warning_entry->fbyte = atoi(value_str.c_str());
+                value_str = tmp_element->get_attribute_value("mask","");
+                warning_entry->fmask = atoi(value_str.c_str());
+                value_str = tmp_element->get_attribute_value("result","");
+                warning_entry->fresult = atoi(value_str.c_str());
+                warning_entry->warning = tmp_element->get_attribute_value("message","");
+                // insert warning in list
                 description.warnings->push_back(*warning_entry);
-                // delete temporary wanring entry
+                // delete this wanring entry
                 delete warning_entry;
         }
 
-        // debug print-out...
-        //print_warnings(description);
+        /*
+        // debug print-out
+        list<DeviceDescription::FuseWarning>::iterator iter;
+        for (iter = description.warnings->begin(); iter != description.warnings->end(); iter++) {
+                cout << endl;
+                cout << "    byte: " << iter->fbyte << endl;
+                cout << "    mask: " << iter->fmask << endl;
+                cout << "   value: " << iter->fresult << endl;
+                cout << "    text: " << iter->warning << endl;
+        }
+        */
 
         return Parser::status::success;
 }
@@ -456,8 +415,6 @@ Parser::status Parser::get_default (xmlpp::Node *root_node, DeviceDescription &d
 
 Parser::status Parser::get_metadata (xmlpp::Node *root_node, DeviceDescription &description)
 {
-        //cout << "PARSING SPECIFICATIONS..." << endl;
-
         xmlpp::Node* xml_node;
         xmlpp::Element* tmp_element;
 
