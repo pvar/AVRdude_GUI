@@ -17,10 +17,10 @@ Parser::status Parser::process_file (string filename, DeviceDescription &descrip
 
         xmlpp::Node *root_node = parser.get_document()->get_root_node();
 
-        get_specs (root_node, description);
-        get_settings (root_node, description);
+        get_metadata (root_node, description);
+        get_default  (root_node, description);
         get_warnings (root_node, description);
-        get_default (root_node, description);
+        get_settings (root_node, description);
 
         return status::success;
 }
@@ -525,101 +525,45 @@ Parser::status Parser::get_default (xmlpp::Node *root_node, DeviceDescription &d
 }
 
 
-Parser::status Parser::get_specs (xmlpp::Node *root_node, DeviceDescription &description)
+Parser::status Parser::get_metadata (xmlpp::Node *root_node, DeviceDescription &description)
 {
         //cout << "PARSING SPECIFICATIONS..." << endl;
 
-        xmlpp::Node* xml_node = root_node;
-        xmlpp::Node* tmp_node = nullptr;
-        string txtvalue;
-        gfloat numvalue;
+        xmlpp::Node* xml_node;
+        xmlpp::Element* tmp_element;
 
-        // go to ADMIN node
-        xml_node = xml_node->get_first_child("ADMIN");
-        // go to SPEED node
-        xml_node = xml_node->get_first_child("SPEED");
-        // get node content
-        txtvalue = get_txt_value(xml_node);
-        txtvalue.resize(txtvalue.size() - 3);
-        description.max_speed = txtvalue + " MHz";
-        //cout << "speed: " << description.max_speed << endl;
+        // get XML element with metadata
+        xml_node = root_node->get_first_child("metadata");
+        tmp_element = dynamic_cast<xmlpp::Element*>(xml_node);
 
-        // go up to ADMIN node
-        xml_node = xml_node->get_parent();
-        // go to BUILD node
-        xml_node = xml_node->get_first_child("BUILD");
-        // get node content
-        txtvalue = get_txt_value(xml_node);
-        description.xml_version = txtvalue;
-        //cout << "build: " << description.xml_version << endl;
-        // go up to ADMIN node
-        xml_node = xml_node->get_parent();
-        // go to SIGNATURE node
-        xml_node = xml_node->get_first_child("SIGNATURE");
-        // get node content
-        description.signature = get_signature_bytes(xml_node);
-        //cout << "signature: \"" << description.signature << "\"" << endl;
-        // go up to AVRPART node
-        xml_node = xml_node->get_parent();
-        xml_node = xml_node->get_parent();
-        // go to MEMORY node
-        xml_node = xml_node->get_first_child("MEMORY");
-        // go to PROG_FLASH node
-        xml_node = xml_node->get_first_child("PROG_FLASH");
-        // get node content
-        txtvalue = get_txt_value(xml_node);
-        numvalue = ::atof(txtvalue.c_str()) / 1024;
-        txtvalue = float_to_string(numvalue);
-        description.flash_size = txtvalue + " KB";
-        //cout << "flash: " << description.flash_size << endl;
-        // go up to MEMORY node
-        xml_node = xml_node->get_parent();
-        // go to EEPROM node
-        tmp_node = xml_node->get_first_child("EEPROM");
-        // if no such node, it must be a device without EEPROM
-        if (!tmp_node) {
-                description.eeprom_exists = false;
-                txtvalue = "0 Bytes";
-                description.sram_size = txtvalue;
-        } else {
+        // get metadata values
+        description.max_speed = tmp_element->get_attribute_value("speed","");
+        description.xml_version = tmp_element->get_attribute_value("xml_ver","");
+        description.flash_size = tmp_element->get_attribute_value("flash","");
+        description.sram_size = tmp_element->get_attribute_value("sram","");
+        description.eeprom_size = tmp_element->get_attribute_value("eeprom","");
+
+        // check if eeprom exists or not
+        if (tmp_element->get_attribute_value("eeprom","") == "yes")
                 description.eeprom_exists = true;
-                xml_node = tmp_node;
-                // get node content
-                txtvalue = get_txt_value(xml_node);
-                numvalue = ::atof(txtvalue.c_str()) / 1024;
-                // check for zero eeprom size
-                if (numvalue == 0)
-                        description.eeprom_exists = false;
-                // express size in KBytes
-                if (numvalue > 1)
-                        txtvalue = float_to_string(numvalue) + " KB";
-                else
-                        txtvalue += " Bytes";
-                description.eeprom_size = txtvalue;
-                //cout << "eeprom: " << description.eeprom_size << endl;
-                // go up to MEMORY node
-                xml_node = xml_node->get_parent();
-        }
-        // go to INT_SRAM node
-        tmp_node = xml_node->get_first_child("INT_SRAM");
-        // if no such node, it must be a device without SRAM!
-        if (!tmp_node) {
-                txtvalue = "0 Bytes";
-                description.sram_size = txtvalue;
-        } else {
-                xml_node = tmp_node;
-                // go to SIZE node
-                xml_node = xml_node->get_first_child("SIZE");
-                // get node content
-                txtvalue = get_txt_value(xml_node);
-                numvalue = ::atof(txtvalue.c_str()) / 1024;
-                if (numvalue > 1)
-                        txtvalue = float_to_string(numvalue) + " KB";
-                else
-                        txtvalue += " Bytes";
-                description.sram_size = txtvalue;
-                //cout << "sram_size: " << description.eeprom_size << endl;
-        }
+        else
+                description.eeprom_exists = false;
+
+        // get XML element with device signature
+        xml_node = root_node->get_first_child("signature");
+        tmp_element = dynamic_cast<xmlpp::Element*>(xml_node);
+
+        // get signature string
+        description.signature = tmp_element->get_attribute_value("value","");
+
+        /*
+        cout << "speed     : " << description.max_speed << endl;
+        cout << "flash     : " << description.flash_size << endl;
+        cout << "sram      : " << description.sram_size << endl;
+        cout << "eeprom    : " << description.eeprom_size << endl;
+        cout << "signature : " << description.signature << endl;
+        cout << "xml build : " << description.xml_version << endl;
+        */
 
         return Parser::status::success;
 }

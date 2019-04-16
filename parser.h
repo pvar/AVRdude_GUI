@@ -21,7 +21,7 @@ class Parser
         protected:
                 std::string get_signature_bytes (xmlpp::Node* signature_node);
 
-                status get_specs (xmlpp::Node *root_node, DeviceDescription &description);
+                status get_metadata (xmlpp::Node *root_node, DeviceDescription &description);
                 status get_settings (xmlpp::Node *root_node, DeviceDescription &description);
                 status get_warnings (xmlpp::Node *root_node, DeviceDescription &description);
                 status get_default (xmlpp::Node *root_node, DeviceDescription &description);
