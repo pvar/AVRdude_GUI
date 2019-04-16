@@ -16,58 +16,61 @@ Micro::~Micro()
 
 void Micro::get_device_list (void)
 {
+        // initialize map (device to xmlfile)
         device_map = new map <string, string>;
 
-        // attempt to get mapping from configuration file
+        // attempt to get mapping from file
         if (load_xml_map())
                 return;
 
+        // create C compatible string with path to XML Files
+        const string subdir = ("devices/");
+        const string path = this->exec_path + subdir;
+        const char *cpath = path.c_str();
+
+        // attempt to get directory listing
         DIR *directory;
         struct dirent *entry;
+        if ((directory = opendir (cpath)) != NULL) {
 
-        // prepare path to XML files...
-        string xml_dir = ("xmlfiles/");
-        string whole_path = this->exec_path + xml_dir;
-        string path_to_file, device_name;
-
-        gchar *path_xml_files = new char[whole_path.size() + 1];
-        // !! Result is not safe, if path uses multi-byte characters (because of copy)
-        copy(whole_path.begin(), whole_path.end(), path_xml_files);
-        path_xml_files[whole_path.size()] = '\0';
-
-        // check files in directory (candidate description-files) one by one
-        if ((directory = opendir ((const gchar *)path_xml_files)) != NULL) {
+                // get candidate description files one by one...
+                Parser xml;
+                string file_uri, device, file;
                 while ((entry = readdir(directory)) != NULL) {
-                        const string filename = entry->d_name;
 
-                        // check for appropriate filename length
-                        if (filename.size() < 4)
+                        // get a filename
+                        file = entry->d_name;
+
+                        // check for appropriate length
+                        if (file.size() < 4)
                                 continue;
 
-                        // look for expected filename-extension
-                        if ((filename.compare(filename.size() - 3, 3, "xml") != 0) &&
-                            (filename.compare(filename.size() - 3, 3, "XML") != 0))
+                        // look for expected extension
+                        if ((file.compare(file.size() - 3, 3, "xml") != 0) &&
+                            (file.compare(file.size() - 3, 3, "XML") != 0))
                                 continue;
 
-                        Parser xml;
-                        Parser *parser = &xml;
-
-                        path_to_file = whole_path + filename;
-                        if (parser->is_description (path_to_file, device_name)) {
-                                (*device_map)[device_name] = filename;
-                        } else
+                        cout << "Checking: " << file;
+                        file_uri = path + file;
+                        if (xml.is_description (file_uri, device)) {
+                                cout << ": It is!" << endl;
+                                (*device_map)[device] = file;
+                        } else {
+                                cout << ": NOT!" << endl;
                                 continue;
+                        }
                 }
                 closedir (directory);
         }
 
-        // check if device-to-xml map is still empty
+        // check if mapping still empty
+        // there will be a new attempt to populate it at next run
         if (device_map->size() == 0) {
                 delete device_map;
                 return;
         }
 
-        // save device-to-xml map in configuration file
+        // save mapping to file
         save_xml_map();
 }
 
@@ -143,12 +146,9 @@ void Micro::parse_data (string xml_file)
         description->xml_filename = xml_file;
 
         // prepare path to specified description-file
-        string xml_dir = ("xmlfiles/");
+        string xml_dir = ("devices/");
         string path_to_file = this->exec_path + xml_dir + xml_file;
 
         Parser xml;
-
-        Parser *parser = &xml;
-
-        parser->process_file (path_to_file, *description);
+        xml.process_file (path_to_file, *description);
 }

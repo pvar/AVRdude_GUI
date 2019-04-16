@@ -40,12 +40,7 @@ Parser::status Parser::get_content (std::string filename, xmlpp::DomParser &pars
         if (!parser)
                 return status::no_content;
 
-        // check if content has expected structure
-        xmlpp::Node *root_node = parser.get_document()->get_root_node();
-        if (is_valid (root_node))
-                return status::success;
-        else
-                return status::doc_error;
+        return status::success;
 }
 
 
@@ -102,6 +97,9 @@ string Parser::get_att_value (xmlpp::Node* xml_node, string att_name)
         xmlpp::Node::NodeList::iterator node_iterator;
         xmlpp::Element::AttributeList::const_iterator att_iterator;
         string data_string;
+
+//xmlpp::Element* this_element = dynamic_cast<const xmlpp::Element*>(xml_node);
+//cout << this_element->get_attribute_value("", "dudegui");
 
         if (const xmlpp::Element* nodeElement = dynamic_cast<const xmlpp::Element*>(xml_node)) {
                 // loop through attribute-nodes
@@ -263,31 +261,22 @@ bool Parser::is_description (string filename, std::string &device_name)
         bool desc_file = false;
 
         xmlpp::DomParser parser;
-        if (Parser::status::success == get_content (filename, parser))
-                desc_file = true;
-        else
-                desc_file = false;
 
-        if (desc_file) {
-                xmlpp::Node *xml_node = parser.get_document()->get_root_node();
-                xml_node = xml_node->get_first_child("ADMIN");
-                xml_node = xml_node->get_first_child("PART_NAME");
-                device_name = this->get_txt_value(xml_node);
-        } else
+        if (Parser::status::success == get_content (filename, parser)) {
+                xmlpp::Node *xmlnode = parser.get_document()->get_root_node();
+                string root_name = xmlnode->get_name();
+                if (root_name.compare("AVRdevice") == 0) {
+                        desc_file = true;
+
+                xmlnode = xmlnode->get_first_child("metadata");
+                device_name = (dynamic_cast<const xmlpp::Element*>(xmlnode))->get_attribute_value("name","");
+                }
+        } else {
                 device_name = "NONE";
+                desc_file = false;
+        }
 
         return desc_file;
-}
-
-
-bool Parser::is_valid (xmlpp::Node *root_node)
-{
-        // check if a valid description file
-        const string node_name = root_node->get_name();
-        if (node_name.compare("AVRPART") != 0) {
-                return false;
-        } else
-                return true;
 }
 
 
@@ -554,6 +543,7 @@ Parser::status Parser::get_specs (xmlpp::Node *root_node, DeviceDescription &des
         txtvalue.resize(txtvalue.size() - 3);
         description.max_speed = txtvalue + " MHz";
         //cout << "speed: " << description.max_speed << endl;
+
         // go up to ADMIN node
         xml_node = xml_node->get_parent();
         // go to BUILD node

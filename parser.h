@@ -19,7 +19,6 @@ class Parser
                 status process_file (std::string filename, DeviceDescription &description);
 
         protected:
-                bool is_valid (xmlpp::Node *root_node);
                 std::string get_signature_bytes (xmlpp::Node* signature_node);
 
                 status get_specs (xmlpp::Node *root_node, DeviceDescription &description);
