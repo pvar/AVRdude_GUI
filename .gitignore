@@ -1,6 +1,8 @@
+bin/dev2xml.lst
 bin/dudegui
 bin/xml
 bin/atdf
+xml_tool/atxml_conv
 *~
 *.o
 *.pdf
