@@ -8,7 +8,7 @@ WORKDIR=${0%`basename $0`}
 # create archive with application files
 echo "Creating archive with application files..."
 cd ${WORKDIR}
-tar -cjf ${ARCHIVE} dudegui dudegui.ui dudegui.png dudegui.desktop dev2xml.lst xmlfiles uninstall.sh
+tar -cjf ${ARCHIVE} dudegui dudegui.ui dudegui.png dudegui.desktop dev2xml.lst devices uninstall.sh
 cd - 1>/dev/null
 
 # get value for SCRIPT_LINES

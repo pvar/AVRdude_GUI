@@ -176,13 +176,13 @@ MENULOCATION="/usr/share/applications/"
 LINKLOCATION="/usr/bin/"
 EXECLOCATION="/opt/dudegui/"
 # working directories
-RND=$(($RANDOM  + 128))
+RND=$(($RANDOM + 128))
 DIR=${0%`basename $0`}
-WORKDIR="${DIR}/dudetmp${RND}"
+WORKDIR="${DIR}dudetmp${RND}"
 BINZIP="binary.zip"
-# number of lines in this script file (plus 1)
+# NUMBER OF LINES IN THIS SCRIPT FILE PLUS ONE
 SCRIPT_LINES=X
-# run /bin/sum on your binary and put the two values here
+# RUN /bin/sum ON YOUR BINARY AND PUT THE TWO VALUES HERE
 SUM1=X
 SUM2=X
 
@@ -213,9 +213,8 @@ ASUM1=`echo "${SUM}" | awk '{print $1}'`
 ASUM2=`echo "${SUM}" | awk '{print $2}'`
 if [ ${ASUM1} -ne ${SUM1} ] || [ ${ASUM2} -ne ${SUM2} ]; then
         echo "FAILED"
-        echo "The binary archive appears to be corrupted. Please, download"
-        echo -e "the file again and re-try the installation...\n"
-        rm -fr ${WORKDIR}
+        echo -e "The binary archive appears to be corrupted. Please, download the file again and re-try the installation...\n"
+#        rm -fr ${WORKDIR}
         exit 1
 fi
 echo "DONE (archive untainted!)"
@@ -276,15 +275,15 @@ sudo cp ${WORKDIR}/dudegui ${EXECLOCATION}
 sudo cp ${WORKDIR}/uninstall.sh ${EXECLOCATION}
 sudo cp ${WORKDIR}/dudegui.ui ${EXECLOCATION}
 sudo cp ${WORKDIR}/dev2xml.lst ${EXECLOCATION}
-sudo cp ${WORKDIR}/xmlfiles ${EXECLOCATION} -r
+sudo cp ${WORKDIR}/devices ${EXECLOCATION} -r
 echo "DONE"
 
 # loosen the permissions on certain files
 #sudo chgrp -f users ${EXECLOCATION}/dev2xml.lst 2>/dev/null
 #sudo chgrp -f users ${EXECLOCATION}/xmlfiles -R 2>/dev/null
 sudo chmod -f 666 ${EXECLOCATION}/dev2xml.lst
-sudo chmod -f 775 ${EXECLOCATION}/xmlfiles
-sudo chmod -f 666 ${EXECLOCATION}/xmlfiles/*
+sudo chmod -f 775 ${EXECLOCATION}/devices
+sudo chmod -f 666 ${EXECLOCATION}/devices/*
 
 # create necessary symbolic links
 sudo ln -s ${EXECLOCATION}/dudegui /usr/bin/dudegui

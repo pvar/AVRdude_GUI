@@ -20,8 +20,9 @@ if [ ! -d "${ICONLOCATION}" ]; then
         sudo rm ${ICONLOCATION}/dudegui.png
 fi
 
-# -------- remove link --------
+# -------- remove links --------
 sudo rm /usr/bin/dudegui
+sudo rm /usr/bin/dudegui-uninstall
 
 # -------- remove aplication --------
 if [ ! -d "${EXECLOCATION}" ]; then
