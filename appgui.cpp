@@ -622,11 +622,11 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
                 // create new instance of signal connection
                 widget_entry->callback = new sigc::connection;
 
-                // decide what kind of widget is needed
+                // check if signle or list (enumerator) option
                 if ((*iter).single_option) {
-                        // check if "single setting" or "register name"
+                        // check if option (real setting) or label (pseudo setting)
                         if ((*iter).offset == 512) {
-                                // REGISTER NAME
+                                // LABEL (register name)
                                 // create pointer to label
                                 widget_entry->reg_label = new Gtk::Label((*iter).fdesc);
                                 // set align, indent and width of the widgets
@@ -642,7 +642,7 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
                                 // show widget
                                 (widget_entry->reg_label)->show();
                         } else {
-                                // SINGLE OPTION
+                                // OPTION (checkbox)
                                 // create pointer to checkbutton
                                 widget_entry->check = new Gtk::CheckButton((*iter).fdesc);
                                 // put checkbutton in grid
@@ -653,14 +653,15 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
                                 *(widget_entry->callback) = (widget_entry->check)->signal_clicked().connect(sigc::mem_fun(*this, &gtkGUI::calculate_fuse_values));
                         }
                 } else {
-                        // OPTION SELECTION
+                        // OPTION (dropdown menu)
                         // create pointer to treemodel
                         widget_entry->model = Gtk::ListStore::create(cbm_generic);
                         // prepare to loop through the enumerator members
                         list<DeviceDescription::OptionEntry>* this_enum_list = (*(microcontroller->description)->option_lists)[(*iter).fname];
                         list<DeviceDescription::OptionEntry>::iterator enum_iter = this_enum_list->begin();
-                        // get value from first entry (this is a pseudo entry with the maximum value of all entries)
-                        widget_entry->max_value = enum_iter->value;
+                        // assign temporary value (will get maximum in following loop)
+                        widget_entry->max_value = 0;
+
                         // proceed to next entry
                         enum_iter++;
                         // loop through the rest of the entries...
@@ -670,6 +671,8 @@ void gtkGUI::display_fuse_settings (gboolean have_fuses)
                                 row[cbm_generic.col_name] = enum_iter->ename;
                                 // add setting values
                                 row[cbm_generic.col_data] = to_string(enum_iter->value);
+                                if (enum_iter->value >= widget_entry->max_value)
+                                        widget_entry->max_value = enum_iter->value;
                         }
                         // create pointer to label
                         widget_entry->combo_label = new Gtk::Label((*iter).fdesc);
@@ -737,6 +740,12 @@ void gtkGUI::calculate_fuse_values ()
                                 selected_row = *selected;
                                 guint selected_value = atoi(string((selected_row[cbm_generic.col_data])).c_str());
                                 guint final_value = (selected_value * fwidget->bitmask) / fwidget->max_value;
+ 
+                                cout << "selected value: " << selected_value << endl;
+                                cout << "enumerator bitmask: " << fwidget->bitmask << endl;
+                                cout << "enumerator max value: " << fwidget->max_value << endl;
+                                cout << "final value: " << final_value << endl;
+ 
                                 microcontroller->fusebytes_custom[fwidget->bytenum] |= (final_value ^ fwidget->bitmask);
                         } else {
                                 if ((fwidget->check)->get_active())
@@ -744,6 +753,7 @@ void gtkGUI::calculate_fuse_values ()
                         }
                 }
         }
+        cout << "--------------------------------" << endl;
 
         // negate calculated values (they are expected this way)
         microcontroller->fusebytes_custom[0] ^= 255;
