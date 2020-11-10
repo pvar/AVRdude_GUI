@@ -3,6 +3,8 @@
 
 #include <map>
 #include <list>
+#include <stdint.h>
+#include <string>
 
 class DeviceDescription {
         public:
